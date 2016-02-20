@@ -327,7 +327,7 @@
                                     <div class="card-move-up waves-effect waves-block waves-light">
                                         <div class="move-up cyan darken-1">
                                             <div>
-                                                <span class="chart-title white-text">Revenue</span>
+                                                <!--span class="chart-title white-text">Revenue</span>
                                                 <div class="chart-revenue cyan darken-2 white-text">
                                                     <p class="chart-revenue-total">$4,500.85</p>
                                                     <p class="chart-revenue-per"><i class="mdi-navigation-arrow-drop-up"></i> 21.80 %</p>
@@ -342,7 +342,7 @@
                                             </div>
                                             <div class="trending-line-chart-wrapper">
                                                 <canvas id="trending-line-chart" height="70"></canvas>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                     <div class="card-content">
