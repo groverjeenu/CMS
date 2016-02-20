@@ -50,14 +50,15 @@ class Auth extends CI_Controller {
 		$this->data['title'] = "Login";
 
 		//validate form input
-		$this->form_validation->set_rules('identity', 'Identity', 'required');
+		$this->form_validation->set_rules('identity', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
 			// check for "remember me"
-			$remember = (bool) $this->input->post('remember');
+			echo "You are here";
+			$remember = (bool) $this->input->post('remember-me');
 
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{

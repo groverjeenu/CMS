@@ -18,16 +18,13 @@ class Login extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
 	public function index()
 	{
 		echo "Jeenu";
-		$this->load->library('form_validation');
-		$this->load->helper('language');
-		$data['message'] ="jhjhjh";
-		$data['identity'] ="jhjhjh";
-		$data['password'] ="jhjhjh";
+		
 
-		$this->load->view('auth/login',$data);
+		$this->load->view('login');
 		
 	}
 }
