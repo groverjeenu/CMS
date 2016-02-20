@@ -1,0 +1,26 @@
+<?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
+
+// You can find dbforge usage examples here: http://ellislab.com/codeigniter/user-guide/database/forge.html
+
+
+class {{MIGRATION}} extends {{MI_EXTENDS}}_Migration
+{
+    public function __construct()
+	{
+	    parent::__construct();
+	}
+	
+	public function up()
+	{
+	    $query = "";
+		$this->db->query($query);
+    }
+    
+	public function down()
+	{
+		$this->db->query("DROP TABLE {{TABLE}};");
+	   // $this->dbforge->drop_table('{{TABLE}}', TRUE);
+    }
+}
+/* End of file '{{MIGRATION_FILE}}' */
+/* Location: ./{{MIGRATION_PATH}}{{MIGRATION_FILE}}.php */
