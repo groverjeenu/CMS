@@ -58,7 +58,15 @@
 
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
+<<<<<<< HEAD
       <form class="login-form" method = "post" action = "<?php echo base_url(); ?>/auth/create_user">
+=======
+      <?php
+        $attributes = array('class' => 'login-form');
+        echo form_open('login', $attributes);
+        ?>
+        
+>>>>>>> 0af8397306c75c0c5bcc75fd4d4bccee444e899f
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?php echo base_url(); ?>public/img/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
