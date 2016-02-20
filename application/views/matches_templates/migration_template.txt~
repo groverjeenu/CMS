@@ -19,7 +19,7 @@ class {{MIGRATION}} extends {{MI_EXTENDS}}_Migration
 	public function down()
 	{
 		$this->db->query("DROP TABLE {{TABLE}};");
-	   // $this->dbforge->drop_table('{{TABLE}}', TRUE);
+	    $this->dbforge->drop_table('{{TABLE}}', TRUE);
     }
 }
 /* End of file '{{MIGRATION_FILE}}' */

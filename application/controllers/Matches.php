@@ -159,6 +159,7 @@ class Matches extends CI_Controller {
                     $this->create_migration($name);
                     break;
             }
+            echo "\n";
 
         }
         else
