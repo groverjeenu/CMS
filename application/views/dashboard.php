@@ -29,20 +29,20 @@
 
 
     <!-- CORE CSS-->    
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- CSS for full screen (Layout-2)-->    
-    <link href="css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- Custome CSS-->    
-    <link href="css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
   <!-- CSS for full screen (Layout-2)-->    
-  <link href="css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">    
+  <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">    
 
 
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-    <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
 
 
 </head>
@@ -67,7 +67,7 @@
                     
                     <ul class="left">                                            
                       <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li>
-                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="images/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
+                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="<?php echo base_url(); ?>public/img/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <i class="mdi-action-search"></i>
@@ -103,7 +103,7 @@
                     <li class="user-details cyan darken-2">
                         <div class="row">
                             <div class="col col s4 m4 l4">
-                                <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                                <img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
                             </div>
                             <div class="col col s8 m8 l8">
                                 <ul id="profile-dropdown" class="dropdown-content">
@@ -702,10 +702,10 @@
                             <div class="col s12 m6 l4">
                                 <div id="profile-card" class="card">
                                     <div class="card-image waves-effect waves-block waves-light">
-                                        <img class="activator" src="images/user-bg.jpg" alt="user background">
+                                        <img class="activator" src="<?php echo base_url(); ?>public/img/user-bg.jpg" alt="user background">
                                     </div>
                                     <div class="card-content">
-                                        <img src="images/avatar.jpg" alt="" class="circle responsive-img activator card-profile-image">
+                                        <img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img activator card-profile-image">
                                         <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
                                             <i class="mdi-action-account-circle"></i>
                                         </a>
@@ -736,7 +736,7 @@
                                 <div class="blog-card" >
                                 <div class="card">
                                     <div class="card-image waves-effect waves-block waves-light">
-                                        <img src="images/gallary/30.jpg" alt="blog-img">
+                                        <img src="img/gallary/30.jpg" alt="blog-img">
                                     </div>
                                     <ul class="card-action-buttons">
                                         <li><a class="btn-floating waves-effect waves-light green accent-4"><i class="mdi-social-share"></i></a>
@@ -753,7 +753,7 @@
                                         </h4>                                        
                                         <div class="row">
                                           <div class="col s2">
-                                            <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                                            <img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
                                           </div>
                                           <div class="col s9"> By <a href="#">John Doe</a></div>
                                         </div>
@@ -772,7 +772,7 @@
                                     <div class="card">
                                         <div class="card-image waves-effect waves-block waves-light">
                                             <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2">$189</a>
-                                            <img src="images/gallary/33.jpg" alt="product-img">
+                                            <img src="img/gallary/33.jpg" alt="product-img">
                                         </div>
                                         <ul class="card-action-buttons">
                                             <li><a class="btn-floating waves-effect waves-light green accent-4"><i class="mdi-av-repeat"></i></a>
@@ -790,7 +790,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="col s4 no-padding">
-                                                    <a href=""></a><img src="images/amazon.jpg" alt="amazon" class="responsive-img">
+                                                    <a href=""></a><img src="<?php echo base_url(); ?>public/img/amazon.jpg" alt="amazon" class="responsive-img">
                                                     
                                                 </div>
                                             </div>
@@ -1093,7 +1093,7 @@
                             <div class="collapsible-header red white-text"><i class="mdi-action-stars"></i>Favorite Associates</div>
                             <div class="collapsible-body favorite-associates">
                                 <div class="favorite-associate-list chat-out-list row">
-                                    <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
+                                    <div class="col s4"><img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
                                     </div>
                                     <div class="col s8">
                                         <p>Eileen Sideways</p>
@@ -1101,7 +1101,7 @@
                                     </div>
                                 </div>
                                 <div class="favorite-associate-list chat-out-list row">
-                                    <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
+                                    <div class="col s4"><img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
                                     </div>
                                     <div class="col s8">
                                         <p>Zaham Sindil</p>
@@ -1109,7 +1109,7 @@
                                     </div>
                                 </div>
                                 <div class="favorite-associate-list chat-out-list row">
-                                    <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img offline-user valign profile-image">
+                                    <div class="col s4"><img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img offline-user valign profile-image">
                                     </div>
                                     <div class="col s8">
                                         <p>Renov Leongal</p>
@@ -1117,7 +1117,7 @@
                                     </div>
                                 </div>
                                 <div class="favorite-associate-list chat-out-list row">
-                                    <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
+                                    <div class="col s4"><img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img online-user valign profile-image">
                                     </div>
                                     <div class="col s8">
                                         <p>Weno Carasbong</p>
@@ -1125,7 +1125,7 @@
                                     </div>
                                 </div>
                                 <div class="favorite-associate-list chat-out-list row">
-                                    <div class="col s4"><img src="images/avatar.jpg" alt="" class="circle responsive-img offline-user valign profile-image">
+                                    <div class="col s4"><img src="img/avatar.jpg" alt="" class="circle responsive-img offline-user valign profile-image">
                                     </div>
                                     <div class="col s8">
                                         <p>Nusja Nawancali</p>
@@ -1183,35 +1183,35 @@
     ================================================ -->
     
     <!-- jQuery Library -->
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery-1.11.2.min.js"></script>    
     <!--materialize js-->
-    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/materialize.js"></script>
     <!--scrollbar-->
-    <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     
 
     <!-- chartist -->
-    <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>   
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.js"></script>   
 
     <!-- chartjs -->
-    <script type="text/javascript" src="js/plugins/chartjs/chart.min.js"></script>
-    <script type="text/javascript" src="js/plugins/chartjs/chart-script.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart-script.js"></script>
 
     <!-- sparkline -->
-    <script type="text/javascript" src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <script type="text/javascript" src="js/plugins/sparkline/sparkline-script.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/sparkline-script.js"></script>
     
     <!-- google map api -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
 
     <!--jvectormap-->
-    <script type="text/javascript" src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script type="text/javascript" src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script type="text/javascript" src="js/plugins/jvectormap/vectormap-script.js"></script>    
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/vectormap-script.js"></script>    
 
     
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins.js"></script>
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
