@@ -58,7 +58,7 @@
 
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-      <form class="login-form" method = "post" action = "<?php echo base_url(); ?>index.php?/auth/login">
+      <form class="login-form" method = "post" action = "<?php echo base_url(); ?>auth/login">
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?php echo base_url(); ?>public/img/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
@@ -68,7 +68,7 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input id="identity" type="text" name = "identity">
+            <input id="identity" type="text" name = "identity" value = "<?php echo set_value('identity') ?>" >
             <label for="username" class="center-align">Username</label>
           </div>
         </div>

@@ -32,8 +32,5 @@ class Welcome extends CI_Controller {
 
 	}
 
-	public function signup()
-	{
-		$this->load->view('signup');
-	}
+	
 }
