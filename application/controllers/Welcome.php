@@ -20,14 +20,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-
+		$this->load->view('login');
 		#$this->load->view('welcome_message');
-		$ans  = $this->db->query("select * from actors");
-		foreach ($ans->result_array() as $key ) {
-			foreach($key as $i)
-				echo $i."\t";
-			echo "<br>";
-		}
 
+	}
+
+	public function test()
+	{
+		$this->load->view('login');
 	}
 }
