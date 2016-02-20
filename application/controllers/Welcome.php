@@ -20,7 +20,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('login');
+		$this->load->view('homepage');
 		#$this->load->view('welcome_message');
 		/*$ans  = $this->db->query("select * from migrations");
 		foreach ($ans->result_array() as $key ) {
@@ -32,8 +32,8 @@ class Welcome extends CI_Controller {
 
 	}
 
-	public function test()
+	public function signup()
 	{
-		$this->load->view('login');
+		$this->load->view('signup');
 	}
 }
