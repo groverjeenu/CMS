@@ -69,12 +69,12 @@ $config['migration_auto_latest'] = FALSE;
 | be upgraded / downgraded to.
 |
 */
-$config['migration_version'] = 20160220120626;
+$config['migration_version'] = 0;
 
 /*
 |--------------------------------------------------------------------------
 | Migrations Path
-|--------------------------------------------------------------------------
+|------------------------------------------------------------------------
 |
 | Path to your migrations folder.
 | Typically, it will be within your application path.
