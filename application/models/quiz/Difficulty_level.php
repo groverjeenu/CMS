@@ -1,5 +1,6 @@
 <?php
 
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Difficulty_level extends CI_Model
 {
 

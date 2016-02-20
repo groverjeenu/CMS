@@ -1,42 +1,47 @@
 <?php
 
-defined
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Qbank_model extends CI_Model
 {
 	function question_list($limit,$cid)
 	{
-	$institute_id = $this->session->userdata('institute_id');
-	$extrap="";
-	if($cid>="1"){
-	$extrap="and qbank.cid='".$cid."'";
-	}else{
-	$extrap="";
-	}
-	$nor=$this->config->item('number_of_rows');
-	if($this->input->post('search_type')){
-	$search_type=$this->input->post('search_type');
-	$search=$this->input->post('search');
+		$institute_id = $this->session->userdata('institute_id');
+		$extrap="";
+		if($cid>="1"){
+			$extrap="and qbank.cid='".$cid."'";
+		}
+		else{
+			$extrap="";
+		}
+		$nor=$this->config->item('number_of_rows');
+		if($this->input->post('search_type'))
+		{
+			$search_type=$this->input->post('search_type');
+			$search=$this->input->post('search');
 
-	$query = $this -> db -> query("select qbank.*, question_category.category_name, difficult_level.level_name from qbank, question_category, difficult_level where qbank.cid=question_category.cid and qbank.did=difficult_level.did and $search_type like '%$search%' and qbank.institute_id = '$institute_id' $extrap order by qid desc limit $limit, $nor");
+			$query = $this -> db -> query("select qbank.*, question_category.category_name, difficult_level.level_name from qbank, question_category, difficult_level where qbank.cid=question_category.cid and qbank.did=difficult_level.did and $search_type like '%$search%' and qbank.institute_id = '$institute_id' $extrap order by qid desc limit $limit, $nor");
 
-	}else{
-	$query = $this -> db -> query("select qbank.*, question_category.category_name, difficult_level.level_name from qbank, question_category, difficult_level where qbank.cid=question_category.cid and qbank.did=difficult_level.did and qbank.institute_id = '$institute_id' $extrap order by qid desc limit $limit, $nor");
+		}
+		else{
+			$query = $this -> db -> query("select qbank.*, question_category.category_name, difficult_level.level_name from qbank, question_category, difficult_level where qbank.cid=question_category.cid and qbank.did=difficult_level.did and qbank.institute_id = '$institute_id' $extrap order by qid desc limit $limit, $nor");
+		}
+		if($query -> num_rows() >= 1)
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
 	}
-	if($query -> num_rows() >= 1)
+
+	function add_new_mul()
 	{
-	return $query->result();
-	}
-	else
-	{
-	return false;
-	}
-	}
 
- function add_new_mul(){
- 
- $institute_id = $this->session->userdata('institute_id');
-			 	
-			$insert_data = array(
+		$institute_id = $this->session->userdata('institute_id');
+
+		$insert_data = array(
 			'cid' => $this->input->post('cid'),
 			'q_type' => $this->input->post('qus_type'),
 			'did' => $this->input->post('did'),
@@ -44,84 +49,94 @@ class Qbank_model extends CI_Model
 			'description' => $this->input->post('description'),
 			'institute_id' => $institute_id
 			);
-			
- 			
-			if($this->db->insert('qbank',$insert_data)){
+
+
+		if($this->db->insert('qbank',$insert_data))
+		{
 			$qid=$this->db->insert_id();
-			foreach($_POST['option'] as $key => $value){
-			foreach($_POST['CheckBox'] as $key2 => $value1){
-			if($value1==$key){
-			$score=1/count($_POST['CheckBox']);
-			break;
-			}else{
-			$score="0";
+			foreach($_POST['option'] as $key => $value)
+			{
+				foreach($_POST['CheckBox'] as $key2 => $value1)
+				{
+					if($value1==$key){
+						$score=1/count($_POST['CheckBox']);
+						break;
+					}
+					else{
+						$score="0";
+					}
+				}
+				$insert_data = array(
+					'qid' => $qid,
+					'option_value' => $value,
+					'score'=> $score,
+					'institute_id' => $institute_id
+					);
+
+				$this->db->insert('q_options',$insert_data);
 			}
-			
-			
-			
-			}
-			$insert_data = array(
-			'qid' => $qid,
-			'option_value' => $value,
-			'score'=> $score,
-			'institute_id' => $institute_id
-			);
-			
-			$this->db->insert('q_options',$insert_data);
-			}
-	
+
 			return "Question added successfully";
-			}else{
+		}
+		else
+		{
 			return "Unable to add question";
-			}
+		}
+	}
  
  
- }
- 
- 
-function add_question(){
-			$institute_id = $this->session->userdata('institute_id');
-			
-			$insert_data = array(
+	function add_question()
+	{
+		$institute_id = $this->session->userdata('institute_id');
+		
+		$insert_data = array(
 			'cid' => $this->input->post('cid'),
 			'q_type' => $this->input->post('qus_type'),
 			'did' => $this->input->post('did'),
 			'question' => $this->input->post('question'),
 			'description' => $this->input->post('description'),
 			'institute_id' => $institute_id
-			);
+		);
 			
  			
-			if($this->db->insert('qbank',$insert_data)){
+		if($this->db->insert('qbank',$insert_data))
+		{
 			$qid=$this->db->insert_id();
 			
-			foreach($_POST['option'] as $key => $value){
-			if($this->input->post('qus_type')=="0"){
-			if($key==($this->input->post('score'))){
-			$score="1";
-			}else{
-			$score="0";
-			}
-			}
-			if($this->input->post('qus_type')=="2"||$this->input->post('qus_type')=="3"){
-		$score="1";
-			}
-			if($this->input->post('qus_type')=="5"){
-		$score=1/count($_POST['option']);
-			}
-			$insert_data = array(
-			'qid' => $qid,
-			'option_value' => $value,
-			'score'=> $score,
-			'institute_id' => $institute_id
-			);
+			foreach($_POST['option'] as $key => $value)
+			{
+				if($this->input->post('qus_type')=="0")
+				{
+					if($key==($this->input->post('score'))){
+						$score="1";
+					}
+					else
+					{
+						$score="0";
+					}
+				}
+				if($this->input->post('qus_type')=="2"||$this->input->post('qus_type')=="3")
+				{
+					$score="1";
+				}
+				if($this->input->post('qus_type')=="5"){
+					$score=1/count($_POST['option']);
+				}
+				$insert_data = array(
+				'qid' => $qid,
+				'option_value' => $value,
+				'score'=> $score,
+				'institute_id' => $institute_id
+				);
 			
-			$this->db->insert('q_options',$insert_data);
+				$this->db->insert('q_options',$insert_data);
 			}
 			return "Question added successfully";
-			}else{
+		}
+		else
+		{
 			return "Unable to add question";
-			}
+		}
 }
 
 function import_question($question){
