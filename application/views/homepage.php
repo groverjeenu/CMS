@@ -21,7 +21,7 @@
 
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#">Log In</a></li>
-        <li><a href="#">Sign Up</a></li>
+        <li><a href="<?php echo base_url(); ?>welcome/signup">Sign Up</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
