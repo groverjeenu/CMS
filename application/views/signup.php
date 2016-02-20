@@ -60,7 +60,7 @@
     <div class="col s12 z-depth-4 card-panel">
       <?php
         $attributes = array('class' => 'login-form');
-        echo form_open('login', $attributes);
+        echo form_open('auth/create_user', $attributes);
         ?>
         <div class="row">
           <div class="input-field col s12 center">

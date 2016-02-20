@@ -15,8 +15,8 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">Incourse</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="<?php echo base_url(); ?>login">Log In</a></li>
-        <li><a href="<?php echo base_url(); ?>signup">Sign Up</a></li>
+        <li><a href="<?php echo base_url(); ?>display_view/login">Log In</a></li>
+        <li><a href="<?php echo base_url(); ?>display_view/signup">Sign Up</a></li>
       </ul>
 
      
