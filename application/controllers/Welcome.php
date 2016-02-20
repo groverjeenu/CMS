@@ -32,5 +32,10 @@ class Welcome extends CI_Controller {
 
 	}
 
+	public function dash()
+	{
+		$this->load->view('dashboard');
+	}
+
 	
 }
