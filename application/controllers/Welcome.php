@@ -22,12 +22,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('login');
 		#$this->load->view('welcome_message');
-		$ans  = $this->db->query("select * from actors");
+		/*$ans  = $this->db->query("select * from migrations");
 		foreach ($ans->result_array() as $key ) {
 			foreach($key as $i)
 				echo $i."\t";
 			echo "<br>";
-		}
+		}*/
 		
 
 	}

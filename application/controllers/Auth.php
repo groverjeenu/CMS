@@ -52,12 +52,12 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-
-		if ($this->form_validation->run() == true)
+		echo $this->input->post('identity')."heheh";
+		/*if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
 			// check for "remember me"
-			echo "You are here";
+
 			$remember = (bool) $this->input->post('remember-me');
 
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
@@ -72,7 +72,7 @@ class Auth extends CI_Controller {
 				// if the login was un-successful
 				// redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('auth/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+				redirect('index.php/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}
 		else
@@ -92,7 +92,7 @@ class Auth extends CI_Controller {
 			);
 
 			$this->_render_page('auth/login', $this->data);
-		}
+		}*/
 	}
 
 	// log the user out
