@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,15 +20,14 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		echo "Jeenu";
+		$this->load->library('form_validation');
+		$this->load->helper('language');
+		$data['message'] ="jhjhjh";
+		$data['identity'] ="jhjhjh";
+		$data['password'] ="jhjhjh";
 
-		#$this->load->view('auth/login');
-		$ans  = $this->db->query("select * from migrations");
-		foreach ($ans->result_array() as $key ) {
-			foreach($key as $i)
-				echo $i."\t";
-			echo "<br>";
-		}
+		$this->load->view('auth/login',$data);
 		
-
 	}
 }
