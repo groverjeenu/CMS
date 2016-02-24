@@ -38,4 +38,9 @@ class Display_view extends CI_Controller {
 		$this->load->view('signup');
 	
 	}
+	public function dashboard()
+	{
+		$this->load->view('dashboard');
+	
+	}
 }
