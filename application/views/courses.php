@@ -30,14 +30,18 @@
 		<link href="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
 		<link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-		<link href="css/app/app.css" rel="stylesheet">
+		<link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
+		<link href="<?php echo base_url(); ?>public/css/app/app.css" rel="stylesheet">
+
 	</head>
+	
 	<body>
 		<?php $this->view('addons/header.php'); ?>
 		<!-- START MAIN -->
 		<div id="main">
 			<!-- START WRAPPER -->
 			<div class="wrapper">
+				<?php $this->view('addons/sidebar.php'); ?>
 				<div class="st-pusher" id="content">
 					<!-- sidebar effects INSIDE of st-pusher: -->
 					<!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
@@ -86,7 +90,9 @@
 					</div>
 					<!-- /st-content -->
 				</div>
-				
-				<?php $this->view('addons/footer.php'); ?>
-			</body>
-		</html>
+			</div>
+		</div>
+		
+		<?php $this->view('addons/footer.php'); ?>
+	</body>
+</html>
