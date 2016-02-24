@@ -50,19 +50,19 @@
 
 <body>
     <!-- Start Page Loading -->
-    <div id="loader-wrapper">
+    <!--div id="loader-wrapper">
         <div id="loader"></div>        
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>
+    </div-->
     <!-- End Page Loading -->
 
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
     <!-- START HEADER -->
-    <header id="header" class="page-topbar">
+    <!--header id="header" class="page-topbar"-->
         <!-- start header nav-->
-        <div class="navbar-fixed">
+        <!--div class="navbar-fixed">
             <nav class="cyan">
                 <div class="nav-wrapper">                    
                     
@@ -86,11 +86,12 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div-->
         <!-- end header nav-->
-    </header>
+    <!--/header-->
     <!-- END HEADER -->
 
+    <?php $this->view('addons/header.php'); ?>
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
     <!-- START MAIN -->
@@ -1347,7 +1348,7 @@
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
     <!-- START FOOTER -->
-    <footer class="page-footer">
+    <!--footer class="page-footer">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -1370,9 +1371,9 @@
                 <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a></span>
             </div>
         </div>
-    </footer>
+    </footer-->
     <!-- END FOOTER -->
-
+    <?php $this->view('addons/footer.php'); ?>
 
     <!-- ================================================
     Scripts
