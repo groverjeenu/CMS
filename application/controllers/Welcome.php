@@ -47,5 +47,9 @@ class Welcome extends CI_Controller {
 		$this->load->view('courselist');
 	}
 
+	public function usercourselist()
+	{
+		$this->load->view('usercourselist');
+	}
 	
 }
