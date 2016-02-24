@@ -52,4 +52,17 @@ class Welcome extends CI_Controller {
 		$this->load->view('usercourselist');
 	}
 	
+	public function coursepage()
+	{
+		$this->load->view('coursepage');
+	}
+
+	public function courselectures()
+	{
+		$this->load->view('courselectures');
+	}
+	public function videotest()
+	{
+		$this->load->view('video_test');
+	}
 }
