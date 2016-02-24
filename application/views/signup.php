@@ -100,7 +100,12 @@
             <label for="password">Retype Password</label>
           </div>
         </div>
-        
+        <div class="row">          
+          <div class="input-field col s12 m12 l12  login-text">
+              <input type="checkbox" id="faculty" />
+              <label for="faculty">I am a faculty</label>
+          </div>
+        </div>
         <div class="row">
           <div class="input-field col s12">
             <button type="submit" class="btn waves-effect waves-light col s12">Sign Up</button>
