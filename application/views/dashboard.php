@@ -314,13 +314,13 @@
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
             <!-- START CONTENT -->
-            <section id="content">
+            <!--section id="content">
 
                 <!--start container-->
-                <div class="container">
+                <!--div class="container">
 
                     <!--chart dashboard start-->
-                    <div id="chart-dashboard">
+                    <!--div id="chart-dashboard">
                         <div class="row">
                             <div class="col s12 m8 l8">
                                 <div class="card">
@@ -342,7 +342,7 @@
                                             </div>
                                             <div class="trending-line-chart-wrapper">
                                                 <canvas id="trending-line-chart" height="70"></canvas>
-                                            </div>-->
+                                            </div>>
                                         </div>
                                     </div>
                                     <div class="card-content">
@@ -547,13 +547,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div-->
                     <!--chart dashboard end-->
 
                     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
                     <!--card stats start-->
-                    <div id="card-stats">
+                    <!--div id="card-stats">
                         <div class="row">
                             <div class="col s12 m6 l3">
                                 <div class="card">
@@ -610,13 +610,13 @@
                             </div>
                             
                         </div>
-                    </div>
+                    </div-->
                     <!--card stats end-->
 
                     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
                     <!--card widgets start-->
-                    <div id="card-widgets">
+                    <!--div id="card-widgets">
                         <div class="row">
 
                             <div class="col s12 m12 l4">
@@ -730,9 +730,9 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="row"-->
                             <!-- blog card -->
-                            <div class="col s12 m12 l4">
+                            <!--div class="col s12 m12 l4">
                                 <div class="blog-card" >
                                 <div class="card">
                                     <div class="card-image waves-effect waves-block waves-light">
@@ -764,10 +764,10 @@
                                     </div>
                                 </div>
                                 </div>
-                            </div>
+                            </div-->
 
                             <!-- product-card -->
-                            <div class="col s12 m12 l4">
+                            <!--div class="col s12 m12 l4">
                                 <div class="product-card">
                                     <div class="card">
                                         <div class="card-image waves-effect waves-block waves-light">
@@ -801,10 +801,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div-->
 
                             <!-- map-card -->
-                            <div class="col s12 m12 l4">
+                            <!--div class="col s12 m12 l4">
                                 <div class="map-card">
                                     <div class="card">
                                         <div class="card-image waves-effect waves-block waves-light">
@@ -830,13 +830,13 @@
                                 </div>
                             </div>
 
-                    </div>
+                    </div-->
                     <!--card widgets end-->
 
                     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
                     <!--work collections start-->
-                    <div id="work-collections">
+                    <!--div id="work-collections">
                         <div class="row">
                             <div class="col s12 m12 l6">
                                 <ul id="projects-collection" class="collection">
@@ -979,11 +979,11 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div-->
                     <!--work collections end-->
 
                     <!-- Floating Action Button -->
-                    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <!--div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
                         <a class="btn-floating btn-large red">
                           <i class="large mdi-editor-mode-edit"></i>
                         </a>
@@ -993,17 +993,17 @@
                           <li><a href="app-calendar.html" class="btn-floating green"><i class="large mdi-editor-insert-invitation"></i></a></li>
                           <li><a href="app-email.html" class="btn-floating blue"><i class="large mdi-communication-email"></i></a></li>
                         </ul>
-                    </div>
+                    </div-->
                     <!-- Floating Action Button -->
 
-                </div>
+                <!--/div-->
                 <!--end container-->
-            </section>
+            <!--/section-->
             <!-- END CONTENT -->
 
             <!-- //////////////////////////////////////////////////////////////////////////// -->
             <!-- START RIGHT SIDEBAR NAV-->
-            <aside id="right-sidebar-nav">
+            <!--aside id="right-sidebar-nav">
                 <ul id="chat-out" class="side-nav rightside-navigation">
                     <li class="li-hover">
                     <a href="#" data-activates="chat-out" class="chat-close-collapse right"><i class="mdi-navigation-close"></i></a>
@@ -1137,13 +1137,13 @@
                         </ul>
                     </li>
                 </ul>
-            </aside>
+            </aside-->
             <!-- LEFT RIGHT SIDEBAR NAV-->
 
-        </div>
+        <!--/div-->
         <!-- END WRAPPER -->
 
-    </div>
+    <!--/div-->
     <!-- END MAIN -->
 
 
