@@ -58,10 +58,7 @@
 
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-      <?php
-        $attributes = array('class' => 'login-form');
-        echo form_open('auth/create_user', $attributes);
-        ?>
+      <form class="signup-form" method = "post" action = "<?php echo base_url(); ?>auth/create_user">
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?php echo base_url(); ?>public/img/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
@@ -71,14 +68,14 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input id="first name" type="text" name = "first">
+            <input id="first name" type="text" name = "first_name">
             <label for="username" class="center-align">First Name</label>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input id="last name" type="text" name = "last">
+            <input id="last name" type="text" name = "last_name">
             <label for="username" class="center-align">LastName</label>
           </div>
         </div>
@@ -99,16 +96,11 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-action-lock-outline prefix"></i>
-            <input id="reenter_pass" type="password" name = "rpassword">
+            <input id="reenter_pass" type="password" name = "password_confirm">
             <label for="password">Retype Password</label>
           </div>
         </div>
-        <div class="row">          
-          <div class="input-field col s12 m12 l12  login-text">
-              <input type="checkbox" id="remember-me" />
-              <label for="remember-me">Remember me</label>
-          </div>
-        </div>
+        
         <div class="row">
           <div class="input-field col s12">
             <button type="submit" class="btn waves-effect waves-light col s12">Sign Up</button>

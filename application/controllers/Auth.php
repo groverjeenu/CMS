@@ -52,11 +52,12 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		#echo $this->input->post('identity')."heheh";
+		echo $this->input->post('identity')." ".$this->input->post('password');
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
 			// check for "remember me"
+			//echo $this->input->post('identity')." huheh ".$this->input->post('password');
 
 			$remember = (bool) $this->input->post('remember-me');
 
@@ -64,8 +65,9 @@ class Auth extends CI_Controller {
 			{
 				//if the login is successful
 				//redirect them back to the home page
+				//echo $this->input->post('identity')." huhdfdfeh ".$this->input->post('password');
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				redirect('display_view/dashboard', 'refresh');
 			}
 			else
 			{
@@ -417,7 +419,7 @@ class Auth extends CI_Controller {
 
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
         {
-            redirect('auth', 'refresh');
+            //redirect('auth', 'refresh');
         }
 
         $tables = $this->config->item('tables','ion_auth');
@@ -436,8 +438,8 @@ class Auth extends CI_Controller {
         {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
-        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
-        $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
+        //$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
+        //$this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
@@ -450,8 +452,8 @@ class Auth extends CI_Controller {
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name'  => $this->input->post('last_name'),
-                'company'    => $this->input->post('company'),
-                'phone'      => $this->input->post('phone'),
+                //'company'    => "",
+                //'phone'      => "",
             );
         }
         if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
@@ -459,7 +461,8 @@ class Auth extends CI_Controller {
             // check to see if we are creating the user
             // redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("auth", 'refresh');
+            echo "registered successfully";
+            //redirect("auth", 'refresh');
         }
         else
         {
@@ -516,7 +519,8 @@ class Auth extends CI_Controller {
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
 
-            $this->_render_page('auth/create_user', $this->data);
+            //$this->_render_page('auth/create_user', $this->data);
+            echo "reg failed";
         }
     }
 
