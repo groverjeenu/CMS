@@ -354,7 +354,14 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                               </div>
                             </div>
                             <div class="media-body">
-                              <a href="#" class="btn btn-white btn-sm paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated> Add Image<i class="fa fa-upl"></i></a>
+                              <input type="file" id="file">
+                                <label for="file" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade"
+                                data-z="0.5" data-hover-z="1" data-animated="">
+                                <i class="fa fa-upl">Add Image</i>
+                                </label>
+                              <style>#file { display: none }</style>
+
+                              <!--a href="#" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated=""><span class="ink animate" style="height: 86px; width: 86px; top: -23px; left: -25.3281px;"></span> Add Image<i class="fa fa-upl"></i></a-->
                             </div>
                           </div>
                         </div>
