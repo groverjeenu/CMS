@@ -58,7 +58,10 @@
 
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-      <form class="login-form" method = "post" action = "<?php echo base_url(); ?>auth/login">
+      <?php $attributes = array('class' => 'login-form');
+            echo form_open('login',$attributes);
+      ?>
+      <!-- <form class="login-form" method = "post" action = "<?php echo base_url(); ?>auth/login"> -->
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?php echo base_url(); ?>public/img/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
@@ -70,6 +73,7 @@
             <i class="mdi-social-person-outline prefix"></i>
             <input id="identity" type="text" name = "identity" value = "<?php echo set_value('identity') ?>" >
             <label for="username" class="center-align">Email</label>
+            <div><?php echo form_error('identity');?></div>
           </div>
         </div>
         <div class="row margin">
@@ -77,6 +81,7 @@
             <i class="mdi-action-lock-outline prefix"></i>
             <input id="password" type="password" name = "password">
             <label for="password">Password</label>
+            <div><?php echo form_error('password');?></div>
           </div>
         </div>
         <div class="row">          
@@ -120,6 +125,11 @@
 
   <!--plugins.js - Some Specific JS codes for Plugin Settings-->
   <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        Materialize.toast("<?php echo trim(preg_replace( array('/\v/','/\s\s+/'), ' ' , $message));?>",5000);
+    });
+  </script>
 
 </body>
 
