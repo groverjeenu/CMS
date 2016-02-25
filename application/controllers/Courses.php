@@ -31,82 +31,65 @@ class Courses extends CI_Controller
 	
 	public function add()
 	{
-		if(!$this->ion_auth->in_group('faculty'))
+		/*if(!$this->ion_auth->in_group('faculty'))
 		{
 			show_error("Access Forbidden",403);
 			exit(0);
-		}
+		}*/
+		$this->load->library('form_validation');
 		$this->form_validation->set_rules('title','Cuurse Title','trim|required|xss_clean');
 		$this->form_validation->set_rules('description','Description','trim|required|xss_clean');
 		$this->form_validation->set_rules('syllabus','Syllabus','trim|required|xss_clean');
+		$this->form_validation->set_rules('is_key',"key exists","trim|required|in_list[enabled,disabled]|xss_clean");
+		$this->form_validation->set_rules('course_key',"course key","trim|callback_course_key_check|xss_clean");
 
 		if($this->form_validation->run()===FALSE)
 		{
-			$data['input_element'] = array('name'=>'element', 'id'=>'element', 'value'=>set_value('element'));
-			$this->load->view('courses_view', $data);
+			$this->load->view('courses/add_course');
 		}
 		else
 		{
-			$field = $this->input->post('element');
-			$this->load->model('courses_model');
-			if($this->courses_model->add(array('field_name'=>$field)))
+			$data = $this->courses->add($this->input->post());
+			$id = $data['id'];
+			$course_hash = $data['hash'];
+			if(is_null($id))
 			{
-				$this->load->view('courses_success_page_view');
+				$this->session->set_flashdata('message','Some unexpected error ocuured');
+				$this->load->view('courses/add_course');
 			}
 			else
 			{
-				$this->load->view('courses_error_page_view');
+				$this->session->set_flashdata('message','Course successfully created');
+				$this->load->view('courses/edit_course', array('hash' => $course_hash));
+				//redirect('courses/edit/'.$course_hash);
 			}
+			
 		}
 	}
-	
-	public function edit()
-	{
-		$this->form_validation->set_rules('element','Element label','trim|required');
-		$this->form_validation->set_rules('id','ID','trim|is_natural_no_zero|required');
-		if($this->form_validation->run()===FALSE)
-		{
-			if(!$this->input->post())
-			{
-				$id = intval($this->uri->segment($this->uri->total_segments()));
-			}
-			else
-			{
-				$id = set_value('id');
-			}
-			$data['input_element'] = array('name'=>'element', 'id'=>'element', 'value'=>set_value('element'));
-			$data['hidden'] = array('id'=>set_value('id',$id));
-			$this->load->view('courses_view', $data);
-		}
-		else
-		{
-			$element = $this->input->post('element');
-			$id = $this->input->post('id');
-			$this->load->model('courses_model');
-			if($this->courses_model->update(array('element'=>$element),array('id'=>$id)))
-			{
-				$this->load->view('courses_success_page_view', $data);
-			}
-			else
-			{
-				$this->load->view('courses_error_page_view');
-			}
-		}
-	}
-	public function delete($id)
-	{
-		$id = intval($id);
-		if($id!=0)
-		{
-			$this->load->model('courses_model');
-			$data['content'] = $this->courses_model->delete();
-			$this->load->view('courses_view', $data);
-		}
-		else
-		{
-			redirect(site_url(),'refresh');
-		}
-	}
+
+
+	public function course_key_check($str,$is_key)
+    {
+    	$is_key = $this->input->post('is_key');
+        if ($is_key== 'enabled')
+        {
+        	if(!is_set($str) || is_null($str))
+        	{
+        		$this->form_validation->set_message('course_key_check', 'The {field} field can not be the empty');
+            	return FALSE;
+        	}
+        	else if(strlen($str) < 6 || strlen($str) > 12)
+        	{
+        		$this->form_validation->set_message('course_key_check', 'The {field} field must be within 6 to 12 characters');
+            	return FALSE;
+        	}
+        	return TRUE;   
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
 }
 /* End of file '/Courses.php' */
 /* Location: ./application/controllers//Courses.php */
