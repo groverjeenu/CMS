@@ -24,7 +24,7 @@ class Courses extends CI_Model
 		return $id;
 	}
 
-	public add
+	//public add
 
 	public function get_all()
 	{

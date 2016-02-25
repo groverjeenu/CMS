@@ -66,8 +66,14 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('courselectures');
 	}
+	
 	public function videotest()
 	{
 		$this->load->view('video_test');
+	}
+
+	public function edit()
+	{
+		$this->load->view('edit_profile');
 	}
 }
