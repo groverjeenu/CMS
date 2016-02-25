@@ -343,7 +343,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <div class="tab-content">
 
                   <div id="account" class="tab-pane active">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action = "<?php echo base_url(); ?>auth/edit_user">
                       <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Avatar</label>
                         <div class="col-md-6">
