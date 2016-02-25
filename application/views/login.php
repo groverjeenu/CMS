@@ -69,7 +69,7 @@
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
             <input id="identity" type="text" name = "identity" value = "<?php echo set_value('identity') ?>" >
-            <label for="username" class="center-align">Username</label>
+            <label for="username" class="center-align">Email</label>
           </div>
         </div>
         <div class="row margin">
@@ -92,7 +92,7 @@
         </div>
         <div class="row">
           <div class="input-field col s6 m6 l6">
-            <p class="margin medium-small"><a href="page-register.html">Sign Up</a></p>
+            <p class="margin medium-small"><a href="<?php echo base_url(); ?>display_view/signup">Sign Up</a></p>
           </div>
           <div class="input-field col s6 m6 l6">
               <p class="margin right-align medium-small"><a href="page-forgot-password.html">Forgot password ?</a></p>

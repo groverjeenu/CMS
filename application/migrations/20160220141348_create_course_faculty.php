@@ -12,7 +12,7 @@ class Migration_Create_course_faculty extends CI_Migration
 	
 	public function up()
 	{
-	    $query = "CREATE TABLE `course-faculty` (
+	    $query = "CREATE TABLE `course_faculty` (
 				  `course_id` int(11) NOT NULL,
 				  `faculty_id` int(11) NOT NULL,
 				  `faculty_role` enum('guest','main') NOT NULL,

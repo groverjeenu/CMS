@@ -37,6 +37,11 @@ class Welcome extends CI_Controller {
 		$this->load->view('dashboard');
 	}
 
+	public function admindash()
+	{
+		$this->load->view('admin_dashboard');
+	}
+
 	public function add_courses()
 	{
 		$this->load->view('courses/add_course');

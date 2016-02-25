@@ -49,8 +49,13 @@
 
 <body>
     <div id = "video">
+<<<<<<< HEAD
         <video height="300" width="200" controls>
             <source src="<?php echo base_url(); ?>contents/videos/moviebig.mp4" type="video/mp4"/>
+=======
+        <video height="1000" width="700" controls>
+            <source src="<?php echo base_url(); ?>contents/videos/lp.mp4" type="video/mp4"/>
+>>>>>>> fa46b2e631829fd56ce5c84c0c9040edd5197611
         </video>
     </div>
 

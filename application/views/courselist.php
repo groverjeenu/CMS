@@ -13,7 +13,7 @@
   <!-- Vendor CSS BUNDLE
     Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
     TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
-  <link href="<?php echo base_url(); ?>public/css/vendor/all1.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
 
   <!-- Vendor CSS Standalone Libraries
         NOTE: Some of these may have been customized (for example, Bootstrap).
@@ -302,6 +302,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
       </div>
     </div>
 
+   
     <div class="sidebar right sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-skin-white" id="sidebar-library">
       <div data-scrollable>
         <h4 class="category">Category</h4>
@@ -345,6 +346,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
       </div>
     </div>
 
+
+
     <!-- sidebar effects OUTSIDE of st-pusher: -->
     <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
 
@@ -366,7 +369,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <div class="media v-middle">
                 <div class="media-body">
                   <h1 class="text-display-1 margin-none">Library</h1>
-                  <p class="text-subhead">Browse through thousands of lessons.</p>
+                   <p class="text-subhead">Browse through thousands of lessons.</p>
+
                 </div>
                 <div class="media-right">
                   <div class="width-100 text-right">
@@ -379,6 +383,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </div>
             </div>
 
+            <?php foreach($query as $i) { ?>
             <div class="panel panel-default paper-shadow" data-z="0.5">
               <div class="panel-body">
 
@@ -399,7 +404,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </div>
                   </div>
                   <div class="media-body">
-                    <h4 class="text-headline margin-v-5-0"><a href="app-student-course.html">Github Webhooks for Beginners</a></h4>
+                    <h4 class="text-headline margin-v-5-0"><a href="app-student-course.html"> <?php echo $i['course_name']; ?></a></h4>
                     <p class="small">
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
@@ -407,8 +412,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                     </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda aut debitis, ducimus, ea eaque earum eius enim eos explicabo facilis harum impedit natus nemo, nobis obcaecati omnis perspiciatis praesentium quaerat quas
-                      quod reprehenderit sapiente temporibus vel voluptatem voluptates voluptatibus?</p>
+                    <p><?php echo $i['description']; ?></p>
 
                     <hr class="margin-v-8" />
                     <div class="media v-middle">
@@ -416,7 +420,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <img src="images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" />
                       </div>
                       <div class="media-body">
-                        <h4><a href="">Adrian Demian</a>
+                        <h4><a href=""><?php echo $i['first_name']." ".$i['last_name']; ?></a>
                           <br/>
                         </h4>
                         Instructor
@@ -428,8 +432,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
               </div>
             </div>
+            <?php } ?>
 
-            <div class="panel panel-default paper-shadow" data-z="0.5">
+           <!-- <div class="panel panel-default paper-shadow" data-z="0.5">
               <div class="panel-body">
 
                 <div class="media media-clearfix-xs">
@@ -477,7 +482,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 </div>
 
               </div>
-            </div>
+            </div> 
 
             <div class="panel panel-default paper-shadow" data-z="0.5">
               <div class="panel-body">
@@ -677,7 +682,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 </div>
 
               </div>
-            </div>
+            </div> -->
 
             <ul class="pagination margin-top-none">
               <li class="disabled"><a href="#">&laquo;</a></li>
@@ -737,7 +742,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     The bundle was generated using modern frontend development tools that are provided with the package
     To learn more about the development process, please refer to the documentation.
     Do not use it simultaneously with the separate bundles above. -->
-  <script src="<?php echo base_url(); ?>public/js/vendor/all1.js"></script>
+  <script src="<?php echo base_url(); ?>public/js/vendor/all.js"></script>
 
   <!-- Vendor Scripts Standalone Libraries -->
   <!-- <script src="js/vendor/core/all.js"></script> -->
