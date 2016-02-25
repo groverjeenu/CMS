@@ -52,7 +52,7 @@ class Auth extends CI_Controller {
 		$this->data['title'] = "Login";
 
 		//validate form input
-		$this->form_validation->set_rules('identity', 'Username', 'trim|required|alpha_dash|min_length[6]|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('identity', 'Email', 'trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 		//echo $this->input->post('identity')." ".$this->input->post('password');
 		if ($this->form_validation->run() == true)
@@ -69,7 +69,8 @@ class Auth extends CI_Controller {
 				//redirect them back to the home page
 				//echo $this->input->post('identity')." huhdfdfeh ".$this->input->post('password');
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				//redirect('display_view/dashboard', 'refresh');
+				$this->session->set_userdata('user', (array)$this->ion_auth->user());
+				redirect('display_view/dashboard', 'refresh');
 			}
 			else
 			{
@@ -461,9 +462,19 @@ class Auth extends CI_Controller {
                 'last_name'  => $this->input->post('last_name'),
                 //'company'    => "",
                 //'phone'      => "",
+                'is_faculty' => (bool)$this->input->post('faculty'),
             );
+
+            if($email === "root@root.com")
+            {
+            	$group = array('2');
+            }
+            else
+            {
+            	$group = array('1');
+            }
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
+        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data, $group))
         {
             // check to see if we are creating the user
             // redirect them back to the admin page
