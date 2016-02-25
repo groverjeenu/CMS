@@ -50,7 +50,7 @@
 <body>
     <div id = "video">
         <video height="300" width="200" controls>
-            <source src="?php echo base_url(); ?>contents/videos/movie.mp4" type="video/mp4"/>
+            <source src="<?php echo base_url(); ?>contents/videos/moviebig.mp4" type="video/mp4"/>
         </video>
     </div>
 

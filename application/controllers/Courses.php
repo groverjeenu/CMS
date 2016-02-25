@@ -31,7 +31,15 @@ class Courses extends CI_Controller
 	
 	public function add()
 	{
-		$this->form_validation->set_rules('element','Element label','trim|required');
+		if(!$this->ion_auth->in_group('faculty'))
+		{
+			show_error("Access Forbidden",403);
+			exit(0);
+		}
+		$this->form_validation->set_rules('title','Cuurse Title','trim|required|xss_clean');
+		$this->form_validation->set_rules('description','Description','trim|required|xss_clean');
+		$this->form_validation->set_rules('syllabus','Syllabus','trim|required|xss_clean');
+
 		if($this->form_validation->run()===FALSE)
 		{
 			$data['input_element'] = array('name'=>'element', 'id'=>'element', 'value'=>set_value('element'));

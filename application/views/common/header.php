@@ -1,4 +1,5 @@
 <!-- Fixed navbar -->
+<?php $firstname = "Prabhat"; $lastname="Agarwal"; $username = "prabhat"; $imagehash = "lop";?>
     <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -118,7 +119,7 @@
             <!-- User -->
             <li class="dropdown">
               <a href="app-instructor-course-edit-course.html#" class="dropdown-toggle user" data-toggle="dropdown">
-                <img src="<?php echo base_url();?>public/images/people/110/guy-5.jpg" alt="Bill" class="img-circle" width="40" /> Bill <span class="caret"></span>
+                <img src="<?php echo base_url()."contents/images/people/$imagehash";?>" alt="<?php echo $username?>" class="img-circle" width="40" /> <?php echo $username?> <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="app-student-profile.html">Account</a></li>
@@ -140,9 +141,9 @@
         <div class="sidebar-block">
           <div class="profile">
             <a href="app-instructor-course-edit-course.html#">
-              <img src="<?php echo base_url();?>public/images/people/110/guy-6.jpg" alt="people" class="img-circle width-80" />
+              <img src="<?php echo base_url()."contents/images/people/$imagehash";?>" alt="<?php echo $username?>" class="img-circle width-80" />
             </a>
-            <h4 class="text-display-1 margin-none">Instructor Name</h4>
+            <h4 class="text-display-1 margin-none"><?php echo $firstname." ".$lastname?></h4>
           </div>
         </div>
 
