@@ -383,7 +383,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </div>
             </div>
 
-            <?php foreach($query as $i) { ?>
+            <?php foreach($query as $key=> $i) { ?>
             <div class="panel panel-default paper-shadow" data-z="0.5">
               <div class="panel-body">
 
@@ -404,7 +404,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </div>
                   </div>
                   <div class="media-body">
-                    <h4 class="text-headline margin-v-5-0"><a href="app-student-course.html"> <?php echo $i['course_name']; ?></a></h4>
+                    <h4 class="text-headline margin-v-5-0"><a href="<?php echo base_url(); ?>display_view/course/<?php echo $key; ?>"> <?php echo $i['course_name']; ?></a></h4>
                     <p class="small">
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
@@ -420,7 +420,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <img src="images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" />
                       </div>
                       <div class="media-body">
-                        <h4><a href=""><?php echo $i['first_name']." ".$i['last_name']; ?></a>
+                        <h4><a href=""><?php echo $i['names']; ?></a>
                           <br/>
                         </h4>
                         Instructor
@@ -684,13 +684,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </div>
             </div> -->
 
-            <ul class="pagination margin-top-none">
-              <li class="disabled"><a href="#">&laquo;</a></li>
-              <li class="active"><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
+            
 
           </div>
 

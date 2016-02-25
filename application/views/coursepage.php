@@ -328,7 +328,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>
                     </div>
                     <div class="media-body">
-                      <h1 class="text-display-1 margin-none">Github Webhooks for Beginners</h1>
+                      <h1 class="text-display-1 margin-none"><?php echo $query['course_name']; ?></h1>
                       <p class="small margin-none">
                         <span class="fa fa-fw fa-star text-yellow-800"></span>
                         <span class="fa fa-fw fa-star text-yellow-800"></span>
@@ -347,30 +347,24 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </div>
                   </div>
                   <p>
-                    <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Ad aperiam autem cumque deleniti dicta iusto laboriosam laudantium omnis, possimus praesentium provident quam quas, sapiente sint, ut! Adipisci aliquid assumenda consequuntur
-                    cupiditate deleniti dicta dolore dolorem
-                    <strong>dolores enim </strong>eos hic illo inventore iure libero magnam minima minus obcaecati optio pariatur porro quibusdam quos reiciendis, sapiente sint veritatis. Eveniet in magni sunt?</p>
-                  <p>
-                    <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Ad aperiam autem cumque deleniti dicta iusto laboriosam laudantium omnis, possimus praesentium provident quam quas, sapiente sint, ut! Adipisci aliquid assumenda consequuntur
-                    cupiditate deleniti dicta dolore dolorem
-                    <strong>dolores enim </strong>eos hic illo inventore iure libero.
-                  </p>
+                    <?php echo $query['description'] ;?>
+                  </p> 
+                  <p></p>
+                  <p></p>
                   <br/>
-                  <p>
-                    <strong>Lorem ipsum</strong> dolor sit amet, consectetur adipisicing elit. Ad aperiam autem cumque deleniti dicta iusto laboriosam laudantium omnis, possimus praesentium provident quam quas, sapiente sint, ut! Adipisci aliquid assumenda consequuntur
-                    cupiditate deleniti dicta dolore dolorem
-                    <strong>dolores enim </strong>eos hic illo inventore iure libero magnam minima minus obcaecati optio pariatur porro quibusdam quos reiciendis, sapiente sint veritatis. Eveniet in magni sunt?</p>
-                  <br/>
+                  <!--
                   <p class="margin-none">
                     <span class="label bg-gray-dark">New</span>
                     <span class="label label-grey-200">WordPress</span>
                     <span class="label label-grey-200">Beginner</span>
                   </p>
+                -->
                 </div>
-
+                <br/><br/><br/>
+                <br/><br/>
                 <div class="page-section">
                   <h2 class="text-headline margin-none">What you'll learn</h2>
-                  <p class="text-subhead text-light">A minus obcaecati optio pariatur porro.</p>
+                  <p class="text-subhead text-light">A brief description.</p>
                   <ul class="list-group relative paper-shadow margin-none" data-hover-z="0.5" data-animated>
                     <li class="list-group-item">
                       <div class="media v-middle">
@@ -380,9 +374,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           </div>
                         </div>
                         <div class="media-body text-body-2">
-                          Basics of GIT and how to become a STAR.
+                          <?php echo $query['syllabus']; ?>
                         </div>
                       </div>
+                      <!--
                     </li>
                     <li class="list-group-item paper-shadow">
                       <div class="media v-middle">
@@ -432,16 +427,19 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         </div>
                       </div>
                     </li>
+                  -->
                   </ul>
                 </div>
-
+                <!--
                 <div class="pull-right">
                   <a class="btn btn-white btn-circle paper-shadow relative" data-z="1" href="#"><i class="md md-add"></i></a>
                 </div>
-
+              -->
+                <!--
                 <h2 class="text-headline margin-none">Testimonials</h2>
                 <p class="text-subhead text-light">A few words from our past students</p>
                 <br/>
+
                 <div class="row">
                   <div class="col-md-6">
                     <div class="testimonial">
@@ -496,6 +494,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </div>
                   </div>
                 </div>
+              -->
 
               </div>
               <div class="media-right">
@@ -512,14 +511,15 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <i class="fa fa-clock-o fa-fw"></i> 4 hrs &nbsp;
                         <i class="fa fa-calendar fa-fw"></i> 21/10/14
                         <br/>
-                        <i class="fa fa-user fa-fw"></i> Instructor: Adrian Demian
+                        <i class="fa fa-user fa-fw"></i> Instructors: <?php echo $query['names'] ;?>
                         <br/>
                         <i class="fa fa-mortar-board fa-fw"></i> Max. students: 50
                         <br/>
-                        <i class="fa fa-check fa-fw"></i> Attending: 30
+                        <i class="fa fa-check fa-fw"></i> Attending: <?php echo $query['attending'];?>
                       </p>
                     </div>
                     <hr class="margin-none" />
+                    <!--
                     <div class="panel-body text-center">
                       <p><a class="btn btn-success btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated href="app-take-course.html">Start Course</a></p>
                       <p class="text-body-2">or <a href="#">buy course for $1</a></p>
@@ -532,10 +532,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <a href="#" class="text-light"><i class="fa fa-twitter fa-fw"></i> Tweet this course</a>
                       </li>
                     </ul>
+                  -->
                   </div>
                   <!-- // END .panel -->
 
                   <!-- .panel -->
+                  <!--
                   <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                     <div class="panel-body">
                       <div class="media v-middle">
@@ -556,9 +558,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       </div>
                     </div>
                   </div>
+                -->
                   <!-- // END .panel -->
 
                   <!-- .panel -->
+                  <!--
                   <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                     <div class="panel-body">
                       <h4 class="text-headline">Other Courses</h4>
@@ -604,6 +608,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       </li>
                     </ul>
                   </div>
+                -->
                   <!-- // END .panel -->
 
                 </div>
