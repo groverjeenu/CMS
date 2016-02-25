@@ -132,4 +132,17 @@ class Display_view extends CI_Controller {
 		$data['query'] = $query;
 		$this->load->view('coursepage',$data);	
 	}
+
+	public function edit_profile()
+	{	
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("display_view/login","refresh");
+		}
+
+		$uid = $this->ion_auth->get_user_id();
+
+
+		$this->load->view('edit_profile',$uid);
+	}
 } 

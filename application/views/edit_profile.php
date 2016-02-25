@@ -14,6 +14,21 @@
     Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
     TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
   <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
+  <script>
+  function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgtab')
+                    .attr('src', e.target.result)
+                    ;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
 
   <!-- Vendor CSS Standalone Libraries
         NOTE: Some of these may have been customized (for example, Bootstrap).
@@ -343,18 +358,18 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <div class="tab-content">
 
                   <div id="account" class="tab-pane active">
-                    <form class="form-horizontal" action = "<?php echo base_url(); ?>auth/edit_user">
+                    <form class="form-horizontal" action = "<?php echo base_url(); ?>auth/edit_user" enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Avatar</label>
                         <div class="col-md-6">
                           <div class="media v-middle">
                             <div class="media-left">
                               <div class="icon-block width-100 bg-grey-100">
-                                <i class="fa fa-photo text-light"></i>
+                               <img src ="" id = "imgtab" class = "icon-block width-100 bg-grey-100">
                               </div>
                             </div>
                             <div class="media-body">
-                              <input type="file" id="file">
+                              <input type="file" id="file" onchange="readURL(this);" name="image">
                                 <label for="file" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade"
                                 data-z="0.5" data-hover-z="1" data-animated="">
                                 <i class="fa fa-upl">Add Image</i>
@@ -372,13 +387,13 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           <div class="row">
                             <div class="col-md-6">
                               <div class="form-control-material">
-                                <input type="email" class="form-control" id="exampleInputFirstName" placeholder="Your first name">
+                                <input type="email" class="form-control" id="exampleInputFirstName" placeholder="Your first name" name="first_name">
                                 <label for="exampleInputFirstName">First name</label>
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-control-material">
-                                <input type="email" class="form-control" id="exampleInputLastName" placeholder="Your last name">
+                                <input type="email" class="form-control" id="exampleInputLastName" placeholder="Your last name" name="last_name">
                                 <label for="exampleInputLastName">Last name</label>
                               </div>
                             </div>
@@ -397,6 +412,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           </div>
                         </div>
                       </div>
+                      <!--
                       <div class="form-group">
                         <label for="inputEmail3" class="col-md-2 control-label">Website</label>
                         <div class="col-md-6">
@@ -409,23 +425,26 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           </div>
                         </div>
                       </div>
+                    -->
                       <div class="form-group">
                         <label for="inputPassword3" class="col-md-2 control-label">Change Password</label>
                         <div class="col-md-6">
                           <div class="form-control-material">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name= "password">
                             <label for="inputPassword3">Password</label>
                           </div>
                         </div>
                       </div>
                       <div class="form-group">
-                        <div class="col-md-offset-2 col-md-6">
-                          <div class="checkbox checkbox-success">
-                            <input id="checkbox3" type="checkbox" checked="">
-                            <label for="checkbox3">Subscribe to our Newsletter</label>
+                        <label for="inputPassword3" class="col-md-2 control-label">Retype Password</label>
+                        <div class="col-md-6">
+                          <div class="form-control-material">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password_confirm">
+                            <label for="inputPassword3"> Retype Password</label>
                           </div>
                         </div>
                       </div>
+                      
                       <div class="form-group margin-none">
                         <div class="col-md-offset-2 col-md-10">
                           <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated>Save Changes</button>
