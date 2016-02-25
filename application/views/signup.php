@@ -93,7 +93,7 @@
           </div>
           <div class="row">
             <div class="input-field col s12 m12 l12  login-text">
-              <input type="checkbox" id="faculty" />
+              <input type="checkbox" id="faculty" name = "faculty">
               <label for="faculty">I am a faculty</label>
             </div>
           </div>
