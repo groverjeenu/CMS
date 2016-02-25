@@ -21,6 +21,21 @@ class Courses extends CI_Model
 
 	public function get_all_courses()
 	{
-		return $this->db->query("select * from courses ,course_faculty ,users where courses.cid = course_faculty.course_id and course_faculty.faculty_id = users.id");
+		 $courses = $this->db->query("select * from courses")->result_array();
+		 $d = array();
+		 foreach($courses as $c)
+		 {
+		 	$t = "";
+		 	$qq = $c['cid'];
+		 	$z = $this->db->query("select * from course_faculty ,users where course_faculty.course_id = ?  and course_faculty.faculty_id = users.id",$qq)->result_array(); 
+		 	foreach($z as $p)
+		 	{
+		 		$t = $t.$p['first_name']."\t".$p['last_name']."\t,";
+		 	}
+		 	$d[$c['cid']] = array("names" =>$t,"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key']);
+		 }
+		 
+		 //$this->db->query("select * from courses ,course_faculty ,users where courses.cid = course_faculty.course_id and course_faculty.faculty_id = users.id");
+		 return $d;
 	}
 }

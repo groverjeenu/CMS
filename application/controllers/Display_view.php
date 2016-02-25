@@ -63,7 +63,7 @@ class Display_view extends CI_Controller {
 			redirect("display_view/login","refresh");
 		}
 
-		$query = $this->courses->get_all_courses()->result_array();
+		$query = $this->courses->get_all_courses();
 
 		/*$code = "<div class=\"panel panel-default paper-shadow\" data-z=\"0.5\">
               <div class=\"panel-body\">
@@ -116,10 +116,13 @@ class Display_view extends CI_Controller {
             </div>"*/
             $data['query'] = $query;
 
-            foreach ($query as  $key) {
-            	echo $key['course_name'];
-            }
+            
        
         $this->load->view('courselist',$data);
+	}
+
+	public function course($cid)
+	{
+
 	}
 } 
