@@ -37,9 +37,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('dashboard');
 	}
 
-	public function courses()
+	public function admindash()
 	{
-		$this->load->view('courses');
+		$this->load->view('admin_dashboard');
+	}
+
+	public function add_courses()
+	{
+		$this->load->view('courses/add_course');
 	}
 
 	public function courselist()
@@ -61,8 +66,14 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('courselectures');
 	}
+	
 	public function videotest()
 	{
 		$this->load->view('video_test');
+	}
+
+	public function edit()
+	{
+		$this->load->view('edit_profile');
 	}
 }

@@ -10,9 +10,21 @@ class Courses extends CI_Model
 
 	public function add($details)
 	{
-		
+		$data = array(
+				'course_name' => $details['course_name'],
+				'description' => $details['description'],
+				'syllabus' => $details['syllabus'],
+			);
+		if($details['is_key'])
+		{
+			$data['course_key'] = $details['course_key'];
+		}
+		$this->db->insert('courses',$data);
+		$id = $this->db->insert();
+		return $id;
 	}
 
+	//public add
 
 	public function get_all()
 	{
