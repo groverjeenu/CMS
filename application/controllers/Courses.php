@@ -5,6 +5,7 @@ class Courses extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Courses_model','courses');
 	}
 	
 	public function index()
@@ -49,6 +50,7 @@ class Courses extends CI_Controller
 		}
 		else
 		{
+			log_message('DEBUG','some info');
 			$data = $this->courses->add($this->input->post());
 			$id = $data['id'];
 			$course_hash = $data['hash'];
@@ -62,8 +64,7 @@ class Courses extends CI_Controller
 				$this->session->set_flashdata('message','Course successfully created');
 				$this->load->view('courses/edit_course', array('hash' => $course_hash));
 				//redirect('courses/edit/'.$course_hash);
-			}
-			
+			}	
 		}
 	}
 

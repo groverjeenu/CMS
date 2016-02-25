@@ -6,8 +6,8 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->library(array('ion_auth','form_validation'));
-		$this->load->helper(array('url','language'));
+		$this->load->library(array('form_validation'));
+		$this->load->helper(array('language'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
@@ -50,9 +50,9 @@ class Auth extends CI_Controller {
 		$this->data['title'] = "Login";
 
 		//validate form input
-		$this->form_validation->set_rules('identity', 'Username', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		echo $this->input->post('identity')." ".$this->input->post('password');
+		$this->form_validation->set_rules('identity', 'Username', 'trim|required|alpha_dash|min_length[6]|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+		//echo $this->input->post('identity')." ".$this->input->post('password');
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
@@ -65,7 +65,7 @@ class Auth extends CI_Controller {
 			{
 				//if the login is successful
 				//redirect them back to the home page
-				echo $this->input->post('identity')." huhdfdfeh ".$this->input->post('password');
+				//echo $this->input->post('identity')." huhdfdfeh ".$this->input->post('password');
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				//redirect('display_view/dashboard', 'refresh');
 			}
@@ -74,7 +74,8 @@ class Auth extends CI_Controller {
 				// if the login was un-successful
 				// redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				//redirect('display_view/login', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+				log_message('DEBUG',$this->session->flashdata('message'));
+				redirect('login','refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}
 		else
@@ -83,7 +84,9 @@ class Auth extends CI_Controller {
 			// set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-			$this->data['identity'] = array('name' => 'identity',
+			log_message('DEBUG',$this->data['message']);
+
+			/*$this->data['identity'] = array('name' => 'identity',
 				'id'    => 'identity',
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('identity'),
@@ -91,9 +94,11 @@ class Auth extends CI_Controller {
 			$this->data['password'] = array('name' => 'password',
 				'id'   => 'password',
 				'type' => 'password',
-			);
+			);*/
 
-			$this->_render_page("login", $this->data);
+			//$this->_render_page("login", $this->data);
+			//$this->session->set_flashdata('message','Invalid Login');
+			$this->load->view('login',$this->data);
 		}
 	}
 
@@ -107,7 +112,7 @@ class Auth extends CI_Controller {
 
 		// redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('auth/login', 'refresh');
+		redirect('login', 'refresh');
 	}
 
 	// change password
@@ -461,8 +466,8 @@ class Auth extends CI_Controller {
             // check to see if we are creating the user
             // redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            echo "registered successfully";
-            //redirect("auth", 'refresh');
+            //echo "registered successfully";
+            redirect("login", 'refresh');
         }
         else
         {
@@ -470,7 +475,7 @@ class Auth extends CI_Controller {
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-            $this->data['first_name'] = array(
+            /*$this->data['first_name'] = array(
                 'name'  => 'first_name',
                 'id'    => 'first_name',
                 'type'  => 'text',
@@ -517,10 +522,11 @@ class Auth extends CI_Controller {
                 'id'    => 'password_confirm',
                 'type'  => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
-            );
+            );*/
 
             //$this->_render_page('auth/create_user', $this->data);
-            echo "reg failed";
+            //echo "reg failed";
+            $this->load->view('signup',$this->data);
         }
     }
 

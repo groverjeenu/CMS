@@ -94,18 +94,23 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div id="course" class="card">
-                                        <form action="app-instructor-course-edit-course.html" class="form">
+                                        <?php $attributes = array('class' => 'form');
+                                                echo form_open('courses/add');?>
+                                        <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
                                             <div class="form-group form-control-material">
                                                 <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo set_value('title');?>" />
                                                 <label for="title">Title</label>
+                                                <?php echo form_error('title');?>
                                             </div>
                                             <div class="form-group form-control-material mytextarea" >
-                                                <textarea id="description" class="form-control used" row="20" placeholder="Write course description here...."></textarea>
+                                                <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php echo set_value('description');?>"></textarea>
                                                 <label for="reply">Description</label>
+                                                <?php echo form_error('description');?>
                                             </div>
                                             <div class="form-group form-control-material mytextarea">
-                                                <textarea id="syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...."></textarea>
+                                                <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php echo set_value('syllabus');?>"></textarea>
                                                 <label for="reply">Syllabus</label>
+                                                <?php echo form_error('syllabus');?>
                                             </div>
                                             <h5>Enrollment Key</h5>
                                             <div class="form-group">
@@ -116,7 +121,8 @@
                                             </div>
                                             <input type='text' class='hidden' name='is_key' id='is_key'/>
                                             <div class="form-group form-control-material">
-                                                <input type="text" disabled="disabled" name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" />
+                                                <input type="text" disabled="disabled" name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo set_value('course_key');?>" />
+                                                <?php echo form_error('course_key');?>
                                             </div>
                                             <div class="text-right">
                                             <button type='submit' class="btn btn-primary">Save</a>
