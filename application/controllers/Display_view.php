@@ -123,6 +123,13 @@ class Display_view extends CI_Controller {
 
 	public function course($cid)
 	{
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("display_view/login","refresh");
+		}
 
+		$query = $this->courses->get_course($cid);
+		$data['query'] = $query;
+		$this->load->view('coursepage',$data);	
 	}
 } 
