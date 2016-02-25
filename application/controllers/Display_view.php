@@ -25,6 +25,7 @@ class Display_view extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model');
+		$this->load->model('admindash_model');
 		$this->load->helper(array('url','language'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -57,6 +58,7 @@ class Display_view extends CI_Controller {
 		$this->load->view('signup');
 	
 	}
+
 	public function dashboard()
 	{
 		if($this->ion_auth->in_group('faculty'))
@@ -65,7 +67,9 @@ class Display_view extends CI_Controller {
 		}
 		else if($this->ion_auth->in_group('admin'))
 		{
-			$this->load->view('admin_dashboard');
+			$users = $this->admindash_model->get_faculty_approvals();
+			$data['users'] = $users;
+			$this->load->view('admin_dashboard', $data);
 		}
 		else if($this->ion_auth->in_group('course-admin'))
 		{
@@ -76,6 +80,13 @@ class Display_view extends CI_Controller {
 			$this->load->view('dashboard');
 		}
 	}
+
+	public function admin_helper_add($id)
+	{
+		$this->ion_auth->add_to_group(3, $id);
+		
+	}
+
 	public function create_group()
 	{
 		$this->ion_auth->create_group('members');
@@ -85,7 +96,6 @@ class Display_view extends CI_Controller {
 
 	}
 
-	
 	public function courselist()
 	{
 		

@@ -312,6 +312,7 @@
                 
             </aside>
 
+
             <section id = "content">
                 <div class = "container">
                     <section id = "work-collections">
@@ -323,14 +324,17 @@
                                         <span class="collection-header">Faculty Approvals Pending</span>
                                         <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                                     </li>
+                                    <?php foreach($users as $i){ ?>
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
-                                                <p class="collections-title">HTML</p>
-                                                <p class="collections-content">Web Dev</p>
+                                                <p class="collections-title"><?php echo $i['email'] ?></p>
+                                                <p class="collections-content"><?php echo $i['first_name']." ".$i['last_name'] ?></p>
                                             </div>
                                             <div class="col s3">
-                                                <button type="submit" class="btn waves-effect waves-light col s12">Approve</button>
+                                                <a href="<?php echo base_url(); ?>display_view/admin_helper_add/$i['id']>">
+                                                    <button class="btn waves-effect waves-light col s12">Approve</button>
+                                                </a>
                                             </div>
                                             <div class="col s3">
                                                 <button type="submit" class="btn waves-effect waves-light col s12">Cancel</button>
@@ -340,7 +344,8 @@
                                             </div-->
                                         </div>
                                     </li>
-                                    <li class="collection-item">
+                                    <?php } ?>
+                                    <!--li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
                                                 <p class="collections-title">Mobile App for Social</p>
@@ -348,11 +353,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat grey darken-3">UI/UX</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-2"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -362,11 +367,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat teal">Marketing</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-3"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -376,12 +381,12 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat green">SEO</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-4"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
-                                    </li>
+                                        <!--/div>
+                                    </li-->
                                 </ul> 
                             </div> 
                                       
