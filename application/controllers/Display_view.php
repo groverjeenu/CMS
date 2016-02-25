@@ -30,6 +30,12 @@ class Display_view extends CI_Controller {
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("display_view/login","refresh");
+		}
+
 	}
 
 	public function index()
@@ -53,16 +59,36 @@ class Display_view extends CI_Controller {
 	}
 	public function dashboard()
 	{
-		$this->load->view('dashboard');
-	
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$this->load->view('fac');
+		}
+		else if($this->ion_auth->in_group('admin'))
+		{
+			$this->load->view('admin_dashboard');
+		}
+		else if($this->ion_auth->in_group('course-admin'))
+		{
+			$this->load->view('dashboard');
+		}
+		else
+		{
+			$this->load->view('dashboard');
+		}
 	}
+	public function create_group()
+	{
+		$this->ion_auth->create_group('members');
+		$this->ion_auth->create_group('admin');
+		$this->ion_auth->create_group('faculty');
+		$this->ion_auth->create_group('course-admin');
+
+	}
+
+	
 	public function courselist()
 	{
-		if(!$this->ion_auth->logged_in())
-		{
-			redirect("display_view/login","refresh");
-		}
-
+		
 		$query = $this->courses->get_all_courses();
 
 		/*$code = "<div class=\"panel panel-default paper-shadow\" data-z=\"0.5\">
