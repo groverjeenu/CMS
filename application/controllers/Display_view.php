@@ -140,9 +140,10 @@ class Display_view extends CI_Controller {
 			redirect("display_view/login","refresh");
 		}
 
-		$uid = $this->ion_auth->get_user_id();
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
 
-
-		$this->load->view('edit_profile',$uid);
+		 //foreach($data['user'] as $k)echo $k."<br>";
+		$this->load->view('edit_profile',$data);
 	}
 } 
