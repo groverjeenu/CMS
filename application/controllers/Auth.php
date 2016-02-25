@@ -562,7 +562,7 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
 		//$this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required');
-		$hashed_file ="user.png";
+		//$hashed_file ="user.png";
 
 		if(!empty($_FILES['image']['name']))
 		{
@@ -644,9 +644,13 @@ class Auth extends CI_Controller {
 					'first_name' => $this->input->post('first_name'),
 					'last_name'  => $this->input->post('last_name'),
 					//'email'    => $this->input->post('email'),
-					'image' => $hashed_file,
+					//'image' => $hashed_file,
 					//'image'		=> $this->input->post('image')
 				);
+				if(!empty($_FILES['image']['name']))
+				{
+					$data['image'] = $hashed_file;
+				}
 
 				// update the password if it was posted
 				if ($this->input->post('password'))
