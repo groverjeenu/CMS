@@ -467,6 +467,10 @@ class Auth extends CI_Controller {
             {
             	$group = array('2');
             }
+            else
+            {
+            	$group = array('1');
+            }
         }
         if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data, $group))
         {

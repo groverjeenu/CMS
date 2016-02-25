@@ -332,12 +332,14 @@
                                                 <p class="collections-content"><?php echo $i['first_name']." ".$i['last_name'] ?></p>
                                             </div>
                                             <div class="col s3">
-                                                <a href="<?php echo base_url(); ?>display_view/admin_helper_add/$i['id']>">
+                                                <a href="<?php echo base_url()."display_view/admin_helper_add/".$i['id'] ?>">
                                                     <button class="btn waves-effect waves-light col s12">Approve</button>
                                                 </a>
                                             </div>
                                             <div class="col s3">
-                                                <button type="submit" class="btn waves-effect waves-light col s12">Cancel</button>
+                                                <a href="<?php echo base_url()."display_view/admin_helper_rem/".$i['id'] ?>">
+                                                    <button class="btn waves-effect waves-light col s12">Cancel</button>
+                                                </a>
                                             </div>
                                             <!--div class="col s3">
                                                 <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>

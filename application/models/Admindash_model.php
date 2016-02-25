@@ -12,4 +12,9 @@ class Admindash_model extends CI_Model
 		$users = $this->db->query("select * from users where is_faculty=1")->result_array();
 		return $users;
 	}
+
+	public function update_faculty($id)
+	{
+		$this->db->query("update users set is_faculty=0 where id=".$id);	
+	}
 }

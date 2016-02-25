@@ -83,8 +83,16 @@ class Display_view extends CI_Controller {
 
 	public function admin_helper_add($id)
 	{
+		$this->admindash_model->update_faculty($id);
+		$this->ion_auth->remove_from_group(NULL, $id);
 		$this->ion_auth->add_to_group(3, $id);
-		
+		redirect('dashboard');
+	}
+
+	public function admin_helper_rem($id)
+	{
+		$this->admindash_model->update_faculty($id);
+		redirect('dashboard');
 	}
 
 	public function create_group()
