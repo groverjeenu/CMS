@@ -508,13 +508,17 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </div>
                     <div class="panel-body">
                       <p class="text-caption margin-none">
+                        <!--
                         <i class="fa fa-clock-o fa-fw"></i> 4 hrs &nbsp;
                         <i class="fa fa-calendar fa-fw"></i> 21/10/14
                         <br/>
+                      -->
                         <i class="fa fa-user fa-fw"></i> Instructors: <?php echo $query['names'] ;?>
                         <br/>
+                        <!--
                         <i class="fa fa-mortar-board fa-fw"></i> Max. students: 50
                         <br/>
+                      -->
                         <i class="fa fa-check fa-fw"></i> Attending: <?php echo $query['attending'];?>
                       </p>
                     </div>
