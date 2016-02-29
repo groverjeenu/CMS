@@ -3,7 +3,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
 $config['upload_path']          = './contents/videos';
-$config['allowed_types']        = 'mpeg|mpg|mpe|3gp|mp4|jpg';
+$config['allowed_types']        = 'mpeg|mpg|mpe|3gp|mp4';
 $config['file_ext_tolower']		= TRUE;
 $config['encrypt_name']			= TRUE;
 $config['max_size']             = 500000;

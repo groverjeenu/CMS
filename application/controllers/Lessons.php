@@ -20,6 +20,7 @@ class Lessons extends CI_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('title','Lesson Title','trim|required|xss_clean');
 		$this->form_validation->set_rules('description','Description','trim|required|xss_clean');
+		$this->form_validation->set_rules('visibility','Visibility','trim|required|xss_clean');
 		//$this->form_validation->set_rules('video','Lecture Video','trim|required');
 		//$this->form_validation->set_rules('text','Lecture text','trim|required');
 
@@ -36,12 +37,41 @@ class Lessons extends CI_Controller
                 $data['error'] = $this->upload->display_errors();
                 $this->load->view('lessons/add_lesson', $data);
             }
-            else
+            else 
             {
-            	echo "File uploaded successfully";
-            	echo "<br>Name = ".$this->upload->data('file_name');
+            	$data['videoname'] = $this->upload->data('file_name');
+            	$config['upload_path']          = './contents/texts';
+				$config['allowed_types']        = 'pdf|txt';
+				$config['file_ext_tolower']		= TRUE;
+				$config['encrypt_name']			= TRUE;
+				$config['max_size']             = 100000;
+				$this->upload->initialize($config);
+	            if ( !$this->upload->do_upload('text'))
+	            {
 
-            }
+	                $data['error'] = $this->upload->display_errors();
+	                $this->load->view('lessons/add_lesson', $data);
+	            }
+	            else
+	            {
+	       			$data['course_id'] = $courseid;
+	       			$data['videoname'] = $videoname;
+	       			$data['name'] = $this->input->post('title');
+	       			$data['description'] = $this->input->post('description');
+	       			$data['textname'] = $this->upload->data('file_name');
+	       			if($this->input->post('visibility') == "on")
+	       				$data['visibility'] = TRUE;
+	       			else
+	       				$data['visibility'] = FALSE;
+	       			$this->lesson->add($data);
+	            	echo "File uploaded successfully";
+	            	echo "<br>VideoName = ".$videoname;
+	            	echo "<br>textName = ".$this->upload->data('file_name');
+	            	echo "<br>Visi = ".$this->input->post('visibility');
+
+
+	            }
+	        }
 
 		}
 		//echo "You are adding lesson for $courseid";

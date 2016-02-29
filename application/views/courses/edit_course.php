@@ -177,6 +177,7 @@
                                         $lesson['last_updated'] = time(0);
                                         $lessons = array($lesson);
                                         $no_lessons = 1;
+                                        $courseid= $course['id'];
                                 ?>
                                 <div id="lessons" class="tab-pane">
                                     <div class="media v-middle s-container">

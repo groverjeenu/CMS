@@ -44,6 +44,7 @@
         TIP:
         - Using bundles will improve performance by greatly reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/app/app.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>public/css/app/bootstrap-switch.min.css" rel="stylesheet">
         <!-- App CSS CORE
         This variant is to be used when loading the separate styling modules -->
         <!-- <link href="css/app/main.css" rel="stylesheet"> -->
@@ -117,12 +118,7 @@
                                             <label for="text">Lesson Text</label>
                                         </div>
                                         <h5>Visible</h5>
-                                        <div class="form-group">
-                                            <div class="btn-group btn-group-sm">
-                                                <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
-                                                <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
-                                            </div>
-                                        </div>
+                                        <input type="checkbox" name="visibility" id="visibility" checked>
                                         <div class="text-right">
                                             <button type='submit' class="btn btn-primary">Save</button>
                                         </div>
@@ -200,6 +196,7 @@
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
     <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-switch.min.js"></script>
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -221,15 +218,9 @@
     <script>
     $(document).ready(function()
     {
-    autosize($('textarea'));
-    $('#enable_toggle').click(function(){
-    $("#is_key").val('enabled');
-    $("#course_key").prop('disabled',false);
-    });
-    $('#disable_toggle').click(function(){
-    $("#is_key").val('disabled');
-    $("#course_key").prop('disabled',true);
-    });
+        autosize($('textarea'));
+        $("#visibility").bootstrapSwitch();
+
     });
     </script>
 </body>
