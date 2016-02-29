@@ -321,65 +321,36 @@
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
                                         <span class="collection-header">Courses</span>
-                                        <p>Your Favorites</p>
+                                        <p>My Courses</p>
                                         <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                                     </li>
+                                    <?php  foreach ($user_courses as $kk => $ccourse) { ?>
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
-                                                <p class="collections-title">HTML</p>
-                                                <p class="collections-content">Web Dev</p>
+                                                <a href = "<?php echo base_url()."display_view/course/".$ccourse['course_id']?>">
+                                                <p class="collections-title"> <?php echo $ccourse['course_name'] ?></p>
+                                                </a>
+                                                <p class="collections-content"><?php echo $ccourse['description'] ?></p>
                                             </div>
                                             <div class="col s3">
-                                                <span class="task-cat cyan">Development</span>
+                                                <span class="task-cat cyan"> 
+                                                <?php 
+
+                                                //$names = $this->course->get_course($ccourse['course_id'])->row();
+                                                //$namess = (array)$names;
+                                                echo $all_courses[$ccourse['course_id']]['names']; ?>
+                                            </span>
                                             </div>
                                             <!--div class="col s3">
                                                 <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
                                         </div>
                                     </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">Mobile App for Social</p>
-                                                <p class="collections-content">iSocial App</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat grey darken-3">UI/UX</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-2"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">Website</p>
-                                                <p class="collections-content">MediTab</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat teal">Marketing</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-3"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">AdWord campaign</p>
-                                                <p class="collections-content">True Line</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat green">SEO</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-4"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
+                                    <?php } ?>
+                                 
+                                   
+                                    
                                 </ul> 
                             </div> 
                                  <!--div class = "card">

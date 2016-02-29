@@ -4,6 +4,7 @@ class Courses_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('ion_auth_model');
 
 	}
 	
@@ -44,6 +45,7 @@ class Courses_model extends CI_Model
 		 	{
 		 		$t = $t.$p['first_name']."\t".$p['last_name']."\t,";
 		 	}
+		 	$t = substr($t,0,-2);
 		 	$d[$c['cid']] = array("names" =>$t,"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key']);
 		 }
 		 
@@ -69,10 +71,36 @@ class Courses_model extends CI_Model
 		 	{
 		 		$t = $t.$p['first_name']."\t".$p['last_name']."\t,";
 		 	}
+		 	$t = substr($t,0,-2);
 		 	$d[$c['cid']] = array("names" =>$t,"cid"=>$c['cid'],"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key'],"syllabus"=>$c['syllabus'],"attending"=>$number);
 		 }
 		 
 		 //$this->db->qu
 		 return $d[$c['cid']];
+	}
+
+	public function  get_user_courses()
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$user_courses =  $this->db->query("select * from users,enrollments,courses where users.id = enrollments.student_id and enrollments.course_id = courses.cid and users.id = ?",$curr_user['id'])->result_array();
+		return $user_courses;
+
+	}
+
+	public function check_if_enrolled($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$val = (array)$this->db->query("select count(*) as cnt  from enrollments where course_id = ? and student_id = ?",array($cid, $curr_user['user_id']) )->row();
+		
+		return $val['cnt'];
+		
+
+	}
+
+	public function get_course_lectures($cid)
+	{
+		$lectures = $this->db->query("select * from lectures where course_id = ? and is_public = 1 order by upload_time",$cid)->result_array();
+		return $lectures;
+
 	}
 }

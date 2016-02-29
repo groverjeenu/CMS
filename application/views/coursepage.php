@@ -377,8 +377,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           <?php echo $query['syllabus']; ?>
                         </div>
                       </div>
-                      <!--
+                      
                     </li>
+                    <!--
                     <li class="list-group-item paper-shadow">
                       <div class="media v-middle">
                         <div class="media-left">
@@ -430,6 +431,36 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   -->
                   </ul>
                 </div>
+
+                <?php if($val != 0) { ?>
+
+                <div class="page-section">
+                  <h2 class="text-headline margin-none">Lectures</h2>
+                  <p class="text-subhead text-light">Timeline for Course lectures</p>
+                  <ul class="list-group relative paper-shadow margith-sn-none" data-hover-z="0.5" data-animated>
+                    <?php foreach($lectures as $ll) {?>
+                    <li class="list-group-item">
+                      <div class="media v-middle">
+                        <div class="media-left">
+                          <div class="icon-block s30 bg-green-300 text-white img-circle">
+                            <i class="fa fa-database"></i>
+                          </div>
+                        </div>
+                        
+                        <div class="media-body text-body-2">
+
+                          <?php echo "<a href = ".base_url()."display_view/lectures/".$ll['id'].">".$ll['name']."</a>"; ?>
+                        </div>
+                      
+                      </div>
+                    </li>
+                      <?php }?>
+                  </ul>
+                </div>
+                <?php }?>
+
+               
+
                 <!--
                 <div class="pull-right">
                   <a class="btn btn-white btn-circle paper-shadow relative" data-z="1" href="#"><i class="md md-add"></i></a>

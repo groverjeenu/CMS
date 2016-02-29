@@ -24,7 +24,7 @@ class Display_view extends CI_Controller {
 		parent::__construct();
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
-		$this->load->model('courses_model');
+		$this->load->model('courses_model','courses');
 		$this->load->model('admindash_model');
 		$this->load->helper(array('url','language'));
 
@@ -34,7 +34,7 @@ class Display_view extends CI_Controller {
 
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("display_view/login","refresh");
+			redirect("display_view/login_view","refresh");
 		}
 
 	}
@@ -48,16 +48,8 @@ class Display_view extends CI_Controller {
 		
 	}
 
-	public function login()
-	{
-		$this->load->view('login');
-
-	}
-	public function signup()
-	{
-		$this->load->view('signup');
 	
-	}
+	
 
 	public function dashboard()
 	{
@@ -77,7 +69,9 @@ class Display_view extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('dashboard');
+			$data['user_courses'] = $this->courses->get_user_courses();
+			$data['all_courses'] = $this->courses->get_all_courses();
+			$this->load->view('dashboard',$data);
 		}
 	}
 
@@ -169,25 +163,38 @@ class Display_view extends CI_Controller {
 	{
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("display_view/login","refresh");
+			redirect("display_view/login_view","refresh");
 		}
 
 		$query = $this->courses->get_course($cid);
 		$data['query'] = $query;
-		$this->load->view('coursepage',$data);	
+			
+
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+		$val = $this->courses->check_if_enrolled($cid);
+		$lectures = $this->courses->get_course_lectures($cid);
+		$data['val'] = $val;
+		$data['lectures'] = $lectures;
+
+		$this->load->view('coursepage',$data);
+
 	}
 
 	public function edit_profile()
 	{	
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("display_view/login","refresh");
+			redirect("display_view/login_view","refresh");
 		}
 
 		$usr= $this->ion_auth->user()->row();
 		$data['user']= (array)$usr;
 
+
 		 //foreach($data['user'] as $k)echo $k."<br>";
 		$this->load->view('edit_profile',$data);
 	}
+	
 } 
