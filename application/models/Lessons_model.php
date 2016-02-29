@@ -18,6 +18,11 @@ class Lessons_model extends CI_Model
 		$result = $this->db->get('lectures',array('id'=>$id))->result_array();
 		return $result;
 	}
+
+	public function edit($id,$data)
+	{
+
+	}
 	
 	
 }

@@ -20,7 +20,7 @@ class Lessons extends CI_Controller
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('title','Lesson Title','trim|required|xss_clean');
 		$this->form_validation->set_rules('description','Description','trim|required|xss_clean');
-		$this->form_validation->set_rules('visibility','Visibility','trim|required|xss_clean');
+		$this->form_validation->set_rules('visibility','Visibility','trim|xss_clean');
 		//$this->form_validation->set_rules('video','Lecture Video','trim|required');
 		//$this->form_validation->set_rules('text','Lecture text','trim|required');
 
@@ -54,20 +54,21 @@ class Lessons extends CI_Controller
 	            }
 	            else
 	            {
+	            	unset($data['courseid']);
 	       			$data['course_id'] = $courseid;
-	       			$data['videoname'] = $videoname;
 	       			$data['name'] = $this->input->post('title');
 	       			$data['description'] = $this->input->post('description');
 	       			$data['textname'] = $this->upload->data('file_name');
 	       			if($this->input->post('visibility') == "on")
-	       				$data['visibility'] = TRUE;
+	       				$data['is_public'] = TRUE;
 	       			else
-	       				$data['visibility'] = FALSE;
-	       			$this->lesson->add($data);
+	       				$data['is_public'] = FALSE;
+	       			$id = $this->lesson->add($data);
 	            	echo "File uploaded successfully";
-	            	echo "<br>VideoName = ".$videoname;
+	            	echo "<br>VideoName = ".$data['videoname'];
 	            	echo "<br>textName = ".$this->upload->data('file_name');
 	            	echo "<br>Visi = ".$this->input->post('visibility');
+	            	echo "<br>Id if lecture = ".$id;
 
 
 	            }
