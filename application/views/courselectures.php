@@ -394,44 +394,31 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   <span class="icon-block half bg-blue-300 text-white">2</span>
                 </div>
                 <div class="media-body">
-                  <h1 class="text-display-1 margin-none">The MVC architectural pattern</h1>
+                  <h1 class="text-display-1 margin-none"><?php echo $lec['name']?></h1>
                 </div>
               </div>
               <br/>
-              <p class="text-body-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta eius enim inventore minus optio ratione veritatis. Beatae deserunt illum ipsam magni minima mollitia officiis quia tempora! Aliquid autem beatae, dignissimos exercitationem
-                illum, incidunt itaque libero, minima molestiae necessitatibus perferendis quae quas quidem recusandae sit! Esse maxime porro provident quasi?</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda aut debitis, ducimus, ea eaque earum eius enim eos explicabo facilis harum impedit natus nemo, nobis obcaecati omnis perspiciatis praesentium quaerat quas quod
-                reprehenderit sapiente temporibus vel voluptatem voluptates voluptatibus?</p>
+              <p class="text-body-2"><?php echo $lec['description']?></p>
             </div>
 
-            <h5 class="text-subhead-2 text-light">Curriculum</h5>
             <div class="panel panel-default curriculum open paper-shadow" data-z="0.5">
               <div class="panel-heading panel-heading-gray" data-toggle="collapse" data-target="#curriculum-1">
                 <div class="media">
-                  <div class="media-left">
-                    <span class="icon-block img-circle bg-indigo-300 half text-white"><i class="fa fa-graduation-cap"></i></span>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="text-headline">Chapter 1</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque minima nemo repudiandae rerum! Aspernatur at, autem expedita id illum laudantium molestias officiis quaerat, rem sapiente sint totam velit. Enim.</p>
-                  </div>
-                </div>
-                <span class="collapse-status collapse-open">Open</span>
-                <span class="collapse-status collapse-close">Close</span>
-              </div>
-              <div class="list-group collapse in" id="curriculum-1">
-                <div class="list-group-item media" data-target="app-take-course.html">
-                  <div class="media-left">
-                    <div class="text-crt">1.</div>
-                  </div>
-                  <div class="media-body">
-                    <i class="fa fa-fw fa-circle text-green-300"></i> Installation
-                  </div>
                   <div class="media-right">
-                    <div class="width-100 text-right text-caption">2:03 min</div>
+                     <label for="download" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
+                      <i class="fa fa-upl">Download Lectures</i>
+                    </label>
                   </div>
                 </div>
-                <div class="list-group-item media active" data-target="app-take-course.html">
+              </div>
+              <div>
+                <div id = "video">
+                  <video height=100% width = 100% controls>
+                      <source src="<?php echo base_url(); ?>contents/videos/lp.mp4" type="video/mp4"/>
+                  </video>
+                </div>
+               
+                <!--div class="list-group-item media active" data-target="app-take-course.html">
                   <div class="media-left">
                     <div class="text-crt">2.</div>
                   </div>
@@ -653,7 +640,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   <div class="media-right">
                     <div class="width-100 text-right text-caption">10:00 min</div>
                   </div>
-                </div>
+                </div-->
               </div>
             </div>
 

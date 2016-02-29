@@ -20,12 +20,23 @@ class Courses_model extends CI_Model
 		{
 			$data['course_key'] = $details['course_key'];
 		}
-		$this->db->insert('courses',$data);
-		$id = $this->db->insert();
-		return $id;
+		$this->db->insert('courses',$data,false);
+		$id = $this->db->insert_id();
+		$data['id'] = $id;
+		$this->add_faculty_to_course($id,$this->ion_auth->get_user_id());
+		$data['hash'] = $id;
+		return $data;
 	}
 
-	//public add
+	public function add_faculty_to_course($cid,$faculty_id,$is_guest)
+	{
+		$type = 'main';
+		if($is_guest)
+		{
+			$type = 'guest';
+		}
+		$data = array('course_id' => $cid, 'faculty_id' => $faculty_id, 'faculty_role' => $type);
+		$this->db->insert('course_faculty',$data);
 
 	public function get_all()
 	{

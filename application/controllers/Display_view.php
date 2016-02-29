@@ -26,6 +26,7 @@ class Display_view extends CI_Controller {
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model','courses');
 		$this->load->model('admindash_model');
+		$this->load->model('lessons_model');
 		$this->load->helper(array('url','language'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -48,6 +49,9 @@ class Display_view extends CI_Controller {
 		
 	}
 
+	
+
+	
 	
 	
 
@@ -196,5 +200,12 @@ class Display_view extends CI_Controller {
 		 //foreach($data['user'] as $k)echo $k."<br>";
 		$this->load->view('edit_profile',$data);
 	}
-	
+
+	public function lectures($id)
+	{
+
+		$lec = $this->lessons->get($id);
+		$data['lec'] = $lec;
+		$this->load->view('courselectures', $data);
+	}
 } 

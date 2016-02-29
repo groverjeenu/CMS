@@ -10,9 +10,7 @@ class Courses extends CI_Controller
 	
 	public function index()
 	{
-		$this->load->model('courses_model');
-		$data['content'] = $this->courses_model->get_all();
-		$this->load->view('courses_view', $data);
+
 	}
 		
 	public function get($id)
@@ -38,7 +36,7 @@ class Courses extends CI_Controller
 			exit(0);
 		}*/
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('title','Cuurse Title','trim|required|xss_clean');
+		$this->form_validation->set_rules('title','Course Title','trim|required|xss_clean');
 		$this->form_validation->set_rules('description','Description','trim|required|xss_clean');
 		$this->form_validation->set_rules('syllabus','Syllabus','trim|required|xss_clean');
 		$this->form_validation->set_rules('is_key',"key exists","trim|required|in_list[enabled,disabled]|xss_clean");
@@ -46,6 +44,8 @@ class Courses extends CI_Controller
 
 		if($this->form_validation->run()===FALSE)
 		{
+			log_message('DEBUG','ERror in validation'.validation_errors());
+
 			$this->load->view('courses/add_course');
 		}
 		else
@@ -62,19 +62,35 @@ class Courses extends CI_Controller
 			else
 			{
 				$this->session->set_flashdata('message','Course successfully created');
-				$this->load->view('courses/edit_course', array('hash' => $course_hash));
-				//redirect('courses/edit/'.$course_hash);
+				$this->session->set_flashdata('hash',$course_hash);
+
+				//$this->load->view('courses/edit_course', array('hash' => $course_hash));
+				redirect('courses/edit/'.$course_hash,'refresh');
 			}	
 		}
 	}
 
+    public function edit($courseid)
+    {
+    	/*if(!$this->ion_auth->in_group('faculty'))
+		{
+			show_error("Access Forbidden",403);
+			exit(0);
+		}*/
+    	//$course = $this->courses->get_minimal($courseid);
+    	$course['id'] = $courseid;
+    	$course['name'] = "This is a course";
+    	$course['description'] = "This is a desciption";
+    	$course['syllabus'] = "This is a syllabus";
+    	$this->load->view('courses/edit_course',array('course'=>$course));
+    }
 
-	public function course_key_check($str,$is_key)
+    public function course_key_check($str,$is_key)
     {
     	$is_key = $this->input->post('is_key');
         if ($is_key== 'enabled')
         {
-        	if(!is_set($str) || is_null($str))
+        	if(!isset($str) || is_null($str))
         	{
         		$this->form_validation->set_message('course_key_check', 'The {field} field can not be the empty');
             	return FALSE;
