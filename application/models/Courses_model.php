@@ -38,9 +38,6 @@ class Courses_model extends CI_Model
 		$data = array('course_id' => $cid, 'faculty_id' => $faculty_id, 'faculty_role' => $type);
 		$this->db->insert('course_faculty',$data);
 
-	public function get_all()
-	{
-		return ('This is your first application');
 	}
 
 	public function get_all_courses()

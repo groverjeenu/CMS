@@ -25,6 +25,7 @@ class Display_view extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model','courses');
+		$this->load->model('lessons_model','lessons');
 		$this->load->model('admindash_model');
 		$this->load->model('lessons_model');
 		$this->load->helper(array('url','language'));

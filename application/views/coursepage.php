@@ -572,7 +572,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   <!-- // END .panel -->
 
                   <!-- .panel -->
-                  <!--
+                  
                   <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                     <div class="panel-body">
                       <div class="media v-middle">
@@ -593,7 +593,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       </div>
                     </div>
                   </div>
-                -->
+                
                   <!-- // END .panel -->
 
                   <!-- .panel -->
