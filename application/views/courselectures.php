@@ -408,7 +408,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <div class="panel-heading panel-heading-gray" data-toggle="collapse" data-target="#curriculum-1">
                 <div class="media">
                   <div class="media-right">
-                     <label for="download" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
+                     <label for="download" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
                       <i class="fa fa-upl">Download Lectures</i>
                     </label>
                   </div>
