@@ -196,6 +196,7 @@ class Display_view extends CI_Controller {
 	{
 
 		$lec = $this->lessons->get($id);
-		$this->load->view('courselectures', $lec);
+		$data['lec'] = $lec;
+		$this->load->view('courselectures', $data);
 	}
 } 
