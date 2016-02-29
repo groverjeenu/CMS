@@ -44,7 +44,7 @@ class Courses_model extends CI_Model
 		return $this->db->get_where('topics',array('parent_id' => 1, 'id!=' => 1))->result_array();
 	}
 
-	public function get($cid)
+	public function get_course($cid)
 	{
 		 $courses = $this->db->query("select * from courses where cid = ?",$cid)->result_array();
 		 $d = array();
