@@ -88,41 +88,40 @@
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
                         <div class="container-fluid">
+                            <?php echo $error; ?>
                             <div class="page-section">
-                                <h1 class="text-display-1">Create New Course</h1>
+                                <h1 class="text-display-1">Create New Lesson</h1>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div id="course" class="card">
                                         <?php $attributes = array('class' => 'form');
-                                        echo form_open('courses/add');?>
+                                        echo form_open_multipart('courses/'.$courseid.'/lessons/add');?>
                                         <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
                                         <div class="form-group form-control-material">
-                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo set_value('title');?>" />
+                                            <input type="text" name="title" id="title" placeholder="Lesson Title" class="form-control used" value="<?php echo set_value('title');?>" />
                                             <label for="title">Title</label>
                                             <?php echo form_error('title');?>
                                         </div>
                                         <div class="form-group form-control-material mytextarea" >
-                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
+                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write lesson description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
                                             <label for="description">Description</label>
                                             <?php echo form_error('description');?>
                                         </div>
-                                        <div class="form-group form-control-material mytextarea">
-                                            <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php echo set_value('syllabus');?>"><?php echo set_value('syllabus');?></textarea>
-                                            <label for="syllabus">Syllabus</label>
-                                            <?php echo form_error('syllabus');?>
+                                        <div class="form-group form-control-material">
+                                            <input type='file' name='video' id='video' class="form-control used"/>
+                                            <label for="video">Video</label>
                                         </div>
-                                        <h5>Enrollment Key</h5>
+                                        <div class="form-group form-control-material">
+                                            <input type='file' name='text' id='text' class="form-control used"/>
+                                            <label for="text">Lesson Text</label>
+                                        </div>
+                                        <h5>Visible</h5>
                                         <div class="form-group">
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
                                                 <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
                                             </div>
-                                        </div>
-                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php echo set_value('is_key');?>"/>
-                                        <div class="form-group form-control-material">
-                                            <input type="text" <?php if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo set_value('course_key');?>" />
-                                            <?php echo form_error('course_key');?>
                                         </div>
                                         <div class="text-right">
                                             <button type='submit' class="btn btn-primary">Save</button>

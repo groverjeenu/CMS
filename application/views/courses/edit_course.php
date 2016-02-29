@@ -12,11 +12,11 @@
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
         <style type="text/css">
-            .mytextarea
-            {
-                resize : none;
-                height: auto !important;
-            }
+        .mytextarea
+        {
+        resize : none;
+        height: auto !important;
+        }
         </style>
         <!-- Vendor CSS Standalone Libraries
         NOTE: Some of these may have been customized (for example, Bootstrap). -->
@@ -89,7 +89,7 @@
                     <div class="st-content-inner padding-none">
                         <div class="container-fluid">
                             <div class="page-section">
-                                <h1 class="text-display-1">Create New Course</h1>
+                                <h1 class="text-display-1">Edit Course</h1>
                             </div>
                             <!-- Tabbable Widget -->
                             <div class="tabbable paper-shadow relative" data-z="0.5">
@@ -103,244 +103,219 @@
                                 <!-- Panes -->
                                 <div class="tab-content">
                                     <div id="course" class="tab-pane active">
-                                        <form action="app-instructor-course-edit-course.html" class="form">
-                                            <div class="form-group form-control-material">
-                                                <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="Basics of HTML" />
-                                                <label for="title">Title</label>
+                                        <?php $attributes = array('class' => 'form');
+                                        echo form_open('courses/edit');?>
+                                        <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
+                                        <div class="form-group form-control-material">
+                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo set_value('title');?>" />
+                                            <label for="title">Title</label>
+                                            <?php echo form_error('title');?>
+                                        </div>
+                                        <div class="form-group form-control-material mytextarea" >
+                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
+                                            <label for="description">Description</label>
+                                            <?php echo form_error('description');?>
+                                        </div>
+                                        <div class="form-group form-control-material mytextarea">
+                                            <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php echo set_value('syllabus');?>"><?php echo set_value('syllabus');?></textarea>
+                                            <label for="syllabus">Syllabus</label>
+                                            <?php echo form_error('syllabus');?>
+                                        </div>
+                                        <h5>Enrollment Key</h5>
+                                        <div class="form-group">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
+                                                <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
                                             </div>
-                                            <div class="form-group form-control-material mytextarea" >
-                                                <textarea id="description" class="form-control used" row="20" placeholder="Write course description here...."></textarea>
-                                                <label for="reply">Description</label>
-                                            </div>
-                                            <div class="form-group form-control-material mytextarea">
-                                                <textarea id="syllabus" class="form-control used" row="20" style="height=auto !important;" placeholder="Write course syllabus here...."></textarea>
-                                                <label for="reply">Syllabus</label>
-                                            </div>
-                                            <h5>Enrollment</h5>
-                                            <div class="form-group">
-                                                <div class="btn-group btn-group-sm">
-                                                    <input type="button" data-toggle="key-enable" data-target="#course_key" class="btn btn-default" value="Enable" />
-                                                    <input type="button" data-toggle="key-disable" data-target="#course_key" class="btn btn-default" value="Disable" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group form-control-material">
-                                                <input type="text" disabled="disabled" name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" />
-                                                
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php echo set_value('is_key');?>"/>
+                                        <div class="form-group form-control-material">
+                                            <input type="text" <?php if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo set_value('course_key');?>" />
+                                            <?php echo form_error('course_key');?>
+                                        </div>
                                         <div class="text-right">
-                                            <a href="app-instructor-course-edit-course.html#" class="btn btn-primary">Save</a>
+                                            <button type='submit' class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="meta" class="tab-pane">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="select" class="col-sm-3 control-label">Stream</label>
+                                            <div class="col-sm-9 col-md-9">
+                                                <select id="stream" name='stream' class="form-control selectpicker" multiple data-style="btn-white" data-live-search="true" data-size="5">
+                                                    <?php
+                                                    $streams = $this->courses->all_streams();
+                                                    foreach ($streams as $stream) {
+                                                    echo "<option value=".$stream['id'].">".$stream['name']."</option>";
+                                                    }?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="duration" class="col-sm-3 control-label">Course Duration</label>
+                                            <div class="col-sm-4 col-md-2">
+                                                <input type="text" class="form-control" placeholder="No. of Days" value="10">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="start" class="col-sm-3 control-label">Start Date</label>
+                                            <div class="col-sm-9 col-md-4">
+                                                <input name='start' id="start" type="text" class="form-control datepicker">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end" class="col-sm-3 control-label">End Date</label>
+                                            <div class="col-sm-9 col-md-4">
+                                                <input name='end' id="end" type="text" class="form-control datepicker">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <?php $lesson['id'] = 1;
+                                        $lesson['name'] = "I am a lesson";
+                                        $lesson['last_updated'] = time(0);
+                                        $lessons = array($lesson);
+                                        $no_lessons = 1;
+                                ?>
+                                <div id="lessons" class="tab-pane">
+                                    <div class="media v-middle s-container">
+                                        <div class="media-body">
+                                            <h5 class="text-subhead text-light"><?php echo $no_lessons;?> Lessons</h5>
+                                        </div>
+                                        <div class="media-right">
+                                            <a class="btn btn-primary paper-shadow relative" href="<?php echo base_url()."courses/$courseid/";?>lessons/add">Add lesson</a>
                                         </div>
                                     </div>
-                                    <div id="meta" class="tab-pane">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="select" class="col-sm-3 control-label">Category</label>
-                                                <div class="col-sm-9 col-md-9">
-                                                    <select id="select" class="form-control select2">
-                                                        <option value="#">HTML</option>
-                                                        <option value="#">Angular JS</option>
-                                                        <option value="#">CSS / LESS</option>
-                                                        <option value="#">Design / Concept</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="duration" class="col-sm-3 control-label">Course Duration</label>
-                                                <div class="col-sm-4 col-md-2">
-                                                    <input type="text" class="form-control" placeholder="No. of Days" value="10">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="start" class="col-sm-3 control-label">Start Date</label>
-                                                <div class="col-sm-9 col-md-4">
-                                                    <input id="datepicker" type="text" class="form-control datepicker">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="end" class="col-sm-3 control-label">End Date</label>
-                                                <div class="col-sm-9 col-md-4">
-                                                    <input id="datepicker" type="text" class="form-control datepicker">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="lessons" class="tab-pane">
-                                        <div class="media v-middle s-container">
-                                            <div class="media-body">
-                                                <h5 class="text-subhead text-light">3 Lessons</h5>
-                                            </div>
-                                            <div class="media-right">
-                                                <a class="btn btn-primary paper-shadow relative" href="app-instructor-course-edit-lessons.html">Add lesson</a>
-                                            </div>
-                                        </div>
-                                        <div class="nestable" id="nestable-handles-primary">
-                                            <ul class="nestable-list">
-                                                <?php //TODO LEsson hereecho ENlits lessons here?>
-                                                <li class="nestable-item nestable-item-handle" data-id="1">
-                                                    <div class="nestable-handle"><i class="md md-menu"></i></div>
-                                                    <div class="nestable-content">
-                                                        <div class="media v-middle">
-                                                            <div class="media-left">
-                                                                <div class="icon-block half bg-red-400 text-white">
-                                                                    <i class="fa fa-github"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h4 class="text-title media-heading margin-none">
-                                                                <a href="app-instructor-course-edit-lessons.html" class="link-text-color">Github Webhooks for Beginners</a>
-                                                                </h4>
-                                                                <div class="text-caption">updated 1 month ago</div>
-                                                            </div>
-                                                            <div class="media-right">
-                                                                <a href="app-instructor-course-edit-lessons.html" class="btn btn-white btn-flat"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                                    <div class="nestable" id="nestable-handles-primary">
+                                        <ul class="nestable-list">
+                                            <?php 
+                                                foreach($lessons as $lesson){
+                                            ?>
+                                            <li class="nestable-item nestable-item-handle" data-id="<?php echo $lesson['id']?>">
+                                                <div class="nestable-handle"><i class="md md-menu"></i></div>
+                                                <div class="nestable-content">
+                                                    <div class="media v-middle">
+                                                        <div class="media-left">
+                                                            <div class="icon-block half bg-purple-400  text-white">
+                                                                <i class="fa fa-book"></i>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                                <li class="nestable-item nestable-item-handle" data-id="2">
-                                                    <div class="nestable-handle"><i class="md md-menu"></i></div>
-                                                    <div class="nestable-content">
-                                                        <div class="media v-middle">
-                                                            <div class="media-left">
-                                                                <div class="icon-block half bg-blue-400 text-white">
-                                                                    <i class="fa fa-css3"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h4 class="text-title media-heading margin-none">
-                                                                <a href="app-instructor-course-edit-lessons.html" class="link-text-color">Awesome CSS with LESS Processing</a>
-                                                                </h4>
-                                                                <div class="text-caption">updated 1 month ago</div>
-                                                            </div>
-                                                            <div class="media-right">
-                                                                <a href="app-instructor-course-edit-lessons.html" class="btn btn-white btn-flat"><i class="fa fa-pencil fa-fw"></i> Edit</a>
-                                                            </div>
+                                                        <div class="media-body">
+                                                            <h4 class="text-title media-heading margin-none">
+                                                            <a href='<?php echo base_url()."courses/".$courseid."/lessons/".$lesson['id'];?>' class="link-text-color"><?php echo $lesson['name'];?></a>
+                                                            </h4>
+                                                            <?php //TODO: Add timeago here for udating last updated?>
+                                                            <div class="text-caption">updated 1 month ago</div>
+                                                        </div>
+                                                        <div class="media-right">
+                                                            <a href="<?php echo base_url()."courses/".$courseid."/lessons/edit/".$lesson['id'];?>" class="btn btn-white btn-flat"><i class="fa fa-pencil fa-fw"></i> Edit</a>
                                                         </div>
                                                     </div>
-                                                </li>
-                                                <li class="nestable-item nestable-item-handle" data-id="2">
-                                                    <div class="nestable-handle"><i class="md md-menu"></i></div>
-                                                    <div class="nestable-content">
-                                                        <div class="media v-middle">
-                                                            <div class="media-left">
-                                                                <div class="icon-block half bg-purple-400 text-white">
-                                                                    <i class="fa fa-jsfiddle"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <h4 class="text-title media-heading margin-none">
-                                                                <a href="app-instructor-course-edit-lessons.html" class="link-text-color">Browserify: Writing Modular JavaScript</a>
-                                                                </h4>
-                                                                <div class="text-caption">updated 1 month ago</div>
-                                                            </div>
-                                                            <div class="media-right">
-                                                                <a href="app-instructor-course-edit-lessons.html" class="btn btn-white btn-flat"><i class="fa fa-pencil fa-fw"></i> Edit</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                </div>
+                                            </li>
+                                            <?php }?>
+                                        </ul>
                                     </div>
                                 </div>
-                                <!-- // END Panes -->
                             </div>
-                            <!-- // END Tabbable Widget -->
+                            <!-- // END Panes -->
                         </div>
+                        <!-- // END Tabbable Widget -->
                     </div>
-                    <!-- /st-content-inner -->
                 </div>
-                <!-- /st-content -->
+                <!-- /st-content-inner -->
             </div>
-            <!-- /st-pusher -->
-            <?php $this->view('common/footer');?>
+            <!-- /st-content -->
         </div>
-        <!-- /st-container -->
-        <!-- Inline Script for colors and config objects; used by various external scripts; -->
-        <script>
-        var colors = {
-        "danger-color": "#e74c3c",
-        "success-color": "#81b53e",
-        "warning-color": "#f0ad4e",
-        "inverse-color": "#2c3e50",
-        "info-color": "#2d7cb5",
-        "default-color": "#6e7882",
-        "default-light-color": "#cfd9db",
-        "purple-color": "#9D8AC7",
-        "mustard-color": "#d4d171",
-        "lightred-color": "#e15258",
-        "body-bg": "#f6f6f6"
-        };
-        var config = {
-        theme: "html",
-        skins: {
-        "default": {
-        "primary-color": "#42a5f5"
-        }
-        }
-        };
-        </script>
-        <!-- Vendor Scripts Bundle
-        Includes all of the 3rd party JavaScript libraries above.
-        The bundle was generated using modern frontend development tools that are provided with the package
-        To learn more about the development process, please refer to the documentation.
-        Do not use it simultaneously with the separate bundles above. -->
-        <script src="<?php echo base_url();?>public/js/vendor/all.js"></script>
-        <!-- Vendor Scripts Standalone Libraries -->
-        <!-- <script src="js/vendor/core/all.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.js"></script> -->
-        <!-- <script src="js/vendor/core/bootstrap.js"></script> -->
-        <!-- <script src="js/vendor/core/breakpoints.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.nicescroll.js"></script> -->
-        <!-- <script src="js/vendor/core/isotope.pkgd.js"></script> -->
-        <!-- <script src="js/vendor/core/packery-mode.pkgd.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.grid-a-licious.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.cookie.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery-ui.custom.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.hotkeys.js"></script> -->
-        <!-- <script src="js/vendor/core/handlebars.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.hotkeys.js"></script> -->
-        <!-- <script src="js/vendor/core/load_image.js"></script> -->
-        <!-- <script src="js/vendor/core/jquery.debouncedresize.js"></script> -->
-        <!-- <script src="js/vendor/core/modernizr.js"></script> -->
-        <!-- <script src="js/vendor/core/velocity.js"></script> -->
-        <!-- <script src="js/vendor/tables/all.js"></script> -->
-        <!-- <script src="js/vendor/forms/all.js"></script> -->
-        <!-- <script src="js/vendor/media/slick.js"></script> -->
-        <!-- <script src="js/vendor/charts/flot/all.js"></script> -->
-        <!-- <script src="js/vendor/nestable/jquery.nestable.js"></script> -->
-        <!-- <script src="js/vendor/countdown/all.js"></script> -->
-        <!-- <script src="js/vendor/angular/all.js"></script> -->
-        <!-- App Scripts Bundle
-        Includes Custom Application JavaScript used for the current theme/module;
-        Do not use it simultaneously with the standalone modules below. -->
-        <script src="<?php echo base_url();?>public/js/app/app.js"></script>
-        <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
-        <!-- App Scripts Standalone Modules
-        As a convenience, we provide the entire UI framework broke down in separate modules
-        Some of the standalone modules may have not been used with the current theme/module
-        but ALL the modules are 100% compatible -->
-        <!-- <script src="js/app/essentials.js"></script> -->
-        <!-- <script src="js/app/material.js"></script> -->
-        <!-- <script src="js/app/layout.js"></script> -->
-        <!-- <script src="js/app/sidebar.js"></script> -->
-        <!-- <script src="js/app/media.js"></script> -->
-        <!-- <script src="js/app/messages.js"></script> -->
-        <!-- <script src="js/app/maps.js"></script> -->
-        <!-- <script src="js/app/charts.js"></script> -->
-        <!-- App Scripts CORE [html]:
-        Includes the custom JavaScript for this theme/module;
-        The file has to be loaded in addition to the UI modules above;
-        app.js already includes main.js so this should be loaded
-        ONLY when using the standalone modules; -->
-        <!-- <script src="js/app/main.js"></script> -->
-        <script>
-        autosize($('textarea'));
-        $(document).ready(function()
-        {
-            autosize($('textarea'));
-        });
-        </script>
-    </body>
+        <!-- /st-pusher -->
+        <?php $this->view('common/footer');?>
+    </div>
+    <!-- /st-container -->
+    <!-- Inline Script for colors and config objects; used by various external scripts; -->
+    <script>
+    var colors = {
+    "danger-color": "#e74c3c",
+    "success-color": "#81b53e",
+    "warning-color": "#f0ad4e",
+    "inverse-color": "#2c3e50",
+    "info-color": "#2d7cb5",
+    "default-color": "#6e7882",
+    "default-light-color": "#cfd9db",
+    "purple-color": "#9D8AC7",
+    "mustard-color": "#d4d171",
+    "lightred-color": "#e15258",
+    "body-bg": "#f6f6f6"
+    };
+    var config = {
+    theme: "html",
+    skins: {
+    "default": {
+    "primary-color": "#42a5f5"
+    }
+    }
+    };
+    </script>
+    <!-- Vendor Scripts Bundle
+    Includes all of the 3rd party JavaScript libraries above.
+    The bundle was generated using modern frontend development tools that are provided with the package
+    To learn more about the development process, please refer to the documentation.
+    Do not use it simultaneously with the separate bundles above. -->
+    <script src="<?php echo base_url();?>public/js/vendor/all.js"></script>
+    <!-- Vendor Scripts Standalone Libraries -->
+    <!-- <script src="js/vendor/core/all.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.js"></script> -->
+    <!-- <script src="js/vendor/core/bootstrap.js"></script> -->
+    <!-- <script src="js/vendor/core/breakpoints.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.nicescroll.js"></script> -->
+    <!-- <script src="js/vendor/core/isotope.pkgd.js"></script> -->
+    <!-- <script src="js/vendor/core/packery-mode.pkgd.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.grid-a-licious.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.cookie.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery-ui.custom.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.hotkeys.js"></script> -->
+    <!-- <script src="js/vendor/core/handlebars.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.hotkeys.js"></script> -->
+    <!-- <script src="js/vendor/core/load_image.js"></script> -->
+    <!-- <script src="js/vendor/core/jquery.debouncedresize.js"></script> -->
+    <!-- <script src="js/vendor/core/modernizr.js"></script> -->
+    <!-- <script src="js/vendor/core/velocity.js"></script> -->
+    <!-- <script src="js/vendor/tables/all.js"></script> -->
+    <!-- <script src="js/vendor/forms/all.js"></script> -->
+    <!-- <script src="js/vendor/media/slick.js"></script> -->
+    <!-- <script src="js/vendor/charts/flot/all.js"></script> -->
+    <!-- <script src="js/vendor/nestable/jquery.nestable.js"></script> -->
+    <!-- <script src="js/vendor/countdown/all.js"></script> -->
+    <!-- <script src="js/vendor/angular/all.js"></script> -->
+    <!-- App Scripts Bundle
+    Includes Custom Application JavaScript used for the current theme/module;
+    Do not use it simultaneously with the standalone modules below. -->
+    <script src="<?php echo base_url();?>public/js/app/app.js"></script>
+    <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
+    <!-- App Scripts Standalone Modules
+    As a convenience, we provide the entire UI framework broke down in separate modules
+    Some of the standalone modules may have not been used with the current theme/module
+    but ALL the modules are 100% compatible -->
+    <!-- <script src="js/app/essentials.js"></script> -->
+    <!-- <script src="js/app/material.js"></script> -->
+    <!-- <script src="js/app/layout.js"></script> -->
+    <!-- <script src="js/app/sidebar.js"></script> -->
+    <!-- <script src="js/app/media.js"></script> -->
+    <!-- <script src="js/app/messages.js"></script> -->
+    <!-- <script src="js/app/maps.js"></script> -->
+    <!-- <script src="js/app/charts.js"></script> -->
+    <!-- App Scripts CORE [html]:
+    Includes the custom JavaScript for this theme/module;
+    The file has to be loaded in addition to the UI modules above;
+    app.js already includes main.js so this should be loaded
+    ONLY when using the standalone modules; -->
+    <!-- <script src="js/app/main.js"></script> -->
+    <script>
+    autosize($('textarea'));
+    $(document).ready(function()
+    {
+    autosize($('textarea'));
+    });
+    </script>
+</body>
 </html>
