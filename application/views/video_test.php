@@ -49,8 +49,6 @@
 
 <body>
     <div id = "video">
-        <video height="300" width="200" controls>
-            <source src="<?php echo base_url(); ?>contents/videos/moviebig.mp4" type="video/mp4"/>
         <video height="1000" width="700" controls>
             <source src="<?php echo base_url(); ?>contents/videos/lp.mp4" type="video/mp4"/>
         </video>

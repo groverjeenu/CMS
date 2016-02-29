@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/incourse';
-//$config['base_url'] = 'http://10.147.11.24/incourse';
+//$config['base_url'] = 'http://10.147.18.244/CMS';
 
 /*
 |--------------------------------------------------------------------------
@@ -440,7 +440,7 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'great_name';
 $config['csrf_cookie_name'] = 'ecourse_secret';
 $config['csrf_expire'] = 7200;

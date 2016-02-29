@@ -25,11 +25,18 @@ class Display_view extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model');
+		$this->load->model('admindash_model');
 		$this->load->helper(array('url','language'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("display_view/login","refresh");
+		}
+
 	}
 
 	public function index()
@@ -51,18 +58,55 @@ class Display_view extends CI_Controller {
 		$this->load->view('signup');
 	
 	}
+
 	public function dashboard()
 	{
-		$this->load->view('dashboard');
-	
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$this->load->view('fac');
+		}
+		else if($this->ion_auth->in_group('admin'))
+		{
+			$users = $this->admindash_model->get_faculty_approvals();
+			$data['users'] = $users;
+			$this->load->view('admin_dashboard', $data);
+		}
+		else if($this->ion_auth->in_group('course-admin'))
+		{
+			$this->load->view('dashboard');
+		}
+		else
+		{
+			$this->load->view('dashboard');
+		}
 	}
+
+	public function admin_helper_add($id)
+	{
+		$this->admindash_model->update_faculty($id);
+		$this->ion_auth->remove_from_group(NULL, $id);
+		$this->ion_auth->add_to_group(3, $id);
+		redirect('dashboard');
+	}
+
+	public function admin_helper_rem($id)
+	{
+		$this->admindash_model->update_faculty($id);
+		redirect('dashboard');
+	}
+
+	public function create_group()
+	{
+		$this->ion_auth->create_group('members');
+		$this->ion_auth->create_group('admin');
+		$this->ion_auth->create_group('faculty');
+		$this->ion_auth->create_group('course-admin');
+
+	}
+
 	public function courselist()
 	{
-		if(!$this->ion_auth->logged_in())
-		{
-			redirect("display_view/login","refresh");
-		}
-
+		
 		$query = $this->courses->get_all_courses();
 
 		/*$code = "<div class=\"panel panel-default paper-shadow\" data-z=\"0.5\">
@@ -131,5 +175,19 @@ class Display_view extends CI_Controller {
 		$query = $this->courses->get_course($cid);
 		$data['query'] = $query;
 		$this->load->view('coursepage',$data);	
+	}
+
+	public function edit_profile()
+	{	
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("display_view/login","refresh");
+		}
+
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+		 //foreach($data['user'] as $k)echo $k."<br>";
+		$this->load->view('edit_profile',$data);
 	}
 } 

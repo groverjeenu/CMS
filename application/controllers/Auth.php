@@ -2,16 +2,18 @@
 
 class Auth extends CI_Controller {
 
+
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->library(array('form_validation'));
+		$this->load->library(array('form_validation','ion_auth'));
 		$this->load->helper(array('language'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+		$this->sser = (array)$this->ion_auth->user()->row();
 	}
 
 	// redirect if needed, otherwise display the user list
@@ -50,7 +52,7 @@ class Auth extends CI_Controller {
 		$this->data['title'] = "Login";
 
 		//validate form input
-		$this->form_validation->set_rules('identity', 'Username', 'trim|required|alpha_dash|min_length[6]|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('identity', 'Email', 'trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 		//echo $this->input->post('identity')." ".$this->input->post('password');
 		if ($this->form_validation->run() == true)
@@ -67,7 +69,8 @@ class Auth extends CI_Controller {
 				//redirect them back to the home page
 				//echo $this->input->post('identity')." huhdfdfeh ".$this->input->post('password');
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				//redirect('display_view/dashboard', 'refresh');
+				$this->session->set_userdata('user', (array)$this->ion_auth->user());
+				redirect('display_view/dashboard', 'refresh');
 			}
 			else
 			{
@@ -459,9 +462,19 @@ class Auth extends CI_Controller {
                 'last_name'  => $this->input->post('last_name'),
                 //'company'    => "",
                 //'phone'      => "",
+                'is_faculty' => (bool)$this->input->post('faculty'),
             );
+
+            if($email === "root@root.com")
+            {
+            	$group = array('2');
+            }
+            else
+            {
+            	$group = array('1');
+            }
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
+        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data, $group))
         {
             // check to see if we are creating the user
             // redirect them back to the admin page
@@ -548,15 +561,75 @@ class Auth extends CI_Controller {
 		// validate form input
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
-		$this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required');
+		//$this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required');
+		//$hashed_file ="user.png";
+
+		if(!empty($_FILES['image']['name']))
+		{
+
+				$target_dir = dirname(APPPATH)."/contents/users/";
+				$target_file = $target_dir.basename($_FILES["image"]["name"]);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+
+				// Check if image file is a actual image or fake image
+				if(isset($_POST["submit"])) {
+				    $check = getimagesize($_FILES["image"]["tmp_name"]);
+				    if($check !== false) {
+				        echo "File is an image - " . $check["mime"] . ".";
+				        $uploadOk = 1;
+				    } else {
+				        echo "File is not an image.";
+				        $uploadOk = 0;
+				    }
+				}
+				// Check if file already exists
+				if (file_exists($target_file)) {
+				    echo "Sorry, file already exists.";
+				    $uploadOk = 0;
+				}
+				// Check file size
+				if ($_FILES["image"]["size"] > 500000) {
+				    echo "Sorry, your file is too large.";
+				    $uploadOk = 0;
+				}
+				// Allow certain file formats
+				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+				&& $imageFileType != "gif" ) {
+				    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				    $uploadOk = 0;
+				}
+
+				$hashed_file = hash("md5",$this->sser['email'].$_FILES["image"]["name"]).".png";
+				$target_file = $target_dir.$hashed_file ;
+				// Check if $uploadOk is set to 0 by an error
+				if ($uploadOk == 0) {
+				    echo "Sorry, your file was not uploaded.";
+				// if everything is ok, try to upload file
+				} else {
+				    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+				        echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+				        // $this->data['image'] = array(
+				        // 	'name'=>'image',
+				        // 	'id' => 'image',
+				        // 	'type' =>'text',
+				        // 	'value' => $hashed_file,);
+				        //$data['image'] =$hashed_file;
+				    } else {
+				        echo "Sorry, there was an error uploading your file.";
+				    }
+				}
+
+		}
 		
 		if (isset($_POST) && !empty($_POST))
 		{
 			// do we have a valid request?
-			if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
-			{
-				show_error($this->lang->line('error_csrf'));
-			}
+			// if ($id != $this->input->post('id'))
+			// {
+			// 	show_error($this->lang->line('error_csrf'));
+			// }
 
 			// update the password if it was posted
 			if ($this->input->post('password'))
@@ -570,9 +643,14 @@ class Auth extends CI_Controller {
 				$data = array(
 					'first_name' => $this->input->post('first_name'),
 					'last_name'  => $this->input->post('last_name'),
-					'email'    => $this->input->post('email'),
+					//'email'    => $this->input->post('email'),
+					//'image' => $hashed_file,
 					//'image'		=> $this->input->post('image')
 				);
+				if(!empty($_FILES['image']['name']))
+				{
+					$data['image'] = $hashed_file;
+				}
 
 				// update the password if it was posted
 				if ($this->input->post('password'))
@@ -603,14 +681,15 @@ class Auth extends CI_Controller {
 			   if($this->ion_auth->update($user->id, $data))
 			    {
 			    	// redirect them back to the admin page if admin, or to the base url if non admin
+			    	echo "here";
 				    $this->session->set_flashdata('message', $this->ion_auth->messages() );
 				    if ($this->ion_auth->is_admin())
 					{
-						redirect('auth', 'refresh');
+						//redirect('auth', 'refresh');
 					}
 					else
 					{
-						redirect('/', 'refresh');
+						//redirect('/', 'refresh');
 					}
 
 			    }
@@ -620,11 +699,11 @@ class Auth extends CI_Controller {
 				    $this->session->set_flashdata('message', $this->ion_auth->errors() );
 				    if ($this->ion_auth->is_admin())
 					{
-						redirect('auth', 'refresh');
+						//redirect('auth', 'refresh');
 					}
 					else
 					{
-						redirect('/', 'refresh');
+						//redirect('/', 'refresh');
 					}
 
 			    }
@@ -678,7 +757,7 @@ class Auth extends CI_Controller {
 			'type' => 'password'
 		);
 
-		$this->_render_page('auth/edit_user', $this->data);
+		//$this->_render_page('auth/edit_user', $this->data);
 	}
 
 	// create a new group
