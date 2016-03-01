@@ -573,26 +573,40 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
                   <!-- .panel -->
                   
-                  <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+
+                  <?php if($val == 0){?>
+
+                  <script type = "text/javascript" language = "javascript">
+                  $('document').ready(function()
+                    {
+                      $('#enroll_btn').onclick(function(event)
+                        {
+                          $('document').load("<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>");
+                        });
+                    });
+
+                  </script>
+                  <div  class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                     <div class="panel-body">
                       <div class="media v-middle">
-                        <div class="media-left">
-                          <img src="images/people/110/guy-6.jpg" alt="About Adrian" width="60" class="img-circle" />
-                        </div>
-                        <div class="media-body">
-                          <h4 class="text-title margin-none"><a href="#">Adrian Demian</a></h4>
-                          <span class="caption text-light">Biography</span>
-                        </div>
-                      </div>
-                      <br/>
-                      <div class="expandable expandable-indicator-white expandable-trigger">
-                        <div class="expandable-content">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus aut consectetur consequatur cum cupiditate debitis doloribus, error ex explicabo harum illum minima mollitia nisi nostrum officiis omnis optio qui quisquam
-                            saepe sit sunt totam vel velit voluptatibus? Adipisci ducimus expedita id nostrum quas quia!</p>
+                        
+                        <div class="media-body media-right">
+                          <!--<a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>"> -->
+                          <label  id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
+                            <i class="fa fa-flag fa-lg fa-pull-left"></i>
+                          <span style="display:inline-block; width: 20px;"></span>
+                      Enroll for Course
+                      <span style="display:inline-block; width: 20px;"></span>
+                      </label>
+                    <!-- </a> -->
+                    
                         </div>
                       </div>
+              
+                     
                     </div>
                   </div>
+                  <?php }?>
                 
                   <!-- // END .panel -->
 

@@ -105,6 +105,12 @@ class Courses_model extends CI_Model
 
 	}
 
+	public function enroll($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$this->db->query("insert into enrollments(course_id,student_id) values(?,?)",array($cid,$curr_user['user_id']));
+	}
+
 	public function get_course_lectures($cid)
 	{
 		$lectures = $this->db->query("select * from lectures where course_id = ? and is_public = 1 order by upload_time",$cid)->result_array();
