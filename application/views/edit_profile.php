@@ -318,11 +318,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     <li class="user-details cyan darken-2">
                         <div class="row">
                             <div class="col col s4 m4 l4">
-                                <img src="http://localhost/incourse/public/img/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                                <img src="<?php echo base_url(); ?>contents/users/<?php echo $user['image'];?>" alt="" class="circle responsive-img valign profile-image">
                             </div>
                             <div class="col col s8 m8 l8">
                                 
-                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a><ul id="profile-dropdown" class="dropdown-content" style="width: 130px; position: absolute; top: 57px; left: 99.734375px; opacity: 1; display: none;">
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?php echo $user['email'];?><i class="mdi-navigation-arrow-drop-down right"></i></a><ul id="profile-dropdown" class="dropdown-content" style="width: 130px; position: absolute; top: 57px; left: 99.734375px; opacity: 1; display: none;">
                                     <li><a href="#"><i class="mdi-action-face-unlock"></i> Profile</a>
                                     </li>
                                     <li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
@@ -480,7 +480,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 </div>
                             </li>
                             
-                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Charts</a>
+                            <!--li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Charts</a>
                                 <div class="collapsible-body" style="">
                                     <ul>
                                         <li><a href="charts-chartjs.html">Chart JS</a>
@@ -497,10 +497,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li-->
                         </ul>
                     </li>
-                    <li class="li-hover"><div class="divider"></div></li>
+                    <!--li class="li-hover"><div class="divider"></div></li>
                     <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
                     <li><a href="css-grid.html"><i class="mdi-image-grid-on"></i> Grid</a>
                     </li>
@@ -520,7 +520,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li-->
                 </ul>
                 
             </aside>
