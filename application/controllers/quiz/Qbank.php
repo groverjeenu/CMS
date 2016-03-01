@@ -1,4 +1,4 @@
-<? php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Qbank extends CI_Controller {
 
@@ -7,49 +7,43 @@ class Qbank extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('xlsimport/php-excel-reader/excel_reader2');
 		$this->load->helper('xlsimport/spreadsheetreader.php');
-		$this->load->model('qbank_model', '', TRUE);
-		if (!$this->session->userdata('logged_in'))
+		$this->load->model('quiz/qbank_model', '', TRUE);
+		/*if (!$this->ion_auth->logged_in())
 		{
 			redirect('login');
 		}
+		if(!$this->ion_auth->in_group('faculty'))
+		{
+			redirect('dashboard');
+		}*/
 	}
 
 	function index($limit = '0', $cid = '0')
 	{
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
-
 		$this->load->helper('form');
-		$this->load->model('category', '', TRUE);
+		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
-		$this->load->model('difficult_level', '', TRUE);
+		$this->load->model('quiz/difficult_level', '', TRUE);
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
 		$data['result'] = $this->qbank_model->question_list($limit, $cid);
 		$data['title'] = "Question Bank";
 		$data['limit'] = $limit;
 		$data['fcid'] = $cid;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/question_list', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+
+		//$this->load->view("quiz".'/header', $data);
+		$this->load->view("quiz".'/question_list', $data);
+		//$this->load->view("quiz".'/footer', $data);
 	}
 
 	function select_questions($quid = '0', $quiz_name = '', $limit = '0', $cid = '0')
 	{
 
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
 		$data['fcid'] = $cid;
 
 		$this->load->helper('form');
-		$this->load->model('category', '', TRUE);
+		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
-		$this->load->model('difficult_level', '', TRUE);
+		$this->load->model('quiz/difficult_level', '', TRUE);
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
 		$data['result'] = $this->qbank_model->question_list($limit, $cid);
 		$data['title'] = "Question Bank";
@@ -58,19 +52,14 @@ class Qbank extends CI_Controller {
 		$data['quiz_name'] = $quiz_name;
 		$this->load->model('quiz_model', '', TRUE);
 		$data['assigned_questions'] = $this->quiz_model->assigned_questions_manually($quid);
-
-		$this->load->view($this->session->userdata('web_view').'/select_questions', $data);
+		//TODO:Check this our
+		$this->load->view("quiz".'/select_questions', $data);
 
 	}
 
 
 	function import()
 	{
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
 		if (isset($_FILES['xlsfile'])) {
 			$targets = 'xls/';
 			$targets = $targets . basename( $_FILES['xlsfile']['name']);
@@ -163,24 +152,16 @@ class Qbank extends CI_Controller {
 
 	function add_new_mul() {
 
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
-
-		$this->load->model('category', '', TRUE);
+		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
-		$this->load->model('difficult_level', '', TRUE);
+		$this->load->model('quiz/difficult_level', '', TRUE);
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
 
-		$data['resultstatus'] = $this->qbank_model->add_new_mul();
+		//$data['resultstatus'] = $this->qbank_model->add_new_mul();
 
 		$data['title'] = "Add new question";
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
 
-		$this->load->view($this->session->userdata('web_view').'/new_question_1', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/new_question_1', $data);
 
 
 
@@ -189,54 +170,40 @@ class Qbank extends CI_Controller {
 
 	function add_new($q_t = '0')
 	{
-
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
 		$data['q_t'] = $q_t;
-		$this->load->model('category', '', TRUE);
+		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
-		$this->load->model('difficult_level', '', TRUE);
+		$this->load->model('quiz/difficult_level', '', TRUE);
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
 		if ($this->input->post('cid')) {
 			$data['resultstatus'] = $this->qbank_model->add_question();
 		}
 		$data['title'] = "Add new question";
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
 		if ($q_t == 0) {
-			$this->load->view($this->session->userdata('web_view').'/new_question', $data);
+			$this->load->view("quiz".'/new_question', $data);
 		}
 		if ($q_t == 1) {
-			$this->load->view($this->session->userdata('web_view').'/new_question_1', $data);
+			$this->load->view("quiz".'/new_question_1', $data);
 		}
 		if ($q_t == 2) {
-			$this->load->view($this->session->userdata('web_view').'/new_question_2', $data);
+			$this->load->view("quiz".'/new_question_2', $data);
 		}
 		if ($q_t == 3) {
-			$this->load->view($this->session->userdata('web_view').'/new_question_3', $data);
+			$this->load->view("quiz".'/new_question_3', $data);
 		}
 		if ($q_t == 4) {
-			$this->load->view($this->session->userdata('web_view').'/new_question_4', $data);
+			$this->load->view("quiz".'/new_question_4', $data);
 		}
 		if ($q_t == 5) {
-			$this->load->view($this->session->userdata('web_view').'/new_question_5', $data);
+			$this->load->view("quiz".'/new_question_5', $data);
 		}
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
 	}
 
 	function edit_question($id, $q_type = '0')
 	{
-
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
-		$this->load->model('category', '', TRUE);
+		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
-		$this->load->model('difficult_level', '', TRUE);
+		$this->load->model('quiz/difficult_level', '', TRUE);
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
 		if ($this->input->post('cid')) {
 			//print_r($_POST);
@@ -246,49 +213,37 @@ class Qbank extends CI_Controller {
 		$q_type = $data['result']['0']['q_type'];
 		//echo $q_type;die;
 		$data['title'] = "Edit question";
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
 		if ($q_type == "0") {
-			$this->load->view($this->session->userdata('web_view').'/edit_question', $data);
+			$this->load->view("quiz".'/edit_question', $data);
 		}
 		if ($q_type == "1") {
-			$this->load->view($this->session->userdata('web_view').'/edit_question_1', $data);
+			$this->load->view("quiz".'/edit_question_1', $data);
 		}
 		if ($q_type == "2") {
-			$this->load->view($this->session->userdata('web_view').'/edit_question_2', $data);
+			$this->load->view("quiz".'/edit_question_2', $data);
 		}
 		if ($q_type == "3") {
-			$this->load->view($this->session->userdata('web_view').'/edit_question_3', $data);
+			$this->load->view("quiz".'/edit_question_3', $data);
 		}
 		if ($q_type == "4") {
-			$this->load->view($this->session->userdata('web_view').'/edit_question_4', $data);
+			$this->load->view("quiz".'/edit_question_4', $data);
 		}
 		if ($q_type == "5") {
-			$this->load->view($this->session->userdata('web_view').'/edit_question_5', $data);
+			$this->load->view("quiz".'/edit_question_5', $data);
 		}
 
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
 	}
 
 
 	function remove_question($id) {
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
 		$data['resultstatus'] = $this->qbank_model->remove_question($id);
-		redirect('qbank', 'refresh');
+		redirect('quiz/qbank', 'refresh');
 	}
 
 	function remove_qids($limit) {
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
 		$qids = $this->input->post('qid');
 		$data['resultstatus'] = $this->qbank_model->remove_qids($qids);
-		redirect('qbank/index/'.$limit, 'refresh');
+		redirect('quiz/qbank/index/'.$limit, 'refresh');
 	}
 
 // get desired question for particular subject and difficulty level
@@ -301,18 +256,3 @@ class Qbank extends CI_Controller {
 	}
 
 }
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-

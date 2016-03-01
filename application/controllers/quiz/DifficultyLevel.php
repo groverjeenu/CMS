@@ -8,16 +8,15 @@ class Difficultylevel extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->load->model('difficult_level', '', TRUE);
-		if (!$this->session->userdata('logged_in'))
+		$this->load->model('quiz/difficult_level', '', TRUE);
+		/*if (!$this->ion_auth->logged_in())
 		{
 			redirect('login');
 		}
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
+		if(!$this->ion_auth->in_group('faculty'))
+		{
+			redirect('dashboard');
+		}*/
 
 	}
 
