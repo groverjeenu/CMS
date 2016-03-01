@@ -101,12 +101,12 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <form method="post" action="<?php echo site_url('quiz/qbank/add_new_mul');?>">
+                                                    <form method="post" action="<?php echo site_url('quiz/qbank/add_new');?>">
                                                         <div class="form-group">
                                                             <label>Question Type</label>
                                                             <select class="form-control"  name="qus_type" OnChange="get_ques_type(this.value)">
                                                                 <option value="0"> Multiple Choice -single answers</option>
-                                                                <option value="1" selected> Multiple Choice -multiple answers</option>
+                                                                <option value="1"> Multiple Choice -multiple answers</option>
                                                                 <option value="2">Fill in the Blank</option>
                                                                 <option value="3">Short Answer</option>
                                                                 <option value="4">Essay</option>
@@ -146,37 +146,28 @@
                                                                     <td valign="top"></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top">1) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="0" /></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
+                                                                    <td valign="top">1) &nbsp;&nbsp; <input type="radio" id="radiobtn" value="0" name="score" selected="selected" ></td>
+                                                                    <td valign="top"><textarea name="option[]"></textarea> </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top">2) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="1" /></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
+                                                                    <td valign="top">2) &nbsp;&nbsp; <input type="radio" id="radiobtn" value="1" name="score"></td>
+                                                                    <td valign="top"><textarea name="option[]"></textarea> </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td valign="top">3) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="2" /></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
+                                                                <tr><td valign="top">3) &nbsp;&nbsp; <input type="radio" id="radiobtn" value="2" name="score"></td>
+                                                                    <td valign="top"><textarea name="option[]"></textarea></td>
                                                                 </tr>
-                                                                <tr><td valign="top">4)  &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="3"  /><?php $op="5"; ?></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
+                                                                <tr><td valign="top">4)  &nbsp;&nbsp; <input type="radio" id="radiobtn" value="3" name="score"><?php $op="5"; ?></td>
+                                                                    <td valign="top"><textarea name="option[]"></textarea></td>
                                                                 </tr>
                                                                 <?php
-                                                                if($this->input->post('add')){
-                                                                for($j=1; $j<=$this->input->post('add'); $j++){
-                                                                ?>
-                                                                <tr><td valign="top"><?php echo $op.")"; ?> &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="<?php echo $op-1; ?>" /></td><td valign="top"><textarea name="option[]"></textarea>  </td></tr>
-                                                                <?php
-                                                                $op++;
-                                                                }
-                                                                }
+                                                                    if($this->input->post('add')){
+                                                                    for($j=1; $j<=$this->input->post('add'); $j++){
+                                                                    ?>
+                                                                    <tr><td valign="top"><?php echo $op.")"; ?> &nbsp;&nbsp; <input type="radio" id="radiobtn" value="<?php echo $op-1; ?>" name="score"></td><td valign="top"><textarea name="option[]"></textarea>  </td></tr>
+                                                                    <?php
+                                                                    $op++;
+                                                                    }
+                                                                    }
                                                                 ?>
                                                                 <tr><td valign="top"></td><td valign="top"><br>
                                                                 <input type="submit" value="Submit"  class="btn btn-default"> </td></tr>
@@ -187,7 +178,7 @@
                                             </div>
                                         </div>
                                         <div class="panel-footer">
-                                            <form method="post" class="form-inline" action="<?php echo site_url('quiz/qbank/add_new/1');?>">
+                                            <form method="post" class="form-inline" action="<?php echo site_url('quiz/qbank/add_new');?>">
                                                 <label>Add more options </label>
                                                 <div class="row">
                                                     <select name="add" class="form-control col-sm-9" data-toggle="select2" >
@@ -201,8 +192,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                            
 
                             
                         </div>

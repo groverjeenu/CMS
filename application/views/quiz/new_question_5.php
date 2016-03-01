@@ -101,14 +101,14 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <form method="post" action="<?php echo site_url('quiz/qbank/add_new_mul');?>">
+                                                    <form method="post" action="<?php echo site_url('quiz/qbank/add_new');?>">
                                                         <div class="form-group">
                                                             <label>Question Type</label>
                                                             <select class="form-control"  name="qus_type" OnChange="get_ques_type(this.value)">
                                                                 <option value="0"> Multiple Choice -single answers</option>
-                                                                <option value="1" selected> Multiple Choice -multiple answers</option>
-                                                                <option value="2">Fill in the Blank</option>
-                                                                <option value="3">Short Answer</option>
+                                                                <option value="1" > Multiple Choice -multiple answers</option>
+                                                                <option value="2"  >Fill in the Blank</option>
+                                                                <option value="3" selected >Short Answer</option>
                                                                 <option value="4">Essay</option>
                                                                 <option value="5">Matching</option>
                                                             </select>
@@ -130,6 +130,7 @@
                                                         <div class="form-group">
                                                             <label>Question</label>
                                                             <textarea name="question"></textarea>
+                                                            
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Description (Optional)</label>
@@ -146,48 +147,50 @@
                                                                     <td valign="top"></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top">1) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="0" /></td>
+                                                                    <td valign="top" style="height:30px;">1) &nbsp;&nbsp; </td>
                                                                     <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
+                                                                        <input name="option[]" type="text"> Ex: option1=Answer1
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top">2) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="1" /></td>
+                                                                    <td valign="top" style="height:30px;">2) &nbsp;&nbsp;</td>
                                                                     <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
+                                                                        <input name="option[]" type="text"> Ex: option2=Answer2
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td valign="top">3) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="2" /></td>
+                                                                    <td valign="top" style="height:30px;" >3) &nbsp;&nbsp;</td>
                                                                     <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
+                                                                        <input name="option[]" type="text"> Ex: option3=Answer3
                                                                     </td>
                                                                 </tr>
-                                                                <tr><td valign="top">4)  &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="3"  /><?php $op="5"; ?></td>
+                                                                <tr>
+                                                                    <td valign="top" style="height:30px;">4)  &nbsp;&nbsp; </td>
                                                                     <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
+                                                                        <input name="option[]" type="text"> Ex: option4=Answer4 <?php $op="5"; ?>
                                                                     </td>
                                                                 </tr>
                                                                 <?php
                                                                 if($this->input->post('add')){
                                                                 for($j=1; $j<=$this->input->post('add'); $j++){
                                                                 ?>
-                                                                <tr><td valign="top"><?php echo $op.")"; ?> &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="<?php echo $op-1; ?>" /></td><td valign="top"><textarea name="option[]"></textarea>  </td></tr>
+                                                                <tr><td valign="top" style="height:30px;"><?php echo $op.")"; ?> &nbsp;&nbsp;</td><td valign="top"><input name="option[]" type="text">  </td></tr>
                                                                 <?php
                                                                 $op++;
                                                                 }
                                                                 }
                                                                 ?>
-                                                                <tr><td valign="top"></td><td valign="top"><br>
-                                                                <input type="submit" value="Submit"  class="btn btn-default"> </td></tr>
                                                             </table>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Submit"  class="btn btn-default">
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="panel-footer">
-                                            <form method="post" class="form-inline" action="<?php echo site_url('quiz/qbank/add_new/1');?>">
+                                            <form method="post" class="form-inline" action="<?php echo site_url('quiz/qbank/add_new/5');?>">
                                                 <label>Add more options </label>
                                                 <div class="row">
                                                     <select name="add" class="form-control col-sm-9" data-toggle="select2" >

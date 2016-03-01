@@ -104,7 +104,7 @@ foreach($assigned_questions as $key => $aqid){
 }
 ?>
                                         <div class="searchbox form-group" id="searchbox">
-                                            <form method="post" class="form-inline col-sm-6" action="<?php echo site_url('qbank');?>">
+                                            <form method="post" class="form-inline col-sm-6" action="<?php echo site_url('quiz/qbank');?>">
                                                 <div class="form-group">
                                                     <select style="width:100%;" data-toggle="select2">
                                                         <option value="qbank.question">Question</option>
@@ -133,7 +133,7 @@ foreach($assigned_questions as $key => $aqid){
 
                                                 <div class="panel-body">
                                                     <div class="table-responsive">
-                                                        <form method="post" action="<?php echo site_url('qbank/remove_qids/'.$limit);?>" id="removeqids">
+                                                        <form method="post" action="<?php echo site_url('quiz/qbank/remove_qids/'.$limit);?>" id="removeqids">
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
@@ -192,8 +192,8 @@ foreach($assigned_questions as $key => $aqid){
                                                                         <td data-th="Level"><?php echo $row->level_name;?></td>
                                                                         <td data-th="Type"><?php echo $type;?></td>
                                                                         <td data-th="Action">
-                                                                        <a href="javascript: if(confirm('Do you really want to remove this question?')){ window.location='<?php echo site_url('qbank/remove_question/'.$row->qid );?>'; }" class="btn btn-danger btn-xs">Remove</a> 
-                                                                         <a href="<?php echo site_url('qbank/edit_question/'.$row->qid.'/'.$row->q_type );?>" class="btn btn-info btn-xs">Edit</a></td>
+                                                                        <a href="javascript: if(confirm('Do you really want to remove this question?')){ window.location='<?php echo site_url('quiz/qbank/remove_question/'.$row->qid );?>'; }" class="btn btn-danger btn-xs">Remove</a> 
+                                                                         <a href="<?php echo site_url('quiz/qbank/edit_question/'.$row->qid.'/'.$row->q_type );?>" class="btn btn-info btn-xs">Edit</a></td>
                                                                         </tr>
                                                                 <?php
                                                                     }
@@ -337,7 +337,7 @@ foreach($assigned_questions as $key => $aqid){
 
 
     function sortby(limi,cid){
-    window.location="<?php echo site_url();?>/qbank/index/0/"+cid;
+    window.location="<?php echo site_url();?>/quiz/qbank/index/0/"+cid;
     }
     </script>
 </body>

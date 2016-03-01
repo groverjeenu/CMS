@@ -1,5 +1,5 @@
 // update base url ( http://localhost/savsoftquiz/ ). include slash at end
-var base_url = "http://localhost/quizzed/";
+var base_url = "http://localhost/incourse/";
 
 var comnt_id="0";
 $(document).ready(function(){
@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var did = $('#did').val();
 	var cid = $('#cid').val();
 	$.ajax({
-		url: base_url + "index.php/qbank/get_level_question/" + did + "/" + cid,
+		url: base_url + "quiz/qbank/get_level_question/" + did + "/" + cid,
 		success: function(data){
 		
 			var output = "<select name = 'no_of_questions[]' id='cnoq' >";
@@ -66,7 +66,7 @@ function showquestion_afterquiz(id){
 	
 function update_answer(oid){
 var cq=document.getElementById('current_question').value;
-	var aurl=base_url+"index.php/quiz/update_answer/"+cq+"/"+oid+"";
+	var aurl=base_url+"quiz/quiz/update_answer/"+cq+"/"+oid+"";
 	$.ajax({
 		url: aurl
 		
@@ -202,7 +202,7 @@ function questionselection(quid,qname,limi,cid){
 		var vall="<center><img src='"+base_url+"images/processing.gif'></center>";
 $("#qbank").html(vall);
 	$.ajax({
-		url: base_url + "index.php/qbank/select_questions/"+quid+"/"+qname+"/"+limi+"/"+cid,
+		url: base_url + "quiz/qbank/select_questions/"+quid+"/"+qname+"/"+limi+"/"+cid,
 		success: function(data){
 		$("#qbank").html(data);
 			
@@ -224,7 +224,7 @@ var formData = {search_type:search_type,search:searchval};
 	$.ajax({
 		 type: "POST",
 		 data : formData,
-			url: base_url + "index.php/qbank/select_questions/"+quid+"/"+qname+"/"+limi,
+			url: base_url + "quiz/qbank/select_questions/"+quid+"/"+qname+"/"+limi,
 		success: function(data){
 		$("#qbank").html(data);
 			
@@ -239,12 +239,12 @@ var formData = {search_type:search_type,search:searchval};
 function closeqselection(quid){
 		document.getElementById('qbank').style.display="none";
 		document.getElementById('qbank').style.visibility="hidden";
-		window.location=base_url+"index.php/quiz/edit_quiz/"+quid;
+		window.location=base_url+"quiz/quiz/edit_quiz/"+quid;
 }
 
 function addquestion(quid,qid){
 	$.ajax({
-		url: base_url + "index.php/quiz/add_question/"+quid+"/"+qid,
+		url: base_url + "quiz/quiz/add_question/"+quid+"/"+qid,
 		success: function(data){
 		},
 		error: function(xhr,status,strErr){
@@ -265,7 +265,7 @@ document.getElementById('page_res').innerHTML="Sending data...";
 	$.ajax({
 		type: "POST",
 	    data : formData,
-		url: base_url + "index.php/liveclass/insert_content/"+id,
+		url: base_url + "quiz/liveclass/insert_content/"+id,
 		success: function(data){
 				var d = new Date();
 		var dt=d.toString();
@@ -284,7 +284,7 @@ document.getElementById('page_res').innerHTML="Sending data...";
 function get_liveclass_content(id){
 
 	$.ajax({
-		url: base_url + "index.php/liveclass/get_class_content/"+id,
+		url: base_url + "quiz/liveclass/get_class_content/"+id,
 		success: function(data){
 		var d = new Date();
 var dt=d.toString();
@@ -311,7 +311,7 @@ get_liveclass_content(id);
 function get_liveclass_content_2(id){
 
 	$.ajax({
-		url: base_url + "index.php/liveclass/get_class_content/"+id,
+		url: base_url + "quiz/liveclass/get_class_content/"+id,
 		success: function(data){
 		var d = new Date();
 var dt=d.toString();
@@ -337,7 +337,7 @@ var class_id;
 function get_ques_content(id){
 class_id=id;
 	$.ajax({
-		url: base_url + "index.php/liveclass/get_ques_content/"+id,
+		url: base_url + "quiz/liveclass/get_ques_content/"+id,
 		success: function(data){
 		//alert(data);
 		document.getElementById('comment_box').innerHTML=data;
@@ -359,7 +359,7 @@ get_ques_content(id);
 function get_ques_content_2(id){
 class_id=id;
 	$.ajax({
-		url: base_url + "index.php/liveclass/get_ques_content/"+id,
+		url: base_url + "quiz/liveclass/get_ques_content/"+id,
 		success: function(data){
 		//alert(data);
 		document.getElementById('comment_box').innerHTML=data;
@@ -385,7 +385,7 @@ document.getElementById('comment_send').value="Sending data...";
 	$.ajax({
 		type: "POST",
 	    data : formData,
-		url: base_url + "index.php/liveclass/insert_comnt/"+id,
+		url: base_url + "quiz/liveclass/insert_comnt/"+id,
 		success: function(data){
 				document.getElementById('comment_send').value="";
 		},
@@ -418,7 +418,7 @@ $("#comnt_optn").fadeOut();
 	$.ajax({
 		type: "POST",
 	    data : formData,
-		url: base_url + "index.php/liveclass/publish_comnt/",
+		url: base_url + "quiz/liveclass/publish_comnt/",
 		success: function(data){
 				$("#comnt_optn").fadeOut();
 				 get_ques_content(class_id);
@@ -434,7 +434,7 @@ $("#comnt_optn").fadeOut();
 	$.ajax({
 		type: "POST",
 	    data : formData,
-		url: base_url + "index.php/liveclass/del_comnt/",
+		url: base_url + "quiz/liveclass/del_comnt/",
 		success: function(data){
 				$("#comnt_optn").fadeOut();
 				 get_ques_content(class_id);
@@ -444,8 +444,8 @@ $("#comnt_optn").fadeOut();
  
  }
  function get_ques_type(val){
- //alert(base_url +'index.php/qbank/add_new');
- window.location =base_url +'index.php/qbank/add_new/'+val;
+ //alert(base_url +'quiz/qbank/add_new');
+ window.location =base_url +'quiz/qbank/add_new/'+val;
 
  }
 
@@ -459,7 +459,7 @@ function add_score(qid,rid,opn_id){
 	$.ajax({
 		type: "POST",
 	    data : formData,
-		url: base_url + "index.php/result/add_score/",
+		url: base_url + "quiz/result/add_score/",
 		success: function(data){
 				if((data.trim())=="1"){
 					
@@ -620,7 +620,7 @@ var check_color_qus="0";
 			document.getElementById(qid).style.display="block";
 			document.getElementById(qid).style.visibility="visible";
 			document.getElementById('current_question').value=id;
-			var rurl=base_url+"index.php/quiz/update_time/"+cq+"/"+qtime+"";
+			var rurl=base_url+"quiz/quiz/update_time/"+cq+"/"+qtime+"";
 			$.ajax({
 				url: rurl
 				
@@ -650,7 +650,7 @@ function update_curr_ans(key,q_type,qid){
 					var cq=document.getElementById('current_question').value;
 					cq=cq-1;
 					//alert(cq);
-					var aurl=base_url+"index.php/quiz/update_answer/"+cq+"/"+oid+"";
+					var aurl=base_url+"quiz/quiz/update_answer/"+cq+"/"+oid+"";
 					$.ajax({
 						url: aurl
 						
@@ -686,7 +686,7 @@ function update_curr_ans(key,q_type,qid){
 		var cq=document.getElementById('current_question').value;
 		cq=cq-1;
 					//alert(cq);
-					var aurl=base_url+"index.php/quiz/update_answer/"+cq+"/"+vals+"";
+					var aurl=base_url+"quiz/quiz/update_answer/"+cq+"/"+vals+"";
 					$.ajax({
 						url: aurl
 						
@@ -705,17 +705,17 @@ function update_curr_ans(key,q_type,qid){
 			var cq=document.getElementById('current_question').value;
 					cq=cq-1;
 					//alert(qid);
-					var aurl=base_url+"index.php/quiz/update_answer/"+cq+"/"+oid+"";
+					var aurl=base_url+"quiz/quiz/update_answer/"+cq+"/"+oid+"";
 					$.ajax({
 						url: aurl
 						
 						});	
-						//var aurl=base_url+"index.php/quiz/update_fillups/"+qid+"/"+optn_value_user+"";
+						//var aurl=base_url+"quiz/quiz/update_fillups/"+qid+"/"+optn_value_user+"";
 							var formData = {q_id:qid,optn_value_user:optn_value_user,q_type:q_type};
 								$.ajax({
 									type: "POST",
 									data : formData,
-									url: base_url + "index.php/quiz/update_fillups/",
+									url: base_url + "quiz/quiz/update_fillups/",
 									success: function(data){
 											
 									},
@@ -732,12 +732,12 @@ function update_curr_ans(key,q_type,qid){
 			//alert(optn_value_user);
 			//var cq=document.getElementById('current_question').value;
 					
-						//var aurl=base_url+"index.php/quiz/update_fillups/"+qid+"/"+optn_value_user+"";
+						//var aurl=base_url+"quiz/quiz/update_fillups/"+qid+"/"+optn_value_user+"";
 							var formData = {q_id:qid,optn_value_user:optn_value_user,q_type:q_type};
 								$.ajax({
 									type: "POST",
 									data : formData,
-									url: base_url + "index.php/quiz/update_fillups/",
+									url: base_url + "quiz/quiz/update_fillups/",
 									success: function(data){
 											
 									},
@@ -778,7 +778,7 @@ function update_curr_ans(key,q_type,qid){
 	//var checkboxes = document.getElementsByName(s);
 	var cq=document.getElementById('current_question').value;
 					cq=cq-1;
-					var aurl=base_url+"index.php/quiz/update_answer/"+cq+"/"+oid+"";
+					var aurl=base_url+"quiz/quiz/update_answer/"+cq+"/"+oid+"";
 					$.ajax({
 						url: aurl
 						
@@ -797,7 +797,7 @@ function update_curr_ans(key,q_type,qid){
 								$.ajax({
 									type: "POST",
 									data : formData,
-									url: base_url + "index.php/quiz/update_fillups/",
+									url: base_url + "quiz/quiz/update_fillups/",
 									success: function(data){
 											
 									},

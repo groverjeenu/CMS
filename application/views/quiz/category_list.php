@@ -88,122 +88,66 @@
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
                         <div class="container-fluid">
+                            <div style="margin-top:10px;"></div>
+                            <a href="<?php echo site_url('quiz/category_controller/add_new');?>"  class="btn btn-success">Add new</a>
+
                             <?php
-                            $resultstatus = true;
-                                if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div>"; }
+                            if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div>"; }
                             ?>
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-lg-12">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                        <div class="panel-heading h3">
                                             <?php if($title){ echo $title; } ?>
                                         </div>
+                                        <!-- .panel-heading -->
                                         <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <form method="post" action="<?php echo site_url('quiz/qbank/add_new_mul');?>">
-                                                        <div class="form-group">
-                                                            <label>Question Type</label>
-                                                            <select class="form-control"  name="qus_type" OnChange="get_ques_type(this.value)">
-                                                                <option value="0"> Multiple Choice -single answers</option>
-                                                                <option value="1" selected> Multiple Choice -multiple answers</option>
-                                                                <option value="2">Fill in the Blank</option>
-                                                                <option value="3">Short Answer</option>
-                                                                <option value="4">Essay</option>
-                                                                <option value="5">Matching</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Select Category</label>
-                                                            <select class="form-control"  name="cid">
-                                                                <?php foreach($category as $value){ ?>
-                                                                <option value="<?php echo $value->cid; ?>"><?php echo $value->category_name; ?></option>
-                                                            <?php } ?></select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Select Difficulty Level</label>
-                                                            <select class="form-control" name="did">
-                                                                <?php foreach($difficult_level as $value){ ?>
-                                                                <option value="<?php echo $value->did; ?>"><?php echo $value->level_name; ?></option>
-                                                            <?php } ?></select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Question</label>
-                                                            <textarea name="question"></textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Description (Optional)</label>
-                                                            <textarea name="description"></textarea>
-                                                            <p class="help-block">
-                                                                Describe how question can be solved. <br>
-                                                                User can see description after submitting quiz in view answer section.
-                                                            </p>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <table>
-                                                                <tr>
-                                                                    <td valign="top">Options</td>
-                                                                    <td valign="top"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td valign="top">1) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="0" /></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td valign="top">2) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="1" /></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td valign="top">3) &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="2" /></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr><td valign="top">4)  &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="3"  /><?php $op="5"; ?></td>
-                                                                    <td valign="top">
-                                                                        <textarea name="option[]"></textarea> 
-                                                                    </td>
-                                                                </tr>
-                                                                <?php
-                                                                if($this->input->post('add')){
-                                                                for($j=1; $j<=$this->input->post('add'); $j++){
-                                                                ?>
-                                                                <tr><td valign="top"><?php echo $op.")"; ?> &nbsp;&nbsp; <input id="CheckBox[]" type="checkbox"  name="CheckBox[]" value="<?php echo $op-1; ?>" /></td><td valign="top"><textarea name="option[]"></textarea>  </td></tr>
-                                                                <?php
-                                                                $op++;
-                                                                }
-                                                                }
-                                                                ?>
-                                                                <tr><td valign="top"></td><td valign="top"><br>
-                                                                <input type="submit" value="Submit"  class="btn btn-default"> </td></tr>
-                                                            </table>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                            <div class="panel-group" id="accordion">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        
+                                                        <tr><th>Id</th><th>Category</th><th>Action</th></tr><thead><tbody>
+                                                        <?php
+                                                        if($result==false){
+                                                        ?>
+                                                        <tr>
+                                                            <td colspan="5">
+                                                                No record foud!
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                        }else{
+                                                        foreach($result as $row){
+                                                        ?>
+                                                        <tr>
+                                                            <td data-th="Id"><?php echo $row->cid;?></td>
+                                                            <td data-th="Category Name"><?php echo $row->category_name;?></td>
+                                                            <td data-th="Action"><a href="javascript: if(confirm('Do you really want to remove this category?')){ window.location='<?php echo site_url('quiz/category_controller/remove_category/'.$row->cid );?>'; }"  class="btn btn-danger btn-xs">Remove</a>
+                                                            <a href="<?php echo site_url('quiz/category_controller/edit_category/'.$row->cid );?>"  class="btn btn-info btn-xs">Edit</a></td>
+                                                        </tr>
+                                                        <?php
+                                                        }
+                                                        }
+                                                        ?>
+                                                        
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                        <div class="panel-footer">
-                                            <form method="post" class="form-inline" action="<?php echo site_url('quiz/qbank/add_new/1');?>">
-                                                <label>Add more options </label>
-                                                <div class="row">
-                                                    <select name="add" class="form-control col-sm-9" data-toggle="select2" >
-                                                        <?php for($x=1; $x <= 100; $x++ ){ ?>
-                                                        <option value="<?php echo $x; ?>"><?php echo $x; ?></option>
-                                                        <?php } ?>
-                                                    </select>&nbsp;&nbsp;
-                                                    <input type="submit" value="Add"   class="form-control col-sm-3" />
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <!-- .panel-body -->
                                     </div>
+                                    <!-- /.panel -->
                                 </div>
-
+                                <!-- /.col-lg-12 -->
                             </div>
 
+                            <?php
+                            if(($limit-($this->config->item('number_of_rows')))>=0){ $back=$limit-($this->config->item('number_of_rows')); }else{ $back='0'; } ?>
+                            <a href="<?php echo site_url('quiz/category_controller/index/'.$back);?>"    class="btn btn-primary">Back</a>
+                            &nbsp;&nbsp;
+                            <?php
+                            $next=$limit+($this->config->item('number_of_rows'));  ?>
+                            <a href="<?php echo site_url('quiz/category_controller/index/'.$next);?>"   class="btn btn-primary">Next</a>
                             
                         </div>
                     </div>

@@ -21,7 +21,7 @@ class Category extends CI_Model
 // get alll category
     function category_list($limit)
     {
-        $institute_id  = $this->session->userdata('institute_id');
+        $institute_id  = $this->ion_auth->get_user_id();;
         $this->db->where('institute_id', $institute_id);
         $this -> db -> select('cid, category_name');
         $this -> db -> from('question_category');
@@ -41,7 +41,7 @@ class Category extends CI_Model
 
     function remove_category($cid)
     {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();;
         $this->db->where('institute_id', $institute_id);
 
         if ($this->db->delete('question_category', array('cid' => $cid)) )
@@ -56,7 +56,7 @@ class Category extends CI_Model
 
 // insert category
     function insert_category() {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();;
         $insert_category = array(
                                'category_name' => $this->input->post('categoryname'),
                                'institute_id' => $institute_id
@@ -72,7 +72,7 @@ class Category extends CI_Model
 
     // get particular category detail
     function get_category($cid) {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();;
         $query = $this->db->get_where('question_category', array('cid' => $cid, 'institute_id' => $institute_id));
         return $query->row_array();
     }
@@ -84,7 +84,7 @@ class Category extends CI_Model
         $category_detail = array(
                                'category_name' => $categoryname,
                            );
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();;
         $this->db->where('institute_id', $institute_id);
 
         $this->db->where('cid', $cid);

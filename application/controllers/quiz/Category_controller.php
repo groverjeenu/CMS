@@ -1,4 +1,4 @@
-<? php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Category_controller extends CI_Controller {
 
@@ -7,40 +7,38 @@ class Category_controller extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->load->model('category', '', TRUE);
-		if (!$this->session->userdata('logged_in'))
+		$this->load->model('quiz/category', '', TRUE);
+		/*if (!$this->ion_auth->logged_in())
 		{
 			redirect('login');
 		}
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
+		if(!$this->ion_auth->in_group('faculty'))
+		{
+			redirect('dashboard');
+		}*/
 	}
 
 	function index($limit = '0')
 	{
 		$data['result'] = $this->category->category_list($limit);
-		$data['title'] = "category list";
+		$data['title'] = "Category list";
 		$data['limit'] = $limit;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/category_list', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+
+		$data['resultstatus'] = false;
+		$this->load->view("quiz".'/category_list', $data);
 	}
 
 
 	function remove_category($cid) {
 		$this->category->remove_category($cid);
-		redirect('category_controller', 'refresh');
+		redirect('quiz/category_controller', 'refresh');
 	}
 
 // add new category form
 	function add_new() {
 		$data['title'] = "Add Category";
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/add_category', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$data['resultstatus'] = false;
+		$this->load->view("quiz".'/add_category', $data);
 	}
 
 // insert group into database
@@ -56,9 +54,7 @@ class Category_controller extends CI_Controller {
 		{
 			$data['title'] = "Add Category";
 			$data['resultstatus'] = $this->category->insert_category();
-			$this->load->view($this->session->userdata('web_view').'/header', $data);
-			$this->load->view($this->session->userdata('web_view').'/add_category', $data);
-			$this->load->view($this->session->userdata('web_view').'/footer', $data);
+			$this->load->view("quiz".'/add_category', $data);
 		}
 	}
 
@@ -68,9 +64,7 @@ class Category_controller extends CI_Controller {
 		$data['category'] = $this->category->get_category($cid);
 		$data['cid'] = $cid;
 		$data['resultstatus'] = $resultstatus;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/edit_category', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/edit_category', $data);
 	}
 
 
@@ -88,7 +82,6 @@ class Category_controller extends CI_Controller {
 	}
 }
 
-?>
 
 
 

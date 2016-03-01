@@ -132,9 +132,9 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="weightage">Weightage</label>
-                                            <input id="weightage" data-toggle="touch-spin" data-min="0" data-max="100" data-postfix="%" data-step="0.1" data-decimals="2" type="text" value="1" name="weightage"/>
+                                        <div class="form-group">
+                                                <label for="weightage">Weightage</label>
+                                                <input id="weightage" data-toggle="touch-spin" data-min="0" data-max="100" data-postfix="%" data-step="0.1" data-decimals="2" type="text" value="1" name="weightage"/>
                                         </div>
                                         <div class="text-right">
                                             <button type='submit' class="btn btn-primary">Save</button>
