@@ -593,7 +593,7 @@
                 <div class="row">
                     <div class="col s6">
                     </div>
-                  <form class="col s12" action="">
+                  <form class="col s12" method="post" action="<?php echo base_url()?>display_view/submit_grades/<?php echo $query[' assignment_id']?>">
                     <div class="row">
                         <div class=" col s6">
                           <label for="first_name"><b><font size="5">Course Name</font></b></label>
