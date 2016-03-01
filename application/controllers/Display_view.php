@@ -34,10 +34,10 @@ class Display_view extends CI_Controller {
 
 		$this->lang->load('auth');
 
-		// if(!$this->ion_auth->logged_in())
-		// {
-		// 	redirect("login","refresh");
-		// }
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("login","refresh");
+		}
 
 	}
 
@@ -214,5 +214,10 @@ class Display_view extends CI_Controller {
 		$this->courses->enroll($cid);
 		//$this->course($cid);
 		redirect("display_view/course/".$cid,"refresh");
+	}
+
+	public function get_query_courses()
+	{
+		echo json_encode( array("name"=>"jeenu"));
 	}
 } 
