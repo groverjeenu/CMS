@@ -216,4 +216,18 @@ class Display_view extends CI_Controller {
 		//$this->course($cid);
 		redirect("display_view/course/".$cid,"refresh");
 	}
-} 
+
+	public function cadmindash($id)
+	{
+		$query = $this->courses->getcourse_name($id);
+		$data['query'] = $query;
+		$this->load->view('csadmin_dashboard', $data);
+	}
+
+	public function assigngrades($id)
+	{
+		$query = $this->courses->getsubmissions($id);
+		$data['query'] = $query;
+		$this->load->view('assign_grades', $data);
+	}
+}

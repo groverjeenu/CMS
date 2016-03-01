@@ -117,4 +117,17 @@ class Courses_model extends CI_Model
 		return $lectures;
 
 	}
+
+	public function getcourse_name($id)
+	{
+		$id = intval($id);
+		$course = $this->db->query("select * from course_courseadmin natural join courses natural join assignment natural join submissions where isgraded=0 and courseadmin=?",$id)->result_array();
+		return $course;
+	}
+
+	public function getsubmissions($id)
+	{
+		$id = intval($id);
+		$ass = $this->db->query("select * from assignment natural join submissions natural join users natural join courses where assignment_id=? ", $id)->row_array();
+	}
 }
