@@ -54,15 +54,16 @@ class Lessons extends CI_Controller
 	            }
 	            else
 	            {
+	            	unset($data['courseid']);
 	       			$data['course_id'] = $courseid;
-	       			$data['videoname'] = $videoname;
+	       			//$data['videoname'] = $videoname;
 	       			$data['name'] = $this->input->post('title');
 	       			$data['description'] = $this->input->post('description');
 	       			$data['textname'] = $this->upload->data('file_name');
 	       			if($this->input->post('visibility') == "on")
-	       				$data['visibility'] = TRUE;
+	       				$data['is_public'] = TRUE;
 	       			else
-	       				$data['visibility'] = FALSE;
+	       				$data['is_public'] = FALSE;
 	       			$this->lesson->add($data);
 	            	echo "File uploaded successfully";
 	            	echo "<br>VideoName = ".$videoname;

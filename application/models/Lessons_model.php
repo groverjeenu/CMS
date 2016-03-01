@@ -15,7 +15,11 @@ class Lessons_model extends CI_Model
 	public function get($id)
 	{
 		$id = intval($id);
+<<<<<<< Updated upstream
 		$result = (array)$this->db->get('lectures',array('id'=>$id))->row();
+=======
+		$result = $this->db->get_where('lectures',array('id'=>$id))->row_array();
+>>>>>>> Stashed changes
 		return $result;
 	}
 	

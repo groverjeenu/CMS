@@ -414,7 +414,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <div>
                 <div id = "video">
                   <video height=100% width = 100% controls>
-                      <source src="<?php echo base_url(); ?>contents/videos/lp.mp4" type="video/mp4"/>
+                      <source src="<?php echo base_url().'contents/videos/'.$lec['videoname'];?>" type="video/mp4"/>
                   </video>
                 </div>
                
