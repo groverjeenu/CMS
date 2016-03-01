@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./src/js/themes/html/app.js":[function(require,module,exports){
-// Essentials
+/*// Essentials
 require('essential/js/main');
 
 // Layout
@@ -26,6 +26,7 @@ window.initGoogleMaps = require('maps/js/google/main');
 // CORE
 require('./main');
 },{"./main":"/app/www/src/js/themes/html/main.js","charts/js/main":"/app/www/lib/charts/js/main.js","essential/js/main":"/app/www/lib/essential/js/main.js","layout/js/main":"/app/www/lib/layout/js/main.js","maps/js/google/main":"/app/www/lib/maps/js/google/main.js","material/js/main":"/app/www/lib/material/js/main.js","media/js/main":"/app/www/lib/media/js/main.js","messages/js/main":"/app/www/lib/messages/js/main.js","sidebar/js/main":"/app/www/lib/sidebar/js/main.js"}],"/app/www/lib/charts/js/easy-pie/_easy-pie.js":[function(require,module,exports){
+*/
 (function ($) {
     "use strict";
 

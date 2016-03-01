@@ -118,6 +118,20 @@ class Courses_model extends CI_Model
 
 	}
 
+	public function getcourse_name($id)
+	{
+		$id = intval($id);
+		$course = $this->db->query("select * from course_courseadmin natural join courses natural join assignment natural join submissions where isgraded=0 and courseadmin=?",$id)->result_array();
+		return $course;
+	}
+
+	public function getsubmissions($id)
+	{
+		$id = intval($id);
+		$ass = $this->db->query("select * from assignment natural join submissions natural join users natural join courses where assignment_id=? ", $id)->row_array();
+		return $ass;
+	}
+
 	public function get_query_courses($qry)
 	{
 		$this->db->like('course_name', $qry, 'both');
@@ -140,10 +154,17 @@ class Courses_model extends CI_Model
 		 return $d;
 	}
 
+
 	public function get_course_assignments($cid)
 	{
 		return $this->db->query("select * from assignment where cid  = ? order by start_date",$cid)->result_array();
 	}
 
 	
+
+	public function update_submissions($data)
+	{
+		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, is_graded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
+	}
+
 }
