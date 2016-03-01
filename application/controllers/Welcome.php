@@ -82,4 +82,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('view_grades');
 	}
+	public function cadmindash()
+	{
+		$this->load->view('csadmin_dashboard');
+	}
+	public function assigngrades()
+	{
+		$this->load->view('assign_grades');
+	}
 }

@@ -50,11 +50,11 @@
 
 <body>
     <!-- Start Page Loading -->
-    <div id="loader-wrapper">
+    <!--div id="loader-wrapper">
         <div id="loader"></div>        
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>
+    </div-->
     <!-- End Page Loading -->
 
     <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -318,20 +318,20 @@
                         <div class="row">
                             <div class="col s12 l6">
                                 <ul id="projects-collection" class="collection">
+                                    <?php foreach($query as $key){ ?>
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
-                                        <span class="collection-header">Courses</span>
-                                        <p>My Courses</p>
+                                        <span class="collection-header">Assignments left to be corrected</span>
+                                        <p></p>
                                         <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                                     </li>
-                                    <?php  foreach ($user_courses as $kk => $ccourse) { ?>
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
-                                                <a href = "<?php echo base_url()."display_view/course/".$ccourse['course_id']?>">
-                                                <p class="collections-title"> <?php echo $ccourse['course_name'] ?></p>
+                                                <!--a href = "<?php echo base_url()."display_view/cadmindash/".$this->ion_auth->get_user_id()?>"-->
+                                                <p class="collections-title"><?php echo $key['course_name'];?></p>
                                                 </a>
-                                                <p class="collections-content"><?php echo $ccourse['description'] ?></p>
+                                                <p class="collections-content">Assignment <?php echo $key['assignment_id'];?></p>
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat cyan"> 
@@ -339,7 +339,7 @@
 
                                                 //$names = $this->course->get_course($ccourse['course_id'])->row();
                                                 //$namess = (array)$names;
-                                                echo $all_courses[$ccourse['course_id']]['names']; ?>
+                                               // echo $all_courses[$ccourse['course_id']]['names']; ?>
                                             </span>
                                             </div>
                                             <!--div class="col s3">
@@ -347,8 +347,7 @@
                                             </div-->
                                         </div>
                                     </li>
-                                    <?php } ?>
-                                 
+                                    <?php }?>
                                    
                                     
                                 </ul> 
@@ -406,7 +405,7 @@
                                   </ul>
                                   <div class="panel-footer text-right">
                                     <a href="app-student-courses.html" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated href="#"> View all</a-->
-                            <div class="col s12 l6">
+                            <!--div class="col s12 l6">
                                 <ul id="projects-collection" class="collection">
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
@@ -422,11 +421,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat cyan">Development</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -436,11 +435,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat grey darken-3">UI/UX</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-2"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -450,11 +449,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat teal">Marketing</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-3"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -464,7 +463,7 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat green">SEO</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-4"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->

@@ -34,10 +34,10 @@ class Display_view extends CI_Controller {
 
 		$this->lang->load('auth');
 
-		// if(!$this->ion_auth->logged_in())
-		// {
-		// 	redirect("login","refresh");
-		// }
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("login","refresh");
+		}
 
 	}
 
@@ -216,4 +216,39 @@ class Display_view extends CI_Controller {
 		//$this->course($cid);
 		redirect("display_view/course/".$cid,"refresh");
 	}
+
+	public function cadmindash($id)
+	{
+		$query = $this->courses->getcourse_name($id);
+		$data['query'] = $query;
+		$this->load->view('csadmin_dashboard', $data);
+	}
+
+	public function assigngrades($id)
+	{
+		$query = $this->courses->getsubmissions($id);
+		$data['query'] = $query;
+		$this->load->view('assign_grades', $data);
+	}
+
+	public function submit_grades($id)
+	{
+		$data['assignment_id'] = $id;
+		$data['grade'] = $this->input->post('grade');
+		$data['penalty'] = $this->input->post('penalty');
+		$data['graded_by'] = $this->ion_auth->get_user_id();
+		$this->courses->update_submissions($data);
+		echo "Successfully Submitted";
+		$id1 = $this->ion_auth->get_user_id();
+		redirect('display_view/cadmindash/'.$id1, 'refresh');
+	       			
+	}
+	public function get_query_courses()
+	{
+		header('Content-Type: application/x-json; charset=utf-8');
+		$qry = $_POST['qry'];
+		echo json_encode(array("data"=>$this->courses->get_query_courses($qry), "base_url"=> base_url() ));
+	}
+
+
 } 
