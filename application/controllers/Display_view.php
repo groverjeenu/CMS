@@ -168,7 +168,7 @@ class Display_view extends CI_Controller {
 	{
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("display_view/login_view","refresh");
+			redirect("login","refresh");
 		}
 
 		$query = $this->courses->get_course($cid);
@@ -191,7 +191,7 @@ class Display_view extends CI_Controller {
 	{	
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("display_view/login_view","refresh");
+			redirect("login","refresh");
 		}
 
 		$usr= $this->ion_auth->user()->row();
@@ -205,7 +205,8 @@ class Display_view extends CI_Controller {
 	public function lectures($id)
 	{
 
-		$lec = $this->lessons->get($id);
+		$lec = $this->lessons_model->get($id);
+		echo $id;
 		$data['lec'] = $lec;
 		$this->load->view('courselectures', $data);
 	}
