@@ -118,10 +118,10 @@ class Courses_model extends CI_Model
 
 	}
 
-	public function get_query_courses()
+	public function get_query_courses($qry)
 	{
-		$qry = $_POST['qry'];
-		 $courses = $this->db->query("select * from courses where name like ?",$qry)->result_array();
+		$this->db->like('course_name', $qry, 'both');
+		 $courses = $query = $this->db->get('courses')->result_array();
 		 $d = array();
 		 foreach($courses as $c)
 		 {

@@ -219,6 +219,9 @@ class Display_view extends CI_Controller {
 
 	public function get_query_courses()
 	{
-		echo json_encode( array("name"=>"jeenu"));
+		header('Content-Type: application/x-json; charset=utf-8');
+		$qry = $_POST['qry'];
+		echo json_encode(array("data"=>$this->courses->get_query_courses($qry), "base_url"=> base_url() ));
+		
 	}
 } 
