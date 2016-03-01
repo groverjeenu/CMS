@@ -197,9 +197,6 @@ class Display_view extends CI_Controller {
 		 //foreach($data['user'] as $k)echo $k."<br>";
 		$this->load->view('edit_profile',$data);
 	}
-<<<<<<< HEAD
-	
-=======
 
 	public function lectures($id)
 	{
@@ -208,5 +205,4 @@ class Display_view extends CI_Controller {
 		$data['lec'] = $lec;
 		$this->load->view('courselectures', $data);
 	}
->>>>>>> f0c699662f61fa8da8e9bf0ebdf0828cb6f750f4
 } 

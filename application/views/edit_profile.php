@@ -60,6 +60,41 @@ TIP:
     - Using bundles will improve performance by greatly reducing the number of network requests the client needs to make when loading the page. -->
   <link href="<?php echo base_url(); ?>public/css/app/app.css" rel="stylesheet">
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <title>Dashboard</title>
+
+    <!-- Favicons-->
+    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <!-- For Windows Phone -->
+
+
+    <!-- CORE CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS for full screen (Layout-2)-->    
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS for full screen (Layout-2)-->    
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">    
+    <link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection">    
+
+
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+
   <!-- App CSS CORE
 This variant is to be used when loading the separate styling modules -->
   <!-- <link href="css/app/main.css" rel="stylesheet"> -->
@@ -97,10 +132,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 <body>
 
   <!-- Wrapper required for sidebar transitions -->
-  <div class="st-container">
+  <!--div class="st-container"-->
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
+    <?php $this->view('addons/header.php'); ?>
+    
+    <!--div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="#sidebar-menu" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i class="fa fa-ellipsis-v"></i></a>
@@ -157,10 +194,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </svg>
             </a>
           </div>
-        </div>
+        </div-->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="main-nav">
+        <!--div class="collapse navbar-collapse" id="main-nav">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Forum <span class="caret"></span></a>
@@ -204,9 +241,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-nav-bordered navbar-right">
+          <ul class="nav navbar-nav navbar-nav-bordered navbar-right"-->
             <!-- notifications -->
-            <li class="dropdown notifications updates">
+            <!--li class="dropdown notifications updates">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <span class="badge badge-primary">4</span>
@@ -257,10 +294,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   </div>
                 </li>
               </ul>
-            </li>
+            </li-->
             <!-- // END notifications -->
             <!-- User -->
-            <li class="dropdown">
+            <!--li class="dropdown">
               <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
                 <img src="images/people/110/guy-5.jpg" alt="Bill" class="img-circle" width="40" /> Bill <span class="caret"></span>
               </a>
@@ -271,14 +308,226 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </ul>
             </li>
           </ul>
-        </div>
+        </div-->
         <!-- /.navbar-collapse -->
 
-      </div>
-    </div>
+      <!--/div>
+    </div-->
+    <aside id="left-sidebar-nav">
+                <ul id="slide-out" class="side-nav leftside-navigation" style="left: 0px; height: 761px;">
+                    <li class="user-details cyan darken-2">
+                        <div class="row">
+                            <div class="col col s4 m4 l4">
+                                <img src="http://localhost/incourse/public/img/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                            </div>
+                            <div class="col col s8 m8 l8">
+                                
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a><ul id="profile-dropdown" class="dropdown-content" style="width: 130px; position: absolute; top: 57px; left: 99.734375px; opacity: 1; display: none;">
+                                    <li><a href="#"><i class="mdi-action-face-unlock"></i> Profile</a>
+                                    </li>
+                                    <li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
+                                    </li>
+                                    <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
+                                    </li>
+                                    <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                                    </li>
+                                </ul>
+                                <p class="user-roal">Administrator</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="bold active"><a href="index.html" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li class="bold"><a href="app-email.html" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Mailbox <span class="new badge">4</span></a>
+                    </li>
+                    <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Calender</a>
+                    </li>
+                    <li class="no-padding">
+                        <ul class="collapsible collapsible-accordion">
+                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> CSS</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>
+                                        <li><a href="css-typography.html">Typography</a>
+                                        </li>                                        
+                                        <li><a href="css-icons.html">Icons</a>
+                                        </li>
+                                        <li><a href="css-shadow.html">Shadow</a>
+                                        </li>
+                                        <li><a href="css-media.html">Media</a>
+                                        </li>
+                                        <li><a href="css-sass.html">Sass</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-palette"></i> UI Elements</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>
+                                        <li><a href="ui-buttons.html">Buttons</a>
+                                        </li>
+                                        <li><a href="ui-badges.html">Badges</a>
+                                        </li>
+                                        <li><a href="ui-cards.html">Cards</a>
+                                        </li>
+                                        <li><a href="ui-collections.html">Collections</a>
+                                        </li>
+                                        <li><a href="ui-accordions.html">Accordian</a>
+                                        </li>
+                                        <li><a href="ui-tabs.html">Tabs</a>
+                                        </li>
+                                        <li><a href="ui-navbar.html">Navbar</a>
+                                        </li>
+                                        <li><a href="ui-pagination.html">Pagination</a>
+                                        </li>
+                                        <li><a href="ui-preloader.html">Preloader</a>
+                                        </li>
+                                        <li><a href="ui-modals.html">Modals</a>
+                                        </li>
+                                        <li><a href="ui-media.html">Media</a>
+                                        </li>
+                                        <li><a href="ui-toasts.html">Toasts</a>
+                                        </li>
+                                        <li><a href="ui-tooltip.html">Tooltip</a>
+                                        </li>
+                                        <li><a href="ui-waves.html">Waves</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a href="app-widget.html" class="waves-effect waves-cyan"><i class="mdi-device-now-widgets"></i> Widgets <span class="new badge"></span></a>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i> Tables</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>
+                                        <li><a href="table-basic.html">Basic Tables</a>
+                                        </li>
+                                        <li><a href="table-data.html">Data Tables</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-insert-comment"></i> Forms</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>
+                                        <li><a href="form-elements.html">Form Elements</a>
+                                        </li>
+                                        <li><a href="form-layouts.html">Form Layouts</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-social-pages"></i> Pages</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>                                        
+                                        <li><a href="page-contact.html">Contact Page</a>
+                                        </li>
+                                        <li><a href="page-todo.html">ToDos</a>
+                                        </li>
+                                        <li><a href="page-blog-1.html">Blog Type 1</a>
+                                        </li>
+                                        <li><a href="page-blog-2.html">Blog Type 2</a>
+                                        </li>
+                                        <li><a href="page-404.html">404</a>
+                                        </li>
+                                        <li><a href="page-500.html">500</a>
+                                        </li>
+                                        <li><a href="page-blank.html">Blank</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-shopping-cart"></i> eCommers</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>
+                                        <li><a href="eCommerce-products-page.html">Products Page</a>
+                                        </li>                                        
+                                        <li><a href="eCommerce-pricing.html">Pricing Table</a>
+                                        </li>
+                                        <li><a href="eCommerce-invoice.html">Invoice</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-image"></i> Medias</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>                                        
+                                        <li><a href="media-gallary-page.html">Gallery Page</a>
+                                        </li>
+                                        <li><a href="media-hover-effects.html">Image Hover Effects</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> User</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>     
+                                        <li><a href="user-profile-page.html">User Profile</a>
+                                        </li>                                   
+                                        <li><a href="user-login.html">Login</a>
+                                        </li>                                        
+                                        <li><a href="user-register.html">Register</a>
+                                        </li>
+                                        <li><a href="user-forgot-password.html">Forgot Password</a>
+                                        </li>
+                                        <li><a href="user-lock-screen.html">Lock Screen</a>
+                                        </li>                                        
+                                        <li><a href="user-session-timeout.html">Session Timeout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Charts</a>
+                                <div class="collapsible-body" style="">
+                                    <ul>
+                                        <li><a href="charts-chartjs.html">Chart JS</a>
+                                        </li>
+                                        <li><a href="charts-chartist.html">Chartist</a>
+                                        </li>
+                                        <li><a href="charts-morris.html">Morris Charts</a>
+                                        </li>
+                                        <li><a href="charts-xcharts.html">xCharts</a>
+                                        </li>
+                                        <li><a href="charts-flotcharts.html">Flot Charts</a>
+                                        </li>
+                                        <li><a href="charts-sparklines.html">Sparkline Charts</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="li-hover"><div class="divider"></div></li>
+                    <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
+                    <li><a href="css-grid.html"><i class="mdi-image-grid-on"></i> Grid</a>
+                    </li>
+                    <li><a href="css-color.html"><i class="mdi-editor-format-color-fill"></i> Color</a>
+                    </li>
+                    <li><a href="css-helpers.html"><i class="mdi-communication-live-help"></i> Helpers</a>
+                    </li>
+                    <li><a href="changelogs.html"><i class="mdi-action-swap-vert-circle"></i> Changelogs</a>
+                    </li>                    
+                    <li class="li-hover"><div class="divider"></div></li>
+                    <li class="li-hover"><p class="ultra-small margin more-text">Daily Sales</p></li>
+                    <li class="li-hover">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="sample-chart-wrapper">                            
+                                    <div class="ct-chart ct-golden-section" id="ct2-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+            </aside>
+
 
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    <div class="sidebar left sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
+    <!--div class="sidebar left sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
       <div data-scrollable>
 
         <div class="sidebar-block">
@@ -324,45 +573,49 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
           <li><a href="login.html"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
         </ul>
       </div>
-    </div>
+    </div-->
 
     <!-- sidebar effects OUTSIDE of st-pusher: -->
     <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
 
     <!-- content push wrapper -->
-    <div class="st-pusher" id="content">
+    <!--div class="st-pusher" id="content"-->
 
       <!-- sidebar effects INSIDE of st-pusher: -->
       <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
 
       <!-- this is the wrapper for the content -->
-      <div class="st-content">
+      <!--div class="st-content">
 
-        <!-- extra div for emulating position:fixed of the menu -->
-        <div class="st-content-inner padding-none">
+        < extra div for emulating position:fixed of the menu -->
+        <!--div class="st-content-inner padding-none">
 
           <div class="container-fluid">
 
-            <div class="page-section third">
+            <div class="page-section third"-->
               <!-- Tabbable Widget -->
-              <div class="tabbable paper-shadow relative" data-z="0.5">
+              <!--div class="tabbable paper-shadow relative" data-z="0.5"-->
 
                 <!-- Tabs -->
-                <ul class="nav nav-tabs">
+
+                <!--ul class="nav nav-tabs">
                   <li class="active"><a href="app-student-profile.html"><i class="fa fa-fw fa-lock"></i> <span class="hidden-sm hidden-xs">Manage Account</span></a></li>
                   <li><a href="app-student-billing.html"><i class="fa fa-fw fa-credit-card"></i> <span class="hidden-sm hidden-xs">Billing Details</span></a></li>
-                </ul>
+                </ul-->
                 <!-- // END Tabs -->
 
                 <!-- Panes -->
-                <div class="tab-content">
-
-                  <div id="account" class="tab-pane active">
+                <div id="container">
+                <div class="card-panel">
+                  <div class="col s12 l6">
                     <?php $attributes['class'] = 'form-horizontal';
                         echo form_open_multipart('auth/edit_user',$attributes);
                     ?>
 <!--                     <form class="form-horizontal" action = "<?php  base_url(); ?>auth/edit_user" enctype="multipart/form-data" method = "post">
- -->                      <div class="form-group">
+ -->                    
+                    <div class = "row">
+                      <div class="col s12 form-group">
+
                         <label for="inputEmail3" class="col-sm-2 control-label">Avatar</label>
                         <div class="col-md-6">
                           <div class="media v-middle">
@@ -374,12 +627,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             </div>
                             <div class="media-body">
                               <input type="file" id="file" onchange="readURL(this);" name="image">
-                                <label for="file" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade"
+                                <label for="file" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade"
                                 data-z="0.5" data-hover-z="1" data-animated="">
                                 <i class="fa fa-upl">Add Image</i>
                                 </label>
                               <style>#file { display: none }</style>
-
                               <!--a href="#" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated=""><span class="ink animate" style="height: 86px; width: 86px; top: -23px; left: -25.3281px;"></span> Add Image<i class="fa fa-upl"></i></a-->
                             </div>
                           </div>
@@ -398,7 +650,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             <div class="col-md-6">
                               <div class="form-control-material">
                                 <input class="form-control" id="exampleInputLastName" placeholder="Your last name" name="last_name" value = "<?php echo $user['last_name'];?>">
-                                
                               </div>
                             </div>
                           </div>
@@ -416,6 +667,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           </div>
                         </div>
                       </div>
+                    </div>
                       <!--
                       <div class="form-group">
                         <label for="inputEmail3" class="col-md-2 control-label">Website</label>
@@ -547,6 +799,116 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     Includes Custom Application JavaScript used for the current theme/module;
     Do not use it simultaneously with the standalone modules below. -->
   <script src="<?php echo base_url(); ?>public/js/app/app.js"></script>
+
+      <?php $this->view('addons/footer.php'); ?>
+
+    <!-- ================================================
+    Scripts
+    ================================================ -->
+    
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery-1.11.2.min.js"></script>    
+    <!--materialize js-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/materialize.js"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    
+
+    <!-- chartist -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.js"></script>   
+
+    <!-- chartjs -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart-script.js"></script>
+
+    <!-- sparkline -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/sparkline-script.js"></script>
+    
+    <!-- google map api -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
+
+    <!--jvectormap-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/vectormap-script.js"></script>    
+
+    
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins.js"></script>
+    <!-- Toast Notification -->
+    <script type="text/javascript">
+    // Toast Notification
+/*    $(window).load(function() {
+        setTimeout(function() {
+            Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
+        }, 1500);
+        setTimeout(function() {
+            Materialize.toast('<span>You can swipe me too!</span>', 3000);
+        }, 5000);
+        setTimeout(function() {
+            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
+        }, 15000);
+    });*/
+
+
+    $(function() {
+      // Google Maps  
+      $('#map-canvas').addClass('loading');    
+      var latlng = new google.maps.LatLng(40.6700, -73.9400); // Set your Lat. Log. New York
+      var settings = {
+          zoom: 10,
+          center: latlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          scrollwheel: false,
+          draggable: true,
+          styles: [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}],
+          mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+          navigationControl: false,
+          navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},            
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"), settings);
+
+      google.maps.event.addDomListener(window, "resize", function() {
+          var center = map.getCenter();
+          google.maps.event.trigger(map, "resize");
+          map.setCenter(center);
+          $('#map-canvas').removeClass('loading');
+      });
+
+      var contentString =
+          '<div id="info-window">'+
+          '<p>18 McLuice Road, Vellyon Hills,<br /> New York, NY 10010<br /><a href="https://plus.google.com/102896039836143247306/about?gl=za&hl=en" target="_blank">Get directions</a></p>'+
+          '</div>';
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString
+      });
+
+      var companyImage = new google.maps.MarkerImage('http://demo.geekslabs.com/ashoka/images/map-marker.png',
+          new google.maps.Size(36,62),// Width and height of the marker
+          new google.maps.Point(0,0),
+          new google.maps.Point(18,52)// Position of the marker 
+      );
+
+      var companyPos = new google.maps.LatLng(40.6700, -73.9400);
+
+      var companyMarker = new google.maps.Marker({
+          position: companyPos,
+          map: map,
+          icon: companyImage,
+          title:"Shapeshift Interactive",
+          zIndex: 3});
+
+      google.maps.event.addListener(companyMarker, 'click', function() {
+          infowindow.open(map,companyMarker);
+          pageView('/#address');
+      });
+    });
+
+
+    
+    </script>
 
   <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
