@@ -139,4 +139,11 @@ class Courses_model extends CI_Model
 		 //$this->db->query("select * from courses ,course_faculty ,users where courses.cid = course_faculty.course_id and course_faculty.faculty_id = users.id");
 		 return $d;
 	}
+
+	public function get_course_assignments($cid)
+	{
+		return $this->db->query("select * from assignment where cid  = ? order by start_date",$cid)->result_array();
+	}
+
+	
 }

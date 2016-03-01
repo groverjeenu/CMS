@@ -27,6 +27,7 @@ class Display_view extends CI_Controller {
 		$this->load->model('courses_model','courses');
 		$this->load->model('lessons_model','lessons');
 		$this->load->model('admindash_model');
+		$this->load->model('assignments_model','assignments');
 		$this->load->model('lessons_model');
 		$this->load->helper(array('url','language'));
 
@@ -182,6 +183,7 @@ class Display_view extends CI_Controller {
 		$lectures = $this->courses->get_course_lectures($cid);
 		$data['val'] = $val;
 		$data['lectures'] = $lectures;
+		$data['assignments'] = $this->courses->get_course_assignments($cid);
 
 		$this->load->view('coursepage',$data);
 
@@ -222,6 +224,33 @@ class Display_view extends CI_Controller {
 		header('Content-Type: application/x-json; charset=utf-8');
 		$qry = $_POST['qry'];
 		echo json_encode(array("data"=>$this->courses->get_query_courses($qry), "base_url"=> base_url() ));
-		
+
+	}
+
+	public function assignments($aid)
+	{
+		$ass = $this->assignments->get($aid);
+		if($this->courses->check_if_enrolled($ass['cid']) == 0 )
+		{
+			redirect('display_view/'.$ass['cid'],"refresh");
+		}
+		$cid =$ass['cid'];
+		$query = $this->courses->get_course($cid);
+		$data['query'] = $query;
+			
+
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+		$val = $this->courses->check_if_enrolled($cid);
+		$lectures = $this->courses->get_course_lectures($cid);
+		$data['val'] = $val;
+		$data['lectures'] = $lectures;
+		$data['assignments'] = $this->courses->get_course_assignments($cid);
+		$data['ass'] = $ass;
+		$this->load->view('assignment',$data);
+
+
+
 	}
 } 
