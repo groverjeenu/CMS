@@ -56,6 +56,7 @@ class Lessons extends CI_Controller
 	            {
 	            	unset($data['courseid']);
 	       			$data['course_id'] = $courseid;
+
 	       			$data['name'] = $this->input->post('title');
 	       			$data['description'] = $this->input->post('description');
 	       			$data['textname'] = $this->upload->data('file_name');
@@ -64,6 +65,7 @@ class Lessons extends CI_Controller
 	       			else
 	       				$data['is_public'] = FALSE;
 	       			$id = $this->lesson->add($data);
+
 	            	echo "File uploaded successfully";
 	            	echo "<br>VideoName = ".$data['videoname'];
 	            	echo "<br>textName = ".$this->upload->data('file_name');

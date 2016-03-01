@@ -15,7 +15,8 @@ class Lessons_model extends CI_Model
 	public function get($id)
 	{
 		$id = intval($id);
-		$result = $this->db->get('lectures',array('id'=>$id))->result_array();
+		$result = (array)$this->db->get('lectures',array('id'=>$id))->row();
+		$result = $this->db->get_where('lectures',array('id'=>$id))->row_array();
 		return $result;
 	}
 

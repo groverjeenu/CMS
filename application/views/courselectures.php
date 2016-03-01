@@ -394,14 +394,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   <span class="icon-block half bg-blue-300 text-white">2</span>
                 </div>
                 <div class="media-body">
-                  <h1 class="text-display-1 margin-none">The MVC architectural pattern</h1>
+                  <h1 class="text-display-1 margin-none"><?php echo $lec['name']?></h1>
                 </div>
               </div>
               <br/>
-              <p class="text-body-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta eius enim inventore minus optio ratione veritatis. Beatae deserunt illum ipsam magni minima mollitia officiis quia tempora! Aliquid autem beatae, dignissimos exercitationem
-                illum, incidunt itaque libero, minima molestiae necessitatibus perferendis quae quas quidem recusandae sit! Esse maxime porro provident quasi?</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda aut debitis, ducimus, ea eaque earum eius enim eos explicabo facilis harum impedit natus nemo, nobis obcaecati omnis perspiciatis praesentium quaerat quas quod
-                reprehenderit sapiente temporibus vel voluptatem voluptates voluptatibus?</p>
+              <p class="text-body-2"><?php echo $lec['description']?></p>
             </div>
 
             <div class="panel panel-default curriculum open paper-shadow" data-z="0.5">
@@ -417,7 +414,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <div>
                 <div id = "video">
                   <video height=100% width = 100% controls>
-                      <source src="<?php echo base_url(); ?>contents/videos/lp.mp4" type="video/mp4"/>
+                      <source src="<?php echo base_url().'contents/videos/'.$lec['videoname'];?>" type="video/mp4"/>
                   </video>
                 </div>
                

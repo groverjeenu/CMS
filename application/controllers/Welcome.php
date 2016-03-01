@@ -77,4 +77,9 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('edit_profile');
 	}
+
+	public function viewgrades()
+	{
+		$this->load->view('view_grades');
+	}
 }

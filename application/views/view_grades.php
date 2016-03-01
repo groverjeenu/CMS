@@ -316,41 +316,24 @@
                 <div class = "container">
                     <section id = "work-collections">
                         <div class="row">
-                            <div class="col s12 l6">
+                            <div class="col s4">
                                 <ul id="projects-collection" class="collection">
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
-                                        <span class="collection-header">Courses</span>
-                                        <p>My Courses</p>
+                                        <span class="collection-header">Course Name</span>
+                                        <!--p>Assignment No</p-->
                                         <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                                     </li>
-                                    <?php  foreach ($user_courses as $kk => $ccourse) { ?>
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
-                                                <a href = "<?php echo base_url()."display_view/course/".$ccourse['course_id']?>">
-                                                <p class="collections-title"> <?php echo $ccourse['course_name'] ?></p>
-                                                </a>
-                                                <p class="collections-content"><?php echo $ccourse['description'] ?></p>
+                                                <p class="collections-title">Assignment No</p>
+                                                <p class="collections-content">Evaluated by: TA Name</p>
                                             </div>
                                             <div class="col s3">
-                                                <span class="task-cat cyan"> 
-                                                <?php 
-
-                                                //$names = $this->course->get_course($ccourse['course_id'])->row();
-                                                //$namess = (array)$names;
-                                                echo $all_courses[$ccourse['course_id']]['names']; ?>
-                                            </span>
+                                                <span class="task-cat cyan">Grade</span>
                                             </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
                                     </li>
-                                    <?php } ?>
-                                 
-                                   
-                                    
                                 </ul> 
                             </div> 
                                  <!--div class = "card">
@@ -406,72 +389,6 @@
                                   </ul>
                                   <div class="panel-footer text-right">
                                     <a href="app-student-courses.html" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated href="#"> View all</a-->
-                            <div class="col s12 l6">
-                                <ul id="projects-collection" class="collection">
-                                    <li class="collection-item avatar">
-                                        <i class="mdi-file-folder circle light-blue darken-2"></i>
-                                        <span class="collection-header">Quiz</span>
-                                        <p>Recent Performnce</p>
-                                        <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">HTML</p>
-                                                <p class="collections-content">Web Dev</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat cyan">Development</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">Mobile App for Social</p>
-                                                <p class="collections-content">iSocial App</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat grey darken-3">UI/UX</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-2"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">Website</p>
-                                                <p class="collections-content">MediTab</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat teal">Marketing</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-3"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">AdWord campaign</p>
-                                                <p class="collections-content">True Line</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat green">SEO</span>
-                                            </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-4"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                </ul>   
-                            </div>
                                       
                         </div>
                     </section>
@@ -1383,7 +1300,7 @@
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
-    $(window).load(function() {
+/*    $(window).load(function() {
         setTimeout(function() {
             Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
         }, 1500);
@@ -1393,7 +1310,7 @@
         setTimeout(function() {
             Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
         }, 15000);
-    });
+    });*/
 
 
     $(function() {

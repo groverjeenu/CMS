@@ -25,7 +25,6 @@ class Display_view extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model','courses');
-		$this->load->model('lessons_model','lessons');
 		$this->load->model('admindash_model');
 		$this->load->model('lessons_model');
 		$this->load->helper(array('url','language'));
@@ -34,10 +33,10 @@ class Display_view extends CI_Controller {
 
 		$this->lang->load('auth');
 
-		// if(!$this->ion_auth->logged_in())
-		// {
-		// 	redirect("login","refresh");
-		// }
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("display_view/login_view","refresh");
+		}
 
 	}
 
@@ -50,9 +49,6 @@ class Display_view extends CI_Controller {
 		
 	}
 
-	
-
-	
 	
 	
 
@@ -168,7 +164,7 @@ class Display_view extends CI_Controller {
 	{
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("login","refresh");
+			redirect("display_view/login_view","refresh");
 		}
 
 		$query = $this->courses->get_course($cid);
@@ -191,7 +187,7 @@ class Display_view extends CI_Controller {
 	{	
 		if(!$this->ion_auth->logged_in())
 		{
-			redirect("login","refresh");
+			redirect("display_view/login_view","refresh");
 		}
 
 		$usr= $this->ion_auth->user()->row();
@@ -205,15 +201,8 @@ class Display_view extends CI_Controller {
 	public function lectures($id)
 	{
 
-		$lec = $this->lessons_model->get($id);
-		echo $id;
+		$lec = $this->lessons->get($id);
 		$data['lec'] = $lec;
 		$this->load->view('courselectures', $data);
-	}
-	public function enroll($cid)
-	{
-		$this->courses->enroll($cid);
-		//$this->course($cid);
-		redirect("display_view/course/".$cid,"refresh");
 	}
 } 
