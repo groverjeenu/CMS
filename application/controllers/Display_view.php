@@ -34,10 +34,10 @@ class Display_view extends CI_Controller {
 
 		$this->lang->load('auth');
 
-		// if(!$this->ion_auth->logged_in())
-		// {
-		// 	redirect("login","refresh");
-		// }
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("login","refresh");
+		}
 
 	}
 
@@ -230,4 +230,12 @@ class Display_view extends CI_Controller {
 		$data['query'] = $query;
 		$this->load->view('assign_grades', $data);
 	}
-}
+
+	public function get_query_courses()
+	{
+		header('Content-Type: application/x-json; charset=utf-8');
+		$qry = $_POST['qry'];
+		echo json_encode(array("data"=>$this->courses->get_query_courses($qry), "base_url"=> base_url() ));
+		
+	}
+} 

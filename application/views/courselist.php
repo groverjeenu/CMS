@@ -10,6 +10,41 @@
   <meta name="author" content="">
   <title>Learning</title>
 
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <title>Dashboard</title>
+
+    <!-- Favicons-->
+    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <!-- For Windows Phone -->
+
+
+    <!-- CORE CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS for full screen (Layout-2)-->    
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS for full screen (Layout-2)-->    
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">    
+    <link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection">    
+
+
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+
   <!-- Vendor CSS BUNDLE
     Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
     TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -76,16 +111,113 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+ $(document).ready(function() {
+
+
+    $("#ajax_srch").on("keyup keydown keypress",function() {                
+
+          $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url()?>display_view/get_query_courses',
+        dataType: 'json',
+        data: { 'qry' : $('#ajax_srch').val()},
+        success: function(response) {
+            //alert(response['5']['names']);
+            $('#courses_section').empty();
+            $.each(response['data'],function(key,val)
+            {
+
+            $('#courses_section').append(
+
+                  '<div class="panel panel-default paper-shadow" data-z="0.5"><div class="panel-body"><div class="media media-clearfix-xs"><div class="media-left text-center"><div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10"><span class="img icon-block height-130 bg-default"></span><span class="overlay overlay-full padding-none icon-block bg-default"><span class="v-center"><i class="fa fa-github"></i></span></span><a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white"><span class="v-center"><span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span></span></a></div></div><div class="media-body">'+'<h4 class="text-headline margin-v-5-0"><a href="'+response['base_url']+'/display_view/course/'+key+'">'+ val['course_name']+'</a></h4>'+'<p class="small"><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span></p><p>'+val['description']+'</p>'+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body"><h4><a href="">'+val['names']+'</a><br/></h4>Instructor</div></div></div></div></div></div>'
+              );
+            });
+            
+        },
+        error: function(response) {
+            alert('Error Here');
+        }
+    });
+});
+});
+
+</script>
+
+
+<script type="text/javascript">
+ var sf = '<div class="panel panel-default paper-shadow" data-z="0.5">
+              <div class="panel-body">
+
+                <div class="media media-clearfix-xs">
+                  <div class="media-left text-center">
+                    <div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10">
+                      <span class="img icon-block height-130 bg-default"></span>
+                      <span class="overlay overlay-full padding-none icon-block bg-default">
+                        <span class="v-center">
+                            <i class="fa fa-github"></i>
+                        </span>
+                      </span>
+                      <a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white">
+                        <span class="v-center">
+                            <span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="text-headline margin-v-5-0"><a href="'+response['base_url']+'/display_view/course/'+key+'">'+ val['course_name']+' </a></h4>
+                    <p class="small">
+                      <span class="fa fa-fw fa-star text-yellow-800"></span>
+                      <span class="fa fa-fw fa-star text-yellow-800"></span>
+                      <span class="fa fa-fw fa-star text-yellow-800"></span>
+                      <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                      <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                    </p>
+              <p>'+val['description']+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body"><h4><a href="">'+val['names']+'</a><br/></h4>Instructor</div></div></div></div></div></div>';
+            </script>
 
 </head>
 
 <body>
-
+<header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="cyan">
+                <div class="nav-wrapper">                    
+                    
+                    <ul class="left">                                            
+                      <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li>
+                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="<?php echo base_url(); ?>public/img/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
+                    </ul>
+                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <i class="mdi-action-search"></i>
+                        <input id = "ajax_srch" type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize"/>
+                    </div>
+                    <ul class="right hide-on-med-and-down">                        
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
+                        </li>
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light"><i class="mdi-navigation-apps"></i></a>
+                        </li>                        
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light"><i class="mdi-social-notifications"></i></a>
+                        </li>                        
+                        <li><a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-communication-chat"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- end header nav-->
+</header>
   <!-- Wrapper required for sidebar transitions -->
-  <div class="st-container">
+  <!--div class="st-container"-->
 
+<?php $this->view('addons/sidebar.php');?>
     <!-- Fixed navbar -->
-    <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
+    <!--div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="#sidebar-menu" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i class="fa fa-ellipsis-v"></i></a>
@@ -142,10 +274,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </svg>
             </a>
           </div>
-        </div>
+        </div-->
+
+
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="main-nav">
+        <!--div class="collapse navbar-collapse" id="main-nav">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Forum <span class="caret"></span></a>
@@ -188,10 +322,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <li><a href="app-instructor-messages.html">Messages</a></li>
               </ul>
             </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-nav-bordered navbar-right">
+          </ul-->
+          <!--ul class="nav navbar-nav navbar-nav-bordered navbar-right"-->
             <!-- notifications -->
-            <li class="dropdown notifications updates">
+            <!--li class="dropdown notifications updates">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <span class="badge badge-primary">4</span>
@@ -242,10 +376,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   </div>
                 </li>
               </ul>
-            </li>
+            </li-->
             <!-- // END notifications -->
             <!-- User -->
-            <li class="dropdown">
+            <!--li class="dropdown">
               <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
                 <img src="images/people/110/guy-5.jpg" alt="Bill" class="img-circle" width="40" /> Bill <span class="caret"></span>
               </a>
@@ -256,14 +390,14 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </ul>
             </li>
           </ul>
-        </div>
+        </div-->
         <!-- /.navbar-collapse -->
 
-      </div>
-    </div>
+      <!--/div>
+    </div-->
 
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    <div class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
+    <!--div class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
       <div data-scrollable>
 
         <ul class="sidebar-menu sm-icons-right">
@@ -344,7 +478,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
           </div>
         </div>
       </div>
-    </div>
+    </div-->
 
 
 
@@ -352,18 +486,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
 
     <!-- content push wrapper -->
-    <div class="st-pusher" id="content">
-
-      <!-- sidebar effects INSIDE of st-pusher: -->
-      <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
-
-      <!-- this is the wrapper for the content -->
-      <div class="st-content">
-
-        <!-- extra div for emulating position:fixed of the menu -->
-        <div class="st-content-inner padding-none">
-
-          <div class="container-fluid">
+    <div class = "container">
+      <div class = "card-panel">
+    
+          <div s class="col s12">
 
             <div class="page-section">
               <div class="media v-middle">
@@ -372,17 +498,17 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                    <p class="text-subhead">Browse through thousands of lessons.</p>
 
                 </div>
-                <div class="media-right">
+                <!-- <div class="media-right">
                   <div class="width-100 text-right">
                     <div class="btn-group">
                       <a class="btn btn-white" href="app-directory-grid.html"><i class="fa fa-th"></i></a>
                       <a class="btn btn-grey-800" href="app-directory-list.html"><i class="fa fa-list"></i></a>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
-
+    <div id = "courses_section" class="col s12">
             <?php foreach($query as $key=> $i) { ?>
             <div class="panel panel-default paper-shadow" data-z="0.5">
               <div class="panel-body">
@@ -417,7 +543,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     <hr class="margin-v-8" />
                     <div class="media v-middle">
                       <div class="media-left">
-                        <img src="images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" />
+                        <img src="<?php echo base_url()?>public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" />
                       </div>
                       <div class="media-body">
                         <h4><a href=""><?php echo $i['names']; ?></a>
@@ -789,6 +915,116 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         app.js already includes main.js so this should be loaded
         ONLY when using the standalone modules; -->
   <!-- <script src="js/app/main.js"></script> -->
+
+    <?php $this->view('addons/footer.php'); ?>
+
+    <!-- ================================================
+    Scripts
+    ================================================ -->
+    
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery-1.11.2.min.js"></script>    
+    <!--materialize js-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/materialize.js"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    
+
+    <!-- chartist -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.js"></script>   
+
+    <!-- chartjs -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart-script.js"></script>
+
+    <!-- sparkline -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/sparkline-script.js"></script>
+    
+    <!-- google map api -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
+
+    <!--jvectormap-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/vectormap-script.js"></script>    
+
+    
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins.js"></script>
+    <!-- Toast Notification -->
+    <script type="text/javascript">
+    // Toast Notification
+    $(window).load(function() {
+        setTimeout(function() {
+            Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
+        }, 1500);
+        setTimeout(function() {
+            Materialize.toast('<span>You can swipe me too!</span>', 3000);
+        }, 5000);
+        setTimeout(function() {
+            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
+        }, 15000);
+    });
+
+
+    $(function() {
+      // Google Maps  
+      $('#map-canvas').addClass('loading');    
+      var latlng = new google.maps.LatLng(40.6700, -73.9400); // Set your Lat. Log. New York
+      var settings = {
+          zoom: 10,
+          center: latlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          scrollwheel: false,
+          draggable: true,
+          styles: [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}],
+          mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+          navigationControl: false,
+          navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},            
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"), settings);
+
+      google.maps.event.addDomListener(window, "resize", function() {
+          var center = map.getCenter();
+          google.maps.event.trigger(map, "resize");
+          map.setCenter(center);
+          $('#map-canvas').removeClass('loading');
+      });
+
+      var contentString =
+          '<div id="info-window">'+
+          '<p>18 McLuice Road, Vellyon Hills,<br /> New York, NY 10010<br /><a href="https://plus.google.com/102896039836143247306/about?gl=za&hl=en" target="_blank">Get directions</a></p>'+
+          '</div>';
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString
+      });
+
+      var companyImage = new google.maps.MarkerImage('http://demo.geekslabs.com/ashoka/images/map-marker.png',
+          new google.maps.Size(36,62),// Width and height of the marker
+          new google.maps.Point(0,0),
+          new google.maps.Point(18,52)// Position of the marker 
+      );
+
+      var companyPos = new google.maps.LatLng(40.6700, -73.9400);
+
+      var companyMarker = new google.maps.Marker({
+          position: companyPos,
+          map: map,
+          icon: companyImage,
+          title:"Shapeshift Interactive",
+          zIndex: 3});
+
+      google.maps.event.addListener(companyMarker, 'click', function() {
+          infowindow.open(map,companyMarker);
+          pageView('/#address');
+      });
+    });
+
+
+    
+    </script>
 
 </body>
 

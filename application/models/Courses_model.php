@@ -129,5 +129,28 @@ class Courses_model extends CI_Model
 	{
 		$id = intval($id);
 		$ass = $this->db->query("select * from assignment natural join submissions natural join users natural join courses where assignment_id=? ", $id)->row_array();
+		return $ass;
+	}
+
+	public function get_query_courses($qry)
+	{
+		$this->db->like('course_name', $qry, 'both');
+		 $courses = $query = $this->db->get('courses')->result_array();
+		 $d = array();
+		 foreach($courses as $c)
+		 {
+		 	$t = "";
+		 	$qq = $c['cid'];
+		 	$z = $this->db->query("select * from course_faculty ,users where course_faculty.course_id = ?  and course_faculty.faculty_id = users.id",$qq)->result_array(); 
+		 	foreach($z as $p)
+		 	{
+		 		$t = $t.$p['first_name']."\t".$p['last_name']."\t,";
+		 	}
+		 	$t = substr($t,0,-2);
+		 	$d[$c['cid']] = array("names" =>$t,"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key']);
+		 }
+		 
+		 //$this->db->query("select * from courses ,course_faculty ,users where courses.cid = course_faculty.course_id and course_faculty.faculty_id = users.id");
+		 return $d;
 	}
 }
