@@ -1,3 +1,4 @@
+
 <?php
 Class quiz_model extends CI_Model
 {

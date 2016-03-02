@@ -6,6 +6,7 @@ class Quiz extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('quiz/quiz_model', '', TRUE);
+		//$this->load->model('group_model', '', TRUE);
 		//$this->load->model('quiz/group_model', '', TRUE);
 		/*if (!$this->session->userdata('logged_in'))
 		{
