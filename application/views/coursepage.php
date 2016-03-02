@@ -628,7 +628,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       <div class="media v-middle">
                         
                         <div class="media-body media-right">
-                          <!--<a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>"> -->
+                          <a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>">
                           <label  id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
                             <i class="fa fa-flag fa-lg fa-pull-left"></i>
                           <span style="display:inline-block; width: 20px;"></span>
@@ -648,7 +648,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
                 <?php if($val_ca == 0){?>
 
-                <!--script type = "text/javascript" language = "javascript">
+                <script type = "text/javascript" language = "javascript">
                   $('document').ready(function()
                     {
                       $('#enroll_ca_btn').onclick(function(event)
@@ -657,14 +657,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         });
                     });
 
-                  </script-->
-                  <script>
-                    //function mybtn()
-                    //{
-                      //$('document').post("<?php echo site_url('display_view/enroll_ca/'.$');
-                      //$.load("<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>");
-
-                    //}
                   </script>
                   
                 <div  class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
@@ -672,7 +664,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       <div class="media v-middle">
                         
                         <div class="media-body media-right">
-                          <!--<a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>"> -->
+                          <a href = "<?php echo base_url();?>display_view/enroll_ca/<?php echo $query['cid'];?>">
                           <label  id = "enroll_ca_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" onclick="mybtn()" data-z="0.5" data-hover-z="1" data-animated="">
                             <i class="fa fa-flag fa-lg fa-pull-left"></i>
                           <span style="display:inline-block; width: 20px;"></span>

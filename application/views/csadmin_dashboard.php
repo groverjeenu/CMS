@@ -92,6 +92,8 @@
     <!-- END HEADER -->
 
     <?php $this->view('addons/header.php'); ?>
+    <?php $this->view('addons/sidebar.php'); ?>
+    
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
     <!-- START MAIN -->
@@ -100,7 +102,7 @@
         <div class="wrapper">
 
             <!-- START LEFT SIDEBAR NAV-->
-            <aside id="left-sidebar-nav">
+            <!--aside id="left-sidebar-nav">
                 <ul id="slide-out" class="side-nav leftside-navigation">
                     <li class="user-details cyan darken-2">
                         <div class="row">
@@ -310,7 +312,7 @@
                     </li>
                 </ul>
                 
-            </aside>
+            </aside-->
 
             <section id = "content">
                 <div class = "container">
@@ -328,15 +330,16 @@
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
-                                                <!--a href = "<?php echo base_url()."display_view/cadmindash/".$this->ion_auth->get_user_id()?>"-->
+                                                <a href = "<?php echo base_url()."display_view/assigngrades/".$key['assignment_id']?>"
                                                 <p class="collections-title"><?php echo $key['course_name'];?></p>
                                                 </a>
                                                 <p class="collections-content">Assignment <?php echo $key['assignment_id'];?></p>
                                             </div>
                                             <div class="col s3">
-                                                <span class="task-cat cyan"> 
+                                                <span class="task-cat cyan">
+                                                Submitted by: id  
                                                 <?php 
-
+                                                echo $key['user_id'];
                                                 //$names = $this->course->get_course($ccourse['course_id'])->row();
                                                 //$namess = (array)$names;
                                                // echo $all_courses[$ccourse['course_id']]['names']; ?>

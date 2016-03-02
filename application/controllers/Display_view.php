@@ -81,7 +81,10 @@ class Display_view extends CI_Controller {
 		}
 		else if($this->ion_auth->in_group('course-admin'))
 		{
-			$this->load->view('dashboard');
+			$id = $this->ion_auth->get_user_id();
+			$query = $this->courses->getcourse_name($id);
+			$data['query'] = $query;
+			$this->load->view('csadmin_dashboard', $data);
 		}
 		else
 		{
@@ -232,10 +235,15 @@ class Display_view extends CI_Controller {
 		redirect("display_view/course/".$cid,"refresh");
 	}
 
-	public function cadmindash($id)
+	public function cadmindash()
 	{
+		$id = $this->ion_auth->get_user_id();
 		$query = $this->courses->getcourse_name($id);
 		$data['query'] = $query;
+		//foreach ($query as $key ) {
+			# code...
+		//	echo $key['assignment_id'];
+		//}
 		$this->load->view('csadmin_dashboard', $data);
 	}
 
@@ -255,7 +263,7 @@ class Display_view extends CI_Controller {
 		$this->courses->update_submissions($data);
 		echo "Successfully Submitted";
 		$id1 = $this->ion_auth->get_user_id();
-		redirect('display_view/cadmindash/'.$id1, 'refresh');
+		//redirect('display_view/cadmindash/'.$id1, 'refresh');
 	       			
 	}
 	public function get_query_courses()
@@ -328,6 +336,13 @@ class Display_view extends CI_Controller {
 		redirect("display_view/course/".$cid,"refresh");
 	}
 
+	public function course_admin_add($id)
+	{
+		$this->courses->update_ca($id);
+		$this->ion_auth->remove_from_group(NULL, $id);
+		$this->ion_auth->add_to_group(4, $id);
+		redirect('display_view/facultydash', 'refresh');
+	}
 
 
 } 
