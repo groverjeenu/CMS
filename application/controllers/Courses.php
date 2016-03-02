@@ -77,7 +77,9 @@ class Courses extends CI_Controller
 			show_error("Access Forbidden",403);
 			exit(0);
 		}*/
-    	//$course = $this->courses->get_minimal($courseid);
+    	$course = $this->courses->get_minimal($courseid);
+    	if(isset($course['course_key']))
+    		$course['is_key'] = 'enabled';
     	$course['id'] = $courseid;
     	$course['name'] = "This is a course";
     	$course['description'] = "This is a desciption";

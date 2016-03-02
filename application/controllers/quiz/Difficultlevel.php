@@ -1,6 +1,6 @@
-<? php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Difficultylevel extends CI_Controller {
+class Difficultlevel extends CI_Controller {
 
 	//TODO:Make a base class fo rlogged in and for super
 	function __construct()
@@ -25,9 +25,8 @@ class Difficultylevel extends CI_Controller {
 		$data['result'] = $this->difficult_level->level_list($limit);
 		$data['title'] = "Level list";
 		$data['limit'] = $limit;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/level_list', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$data['resultstatus'] = false;
+		$this->load->view("quiz".'/level_list', $data);
 	}
 
 
@@ -39,9 +38,8 @@ class Difficultylevel extends CI_Controller {
 // add new level form
 	function add_new() {
 		$data['title'] = "Add Level";
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/add_level', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$data['resultstatus'] = false;
+		$this->load->view("quiz".'/add_level', $data);
 	}
 
 // insert group into database
@@ -57,9 +55,7 @@ class Difficultylevel extends CI_Controller {
 		{
 			$data['title'] = "Add Level";
 			$data['resultstatus'] = $this->difficult_level->insert_level();
-			$this->load->view($this->session->userdata('web_view').'/header', $data);
-			$this->load->view($this->session->userdata('web_view').'/add_level', $data);
-			$this->load->view($this->session->userdata('web_view').'/footer', $data);
+			$this->load->view("quiz".'/add_level', $data);
 		}
 	}
 
@@ -69,9 +65,7 @@ class Difficultylevel extends CI_Controller {
 		$data['level'] = $this->difficult_level->get_level($did);
 		$data['did'] = $did;
 		$data['resultstatus'] = $resultstatus;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/edit_level', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/edit_level', $data);
 	}
 
 

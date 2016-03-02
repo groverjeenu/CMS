@@ -88,58 +88,75 @@
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
                         <div class="container-fluid">
-                            <div class="page-section">
-                                <h1 class="text-display-1">Create New Course</h1>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div id="course" class="card">
-                                        <?php $attributes = array('class' => 'form');
-                                        echo form_open('courses/add');?>
-                                        <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
-                                        <div class="form-group form-control-material">
-                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo set_value('title');?>" />
-                                            <label for="title">Title</label>
-                                            <?php echo form_error('title');?>
+                            <div style="margin-top:10px;"></div>
+                            <a href="<?php echo site_url('quiz/difficultlevel/add_new');?>"   class="btn btn-success">Add new</a>
+                            <?php
+                            $logged_in=$this->session->userdata('logged_in');
+                            if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div>"; }
+                            ?>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <?php if($title){ echo $title; } ?>
                                         </div>
-                                        <div class="form-group form-control-material mytextarea" >
-                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
-                                            <label for="description">Description</label>
-                                            <?php echo form_error('description');?>
-                                        </div>
-                                        <div class="form-group form-control-material mytextarea">
-                                            <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php echo set_value('syllabus');?>"><?php echo set_value('syllabus');?></textarea>
-                                            <label for="syllabus">Syllabus</label>
-                                            <?php echo form_error('syllabus');?>
-                                        </div>
-                                        <h5>Enrollment Key</h5>
-                                        <div class="form-group">
-                                            <div class="btn-group btn-group-sm">
-                                                <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
-                                                <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
+                                        <!-- .panel-heading -->
+                                        <div class="panel-body">
+                                            <div class="panel-group" id="accordion">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        
+                                                        <tr><th>Id</th><th>Group</th><th>Action</th></tr><thead><tbody>
+                                                        <?php
+                                                        if($result==false){
+                                                        ?>
+                                                        <tr>
+                                                            <td colspan="5">
+                                                                No record foud!
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                        }else{
+                                                        foreach($result as $row){
+                                                        ?>
+                                                        <tr>
+                                                            <td data-th="Id"><?php echo $row->did;?></td>
+                                                            <td data-th="Level Name"><?php echo $row->level_name;?></td>
+                                                            <td data-th="Action"><a href="javascript: if(confirm('Do you really want to remove this level?')){ window.location='<?php echo site_url('quiz/difficultlevel/remove_level/'.$row->did );?>'; }"  class="btn btn-danger btn-xs">Remove</a>
+                                                            <a href="<?php echo site_url('quiz/difficultlevel/edit_level/'.$row->did );?>"  class="btn btn-info btn-xs">Edit</a></td>
+                                                        </tr>
+                                                        <?php
+                                                        }
+                                                        }
+                                                        ?>
+                                                        
+                                                        
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php echo set_value('is_key');?>"/>
-                                        <div class="form-group form-control-material">
-                                            <input type="text" <?php if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo set_value('course_key');?>" />
-                                            <?php echo form_error('course_key');?>
-                                        </div>
-                                        <div class="text-right">
-                                            <button type='submit' class="btn btn-primary">Save</button>
-                                        </div>
-                                    </form>
+                                        <!-- .panel-body -->
+                                    </div>
+                                    <!-- /.panel -->
                                 </div>
+                                <!-- /.col-lg-12 -->
                             </div>
+                            <?php
+                            if(($limit-($this->config->item('number_of_rows')))>=0){ $back=$limit-($this->config->item('number_of_rows')); }else{ $back='0'; } ?>
+                            <a href="<?php echo site_url('quiz/difficultlevel/index/'.$back);?>"     class="btn btn-primary">Back</a>
+                            &nbsp;&nbsp;
+                            <?php
+                            $next=$limit+($this->config->item('number_of_rows'));  ?>
+                            <a href="<?php echo site_url('quiz/difficultlevel/index/'.$next);?>"     class="btn btn-primary">Next</a>
+                            
                         </div>
                     </div>
+                    <!-- /st-content-inner -->
                 </div>
-                <!-- /st-content-inner -->
+                <!-- /st-content -->
             </div>
-            <!-- /st-content -->
         </div>
-        <!-- /st-pusher -->
         <?php $this->view('common/footer');?>
-    </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
     <script>
@@ -201,6 +218,10 @@
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
     <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
+    <script src="<?php echo base_url();?>public/js/basic.js"></script>
+    <script src="<?php echo base_url();?>editor/tiny_mce.js"></script>
+
+
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -223,15 +244,34 @@
     $(document).ready(function()
     {
     autosize($('textarea'));
-    $('#enable_toggle').click(function(){
-    $("#is_key").val('enabled');
-    $("#course_key").prop('disabled',false);
-    });
-    $('#disable_toggle').click(function(){
-    $("#is_key").val('disabled');
-    $("#course_key").prop('disabled',true);
-    });
-    });
+   
+	function removeqids(){
+		document.getElementById('removeqids').submit();
+	}
+	var selstatus="0";
+	function selectall(noq){
+
+		for(var i=1; i <= noq; i++)
+		{
+			var che="checkbox"+i;
+			if(selstatus=="0"){
+				document.getElementById(che).checked=true;
+			}else{
+				document.getElementById(che).checked=false;
+			}
+		}
+
+		if(selstatus=="0"){
+		selstatus="1";
+		}else if(selstatus=="1"){
+		selstatus="0";
+		}
+	}
+
+
+	function sortby(limi,cid){
+	window.location="<?php echo site_url();?>/quiz/qbank/index/0/"+cid;
+	}
     </script>
 </body>
 </html>
