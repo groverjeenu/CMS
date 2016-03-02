@@ -190,8 +190,11 @@ class Display_view extends CI_Controller {
 		$data['user']= (array)$usr;
 
 		$val = $this->courses->check_if_enrolled($cid);
+		$val_ca = $this->courses->is_ca($cid);
+		
 		$lectures = $this->courses->get_course_lectures($cid);
 		$data['val'] = $val;
+		$data['val_ca'] = $val_ca;
 		$data['lectures'] = $lectures;
 		$data['assignments'] = $this->courses->get_course_assignments($cid);
 
@@ -315,6 +318,16 @@ class Display_view extends CI_Controller {
 			redirect('login', 'refresh');
 		}
 	}
+
+
+	public function enroll_ca($cid)
+	{
+		$this->courses->enroll_ca($cid);
+		//$this->course($cid);
+		//$this->load->view('coursepage')
+		redirect("display_view/course/".$cid,"refresh");
+	}
+
 
 
 } 

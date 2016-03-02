@@ -181,4 +181,18 @@ class Courses_model extends CI_Model
 		return $query;
 	}
 
+	public function enroll_ca($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$this->db->query("insert into course_courseadmin(cid, courseadmin) values(?,?)",array($cid,$curr_user['user_id']));
+	}
+
+	public function is_ca($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$val = (array)$this->db->query("select count(*) as cnt  from course_courseadmin where cid = ? and courseadmin = ?",array($cid, $curr_user['user_id']) )->row();
+		
+		return $val['cnt'];
+	}
+
 }
