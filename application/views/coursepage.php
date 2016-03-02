@@ -20,7 +20,7 @@
     <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
     <!-- For Windows Phone -->
 
-    <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
+     <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
  
     <!-- CORE CSS-->    
     <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -367,63 +367,65 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <div class="media-body"-->
                 <div class="container">
                   <div class="card-panel">
-                <div class="page-section">
-                  <div class="media">
-                    <div class="media-left">
-                      <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>
-                    </div>
-                    <div class="media-body">
-                      <h1 class="text-display-1 margin-none"><?php echo $query['course_name']; ?></h1>
-                      <p class="small margin-none">
-                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                        <span class="fa fa-fw fa-star text-yellow-800"></span>
-                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                        <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="page-section">
-                  <div class="width-350 width-300-md width-100pc-xs paragraph-inline">
-                    <div class="embed-responsive embed-responsive-16by9">
-                      <iframe class="embed-responsive-item" src="//www.youtube-nocookie.com/embed/Ycv5fNd4AeM?rel=0"></iframe>
-                    </div>
-                  </div>
-                  <p>
-                    <?php echo $query['description'] ;?>
-                  </p> 
-                  <p></p>
-                  <p></p>
-                  <br/>
-                  <!--
-                  <p class="margin-none">
-                    <span class="label bg-gray-dark">New</span>
-                    <span class="label label-grey-200">WordPress</span>
-                    <span class="label label-grey-200">Beginner</span>
-                  </p>
-                -->
-                </div>
-                <br/><br/><br/>
-                <br/><br/>
-                <div class="page-section">
-                  <h2 class="text-headline margin-none">What you'll learn</h2>
-                  <p class="text-subhead text-light">A brief description.</p>
-                  <ul class="list-group relative paper-shadow margin-none" data-hover-z="0.5" data-animated>
-                    <li class="list-group-item">
-                      <div class="media v-middle">
-                        <div class="media-left">
-                          <div class="icon-block s30 bg-red-300 text-white img-circle">
-                            <i class="fa fa-star"></i>
+                    <div class = "row">
+                      <div class = "col s8">
+                      <div class="page-section">
+                        <div class="media">
+                          <div class="media-left">
+                            <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>
+                          </div>
+                          <div class="media-body">
+                            <h1 class="text-display-1 margin-none"><?php echo $query['course_name']; ?></h1>
+                            <p class="small margin-none">
+                              <span class="fa fa-fw fa-star text-yellow-800"></span>
+                              <span class="fa fa-fw fa-star text-yellow-800"></span>
+                              <span class="fa fa-fw fa-star text-yellow-800"></span>
+                              <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                              <span class="fa fa-fw fa-star-o text-yellow-800"></span>
+                            </p>
                           </div>
                         </div>
-                        <div class="media-body text-body-2">
-                          <?php echo $query['syllabus']; ?>
-                        </div>
                       </div>
-                      
-                    </li>
+
+                          <div class="page-section">
+                            <div class="width-350 width-300-md width-100pc-xs paragraph-inline">
+                              <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="//www.youtube-nocookie.com/embed/Ycv5fNd4AeM?rel=0"></iframe>
+                              </div>
+                            </div>
+                            <p>
+                              <?php echo $query['description'] ;?>
+                            </p> 
+                            <p></p>
+                            <p></p>
+                            <br/>
+                            <!--
+                            <p class="margin-none">
+                              <span class="label bg-gray-dark">New</span>
+                              <span class="label label-grey-200">WordPress</span>
+                              <span class="label label-grey-200">Beginner</span>
+                            </p>
+                          -->
+                          </div>
+                          <br/><br/><br/>
+                          <br/><br/>
+                          <div class="page-section">
+                            <h2 class="text-headline margin-none">What you'll learn</h2>
+                            <p class="text-subhead text-light">A brief description.</p>
+                            <ul class="list-group relative paper-shadow margin-none" data-hover-z="0.5" data-animated>
+                              <li class="list-group-item">
+                                <div class="media v-middle">
+                                  <div class="media-left">
+                                    <div class="icon-block s30 bg-red-300 text-white img-circle">
+                                      <i class="fa fa-star"></i>
+                                    </div>
+                                  </div>
+                                  <div class="media-body text-body-2">
+                                    <?php echo $query['syllabus']; ?>
+                                  </div>
+                                </div>
+                                
+                              </li>
                     <!--
                     <li class="list-group-item paper-shadow">
                       <div class="media v-middle">
@@ -474,8 +476,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       </div>
                     </li>
                   -->
-                  </ul>
-                </div>
+                        </ul>
+                      </div>
 
 
                 <?php if($val != 0) { ?>
@@ -597,11 +599,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       </div>
                     </div>
                   </div>
-                </div>
-              -->
-
+                </div-->
               </div>
-              <div class="media-right">
+              <div class="pull-right">
 
                 <div class="page-section width-270 width-auto-xs">
 
@@ -723,9 +723,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           <a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>"> 
                           <label  id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
                             <i class="fa fa-flag fa-lg fa-pull-left"></i>
-                          <span style="display:inline-block; width: 20px;"></span>
+                          <span style="display:inline-block; width: 10px;"></span>
                       Enroll for Course
-                      <span style="display:inline-block; width: 20px;"></span>
+                      <span style="display:inline-block; width: 10px;"></span>
                       </label>
                     </a> 
                     
@@ -758,9 +758,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           <a href = "<?php echo base_url();?>display_view/enroll_ca/<?php echo $query['cid'];?>">
                           <label  id = "enroll_ca_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" onclick="mybtn()" data-z="0.5" data-hover-z="1" data-animated="">
                             <i class="fa fa-flag fa-lg fa-pull-left"></i>
-                          <span style="display:inline-block; width: 20px;"></span>
+                          <span style="display:inline-block; width: 1px;"></span>
                       Enroll for Course Admin
-                      <span style="display:inline-block; width: 20px;"></span>
+                      <span style="display:inline-block; width: 0px;"></span>
                       </label>
                     <!-- </a> -->
                     
