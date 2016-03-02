@@ -223,6 +223,12 @@ class Display_view extends CI_Controller {
 	{
 
 		$lec = $this->lessons_model->get($id);
+		if($this->courses->check_if_enrolled($lec['course_id']) == 0 )
+		{
+			$this->session->set_flashdata('item', 'You are not enrolled for the course');
+			redirect('display_view/dashboard',"refresh");
+		}
+
 		echo $id;
 		$data['lec'] = $lec;
 		$this->load->view('courselectures', $data);
