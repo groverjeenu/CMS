@@ -61,7 +61,17 @@ class Display_view extends CI_Controller {
 	{
 		if($this->ion_auth->in_group('faculty'))
 		{
-			$this->load->view('fac');
+			//$this->load->view('fac');
+			$id = $this->ion_auth->get_user_id();
+			$courses = $this->courses->get_fac_courses($id);
+			$data['courses'] = $courses;
+			$ta = $this->courses->get_pending_approvals($id);
+			$data['ta'] = $ta;
+			//foreach ($courses as $key) {
+				# code...
+			//	echo $key['course_name'];
+			//}
+			$this->load->view('faculty_dashboard', $data);
 		}
 		else if($this->ion_auth->in_group('admin'))
 		{
@@ -283,6 +293,27 @@ class Display_view extends CI_Controller {
 
 
 
+	}
+
+	public function facultydash()
+	{
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$id = $this->ion_auth->get_user_id();
+			$courses = $this->courses->get_fac_courses($id);
+			$data['courses'] = $courses;
+			$ta = $this->courses->get_pending_approvals($id);
+			$data['ta'] = $ta;
+			//foreach ($courses as $key) {
+				# code...
+			//	echo $key['course_name'];
+			//}
+			$this->load->view('faculty_dashboard', $data);
+		}
+		else
+		{
+			redirect('login', 'refresh');
+		}
 	}
 
 

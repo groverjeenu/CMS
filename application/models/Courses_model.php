@@ -167,4 +167,18 @@ class Courses_model extends CI_Model
 		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, is_graded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
 	}
 
+	public function get_fac_courses($id)
+	{
+		$id = intval($id);
+		$query = $this->db->query("select * from courses, course_faculty where cid=course_id and faculty_id=?", $id)->result_array();
+		return $query;
+	}
+
+	public function get_pending_approvals($id)
+	{
+		$id = intval($id);
+		$query = $this->db->query("select * from (select * from courses natural join course_courseadmin) as s, users, course_faculty where users.id = s.courseadmin and s.is_approved = 0 and s.cid = course_faculty.course_id and course_faculty.faculty_id=?", $id)->result_array();
+		return $query;
+	}
+
 }
