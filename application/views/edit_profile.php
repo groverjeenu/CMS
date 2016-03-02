@@ -313,7 +313,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
       <!--/div>
     </div-->
-    <aside id="left-sidebar-nav">
+    <!--aside id="left-sidebar-nav">
                 <ul id="slide-out" class="side-nav leftside-navigation" style="left: 0px; height: 761px;">
                     <li class="user-details cyan darken-2">
                         <div class="row">
@@ -478,7 +478,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li-->
                             
                             <!--li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Charts</a>
                                 <div class="collapsible-body" style="">
@@ -498,8 +498,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                     </ul>
                                 </div>
                             </li-->
-                        </ul>
-                    </li>
+                        <!--/ul>
+                    </li-->
                     <!--li class="li-hover"><div class="divider"></div></li>
                     <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
                     <li><a href="css-grid.html"><i class="mdi-image-grid-on"></i> Grid</a>
@@ -521,9 +521,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                             </div>
                         </div>
                     </li-->
-                </ul>
+                <!--/ul>
                 
-            </aside>
+            </aside-->
 
 
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
@@ -612,7 +612,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         echo form_open_multipart('auth/edit_user',$attributes);
                     ?>
 <!--                     <form class="form-horizontal" action = "<?php  base_url(); ?>auth/edit_user" enctype="multipart/form-data" method = "post">
- -->                    
+ -->        
+     <div id="main">
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+            <?php $this->view('addons/sidebar.php'); ?>
+            
                     <div class = "row">
                       <div class="col s12 form-group">
 
@@ -729,9 +734,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- /st-pusher -->
 
     <!-- Footer -->
-    <footer class="footer">
-      <strong>Learning</strong> v1.1.0 &copy; Copyright 2015
-    </footer>
     <!-- // Footer -->
 
   </div>
