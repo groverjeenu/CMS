@@ -1,5 +1,4 @@
-<? php
-Class quiz_model extends CI_Model
+<?php Class Quiz_model extends CI_Model
 {
 
 	function quiz_list($limit, $gid = '')

@@ -107,6 +107,11 @@ class Courses extends CI_Controller
             return TRUE;
         }
     }
+
+    public function view_quiz()
+    {
+    	$this->load->view('quiz_1/quiz_access');
+    }
 }
 /* End of file '/Courses.php' */
 /* Location: ./application/controllers//Courses.php */

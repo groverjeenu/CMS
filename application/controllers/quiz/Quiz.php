@@ -1,16 +1,16 @@
-<? php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Quiz extends CI_Controller {
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('quiz_model', '', TRUE);
-		$this->load->model('group_model', '', TRUE);
-		if (!$this->session->userdata('logged_in'))
+		$this->load->model('quiz/quiz_model', '', TRUE);
+		//$this->load->model('group_model', '', TRUE);
+		/*if (!$this->session->userdata('logged_in'))
 		{
 			redirect('login');
-		}
+		}*/
 	}
 
 	function index($limit = '0')
@@ -223,9 +223,9 @@ class Quiz extends CI_Controller {
 			$data['quiz_data'] = $this->quiz_model->get_quiz_data($id);
 
 			// load quiz access page
-			$this->load->view($this->session->userdata('web_view').'/header', $data);
-			$this->load->view($this->session->userdata('web_view').'/quiz_access', $data);
-			$this->load->view($this->session->userdata('web_view').'/footer', $data);
+			$this->load->view("quiz".'/header', $data);
+			$this->load->view("quiz".'/quiz_access', $data);
+			$this->load->view($thiss->session->userdata('web_view').'/footer', $data);
 
 
 		} else {
