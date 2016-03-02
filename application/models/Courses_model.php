@@ -127,14 +127,15 @@ class Courses_model extends CI_Model
 	public function getcourse_name($id)
 	{
 		$id = intval($id);
-		$course = $this->db->query("select * from course_courseadmin natural join courses natural join assignment natural join submissions where isgraded=0 and courseadmin=?",$id)->result_array();
+		//echo $id;
+		$course = $this->db->query("select * from course_courseadmin,courses, assignment, submissions where course_courseadmin.cid=courses.cid and courses.cid=assignment.cid and assignment.assignment_id=submissions.assignment_id and isgraded=0 and courseadmin=?",$id)->result_array();
 		return $course;
 	}
 
 	public function getsubmissions($id)
 	{
 		$id = intval($id);
-		$ass = $this->db->query("select * from assignment natural join submissions natural join users natural join courses where assignment_id=? ", $id)->row_array();
+		$ass = $this->db->query("select * from assignment, submissions, users, courses where assignment.cid=courses.cid and submissions.assignment_id=assignment.assignment_id and submissions.user_id=users.id and assignment.assignment_id=? ", $id)->row_array();
 		return $ass;
 	}
 
@@ -160,8 +161,65 @@ class Courses_model extends CI_Model
 		 return $d;
 	}
 
+
+	public function get_course_assignments($cid)
+	{
+		return $this->db->query("select * from assignment where cid  = ? order by start_date",$cid)->result_array();
+	}
+
+	
+
 	public function update_submissions($data)
 	{
-		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, is_graded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
+		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, isgraded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
 	}
+
+
+	public function get_course_grades($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$uid = $curr_user['user_id'];
+		return $this->db->query("select * from enrollments,assignment,submissions where enrollments.course_id = assignment.cid and assignment.assignment_id = submissions.assignment_id and submissions.user_id = ? and enrollments.student_id = ? and isgraded = 1 and assignment.cid = ?",array($uid,$uid,$cid))->result_array();
+	}
+
+	public function get_total_weight($cid)
+	{
+		$wt = (array)$this->db->query("select sum(weightage) as wt from assignment where cid = ?",$cid)->row();
+		return $wt['wt'];
+	}
+	public function get_fac_courses($id)
+	{
+		$id = intval($id);
+		$query = $this->db->query("select * from courses, course_faculty where cid=course_id and faculty_id=?", $id)->result_array();
+		return $query;
+	}
+
+	public function get_pending_approvals($id)
+	{
+		$id = intval($id);
+		$query = $this->db->query("select * from courses, course_courseadmin, users, course_faculty where courses.cid =course_courseadmin.cid and courses.cid =course_faculty.course_id and users.id = course_courseadmin.courseadmin and course_courseadmin.is_approved = 0 and course_courseadmin.cid = course_faculty.course_id and course_faculty.faculty_id=?", $id)->result_array();
+		return $query;
+	}
+
+	public function enroll_ca($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$this->db->query("insert into course_courseadmin(cid, courseadmin) values(?,?)",array($cid,$curr_user['user_id']));
+	}
+
+	public function is_ca($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$val = (array)$this->db->query("select count(*) as cnt  from course_courseadmin where cid = ? and courseadmin = ?",array($cid, $curr_user['user_id']) )->row();
+		
+		return $val['cnt'];
+
+	}
+
+	public function update_ca($id)
+	{
+		$id = intval($id);
+		$this->db->query("update course_courseadmin set is_approved=1 where courseadmin=?", $id);
+	}
+
 }

@@ -3,7 +3,8 @@
                     <li class="user-details cyan darken-2">
                         <div class="row">
                             <div class="col col s4 m4 l4">
-                                <img src="<?php echo base_url(); ?>public/img/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                                <?php $user = (array)$this->ion_auth->user()->row();?>
+                                <img src="<?php echo base_url();?>contents/users/<?php echo $user['image'];?>" alt="" class="circle responsive-img valign profile-image">
                             </div>
                             <div class="col col s8 m8 l8">
                                 <ul id="profile-dropdown" class="dropdown-content">
@@ -16,21 +17,22 @@
                                     <li class="divider"></li>
                                     <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
                                     </li>
-                                    <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                                    <li><a href="<?php echo base_url(); ?>auth/logout"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
                                     </li>
                                 </ul>
-                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                                <p class="user-roal">Administrator</p>
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?php echo $user['email'];?><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                                <!--?php $gr = $this->ion_auth->get_user_groups($user['id'])->row(); ?>
+                                <p class="user-roal"><?php echo $gr['description']?></p-->
                             </div>
                         </div>
                     </li>
                     <li class="bold active"><a href="index.html" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
                     </li>
-                    <li class="bold"><a href="app-email.html" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Mailbox <span class="new badge">4</span></a>
+                    <li class="bold"><a href="app-email.html" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> My courses <span class="new badge">4</span></a>
                     </li>
-                    <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Calender</a>
+                    <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Assignments</a>
                     </li>
-                    <li class="no-padding">
+                    <!--li class="no-padding">
                         <ul class="collapsible collapsible-accordion">
                             <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> CSS</a>
                                 <div class="collapsible-body">
@@ -184,8 +186,8 @@
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <li class="li-hover"><div class="divider"></div></li>
+                    </li-->
+                    <!--li class="li-hover"><div class="divider"></div></li>
                     <li class="li-hover"><p class="ultra-small margin more-text">MORE</p></li>
                     <li><a href="css-grid.html"><i class="mdi-image-grid-on"></i> Grid</a>
                     </li>
@@ -205,7 +207,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li-->
                 </ul>
                 
             </aside>

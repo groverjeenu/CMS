@@ -93,9 +93,10 @@
   <div id="main">
     <!-- START WRAPPER -->
     <div class="wrapper">
-
+    <?php $this->view('addons/sidebar.php'); ?>
+    
       <!-- START LEFT SIDEBAR NAV-->
-      <aside id="left-sidebar-nav">
+      <!--aside id="left-sidebar-nav">
         <ul id="slide-out" class="side-nav leftside-navigation">
             <li class="user-details cyan darken-2">
                 <div class="row">
@@ -305,7 +306,7 @@
             </li>
         </ul>
         
-      </aside>
+      </aside-->
       <!-- END LEFT SIDEBAR NAV-->
 
       <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -593,7 +594,7 @@
                 <div class="row">
                     <div class="col s6">
                     </div>
-                  <form class="col s12" method="post" action="<?php echo base_url()?>display_view/submit_grades/<?php echo $query[' assignment_id']?>">
+                  <form class="col s12" method="post" action="<?php echo base_url()?>display_view/submit_grades/<?php echo $query['assignment_id']?>">
                     <div class="row">
                         <div class=" col s6">
                           <label for="first_name"><b><font size="5">Course Name</font></b></label>
@@ -628,8 +629,9 @@
                           <label for="first_name"><b><font size="5">Download Assignment</font></b></label>
                         </div>
                         <div class="col s6">
-                          <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
+                          <button class="btn cyan waves-effect waves-light right" type="button" name="action">
                             <a href="<?php echo base_url()?>contents/submissions/<?php echo $query['file_name']?>">Download</a></button>
+                            <!--?php redirect('assigngrades/'.$query['assignment_id'], 'refresh')?-->
                         </div>
                         
                     </div>
@@ -638,7 +640,7 @@
                         <div class="input-field col s6">                          
                          <span>Grade</span>
                          <p class="range-field">
-                          <input type="range" id="grade" min="0" max="100" />
+                          <input type="range" for="grade" id="grade" min="0" max="100" />
                         </p>
                       </div>
                     </div>
@@ -647,7 +649,7 @@
                         <div class="input-field col s6">                          
                          <span>Penalty</span>
                          <p class="range-field">
-                          <input type="range" id="penalty" min="0" max="100" />
+                          <input type="range" for="penalty" id="penalty" min="0" max="100" />
                         </p>
                       </div>
                     </div>

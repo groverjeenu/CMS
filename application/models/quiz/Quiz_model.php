@@ -1,8 +1,7 @@
-<?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class Quiz_model extends CI_Model
+<? php
+Class quiz_model extends CI_Model
 {
+
 	function quiz_list($limit, $gid = '')
 	{
 		$institute_id = $this->ion_auth->get_user_id();
@@ -998,6 +997,10 @@ class Quiz_model extends CI_Model
 
 			return "Unable to submit quiz";
 		}
-	}
-}
 
+
+	}
+
+
+}
+?>

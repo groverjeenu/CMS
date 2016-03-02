@@ -27,6 +27,7 @@ class Display_view extends CI_Controller {
 		$this->load->model('courses_model','courses');
 		$this->load->model('lessons_model','lessons');
 		$this->load->model('admindash_model');
+		$this->load->model('assignments_model','assignments');
 		$this->load->model('lessons_model');
 		$this->load->helper(array('url','language'));
 
@@ -60,7 +61,17 @@ class Display_view extends CI_Controller {
 	{
 		if($this->ion_auth->in_group('faculty'))
 		{
-			$this->load->view('fac');
+			//$this->load->view('fac');
+			$id = $this->ion_auth->get_user_id();
+			$courses = $this->courses->get_fac_courses($id);
+			$data['courses'] = $courses;
+			$ta = $this->courses->get_pending_approvals($id);
+			$data['ta'] = $ta;
+			//foreach ($courses as $key) {
+				# code...
+			//	echo $key['course_name'];
+			//}
+			$this->load->view('faculty_dashboard', $data);
 		}
 		else if($this->ion_auth->in_group('admin'))
 		{
@@ -70,7 +81,10 @@ class Display_view extends CI_Controller {
 		}
 		else if($this->ion_auth->in_group('course-admin'))
 		{
-			$this->load->view('dashboard');
+			$id = $this->ion_auth->get_user_id();
+			$query = $this->courses->getcourse_name($id);
+			$data['query'] = $query;
+			$this->load->view('csadmin_dashboard', $data);
 		}
 		else
 		{
@@ -179,9 +193,15 @@ class Display_view extends CI_Controller {
 		$data['user']= (array)$usr;
 
 		$val = $this->courses->check_if_enrolled($cid);
+		$val_ca = $this->courses->is_ca($cid);
+		
 		$lectures = $this->courses->get_course_lectures($cid);
 		$data['val'] = $val;
+		$data['val_ca'] = $val_ca;
 		$data['lectures'] = $lectures;
+		$data['assignments'] = $this->courses->get_course_assignments($cid);
+		$data['grades_course']=$this->courses->get_course_grades($cid);
+		$data['wt'] = $this->courses->get_total_weight($cid);
 
 		$this->load->view('coursepage',$data);
 
@@ -217,10 +237,15 @@ class Display_view extends CI_Controller {
 		redirect("display_view/course/".$cid,"refresh");
 	}
 
-	public function cadmindash($id)
+	public function cadmindash()
 	{
+		$id = $this->ion_auth->get_user_id();
 		$query = $this->courses->getcourse_name($id);
 		$data['query'] = $query;
+		//foreach ($query as $key ) {
+			# code...
+		//	echo $key['assignment_id'];
+		//}
 		$this->load->view('csadmin_dashboard', $data);
 	}
 
@@ -240,7 +265,7 @@ class Display_view extends CI_Controller {
 		$this->courses->update_submissions($data);
 		echo "Successfully Submitted";
 		$id1 = $this->ion_auth->get_user_id();
-		redirect('display_view/cadmindash/'.$id1, 'refresh');
+		//redirect('display_view/cadmindash/'.$id1, 'refresh');
 	       			
 	}
 	public function get_query_courses()
@@ -248,6 +273,77 @@ class Display_view extends CI_Controller {
 		header('Content-Type: application/x-json; charset=utf-8');
 		$qry = $_POST['qry'];
 		echo json_encode(array("data"=>$this->courses->get_query_courses($qry), "base_url"=> base_url() ));
+
+
+	}
+
+	public function assignments($aid)
+	{
+		$ass = $this->assignments->get($aid);
+		if($this->courses->check_if_enrolled($ass['cid']) == 0 )
+		{
+			redirect('display_view/'.$ass['cid'],"refresh");
+		}
+		$cid =$ass['cid'];
+		$query = $this->courses->get_course($cid);
+		$data['query'] = $query;
+			
+
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+		$val = $this->courses->check_if_enrolled($cid);
+		$lectures = $this->courses->get_course_lectures($cid);
+		$data['val'] = $val;
+		$data['lectures'] = $lectures;
+		$data['assignments'] = $this->courses->get_course_assignments($cid);
+		$data['ass'] = $ass;
+		$data['error'] = 0;
+		$data['sub'] = $this->assignments->get_user_submission($aid,$data['user']['id']); 
+		$this->load->view('assignment',$data);
+
+
+
+
+
+	}
+
+	public function facultydash()
+	{
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$id = $this->ion_auth->get_user_id();
+			$courses = $this->courses->get_fac_courses($id);
+			$data['courses'] = $courses;
+			$ta = $this->courses->get_pending_approvals($id);
+			$data['ta'] = $ta;
+			//foreach ($courses as $key) {
+				# code...
+			//	echo $key['course_name'];
+			//}
+			$this->load->view('faculty_dashboard', $data);
+		}
+		else
+		{
+			redirect('login', 'refresh');
+		}
+	}
+
+
+	public function enroll_ca($cid)
+	{
+		$this->courses->enroll_ca($cid);
+		//$this->course($cid);
+		//$this->load->view('coursepage')
+		redirect("display_view/course/".$cid,"refresh");
+	}
+
+	public function course_admin_add($id)
+	{
+		$this->courses->update_ca($id);
+		$this->ion_auth->remove_from_group(NULL, $id);
+		$this->ion_auth->add_to_group(4, $id);
+		redirect('display_view/facultydash', 'refresh');
 	}
 
 
