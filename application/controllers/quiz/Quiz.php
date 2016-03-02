@@ -19,6 +19,7 @@ class Quiz extends CI_Controller {
 		$data['title'] = "Quiz/Test";
 		$data['limit'] = $limit;
 		$data['resultstatus'] = false;
+		$data['result'] = $this->quiz_model->quiz_list($limit);
 		if(!isset($data['result']))  $data['result'] = false;
 		$this->load->view("quiz".'/quiz_list', $data);
 	}
@@ -81,6 +82,7 @@ class Quiz extends CI_Controller {
 	{
 		$data['result'] = $this->quiz_model->quiz_detail($id);
 		$data['title'] = $data['result']->quiz_name;
+		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;
 		$this->load->view("quiz".'/quiz_detail', $data);
 	}
 

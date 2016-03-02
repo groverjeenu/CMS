@@ -12,7 +12,7 @@ class Courses_model extends CI_Model
 	public function add($details)
 	{
 		$data = array(
-				'course_name' => $details['course_name'],
+				'course_name' => $details['title'],
 				'description' => $details['description'],
 				'syllabus' => $details['syllabus'],
 			);
@@ -20,7 +20,7 @@ class Courses_model extends CI_Model
 		{
 			$data['course_key'] = $details['course_key'];
 		}
-		$this->db->insert('courses',$data,false);
+		$this->db->insert('courses',$data);
 		$id = $this->db->insert_id();
 		$data['id'] = $id;
 		$this->add_faculty_to_course($id,$this->ion_auth->get_user_id());
@@ -42,7 +42,7 @@ class Courses_model extends CI_Model
 
 	public function get_minimal($cid)
 	{
-		return $this->db->get_where('courses',array("course_id" => $cid))->result_array();
+		return $this->db->get_where('courses',array("cid" => $cid))->result_array();
 
 	}
 

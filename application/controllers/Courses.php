@@ -80,11 +80,12 @@ class Courses extends CI_Controller
     	$course = $this->courses->get_minimal($courseid);
     	if(isset($course['course_key']))
     		$course['is_key'] = 'enabled';
-    	$course['id'] = $courseid;
+    	$data['course'] = $course;
+     	/*$course['id'] = $courseid;
     	$course['name'] = "This is a course";
     	$course['description'] = "This is a desciption";
-    	$course['syllabus'] = "This is a syllabus";
-    	$this->load->view('courses/edit_course',array('course'=>$course));
+    	$course['syllabus'] = "This is a syllabus";*/
+    	$this->load->view('courses/edit_course',$data);
     }
 
     public function course_key_check($str,$is_key)
