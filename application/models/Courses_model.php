@@ -40,6 +40,12 @@ class Courses_model extends CI_Model
 
 	}
 
+	public function get_minimal($cid)
+	{
+		return $this->db->get_where('courses',array("course_id" => $cid))->result_array();
+
+	}
+
 	public function get_all_courses()
 	{
 		 $courses = $this->db->query("select * from courses")->result_array();
