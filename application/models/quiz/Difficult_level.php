@@ -8,7 +8,7 @@ class Difficult_level extends CI_Model
     function level_dropdown()
     {
         //$nor=$this->config->item('number_of_rows');
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();
         $query = $this -> db -> query("select * from difficult_level where institute_id = '$institute_id'");
 
         if ($query -> num_rows() >= 1)
@@ -24,7 +24,7 @@ class Difficult_level extends CI_Model
 // get all available level to show a group list in admin side
     function level_list($limit)
     {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();
 
         $this -> db -> select('did, level_name');
         $this -> db -> from('difficult_level');
@@ -46,7 +46,7 @@ class Difficult_level extends CI_Model
 
     function remove_level($did)
     {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();
         $this->db->where('institute_id', $institute_id);
         if ($this->db->delete('difficult_level', array('did' => $did)) )
         {
@@ -60,7 +60,7 @@ class Difficult_level extends CI_Model
 
     // insert level
     function insert_level() {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();
         $insert_level = array(
                             'level_name' => $this->input->post('levelname'),
                             'institute_id' => $institute_id
@@ -75,7 +75,7 @@ class Difficult_level extends CI_Model
 
     // get particular level detail
     function get_level($did) {
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();
         $this->db->where('institute_id', $institute_id);
         $this->db->where('did', $did);
         $query = $this->db->get('difficult_level');
@@ -88,7 +88,7 @@ class Difficult_level extends CI_Model
         $level_detail = array(
                             'level_name' => $levelname,
                         );
-        $institute_id = $this->session->userdata('institute_id');
+        $institute_id = $this->ion_auth->get_user_id();
         $this->db->where('institute_id', $institute_id);
         $this->db->where('did', $did);
         $this->db->update('difficult_level', $level_detail);
