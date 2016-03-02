@@ -122,7 +122,7 @@
                                             <?php echo form_error('syllabus');?>
                                         </div>
                                         <h5>Enrollment Key</h5>
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
                                                 <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
@@ -139,11 +139,11 @@
                                     </form>
                                 </div>
                                 <div id="meta" class="tab-pane">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="course/edit">
                                         <div class="form-group">
                                             <label for="select" class="col-sm-3 control-label">Stream</label>
                                             <div class="col-sm-9 col-md-9">
-                                                <select id="stream" name='stream' class="form-control selectpicker" multiple data-style="btn-white" data-live-search="true" data-size="5">
+                                                <select id="stream" name='stream[]' class="form-control selectpicker" multiple data-style="btn-white" data-live-search="true" data-size="5">
                                                     <?php
                                                     $streams = $this->courses->all_streams();
                                                     foreach ($streams as $stream) {
@@ -153,22 +153,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="duration" class="col-sm-3 control-label">Course Duration</label>
+                                            <label for="duration" class="col-sm-3 control-label">Course Duration(in Days)</label>
                                             <div class="col-sm-4 col-md-2">
-                                                <input type="text" class="form-control" placeholder="No. of Days" value="10">
+                                                <input type="text" name="days" class="form-control" placeholder="No. of Days" value="<?php if(isset($course['days']) echo $course['days'] else echo set_value('days'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="start" class="col-sm-3 control-label">Start Date</label>
                                             <div class="col-sm-9 col-md-4">
-                                                <input name='start' id="start" type="text" class="form-control datepicker">
+                                                <input name='start' id="start" type="text" class="form-control datepicker" value="<?php if(isset($course['start']) echo $course['start'] else echo set_value('start'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="end" class="col-sm-3 control-label">End Date</label>
                                             <div class="col-sm-9 col-md-4">
-                                                <input name='end' id="end" type="text" class="form-control datepicker">
+                                                <input name='end' id="end" type="text" class="form-control datepicker" value="<?php if(isset($course['end']) echo $course['end'] else echo set_value('end'); ?>">
                                             </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type='submit' class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
                                 </div>

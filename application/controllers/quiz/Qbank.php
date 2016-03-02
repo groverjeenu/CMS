@@ -29,7 +29,7 @@ class Qbank extends CI_Controller {
 		$data['title'] = "Question Bank";
 		$data['limit'] = $limit;
 		$data['fcid'] = $cid;
-
+		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;
 		//$this->load->view("quiz".'/header', $data);
 		$this->load->view("quiz".'/question_list', $data);
 		//$this->load->view("quiz".'/footer', $data);
@@ -53,6 +53,7 @@ class Qbank extends CI_Controller {
 		$this->load->model('quiz_model', '', TRUE);
 		$data['assigned_questions'] = $this->quiz_model->assigned_questions_manually($quid);
 		//TODO:Check this our
+		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;
 		$this->load->view("quiz".'/select_questions', $data);
 
 	}
@@ -160,7 +161,7 @@ class Qbank extends CI_Controller {
 		//$data['resultstatus'] = $this->qbank_model->add_new_mul();
 
 		$data['title'] = "Add new question";
-
+		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;
 		$this->load->view("quiz".'/new_question_1', $data);
 
 
@@ -178,6 +179,7 @@ class Qbank extends CI_Controller {
 		if ($this->input->post('cid')) {
 			$data['resultstatus'] = $this->qbank_model->add_question();
 		}
+		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;
 		$data['title'] = "Add new question";
 		if ($q_t == 0) {
 			$this->load->view("quiz".'/new_question', $data);
@@ -210,6 +212,7 @@ class Qbank extends CI_Controller {
 			$data['resultstatus'] = $this->qbank_model->update_question($id, $q_type);
 		}
 		$data['result'] = $this->qbank_model->get_question($id);
+		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;
 		$q_type = $data['result']['0']['q_type'];
 		//echo $q_type;die;
 		$data['title'] = "Edit question";
