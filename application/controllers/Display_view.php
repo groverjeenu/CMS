@@ -352,5 +352,10 @@ class Display_view extends CI_Controller {
 		redirect('display_view/facultydash', 'refresh');
 	}
 
+	public function forgot_password()
+	{
+		echo "Password link sent to your email address";
+	}
+
 
 } 
