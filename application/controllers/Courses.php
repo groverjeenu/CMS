@@ -77,12 +77,15 @@ class Courses extends CI_Controller
 			show_error("Access Forbidden",403);
 			exit(0);
 		}*/
-    	//$course = $this->courses->get_minimal($courseid);
-    	$course['id'] = $courseid;
+    	$course = $this->courses->get_minimal($courseid);
+    	if(isset($course['course_key']))
+    		$course['is_key'] = 'enabled';
+    	$data['course'] = $course;
+     	/*$course['id'] = $courseid;
     	$course['name'] = "This is a course";
     	$course['description'] = "This is a desciption";
-    	$course['syllabus'] = "This is a syllabus";
-    	$this->load->view('courses/edit_course',array('course'=>$course));
+    	$course['syllabus'] = "This is a syllabus";*/
+    	$this->load->view('courses/edit_course',$data);
     }
 
     public function course_key_check($str,$is_key)
@@ -106,6 +109,11 @@ class Courses extends CI_Controller
         {
             return TRUE;
         }
+    }
+
+    public function view_quiz()
+    {
+    	$this->load->view('quiz_1/quiz_access');
     }
 }
 /* End of file '/Courses.php' */

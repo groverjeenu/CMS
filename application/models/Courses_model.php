@@ -12,7 +12,7 @@ class Courses_model extends CI_Model
 	public function add($details)
 	{
 		$data = array(
-				'course_name' => $details['course_name'],
+				'course_name' => $details['title'],
 				'description' => $details['description'],
 				'syllabus' => $details['syllabus'],
 			);
@@ -20,7 +20,7 @@ class Courses_model extends CI_Model
 		{
 			$data['course_key'] = $details['course_key'];
 		}
-		$this->db->insert('courses',$data,false);
+		$this->db->insert('courses',$data);
 		$id = $this->db->insert_id();
 		$data['id'] = $id;
 		$this->add_faculty_to_course($id,$this->ion_auth->get_user_id());
@@ -37,6 +37,12 @@ class Courses_model extends CI_Model
 		}
 		$data = array('course_id' => $cid, 'faculty_id' => $faculty_id, 'faculty_role' => $type);
 		$this->db->insert('course_faculty',$data);
+
+	}
+
+	public function get_minimal($cid)
+	{
+		return $this->db->get_where('courses',array("cid" => $cid))->result_array();
 
 	}
 
@@ -121,14 +127,15 @@ class Courses_model extends CI_Model
 	public function getcourse_name($id)
 	{
 		$id = intval($id);
-		$course = $this->db->query("select * from course_courseadmin natural join courses natural join assignment natural join submissions where isgraded=0 and courseadmin=?",$id)->result_array();
+		//echo $id;
+		$course = $this->db->query("select * from course_courseadmin,courses, assignment, submissions where course_courseadmin.cid=courses.cid and courses.cid=assignment.cid and assignment.assignment_id=submissions.assignment_id and isgraded=0 and courseadmin=?",$id)->result_array();
 		return $course;
 	}
 
 	public function getsubmissions($id)
 	{
 		$id = intval($id);
-		$ass = $this->db->query("select * from assignment natural join submissions natural join users natural join courses where assignment_id=? ", $id)->row_array();
+		$ass = $this->db->query("select * from assignment, submissions, users, courses where assignment.cid=courses.cid and submissions.assignment_id=assignment.assignment_id and submissions.user_id=users.id and assignment.assignment_id=? ", $id)->row_array();
 		return $ass;
 	}
 
@@ -164,7 +171,7 @@ class Courses_model extends CI_Model
 
 	public function update_submissions($data)
 	{
-		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, is_graded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
+		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, isgraded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
 	}
 
 
@@ -190,7 +197,7 @@ class Courses_model extends CI_Model
 	public function get_pending_approvals($id)
 	{
 		$id = intval($id);
-		$query = $this->db->query("select * from (select * from courses natural join course_courseadmin) as s, users, course_faculty where users.id = s.courseadmin and s.is_approved = 0 and s.cid = course_faculty.course_id and course_faculty.faculty_id=?", $id)->result_array();
+		$query = $this->db->query("select * from courses, course_courseadmin, users, course_faculty where courses.cid =course_courseadmin.cid and courses.cid =course_faculty.course_id and users.id = course_courseadmin.courseadmin and course_courseadmin.is_approved = 0 and course_courseadmin.cid = course_faculty.course_id and course_faculty.faculty_id=?", $id)->result_array();
 		return $query;
 	}
 
@@ -207,6 +214,12 @@ class Courses_model extends CI_Model
 		
 		return $val['cnt'];
 
+	}
+
+	public function update_ca($id)
+	{
+		$id = intval($id);
+		$this->db->query("update course_courseadmin set is_approved=1 where courseadmin=?", $id);
 	}
 
 }

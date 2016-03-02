@@ -89,7 +89,6 @@
                     <div class="st-content-inner padding-none">
                         <div class="container-fluid">
                             <?php
-                            $resultstatus = true;
                                 if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div>"; }
                             ?>
                             <div class="row" style="margin-top:10px;">

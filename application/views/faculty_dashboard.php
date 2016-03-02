@@ -150,14 +150,14 @@
                                   ?>
                                   <li class="list-group-item media v-middle">
                                     <div class="media-body">
-                                      <a href="app-instructor-course-edit-course.html" class="text-subhead list-group-link"><?php echo $ta['first_name']?></a>
-                                      <br><a href="app-instructor-course-edit-course.html" class="text-subhead list-group-link"><?php echo $ts['course_name']?></a>
+                                      <a href="app-instructor-course-edit-course.html" class="text-subhead list-group-link">Name: <?php echo $key['first_name']?> <?php echo $key['last_name'] ?></a>
+                                      <br><a href="app-instructor-course-edit-course.html" class="text-subhead list-group-link">Course: <?php echo $key['course_name']?></a>
                                       
                                     
                                     </div>
                                     <div class="pull-right">
                                       
-                                    <a href="app-instructor-courses.html" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>Approve</a>
+                                    <a href="<?php echo base_url()."display_view/course_admin_add/".$key['courseadmin'] ?>" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>Approve</a>
                                           <a href="app-instructor-course-edit-course.html" class="btn btn-primary paper-shadow relative" data-z="0" data-hover-z="1" data-animated>Deny</a>
                                         </div>
                                   </li>

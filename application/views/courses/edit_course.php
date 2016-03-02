@@ -107,43 +107,45 @@
                                         echo form_open('courses/edit');?>
                                         <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
                                         <div class="form-group form-control-material">
-                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo set_value('title');?>" />
+                                            <?php if(isset($course['course_name'])) $title =  $course['course_name']; else $title= set_value('title');
+                                            echo $title;?>
+                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo $title?>" />
                                             <label for="title">Title</label>
                                             <?php echo form_error('title');?>
                                         </div>
                                         <div class="form-group form-control-material mytextarea" >
-                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
+                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php if(isset($course['description'])) echo $course['description']; else echo set_value('description');?>"><?php if(isset($course['description'])) echo $course['description']; else echo set_value('description');?></textarea>
                                             <label for="description">Description</label>
                                             <?php echo form_error('description');?>
                                         </div>
                                         <div class="form-group form-control-material mytextarea">
-                                            <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php echo set_value('syllabus');?>"><?php echo set_value('syllabus');?></textarea>
+                                            <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php if(isset($course['syllabus'])) echo $course['syllabus']; else echo set_value('syllabus');?>"><?php if(isset($course['syllabus'])) echo $course['syllabus'] ;else echo set_value('syllabus');?></textarea>
                                             <label for="syllabus">Syllabus</label>
                                             <?php echo form_error('syllabus');?>
                                         </div>
                                         <h5>Enrollment Key</h5>
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
                                                 <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
                                             </div>
                                         </div>
-                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php echo set_value('is_key');?>"/>
+                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php if(isset($course['is_key'])) echo $course['is_key']; else echo set_value('is_key');?>"/>
                                         <div class="form-group form-control-material">
-                                            <input type="text" <?php if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo set_value('course_key');?>" />
+                                            <input type="text" <?php if(isset($course['is_key'])) {if(!$course['course_key']) echo "disabled='disabled'"; }else if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php if(isset($course['course_key'])) echo $course['course_key']; else echo set_value('course_key');?>" />
                                             <?php echo form_error('course_key');?>
                                         </div>
                                         <div class="text-right">
-                                            <button type='submit' class="btn btn-primary">Save</button>
+                                            <button type='submit' class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div id="meta" class="tab-pane">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="course/edit">
                                         <div class="form-group">
                                             <label for="select" class="col-sm-3 control-label">Stream</label>
                                             <div class="col-sm-9 col-md-9">
-                                                <select id="stream" name='stream' class="form-control selectpicker" multiple data-style="btn-white" data-live-search="true" data-size="5">
+                                                <select id="stream" name='stream[]' class="form-control selectpicker" multiple data-style="btn-white" data-live-search="true" data-size="5">
                                                     <?php
                                                     $streams = $this->courses->all_streams();
                                                     foreach ($streams as $stream) {
@@ -153,22 +155,25 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="duration" class="col-sm-3 control-label">Course Duration</label>
+                                            <label for="duration" class="col-sm-3 control-label">Course Duration(in Days)</label>
                                             <div class="col-sm-4 col-md-2">
-                                                <input type="text" class="form-control" placeholder="No. of Days" value="10">
+                                                <input type="text" name="days" class="form-control" placeholder="No. of Days" value="<?php if(isset($course['days'])) echo $course['days']; else echo set_value('days'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="start" class="col-sm-3 control-label">Start Date</label>
                                             <div class="col-sm-9 col-md-4">
-                                                <input name='start' id="start" type="text" class="form-control datepicker">
+                                                <input name='start' id="start" type="text" class="form-control datepicker" value="<?php if(isset($course['start'])) echo $course['start']; else echo set_value('start'); ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="end" class="col-sm-3 control-label">End Date</label>
                                             <div class="col-sm-9 col-md-4">
-                                                <input name='end' id="end" type="text" class="form-control datepicker">
+                                                <input name='end' id="end" type="text" class="form-control datepicker" value="<?php if(isset($course['end'])) echo $course['end']; else echo set_value('end'); ?>">
                                             </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type='submit' class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
                                 </div>

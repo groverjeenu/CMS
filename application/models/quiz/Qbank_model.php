@@ -4,7 +4,7 @@ class qbank_model extends CI_Model
 {
 	function question_list($limit, $cid)
 	{
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 		$extrap = "";
 		if ($cid >= "1") {
 			$extrap = "and qbank.cid='".$cid."'";
@@ -33,7 +33,7 @@ class qbank_model extends CI_Model
 
 	function add_new_mul() {
 
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 
 		$insert_data = array(
 		                   'cid' => $this->input->post('cid'),
@@ -79,7 +79,7 @@ class qbank_model extends CI_Model
 
 
 	function add_question() {
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 
 		$insert_data = array(
 		                   'cid' => $this->input->post('cid'),
@@ -125,7 +125,7 @@ class qbank_model extends CI_Model
 
 	function import_question($question) {
 //echo "<pre>"; print_r($question);exit;
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 		$questioncid = $this->input->post('cid');
 		$questiondid = $this->input->post('did');
 		foreach($question as $key => $singlequestion) {
@@ -348,7 +348,7 @@ class qbank_model extends CI_Model
 		                   'question' => $this->input->post('question'),
 		                   'description' => $this->input->post('description')
 		               );
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 		$this->db->where('institute_id', $institute_id);
 		$this->db->where('qid', $id);
 		if ($this->db->update('qbank', $insert_data)) {
@@ -392,7 +392,7 @@ class qbank_model extends CI_Model
 				               );
 				if ($_POST['oids'][$key] >= "1") {
 					$oid = $_POST['oids'][$key];
-					$institute_id = $this->session->userdata('institute_id');
+					$institute_id = $this->ion_auth->get_user_id();
 					$this->db->where('institute_id', $institute_id);
 					$this->db->where('oid', $oid);
 					$this->db->update('q_options', $insert_data);
@@ -420,7 +420,7 @@ class qbank_model extends CI_Model
 
 
 				} else {
-					$institute_id = $this->session->userdata('institute_id');
+					$institute_id = $this->ion_auth->get_user_id();
 
 					$this->db->insert('q_options', $insert_data);
 
@@ -438,7 +438,7 @@ class qbank_model extends CI_Model
 
 
 	function get_question($id) {
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 		$query = $this -> db -> query("SELECT * FROM  `qbank` JOIN question_category ON qbank.cid = question_category.cid WHERE qbank.qid='$id' and qbank.institute_id = '$institute_id'");
 		$questions = $query->row_array();
 		$query = $this -> db -> query("SELECT * FROM  q_options WHERE qid='$id' and institute_id = '$institute_id'");
@@ -450,7 +450,7 @@ class qbank_model extends CI_Model
 
 	function remove_question($id)
 	{
-		$institute_id = $this->session->userdata('institute_id');
+		$institute_id = $this->ion_auth->get_user_id();
 		if ($this->db->delete('qbank', array('qid' => $id, 'institute_id' => $institute_id)))
 		{
 			$this->db->delete('q_options', array('qid' => $id, 'institute_id' => $institute_id));
@@ -465,7 +465,7 @@ class qbank_model extends CI_Model
 	function remove_qids($qids)
 	{
 		foreach ($qids as $qid) {
-			$institute_id = $this->session->userdata('institute_id');
+			$institute_id = $this->ion_auth->get_user_id();
 			if ($this->db->delete('qbank', array('qid' => $qid, 'institute_id' => $institute_id)))
 			{
 				$this->db->delete('q_options', array('qid' => $qid, 'institute_id' => $institute_id));

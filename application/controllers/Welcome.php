@@ -90,4 +90,34 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('assign_grades');
 	}
+
+	public function trymail()
+	{
+		$from_email = 'mutiny@kgts.in';
+		$to_email = "prabhat.agr2010@gmail.com";
+		$subject = 'Verify Your Account';
+		//$verify_link = base_url().'user/verifyAccount/'.md5($to_email.$this->secret.$rand_num);
+		$message = "This is magic";
+		//log_message('DEBUG',"EMAIL LINK:".$verify_link);
+		//email configuration
+		$config = array(
+			'protocol' => 'smtp',
+			'smtp_host' =>'ssl://cp-11.webhostbox.net ',
+			'smtp_port' => 465,
+			'smtp_user' => $from_email,
+			'smtp_pass' => 'WEQg,]9&t.00mAh',
+			'mailtype' => 'html',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => TRUE,
+			'newline' => "\r\n"
+			);
+
+		//send email
+		$this->email->initialize($config);
+		$this->email->from($from_email, 'The KGTS');
+		$this->email->to($to_email);
+		$this->email->subject($subject);
+		$this->email->message($message);
+		echo $this->email->send();
+	}
 }
