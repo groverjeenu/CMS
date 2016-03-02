@@ -18,7 +18,7 @@ if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div
 							<tr><th valign="top">Start time</th><td><?php echo date("Y-m-d",$result->start_time);?></td></tr>
 							<tr><th valign="top">End time</th><td><?php echo date("Y-m-d",$result->end_time);?></td></tr>
 							<tr><th valign="top">Percentage required to pass</td><td><?php echo $result->pass_percentage;?>%</td></tr>
-							<tr><th valign="top">Test type</th><td><?php if($result->test_type=="1"){ echo "Paid ( credit require: ".$result->credit.")"; }else{ echo "Free"; } ?>
+							
 							<tr><th valign="top">Maximum Attempts</th><td><?php echo $result->max_attempts;?> </td></tr>
 							<tr><th valign="top">Correct answer score</th><td><?php echo $result->correct_score;?> </td></tr>
 							<tr><th valign="top">Incorrect answer score</th><td><?php echo $result->incorrect_score;?> </td></tr>
