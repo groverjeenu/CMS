@@ -1,8 +1,7 @@
-<?php
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class Quiz_model extends CI_Model
+<? php
+Class quiz_model extends CI_Model
 {
+
 	function quiz_list($limit, $gid = '')
 	{
 		$institute_id = $this->session->userdata('institute_id');
@@ -72,6 +71,8 @@ class Quiz_model extends CI_Model
 				                   'gid'	=>	$value,
 				                   'institute_id' => $institute_id
 				               );
+
+
 				$this->db->insert('quiz_group', $insert_data);
 			}
 			if ($qselect == "1") {
@@ -1054,6 +1055,10 @@ class Quiz_model extends CI_Model
 
 			return "Unable to submit quiz";
 		}
-	}
-}
 
+
+	}
+
+
+}
+?>

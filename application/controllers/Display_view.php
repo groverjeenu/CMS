@@ -61,7 +61,17 @@ class Display_view extends CI_Controller {
 	{
 		if($this->ion_auth->in_group('faculty'))
 		{
-			$this->load->view('fac');
+			//$this->load->view('fac');
+			$id = $this->ion_auth->get_user_id();
+			$courses = $this->courses->get_fac_courses($id);
+			$data['courses'] = $courses;
+			$ta = $this->courses->get_pending_approvals($id);
+			$data['ta'] = $ta;
+			//foreach ($courses as $key) {
+				# code...
+			//	echo $key['course_name'];
+			//}
+			$this->load->view('faculty_dashboard', $data);
 		}
 		else if($this->ion_auth->in_group('admin'))
 		{
@@ -180,8 +190,11 @@ class Display_view extends CI_Controller {
 		$data['user']= (array)$usr;
 
 		$val = $this->courses->check_if_enrolled($cid);
+		$val_ca = $this->courses->is_ca($cid);
+		
 		$lectures = $this->courses->get_course_lectures($cid);
 		$data['val'] = $val;
+		$data['val_ca'] = $val_ca;
 		$data['lectures'] = $lectures;
 		$data['assignments'] = $this->courses->get_course_assignments($cid);
 		$data['grades_course']=$this->courses->get_course_grades($cid);
@@ -286,6 +299,37 @@ class Display_view extends CI_Controller {
 
 
 	}
+
+	public function facultydash()
+	{
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$id = $this->ion_auth->get_user_id();
+			$courses = $this->courses->get_fac_courses($id);
+			$data['courses'] = $courses;
+			$ta = $this->courses->get_pending_approvals($id);
+			$data['ta'] = $ta;
+			//foreach ($courses as $key) {
+				# code...
+			//	echo $key['course_name'];
+			//}
+			$this->load->view('faculty_dashboard', $data);
+		}
+		else
+		{
+			redirect('login', 'refresh');
+		}
+	}
+
+
+	public function enroll_ca($cid)
+	{
+		$this->courses->enroll_ca($cid);
+		//$this->course($cid);
+		//$this->load->view('coursepage')
+		redirect("display_view/course/".$cid,"refresh");
+	}
+
 
 
 } 
