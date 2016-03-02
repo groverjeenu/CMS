@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l1 sidebar-r3" lang="en">
 
@@ -28,7 +27,8 @@
     <!-- For Windows Phone -->
 
 
-    <!-- CORE CSS-->    
+    <!-- CORE CSS-->  
+    <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">  
     <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- CSS for full screen (Layout-2)-->    
@@ -48,7 +48,7 @@
   <!-- Vendor CSS BUNDLE
     Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
     TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
-  <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
+  
 
   <!-- Vendor CSS Standalone Libraries
         NOTE: Some of these may have been customized (for example, Bootstrap).
@@ -128,15 +128,18 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         success: function(response) {
             //alert(response['5']['names']);
             $('#courses_section').empty();
+            var flag = 0;
             $.each(response['data'],function(key,val)
             {
-
+              flag = 1;
             $('#courses_section').append(
 
-                  '<div class="panel panel-default paper-shadow" data-z="0.5"><div class="panel-body"><div class="media media-clearfix-xs"><div class="media-left text-center"><div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10"><span class="img icon-block height-130 bg-default"></span><span class="overlay overlay-full padding-none icon-block bg-default"><span class="v-center"><i class="fa fa-github"></i></span></span><a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white"><span class="v-center"><span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span></span></a></div></div><div class="media-body">'+'<h4 class="text-headline margin-v-5-0"><a href="'+response['base_url']+'/display_view/course/'+key+'">'+ val['course_name']+'</a></h4>'+'<p class="small"><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span></p><p>'+val['description']+'</p>'+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body"><h4><a href="">'+val['names']+'</a><br/></h4>Instructor</div></div></div></div></div></div>'
+                  '<div class="panel panel-default paper-shadow" data-z="0.5"><div class="panel-body"><div class="media media-clearfix-xs"><div class="media-left text-center"><div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10"><span class="img icon-block height-130 bg-default"></span><span class="overlay overlay-full padding-none icon-block bg-default"><span class="v-center"><i class="fa fa-github"></i></span></span><a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white"><span class="v-center"><span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span></span></a></div></div><div class="media-body">'+'<h4 class="text-headline margin-v-5-0"><a href="'+response['base_url']+'/display_view/course/'+key+'">'+ val['course_name']+'</a></h4>'+'<p class="small"><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span></p><p>'+val['description']+'</p>'+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body">'+val['names']+'<br/>Instructor</div></div></div></div></div></div>'
               );
             });
-            
+          if(flag == 0)
+            $('#courses_section').append('<h3>No matching courses found</h3>');
+                    
         },
         error: function(response) {
             alert('Error Here');
@@ -177,7 +180,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                     </p>
-              <p>'+val['description']+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body"><h4><a href="">'+val['names']+'</a><br/></h4>Instructor</div></div></div></div></div></div>';
+              <p>'+val['description']+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body">'+val['names']+'<br/>Instructor</div></div></div></div></div></div>';
             </script>
 
 </head>
@@ -190,8 +193,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <div class="nav-wrapper">                    
                     
                     <ul class="left">                                            
+
                       <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li>
-                      <li><span class="logo-text"><h4>Incourse</h4></span></li>
+                      <li><h4 style="color:white">Incourse</h4></li>
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <i class="mdi-action-search"></i>
@@ -546,9 +550,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <img src="<?php echo base_url()?>public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" />
                       </div>
                       <div class="media-body">
-                        <h4><a href=""><?php echo $i['names']; ?></a>
+                        <?php echo $i['names']; ?>
                           <br/>
-                        </h4>
+                         
                         Instructor
                       </div>
                     </div>

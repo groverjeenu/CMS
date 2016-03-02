@@ -3,14 +3,7 @@
 <html class="st-layout ls-top-navbar-large ls-bottom-footer show-sidebar sidebar-l1" lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Learning</title>
-
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
@@ -27,7 +20,8 @@
     <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
     <!-- For Windows Phone -->
 
-
+    <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
+ 
     <!-- CORE CSS-->    
     <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -37,7 +31,7 @@
     <link href="<?php echo base_url(); ?>public/css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- CSS for full screen (Layout-2)-->    
     <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">    
-    <link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection">    
+    <!--link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection"->    
 
 
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
@@ -48,16 +42,15 @@
   <!-- Vendor CSS BUNDLE
     Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
     TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
-  <link href="<?php echo base_url(); ?>public/css/vendor/all.css" rel="stylesheet">
     <style>
-                .disable-select {
-  -webkit-user-select: none;  
-  -moz-user-select: none;    
-  -ms-user-select: none;      
-  user-select: none;
-  highlight:none;
-}
-                </style>
+    .disable-select {
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+    highlight:none;
+  }
+  </style>
 
   <!-- Vendor CSS Standalone Libraries
         NOTE: Some of these may have been customized (for example, Bootstrap).
@@ -837,9 +830,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </div>
             </div>
 
-          </div>
-
-        </div>
         <!-- /st-content-inner -->
 
       </div>
