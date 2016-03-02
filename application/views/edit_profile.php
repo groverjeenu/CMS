@@ -332,7 +332,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                     <li class="divider"></li>
                                     <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
                                     </li>
-                                    <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                                    <li><a href="<?php echo base_url(); ?>auth/logout"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
                                     </li>
                                 </ul>
                                 <p class="user-roal">Administrator</p>

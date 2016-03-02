@@ -704,24 +704,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
                 <?php if($val_ca == 0){?>
 
-                <!--script type = "text/javascript" language = "javascript">
-                  $('document').ready(function()
-                    {
-                      $('#enroll_ca_btn').onclick(function(event)
-                        {
-                          $('document').load("<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>");
-                        });
-                    });
-
-                  </script-->
-                  <script>
-                    //function mybtn()
-                    //{
-                      //$('document').post("<?php echo site_url('display_view/enroll_ca/'.$');
-                      //$.load("<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>");
-
-                    //}
-                  </script>
+                
                   
                 <div  class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                     <div class="panel-body">
