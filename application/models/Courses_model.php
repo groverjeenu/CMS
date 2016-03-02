@@ -168,6 +168,19 @@ class Courses_model extends CI_Model
 		$this->db->query("update submissions set grade = ?, penalty = ? , graded_by = ?, isgraded=1 where assignment_id = ?", array($data['grade'], $data['penalty'], $data['graded_by'], $data['assignment_id']));
 	}
 
+
+	public function get_course_grades($cid)
+	{
+		$curr_user = (array)($this->ion_auth->user()->row());
+		$uid = $curr_user['user_id'];
+		return $this->db->query("select * from enrollments,assignment,submissions where enrollments.course_id = assignment.cid and assignment.assignment_id = submissions.assignment_id and submissions.user_id = ? and enrollments.student_id = ? and isgraded = 1 and assignment.cid = ?",array($uid,$uid,$cid))->result_array();
+	}
+
+	public function get_total_weight($cid)
+	{
+		$wt = (array)$this->db->query("select sum(weightage) as wt from assignment where cid = ?",$cid)->row();
+		return $wt['wt'];
+	}
 	public function get_fac_courses($id)
 	{
 		$id = intval($id);
@@ -194,6 +207,7 @@ class Courses_model extends CI_Model
 		$val = (array)$this->db->query("select count(*) as cnt  from course_courseadmin where cid = ? and courseadmin = ?",array($cid, $curr_user['user_id']) )->row();
 		
 		return $val['cnt'];
+
 	}
 
 	public function update_ca($id)

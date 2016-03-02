@@ -606,6 +606,62 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     </ul>
                   -->
                   </div>
+                  <?php if($val != 0) { ?>
+                  <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                    <div class="panel-heading">
+                      <h4 class="text-headline">Grades</h4>
+                    </div>
+                    <div class="panel-body">
+                      <p class="text-caption margin-none">
+                        <!--
+                        <i class="fa fa-clock-o fa-fw"></i> 4 hrs &nbsp;
+                        <i class="fa fa-calendar fa-fw"></i> 21/10/14
+                        <br/>
+                      -->
+                      <i class="fa fa-bar-chart fa-fw"></i> Assignment  : Marks : Weightage
+                        <br/>
+                      <?php foreach($grades_course as $gg) {?>
+                        <i class="fa fa-bar-chart fa-fw"></i> <?php echo $gg['title'];?> : <?php echo $gg['grade'] ;?>/100 : <?php if($wt != 0)echo $gg['weightage']/$wt*100 ;?>%
+                        <br/>
+                        <?php }?>
+
+                        <?php $sum = 0;
+                        foreach($grades_course as $gg)
+                        {
+                          $sum = $sum + $gg['grade']*$gg['weightage']/100 ;
+                        }  
+
+
+                        ?>
+                        <i class="fa fa-plus fa-fw"></i> Total : <?php echo $sum ;?>/<?php echo $wt ;?> : <?php if($wt != 0)echo $sum/$wt*100 ;else echo "0";?>%
+                        <br/>
+                       
+                        <!--
+                        <i class="fa fa-mortar-board fa-fw"></i> Max. students: 50
+                        <br/>
+                      -->
+                        
+                      </p>
+                    </div>
+                    <hr class="margin-none" />
+                    <!--
+                    <div class="panel-body text-center">
+                      <p><a class="btn btn-success btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated href="app-take-course.html">Start Course</a></p>
+                      <p class="text-body-2">or <a href="#">buy course for $1</a></p>
+                    </div>
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <a href="#" class="text-light"><i class="fa fa-facebook fa-fw"></i> Share on facebook</a>
+                      </li>
+                      <li class="list-group-item">
+                        <a href="#" class="text-light"><i class="fa fa-twitter fa-fw"></i> Tweet this course</a>
+                      </li>
+                    </ul>
+                  -->
+                  </div>
+                  <?php }?>
+
+
                   <!-- // END .panel -->
 
                   <!-- .panel -->
@@ -628,14 +684,14 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                       <div class="media v-middle">
                         
                         <div class="media-body media-right">
-                          <a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>">
+                          <a href = "<?php echo base_url();?>display_view/enroll/<?php echo $query['cid'];?>"> 
                           <label  id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
                             <i class="fa fa-flag fa-lg fa-pull-left"></i>
                           <span style="display:inline-block; width: 20px;"></span>
                       Enroll for Course
                       <span style="display:inline-block; width: 20px;"></span>
                       </label>
-                    <!-- </a> -->
+                    </a> 
                     
                         </div>
                       </div>
@@ -658,7 +714,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     });
 
                   </script>
-                  
                 <div  class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                     <div class="panel-body">
                       <div class="media v-middle">
