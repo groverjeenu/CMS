@@ -86,6 +86,16 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<script type ="text/javascript">
+$(document).ready(function(
+  {
+    var v = <?php echo $error;?>;
+    if(v == 1)
+      alert ('Submission not successful');
+    else alert('Submission successful');
+  }));
+</script>
+
 </head>
 
 <body>
@@ -330,6 +340,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
             <div class="media media-grid media-clearfix-xs">
               <div class="media-body">
+                
 
                 <div class="page-section">
                   <div class="media">
@@ -365,12 +376,14 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         </div>
                         <div class="media-body text-body-2">
                           <?php echo $ass['description']; ?>
+                           <a href = "<?php echo base_url();?>contents/assignments/<?php echo $ass['filename']?>"> 
                               <label  id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="" style="margin-left:400px">
                             <i class="fa fa-download fa-lg fa-pull-left"></i>
                           <span style="display:inline-block; width: 20px;"></span>
                       Download Assignment
                       <span style="display:inline-block; width: 20px;"></span>
                       </label>
+                    </a>
                         </div>
                       </div>
                       
@@ -378,6 +391,45 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     
                   </ul>
                 </div>
+              
+                 <div class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                    <div class="panel-heading">
+                      <h2 class="text-headline">Course Description</h2>
+                    </div>
+                    <div class="panel-body">
+                      <p class="text-caption margin-none">
+                        <!--
+                        <i class="fa fa-clock-o fa-fw"></i> 4 hrs &nbsp;
+                        <i class="fa fa-calendar fa-fw"></i> 21/10/14
+                        <br/>
+                      -->
+                      <i class="fa fa-calendar-o fa-fw"></i> Floating Date : <?php echo $ass['start_date'] ;?>
+                        <br/>
+                        <i class="fa fa-check fa-fw"></i> Last Submitted: <?php if($sub['submiss_time'] == NULL)echo "Not yet submitted" ; else echo $sub['submiss_time'] ;?>
+                        <br/>
+                        <!--
+                        <i class="fa fa-mortar-board fa-fw"></i> Max. students: 50
+                        <br/>
+                      -->
+                        <i class="fa fa-close fa-fw"></i> Deadline: <?php echo $ass['deadline'];?>
+                      </p>
+                    </div>
+                    <hr class="margin-none" />
+                    <!--
+                    <div class="panel-body text-center">
+                      <p><a class="btn btn-success btn-lg paper-shadow relative" data-z="1" data-hover-z="2" data-animated href="app-take-course.html">Start Course</a></p>
+                      <p class="text-body-2">or <a href="#">buy course for $1</a></p>
+                    </div>
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <a href="#" class="text-light"><i class="fa fa-facebook fa-fw"></i> Share on facebook</a>
+                      </li>
+                      <li class="list-group-item">
+                        <a href="#" class="text-light"><i class="fa fa-twitter fa-fw"></i> Tweet this course</a>
+                      </li>
+                    </ul>
+                  -->
+                  </div>
                   <!--
                   <p class="margin-none">
                     <span class="label bg-gray-dark">New</span>
@@ -385,9 +437,44 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     <span class="label label-grey-200">Beginner</span>
                   </p>
                 -->
-                </div>
-                <br/><br/><br/>
-                <br/><br/>
+                
+                
+                <div class="page-section">
+                  
+
+                  <div class="page-section">
+                <ul class="list-group relative paper-shadow margin-none" data-hover-z="0.5" data-animated>
+                    <li class="list-group-item">
+                      <div class="media v-middle">
+                        
+                        <div class="media-body text-body-2">
+                         <?php echo form_open_multipart('assignments/submission/'.$ass['assignment_id']);?>
+                           
+                              <input type="file" name="userfile" id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="" style="margin-left:0px">
+                            
+                      </input>
+                    
+                        
+                      <label  id = "enroll_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="" style="margin-left:0px ; padding-top = 0px;">
+                            <i class="fa fa-upload fa-fw fa-pull-left"></i>
+                          <span style="display:inline-block; width: 20px;"></span>
+                      <input type="submit" value = "Upload Assignment" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated=""> </input>
+                      
+                      </label>
+                   
+                    </div>
+
+                    </form>
+
+                    
+                        </div>
+                      </div>
+                      
+                    </li>
+                    
+                  </ul>
+                </div></div>
+                </br></br></br>
                 <!--div class="page-section">
                   <h2 class="text-headline margin-none">What you'll learn</h2>
                   <p class="text-subhead text-light">A brief description.</p>
@@ -527,7 +614,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   </div>
                 </div>
               -->
-
+            
               </div>
               <div class="media-right">
 

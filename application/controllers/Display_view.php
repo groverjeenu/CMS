@@ -275,7 +275,10 @@ class Display_view extends CI_Controller {
 		$data['lectures'] = $lectures;
 		$data['assignments'] = $this->courses->get_course_assignments($cid);
 		$data['ass'] = $ass;
+		$data['error'] = 0;
+		$data['sub'] = $this->assignments->get_user_submission($aid,$data['user']['id']); 
 		$this->load->view('assignment',$data);
+
 
 
 

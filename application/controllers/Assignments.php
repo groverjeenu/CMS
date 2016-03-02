@@ -6,6 +6,9 @@ class Assignments extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('assignment_model','assignment');
+		$this->load->model('assignments_model','assignments');
+		$this->load->model('courses_model','courses');
+		$this->load->helper(array('form', 'url'));
 	}
 	
 	public function index($courseid,$assgnid)
@@ -71,6 +74,60 @@ class Assignments extends CI_Controller
 	public function edit($courseid,$assgnid)
 	{
 		echo "You are editing $assgnid lesson for $courseid";
+	}
+	public function submission($aid)
+	{
+		$config['upload_path'] = './contents/submissions';
+		$config['allowed_types']        = 'pdf|txt|gzip|gtar|zip|rar|tar|tgz|gz';
+		$config['file_ext_tolower']		= TRUE;
+		$config['encrypt_name']			= TRUE;
+		$config['max_size']             = 100000;
+		$this->load->library('upload');
+		 $this->upload->initialize($config);
+
+
+		//$data['error'] = 0;
+		// $ass = $this->assignments->get($aid);
+		// if($this->courses->check_if_enrolled($ass['cid']) == 0 )
+		// {
+		// 	redirect('display_view/'.$ass['cid'],"refresh");
+		// }
+		// $cid =$ass['cid'];
+		// $query = $this->courses->get_course($cid);
+		// $data['query'] = $query;
+			
+
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+		// $val = $this->courses->check_if_enrolled($cid);
+		// $lectures = $this->courses->get_course_lectures($cid);
+		// $data['val'] = $val;
+		// $data['lectures'] = $lectures;
+		// $data['assignments'] = $this->courses->get_course_assignments($cid);
+		// $data['ass'] = $ass;
+		// $data['sub'] = $this->assignments->get_user_submission($aid,$data['user']['id']);
+		
+		// echo $this->upload->data('file_name');
+
+		if ( ! $this->upload->do_upload('userfile'))
+		{
+			$this->upload->display_errors();
+			$error = array('error' => $this->upload->display_errors());
+			//$data['error'] = 1;
+			echo $error['error'];
+			echo "error";
+
+			//$this->load->view('assignment', $data);
+		}
+		else
+		{
+			$data['upload_data'] = $this->upload->data();
+			$this->assignments->upload($aid,$this->upload->data('file_name'),$data['user']['id']);
+			$data['sub'] = $this->assignments->get_user_submission($aid,$data['user']['id']);
+
+			redirect('display_view/assignments/'.$aid, "refresh");
+		}
 	}
 		
 	
