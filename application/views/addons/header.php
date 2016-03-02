@@ -11,13 +11,10 @@
                 <div class="nav-wrapper">                    
                     
                     <ul class="left">                                            
-                      <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li>
+                      <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li>z
                       <li><span class="logo-text"><h4>Incourse</h4></span></li>
                     </ul>
-                    <div class="header-search-wrapper hide-on-med-and-down">
-                        <i class="mdi-action-search"></i>
-                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder=""/>
-                    </div>
+                    
                     <ul class="right hide-on-med-and-down">                        
                         <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
                         </li>

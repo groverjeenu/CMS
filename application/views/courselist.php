@@ -191,11 +191,11 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                     
                     <ul class="left">                                            
                       <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li>
-                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="<?php echo base_url(); ?>public/img/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
+                      <li><span class="logo-text"><h4>Incourse</h4></span></li>
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <i class="mdi-action-search"></i>
-                        <input id = "ajax_srch" type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize"/>
+                        <input id = "ajax_srch" type="text" name="Search" class="header-search-input z-depth-2" placeholder="Enter the course to search"/>
                     </div>
                     <ul class="right hide-on-med-and-down">                        
                         <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a>
@@ -957,14 +957,9 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     // Toast Notification
     $(window).load(function() {
         setTimeout(function() {
-            Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
+            Materialize.toast('<?php echo  $this->session->flashdata();?>', 1500);
         }, 1500);
-        setTimeout(function() {
-            Materialize.toast('<span>You can swipe me too!</span>', 3000);
-        }, 5000);
-        setTimeout(function() {
-            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
-        }, 15000);
+        
     });
 
 
