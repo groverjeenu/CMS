@@ -616,6 +616,7 @@ class Auth extends CI_Controller {
 				        // 	'type' =>'text',
 				        // 	'value' => $hashed_file,);
 				        //$data['image'] =$hashed_file;
+
 				    } else {
 				        echo "Sorry, there was an error uploading your file.";
 				    }
@@ -758,6 +759,7 @@ class Auth extends CI_Controller {
 		);
 
 		//$this->_render_page('auth/edit_user', $this->data);
+		redirect('display_view/edit_profile',"refresh");
 	}
 
 	// create a new group

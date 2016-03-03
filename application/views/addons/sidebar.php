@@ -6,12 +6,31 @@
                                 <?php $user = (array)$this->ion_auth->user()->row();?>
                                 <img src="<?php echo base_url();?>contents/users/<?php echo $user['image'];?>" alt="" class="circle responsive-img valign profile-image">
                             </div>
+
+                            <div class="col col s10 m10 l10">
+                                <ul id="profile-dropdown" class="dropdown-content">
+                                    <li><a href="<?php echo base_url(); ?>display_view/edit_profile"><i class="mdi-action-face-unlock"></i> Profile</a>
+                                    </li>
+                                    <!--li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
+                                    </li>
+                                    <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
+                                    
+                                    <!--li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
+                                    </li-->
+                                    
+                                </ul>
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?php echo $user['email'];?><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                                <!--?php $gr = $this->ion_auth->get_user_groups($user['id'])->row(); ?>
+                                <p class="user-roal"><?php echo $gr['description']?></p-->
+                            </div>
                            
                         </div>
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>dashboard" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/courselist" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Courselist</a>
+                    </li>
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/grades" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Grade Card</a>
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/edit_profile" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Edit Profile</a>
                     </li>
