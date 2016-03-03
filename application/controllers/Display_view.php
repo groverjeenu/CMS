@@ -232,7 +232,7 @@ class Display_view extends CI_Controller {
 			redirect('display_view/dashboard',"refresh");
 		}
 
-		echo $id;
+		//echo $id;
 		$data['lec'] = $lec;
 		$this->load->view('courselectures', $data);
 	}
