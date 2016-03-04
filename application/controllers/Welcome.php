@@ -91,6 +91,10 @@ class Welcome extends CI_Controller {
 		$this->load->view('assign_grades');
 	}
 
+	public function mail()
+	{
+		$this->load->view('mail_compose');
+	}
 	public function trymail()
 	{
 		$from_email = 'mutiny@kgts.in';

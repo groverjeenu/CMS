@@ -824,7 +824,31 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 -->
                   <!-- // END .panel -->
 
+                <div  class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
+                    <div class="panel-body">
+                      <div class="media v-middle">
+                        
+                        <div class="media-body media-right">
+                          <a href = "<?php echo base_url();?>display_view/composemail/<?php echo $query['cid'];?>">
+                          <label  id = "enroll_ca_btn" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" onclick="mybtn()" data-z="0.5" data-hover-z="1" data-animated="">
+                            <i class="fa fa-flag fa-lg fa-pull-left"></i>
+                          <span style="display:inline-block; width: 1px;"></span>
+                      Ask Doubts
+                      <span style="display:inline-block; width: 0px;"></span>
+                      </label>
+                    <!-- </a> -->
+                    
+                        </div>
+                      </div>
+              
+                     
+                    </div>
+                  </div>
+
                 </div>
+
+
+
                 <!-- // END .page-section -->
 
               </div>

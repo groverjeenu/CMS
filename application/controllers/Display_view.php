@@ -26,6 +26,7 @@ class Display_view extends CI_Controller {
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model','courses');
 		$this->load->model('lessons_model','lessons');
+		$this->load->model('mail_model','mail');
 		$this->load->model('admindash_model');
 		$this->load->model('assignments_model','assignments');
 		$this->load->model('lessons_model');
@@ -388,5 +389,35 @@ class Display_view extends CI_Controller {
 
 		
 		$this->load->view('grades',$data);
+	}
+
+
+	public function composemail($cid)
+	{
+		$fac = $this->mail->getfacmails($cid);
+		$user = $this->mail->getuseremail();
+		$data['fac'] = $fac;
+		$data['user'] = $user;
+		$this->load->view('mail_compose', $data);
+	}
+
+	public function sendmail()
+	{
+		$data['sender_id'] = $this->ion_auth->get_user_id();
+		$data['body'] = htmlspecialchars($_POST['textarea']);
+		$data['is_read'] = 0;
+		date_default_timezone_set('Asia/Kolkata');
+		$data['date'] = date('Y-m-d H:i:s');
+		$this->mail->send_mail($data);
+
+		foreach ($_POST['select2'] as $key) {
+			$sender = $this->mail->getid($data);
+			$this->mail->update_receiver($sender['mail_id'], $key);
+		}
+	}
+
+	public function inbox()
+	{
+		$this->load->view('inbox');
 	}
 } 
