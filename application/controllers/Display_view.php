@@ -394,11 +394,22 @@ class Display_view extends CI_Controller {
 
 	public function composemail($cid)
 	{
-		$fac = $this->mail->getfacmails($cid);
-		$user = $this->mail->getuseremail();
-		$data['fac'] = $fac;
-		$data['user'] = $user;
-		$this->load->view('mail_compose', $data);
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$fac = $this->mail->getstumails($cid);
+			$user = $this->mail->getuseremail();
+			$data['fac'] = $fac;
+			$data['user'] = $user;
+			$this->load->view('mail_compose', $data);
+		}	
+		else
+		{	
+			$fac = $this->mail->getfacmails($cid);
+			$user = $this->mail->getuseremail();
+			$data['fac'] = $fac;
+			$data['user'] = $user;
+			$this->load->view('mail_compose', $data);
+		}
 	}
 
 	public function sendmail()
@@ -428,6 +439,11 @@ class Display_view extends CI_Controller {
 		$mail = $this->mail->mail_data_sent();
 		$data['mail'] = $mail;
 		$this->load->view('sent_mail', $data);
+	}
+
+	public function reply_mail()
+	{
+
 	}
 
 } 

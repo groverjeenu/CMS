@@ -29,6 +29,9 @@
 
 
     <!-- CORE CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/vendor/all.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection">
+    
     <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- CSS for full screen (Layout-2)-->    
@@ -319,53 +322,29 @@
                     <div class="card-panel">
                         <div class = "col s12">
                             <div class="row">
-                                <h4>Inbox<h4>
-                                <ul class="collapsible popout" data-collapsible="accordion">
-                                <?php foreach ($mail as $key) {?>
-                                <li>
-                                    <div class="collapsible-header">
-                                        <div class="row">
-                                            <div class="col s4">
-                                                <h4 class="header2">From: <?php echo $key['email']?></h4>
-                                            </div>
-                                            <div class="col s4">
-                                                <h4 class="header2"></h4>
-                                            </div>
-                                            <div class="col s4">
-                                                <h4 class="header2">Date: <?php echo $key['date']?></h4>
-                                            </div>
-                                        </div>
+                                <h4>Compose Email<h4>
+                                <form class = "col s12" method="post" action="<?php echo base_url();?>display_view/sendmail">
+                                    <div class = "input-select">
+                                        <h6>Select email</h6>
+                                        <select name="select2[]" multiple data-live-search="true">
+                                            <?php foreach ($fac as $key) { ?>
+                                            <option  value="<?php echo $key['id']?>"><?php echo $key['email']; ?></option>
+                                            <?php } ?>
+                                            <!--option value="2">Hi</option-->
+                                        </select multiple>
                                     </div>
-                                    <div class = "collapsible-body hoverable">
-                                        <table class = "striped">
-                                            <thead>
-                                              <!--tr>
-                                                  <th data-field="sender_id"></th>
-                                                  <th data-field="name"></th>
-                                                  <th data-field="price"></th>
-                                                  <th data-field="price"></th>
-                                                  <th data-field="price"></th>
-
-                                              </tr-->
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $key['body']?>
-                                                    </td>  
-                                                    <td>
-                                                        <a class="btn-flat waves-effect pink accent-2 white-text"><i class="mdi-communication-email right"></i>Reply</a>
-                                                    </td> 
-
-                                                    
-                                                </tr>
-                                                <!--?php }?=-->
-                                            </tbody>
-                                        </table>
+                                    <div class = "col s12 input-field">
+                                        <h6>From :</h6>
+                                        <input id="sender-mail" type="text" value="<?php echo $user['email']?>" class="validate" disabled="disabled">
+                                    </div>   
+                                    <div class="col s12 input-field">
+                                        <h6 for="textarea1">Body</h6>
+                                        <textarea name="textarea" id="textarea" class="materialize-textarea"></textarea>
                                     </div>
-                                    <?php } ?>
-                                    </li>
-                                </ul>  
+                                    <div>
+                                        <button type="submit" class="btn-flat waves-effect pink accent-2 white-text"><i class="mdi-communication-email right"></i>Send</button>
+                                    <div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -1248,6 +1227,9 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery-1.11.2.min.js"></script>    
     <!--materialize js-->
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/materialize.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/vendor/all.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/app/app.js"></script>
+    
     <!--scrollbar-->
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     
