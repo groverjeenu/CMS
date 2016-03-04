@@ -30,7 +30,6 @@
 
     <!-- CORE CSS-->    
     <link href="<?php echo base_url(); ?>public/css/vendor/all.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection">
     
     <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -326,7 +325,7 @@
                                 <form class = "col s12" method="post" action="<?php echo base_url();?>display_view/sendmail">
                                     <div class = "input-select">
                                         <h6>Select email</h6>
-                                        <select name="select2[]" multiple data-live-search="true">
+                                        <select name="select2[]" class="selectpicker" multiple data-live-search="true">
                                             <?php foreach ($fac as $key) { ?>
                                             <option  value="<?php echo $key['id']?>"><?php echo $key['email']; ?></option>
                                             <?php } ?>
@@ -1228,7 +1227,6 @@
     <!--materialize js-->
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/materialize.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/vendor/all.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/app/app.js"></script>
     
     <!--scrollbar-->
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>

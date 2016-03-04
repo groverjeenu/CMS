@@ -400,7 +400,7 @@ class Display_view extends CI_Controller {
 			$user = $this->mail->getuseremail();
 			$data['fac'] = $fac;
 			$data['user'] = $user;
-			$this->load->view('mail_compose', $data);
+			$this->load->view('mail_compose_fac', $data);
 		}	
 		else
 		{	
