@@ -40,8 +40,15 @@ class Mail_model extends CI_Model
 	public function mail_data()
 	{
 		$id = $this->ion_auth->get_user_id();
-		$this->db->query();
+		return $this->db->query('select * from mail_body, mail_recipients, users where mail_body.mail_id=mail_recipients.mail_id and sender_id = users.id and (rec_id=?) order by date desc',$id)->result_array();
 	}
+
+	public function mail_data_sent()
+	{
+		$id = $this->ion_auth->get_user_id();
+		return $this->db->query('select * from mail_body, mail_recipients, users where mail_body.mail_id=mail_recipients.mail_id and rec_id = users.id and sender_id=? order by date desc', $id)->result_array();
+	}
+
 	
 }
 /* End of file '/Mail_model.php' */

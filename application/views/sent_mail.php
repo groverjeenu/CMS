@@ -326,7 +326,7 @@
                                     <div class="collapsible-header">
                                         <div class="row">
                                             <div class="col s4">
-                                                <h4 class="header2">From: <?php echo $key['email']?></h4>
+                                                <h4 class="header2">To: <?php echo $key['email']?></h4>
                                             </div>
                                             <div class="col s4">
                                                 <h4 class="header2"></h4>

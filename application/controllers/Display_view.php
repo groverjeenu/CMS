@@ -418,6 +418,16 @@ class Display_view extends CI_Controller {
 
 	public function inbox()
 	{
-		$this->load->view('inbox');
+		$mail = $this->mail->mail_data();
+		$data['mail'] = $mail;
+		$this->load->view('inbox', $data);
 	}
+
+	public function sent_mail()
+	{
+		$mail = $this->mail->mail_data_sent();
+		$data['mail'] = $mail;
+		$this->load->view('sent_mail', $data);
+	}
+
 } 
