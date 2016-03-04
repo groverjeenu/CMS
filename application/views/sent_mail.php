@@ -319,7 +319,7 @@
                     <div class="card-panel">
                         <div class = "col s12">
                             <div class="row">
-                                <h4>Inbox<h4>
+                                <h4>Sent Mail<h4>
                                 <ul class="collapsible popout" data-collapsible="accordion">
                                 <?php foreach ($mail as $key) {?>
                                 <li>
