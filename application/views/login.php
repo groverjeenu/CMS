@@ -16,17 +16,17 @@
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
   <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-  <title>Incourse Login</title>
+  <title>Incourse | Login</title>
 
   <!-- Favicons-->
-
-  <link rel="icon" href="<?php echo base_url(); ?>public/img/favicon/favicon-32x32.png" sizes="32x32">
+  <?php $this->load->view('common/icon');?>
+  <?php /*<link rel="icon" href="<?php echo base_url(); ?>public/img/favicon/favicon-32x32.png" sizes="32x32">
   <!-- Favicons-->
   <link rel="apple-touch-icon-precomposed" href="<?php echo base_url(); ?>public/img/favicon/apple-touch-icon-152x152.png">
   <!-- For iPhone -->
   <meta name="msapplication-TileColor" content="#00bcd4">
-  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
-  <!-- For Windows Phone -->
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">-->
+  <!-- For Windows Phone -->*/?>
 
 
   <!-- CORE CSS-->

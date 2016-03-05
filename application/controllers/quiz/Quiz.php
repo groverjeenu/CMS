@@ -140,7 +140,7 @@ class Quiz extends CI_Controller {
 		$data['title'] = $data['result']->quiz_name;
 		if ($data['resultstatus'] == "1") {
 			if (!$this->input->cookie('rid', TRUE)) {
-				redirect('quiz/access_test/'.$id, 'refresh');
+				redirect('quiz/quiz/access_test/'.$id, 'refresh');
 			}
 			$rid = $this->input->cookie('rid', TRUE);
 			//get the question answer
@@ -204,5 +204,3 @@ class Quiz extends CI_Controller {
 	}
 
 }
-
-?>

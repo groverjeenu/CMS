@@ -6,6 +6,10 @@ class Courses extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Courses_model','courses');
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect('login',"refresh");
+		}
 	}
 	
 	public function index()
@@ -35,6 +39,7 @@ class Courses extends CI_Controller
 			show_error("Access Forbidden",403);
 			exit(0);
 		}*/
+		$data['page_title'] = "Add Course";
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('title','Course Title','trim|required|xss_clean');
 		$this->form_validation->set_rules('description','Description','trim|required|xss_clean');
@@ -44,31 +49,79 @@ class Courses extends CI_Controller
 
 		if($this->form_validation->run()===FALSE)
 		{
-			log_message('DEBUG','ERror in validation'.validation_errors());
-
-			$this->load->view('courses/add_course');
+			
+			$data['file_error'] = "";
+ 			$this->load->view('courses/add_course', $data);
 		}
 		else
 		{
+			$icon = $this->input->post('course_icon');
+			if(isset($icon))
+			{
+				$this->load->library('upload');
+				$config['upload_path']          = './contents/images/course_icons';
+				$config['allowed_types']        = 'jpg|png|gif|jpeg';
+				$config['file_ext_tolower']		= TRUE;
+				$config['encrypt_name']			= TRUE;
+				$config['max_size']             = 5000;
+				$this->upload->initialize($config);
+	            if ( !$this->upload->do_upload('course_icon'))
+	            {
+	                $data['file_error'] = $this->upload->display_errors();
+	                $this->load->view('courses/add_course', $data);
+	                exit(0);
+	            }
+	            else
+	            {
+	            	$data['imagename'] = $this->upload->data('file_name');
+	            }
+	        }
 			log_message('DEBUG','some info');
+			$data_insert = $this->input->post();
 			$data = $this->courses->add($this->input->post());
 			$id = $data['id'];
-			$course_hash = $data['hash'];
 			if(is_null($id))
 			{
+				$this->session->set_flashdata('type','danger');
 				$this->session->set_flashdata('message','Some unexpected error ocuured');
-				$this->load->view('courses/add_course');
+				$data['page_title'] = "Add Course";
+				$this->load->view('courses/add_course', $data);
 			}
 			else
 			{
+				$this->session->set_flashdata('type','success');
 				$this->session->set_flashdata('message','Course successfully created');
-				$this->session->set_flashdata('hash',$course_hash);
-
+				redirect("courses/add");
 				//$this->load->view('courses/edit_course', array('hash' => $course_hash));
-				redirect('courses/edit/'.$course_hash,'refresh');
-			}	
+				//redirect('courses/edit/'.$course_hash,'refresh');
+			}
 		}
 	}
+
+	public function edit_general($courseid)
+    {
+    	/*if(!$this->ion_auth->in_group('faculty'))
+		{
+			show_error("Access Forbidden",403);
+			exit(0);
+		}*/
+    	$course = $this->courses->get_general($courseid);
+    	if(!$course)
+    	{
+    		show_error("Some unexpected error occurred");
+    		exit(0);
+    	}
+    	if(isset($course['course_key']))
+    		$course['is_key'] = 'enabled';
+    	$data['course'] = $course;
+    	$data['file_error'] = "";
+    	$data['page_title'] = "Edit Course";
+     	/*$course['id'] = $courseid;
+    	$course['name'] = "This is a course";
+    	$course['description'] = "This is a desciption";
+    	$course['syllabus'] = "This is a syllabus";*/
+    	$this->load->view('courses/edit_course',$data);
+    }
 
     public function edit($courseid)
     {

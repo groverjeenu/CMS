@@ -15,7 +15,7 @@ class qbank_model extends CI_Model
 		if ($this->input->post('search_type')) {
 			$search_type = $this->input->post('search_type');
 			$search = $this->input->post('search');
-
+			log_message("DEBUG","I av=cae $search");
 			$query = $this -> db -> query("select qbank.*, question_category.category_name, difficult_level.level_name from qbank, question_category, difficult_level where qbank.cid=question_category.cid and qbank.did=difficult_level.did and $search_type like '%$search%' and qbank.institute_id = '$institute_id' $extrap order by qid desc limit $limit, $nor");
 
 		} else {

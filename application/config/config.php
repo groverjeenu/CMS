@@ -514,7 +514,11 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
 /*
 | number of records per page
 */
 $config['number_of_rows']	= '30';
+
+
+$config['sitename'] = "Incourse";

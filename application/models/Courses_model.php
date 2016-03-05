@@ -24,7 +24,6 @@ class Courses_model extends CI_Model
 		$id = $this->db->insert_id();
 		$data['id'] = $id;
 		$this->add_faculty_to_course($id,$this->ion_auth->get_user_id());
-		$data['hash'] = $id;
 		return $data;
 	}
 
@@ -40,10 +39,15 @@ class Courses_model extends CI_Model
 
 	}
 
-	public function get_minimal($cid)
+	public function get_general($cid)
 	{
-		return $this->db->get_where('courses',array("cid" => $cid))->result_array();
-
+		$this->db->select('cid, course_name,description, syllabus, course_key,imagename');
+		$result = $this->db->get_where('courses',array("cid" => $cid));
+		if($result->num_rows() != 1)
+		{
+			return false;
+		}
+		return $result->row_array();
 	}
 
 	public function get_all_courses()

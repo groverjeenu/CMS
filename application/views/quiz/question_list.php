@@ -95,11 +95,11 @@
                                 <div class="panel-body">
                                     <div class="row-fluid">
                                         <a href="<?php echo site_url('quiz/qbank/add_new');?>" class="btn btn-success col-sm-2">Add new</a>
-                                        <div class="searchbox form-group" id="searchbox">
-                                            <form method="post" class="form-inline col-sm-6" action="<?php echo site_url('qbank');?>">
+                                        <div class="form-group" >
+                                            <form method="post" class="form-inline col-sm-6" action="<?php echo site_url('quiz/qbank');?>">
                                                 <div class="form-group">
                                                     <select style="width:100%;" data-toggle="select2">
-                                                        <option value="quiz/qbank.question">Question</option>
+                                                        <option value="qbank.question">Question</option>
                                                         <option value="question_category.category_name">Category</option>
                                                         <option value="difficult_level.level_name">Level</option>
                                                     </select>
@@ -281,6 +281,8 @@
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
     <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
 
+    <script src="<?php echo base_url();?>public/js/basic.js"></script>
+
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -303,6 +305,7 @@
     $(document).ready(function()
     {
     autosize($('textarea'));
+});
    
 	function removeqids(){
 		document.getElementById('removeqids').submit();
@@ -329,7 +332,7 @@
 
 
 	function sortby(limi,cid){
-	window.location="<?php echo site_url();?>/quiz/qbank/index/0/"+cid;
+	window.location="<?php echo site_url();?>quiz/qbank/index/0/"+cid;
 	}
     </script>
 </body>

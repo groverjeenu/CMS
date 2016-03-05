@@ -48,7 +48,7 @@ if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div
 <script>
 	function checkbox_validate(){
 	if(document.getElementById('agree').checked==true){
-window.location="<?php echo site_url('quiz/access_test/'.$result->quid);?>";
+window.location="<?php echo site_url('quiz/quiz/access_test/'.$result->quid);?>";
 }else{
 document.getElementById('warning_checkbox').style.display="block";
 }

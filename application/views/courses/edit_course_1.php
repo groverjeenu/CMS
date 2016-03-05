@@ -6,13 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title><?php echo $page_title." | ".$this->config->item('sitename');?></title>
+        <title><?php echo $this->config->item('sitename')." | ".$page_title;?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
-        <?php $this->load->view('common/icon');?>
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
-        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
         <style type="text/css">
         .mytextarea
         {
@@ -89,59 +87,147 @@
                 <div class="st-content">
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
-                        <?php if($this->session->flashdata('message')) { ?>
-                        <div class="alert alert-<?php echo $this->session->flashdata('type');?>" role="alert"><?php echo $this->session->flashdata('message');?></div>
-                        <?php } ?>
                         <div class="container-fluid">
-
                             <div class="page-section">
-                                <h1 class="text-display-1">Create New Course</h1>
+                                <h1 class="text-display-1">General Course Details</h1>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div id="course" class="card">
+                            <!-- Tabbable Widget -->
+                            <div class="tabbable paper-shadow relative" data-z="0.5">
+                                <!-- Tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a  data-toggle="tab" href="#course"><i class="fa fa-fw fa-lock"></i> <span class="hidden-sm hidden-xs">Course</span></a></li>
+                                    <li><a data-toggle="tab" href="#meta"><i class="fa fa-fw fa-credit-card"></i> <span class="hidden-sm hidden-xs">Meta</span></a></li>
+                                    <li><a data-toggle="tab" href="#lessons"><i class="fa fa-fw fa-credit-card"></i> <span class="hidden-sm hidden-xs">Lessons</span></a></li>
+                                </ul>
+                                <!-- // END Tabs -->
+                                <!-- Panes -->
+                                <div class="tab-content">
+                                    <div id="course" class="tab-pane active">
                                         <?php $attributes = array('class' => 'form');
-                                        echo form_open_multipart('courses/add', $attributes);?>
+                                        echo form_open('courses/edit');?>
                                         <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
                                         <div class="form-group form-control-material">
-                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo set_value('title');?>" />
+                                            <?php if(isset($course['course_name'])) $title =  $course['course_name']; else $title= set_value('title');
+                                            echo $title;?>
+                                            <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo $title?>" />
                                             <label for="title">Title</label>
                                             <?php echo form_error('title');?>
                                         </div>
-                                        <div class="form-group">
-                                          <label for="description">Description</label>
-                                          <textarea name="description" id="description" cols="30" rows="10" class="summernote"><?php echo set_value('description');?></textarea>
-                                          <?php echo form_error('description');?>
+                                        <div class="form-group form-control-material mytextarea" >
+                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write course description here...." value="<?php if(isset($course['description'])) echo $course['description']; else echo set_value('description');?>"><?php if(isset($course['description'])) echo $course['description']; else echo set_value('description');?></textarea>
+                                            <label for="description">Description</label>
+                                            <?php echo form_error('description');?>
                                         </div>
-                                        <div class="form-group">
-                                          <label for="syllabus">Syllabus</label>
-                                          <textarea name="syllabus" id="syllabus" cols="30" rows="10" class="summernote"><?php echo set_value('syllabus');?></textarea>
-                                          <?php echo form_error('syllabus');?>
+                                        <div class="form-group form-control-material mytextarea">
+                                            <textarea id="syllabus" name= "syllabus" class="form-control used" row="20" placeholder="Write course syllabus here...." value="<?php if(isset($course['syllabus'])) echo $course['syllabus']; else echo set_value('syllabus');?>"><?php if(isset($course['syllabus'])) echo $course['syllabus'] ;else echo set_value('syllabus');?></textarea>
+                                            <label for="syllabus">Syllabus</label>
+                                            <?php echo form_error('syllabus');?>
                                         </div>
                                         <h5>Enrollment Key</h5>
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" id="enable_toggle" class="btn btn-default" value="Enable">Enable</button>
                                                 <button type="button" id="disable_toggle" class="btn btn-default" value="Disable" >Disable</button>
                                             </div>
                                         </div>
-                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php echo set_value('is_key');?>"/>
+                                        <input type='text' class='hidden' name='is_key' id='is_key' value="<?php if(isset($course['is_key'])) echo $course['is_key']; else echo set_value('is_key');?>"/>
                                         <div class="form-group form-control-material">
-                                            <input type="text" <?php if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Enrollment Key" class="form-control used>" value="<?php echo set_value('course_key');?>" />
+                                            <input type="text" <?php if(isset($course['is_key'])) {if(!$course['course_key']) echo "disabled='disabled'"; }else if(!set_value('is_key')) echo "disabled='disabled'"; ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php if(isset($course['course_key'])) echo $course['course_key']; else echo set_value('course_key');?>" />
                                             <?php echo form_error('course_key');?>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Course Icon</label>
-                                            <input id="course_icon" name="course_icon"  type="file" class="file" data-show-caption="false" data-show-upload="false" data-allowed-file-extensions='["png", "jpg","gif","jpeg"]'>
-                                            <?php echo $file_error; ?>
-                                        </div>
                                         <div class="text-right">
-                                            <button type='submit' class="btn btn-primary">Save</button>
+                                            <button type='submit' class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
                                 </div>
+                                <div id="meta" class="tab-pane">
+                                    <form class="form-horizontal" method="course/edit">
+                                        <div class="form-group">
+                                            <label for="select" class="col-sm-3 control-label">Stream</label>
+                                            <div class="col-sm-9 col-md-9">
+                                                <select id="stream" name='stream[]' class="form-control selectpicker" multiple data-style="btn-white" data-live-search="true" data-size="5">
+                                                    <?php
+                                                    $streams = $this->courses->all_streams();
+                                                    foreach ($streams as $stream) {
+                                                    echo "<option value=".$stream['id'].">".$stream['name']."</option>";
+                                                    }?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="duration" class="col-sm-3 control-label">Course Duration(in Days)</label>
+                                            <div class="col-sm-4 col-md-2">
+                                                <input type="text" name="days" class="form-control" placeholder="No. of Days" value="<?php if(isset($course['days'])) echo $course['days']; else echo set_value('days'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="start" class="col-sm-3 control-label">Start Date</label>
+                                            <div class="col-sm-9 col-md-4">
+                                                <input name='start' id="start" type="text" class="form-control datepicker" value="<?php if(isset($course['start'])) echo $course['start']; else echo set_value('start'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end" class="col-sm-3 control-label">End Date</label>
+                                            <div class="col-sm-9 col-md-4">
+                                                <input name='end' id="end" type="text" class="form-control datepicker" value="<?php if(isset($course['end'])) echo $course['end']; else echo set_value('end'); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type='submit' class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <?php $lesson['id'] = 1;
+                                        $lesson['name'] = "I am a lesson";
+                                        $lesson['last_updated'] = time(0);
+                                        $lessons = array($lesson);
+                                        $no_lessons = 1;
+                                        $courseid= $course['id'];
+                                ?>
+                                <div id="lessons" class="tab-pane">
+                                    <div class="media v-middle s-container">
+                                        <div class="media-body">
+                                            <h5 class="text-subhead text-light"><?php echo $no_lessons;?> Lessons</h5>
+                                        </div>
+                                        <div class="media-right">
+                                            <a class="btn btn-primary paper-shadow relative" href="<?php echo base_url()."courses/$courseid/";?>lessons/add">Add lesson</a>
+                                        </div>
+                                    </div>
+                                    <div class="nestable" id="nestable-handles-primary">
+                                        <ul class="nestable-list">
+                                            <?php 
+                                                foreach($lessons as $lesson){
+                                            ?>
+                                            <li class="nestable-item nestable-item-handle" data-id="<?php echo $lesson['id']?>">
+                                                <div class="nestable-handle"><i class="md md-menu"></i></div>
+                                                <div class="nestable-content">
+                                                    <div class="media v-middle">
+                                                        <div class="media-left">
+                                                            <div class="icon-block half bg-purple-400  text-white">
+                                                                <i class="fa fa-book"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h4 class="text-title media-heading margin-none">
+                                                            <a href='<?php echo base_url()."courses/".$courseid."/lessons/".$lesson['id'];?>' class="link-text-color"><?php echo $lesson['name'];?></a>
+                                                            </h4>
+                                                            <?php //TODO: Add timeago here for udating last updated?>
+                                                            <div class="text-caption">updated 1 month ago</div>
+                                                        </div>
+                                                        <div class="media-right">
+                                                            <a href="<?php echo base_url()."courses/".$courseid."/lessons/edit/".$lesson['id'];?>" class="btn btn-white btn-flat"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <?php }?>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
+                            <!-- // END Panes -->
                         </div>
+                        <!-- // END Tabbable Widget -->
                     </div>
                 </div>
                 <!-- /st-content-inner -->
@@ -211,8 +297,7 @@
     Includes Custom Application JavaScript used for the current theme/module;
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
-    <script src="<?php echo base_url();?>public/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
-    <script src="<?php echo base_url();?>public/js/fileinput.min.js"></script>
+    <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -232,17 +317,10 @@
     ONLY when using the standalone modules; -->
     <!-- <script src="js/app/main.js"></script> -->
     <script>
+    autosize($('textarea'));
     $(document).ready(function()
     {
-    //autosize($('textarea'));
-    $('#enable_toggle').click(function(){
-    $("#is_key").val('enabled');
-    $("#course_key").prop('disabled',false);
-    });
-    $('#disable_toggle').click(function(){
-    $("#is_key").val('disabled');
-    $("#course_key").prop('disabled',true);
-    });
+    autosize($('textarea'));
     });
     </script>
 </body>

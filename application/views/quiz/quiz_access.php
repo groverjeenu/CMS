@@ -75,7 +75,6 @@ line-height:34px;
 		<div  id="left_div" style="width:70%;">
 			<?php
 			$category_name=explode(",",$time_info['category_name']);
-			$photo=$time_info['photo'];
 			$cate_range=array();
 			$startnextcate=array();
 			$qids_range=explode(",",$time_info['qids_range']);

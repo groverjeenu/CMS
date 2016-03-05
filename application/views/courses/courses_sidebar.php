@@ -1,8 +1,7 @@
 <!-- Fixed navbar -->
 <?php $firstname = "Prabhat"; $lastname="Agarwal"; $username = "prabhat"; $imagehash = "lop";
-  $user = (array)$this->ion_auth->user()->row();
-  //print_r($user);
-?>
+$user = (array)$this->ion_auth->user()->row();
+$courseid = $course['cid'];?>
     <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -14,9 +13,7 @@
             <span class="icon-bar"></span>
           </button>
           <div class="navbar-brand navbar-brand-primary navbar-brand-logo navbar-nav-padding-left">
-            <a class="svg" href="dashboard.html">
-<!--               <img src="<?php echo base_url()."public/img/site_icon.jpg";?>" alt="<?php echo $this->config->item('sitename'); ?>" class="img-circle" width="5"/>
- -->              <?php echo $this->config->item('sitename'); ?>
+            <a class="svg" href="dashboard.html"><?php echo $this->config->item('sitename'); ?>
             </a>
           </div>
         </div>
@@ -142,23 +139,24 @@
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
     <div class="sidebar left sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
       <div data-scrollable>
-
         <div class="sidebar-block">
           <div class="profile">
-            <a href="user/<?php echo $user['username']?>">
-              <img src="<?php echo base_url()."contents/images/people/".$user['image'];?>" alt="<?php echo $user['username']?>" class="img-circle width-80" />
+            <a href="<?php echo base_url()."courses/".$courseid;?>">
+              <img src="<?php echo base_url()."contents/images/courses/".$course['imagename'];?>" alt="<?php echo $course['course_name']?>" class="img-circle width-80" />
             </a>
-            <h4 class="text-display-1 margin-none"><?php echo $user['first_name']." ".$user['last_name']?></h4>
+            <h4 class="text-display-1 margin-none"><?php echo $course['course_name']?></h4>
           </div>
         </div>
 
         <ul class="sidebar-menu">
-          <li><a href="app-instructor-dashboard.html"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
-          <li><a href="app-instructor-messages.html"><i class="fa fa-paper-plane"></i><span>Messages</span></a></li>
-          <li><a href="app-instructor-courses.html"><i class="fa fa-mortar-board"></i><span>My Courses</span></a></li>
-          <li><a href="app-instructor-earnings.html"><i class="fa fa-bank"></i><span>My Question Bank</span></a></li>
-          <li><a href="app-instructor-statement.html"><i class="fa fa-bar-chart-o"></i><span>Statistics</span></a></li>
-          <li><a href="app-instructor-course-edit-course.html#"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
+          <li><a href="<?php echo base_url()."courses/edit/".$courseid;?>"><i class="md-home"></i><span>Course Page</span></a></li>
+          <li><a href="<?php echo base_url()."courses/edit/".$courseid."/meta";?>"><i class="md-description"></i><span>MetaData</span></a></li>
+          <li><a href="<?php echo base_url()."courses/".$courseid."/lectures";?>"><i class="md-video-collection"></i><span>Lectures</span></a></li>
+          <li><a href="<?php echo base_url()."courses/".$courseid."/assignments";?>"><i class="md-assignment"></i><span>Assignments</span></a></li>
+          <li><a href="<?php echo base_url()."courses/".$courseid."/materials";?>"><i class="md-my-library-books"></i><span>Course Materials</span></a></li>
+          <li><a href="<?php echo base_url()."courses/".$courseid."/forum";?>"><i class="md-forum"></i><span>Forum</span></a></li>
+          <li><a href="<?php echo base_url()."courses/".$courseid."/students";?>"><i class="md-account-child"></i><span>Students/Members</span></a></li>
+          <li><a href="<?php echo base_url()."courses/".$courseid."/notfications";?>"><i class="md-notifications"></i><span>Notifications</span></a></li>
         </ul>
       </div>
     </div>
