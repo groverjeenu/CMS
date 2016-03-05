@@ -640,7 +640,7 @@
                         <div class="input-field col s6">                          
                          <span>Grade</span>
                          <p class="range-field">
-                          <input type="range" for="grade" id="grade" min="0" max="100" />
+                          <input type="range" name="grade" id="grade" min="0" max="100" />
                         </p>
                       </div>
                     </div>
@@ -649,15 +649,17 @@
                         <div class="input-field col s6">                          
                          <span>Penalty</span>
                          <p class="range-field">
-                          <input type="range" for="penalty" id="penalty" min="0" max="100" />
+                          <input type="range" name="penalty" id="penalty" min="0" max="100" />
                         </p>
                       </div>
                     </div>
-                    
-                    <div class="input-field col s12">
-                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                        <i class="mdi-content-send right"></i>
-                      </button>
+                   
+                    <div class="row"> 
+                        <div class="input-field col s12">
+                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                            <i class="mdi-content-send right"></i>
+                          </button>
+                        </div>
                     </div>
                   </form>
                 </div>

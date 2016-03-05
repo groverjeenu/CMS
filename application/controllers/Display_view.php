@@ -266,13 +266,13 @@ class Display_view extends CI_Controller {
 	public function submit_grades($id)
 	{
 		$data['assignment_id'] = $id;
-		$data['grade'] = $this->input->post('grade');
-		$data['penalty'] = $this->input->post('penalty');
+		$data['grade'] = $_POST['grade'];
+		$data['penalty'] = $_POST['penalty'];
 		$data['graded_by'] = $this->ion_auth->get_user_id();
 		$this->courses->update_submissions($data);
 		echo "Successfully Submitted";
 		$id1 = $this->ion_auth->get_user_id();
-		//redirect('display_view/cadmindash/'.$id1, 'refresh');
+		redirect('display_view/cadmindash/'.$id1, 'refresh');
 	       			
 	}
 	public function get_query_courses()

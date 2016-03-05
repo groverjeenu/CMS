@@ -32,8 +32,13 @@
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/grades" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Grade Card</a>
                     </li>
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/inbox" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Inbox</a>
+                    </li>
+
+                    <div class="divider"></div>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/edit_profile" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Edit Profile</a>
                     </li>
+                    
                     <li class="bold"><a href="<?php echo base_url(); ?>auth/logout" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Logout</a>
                     </li>
                     

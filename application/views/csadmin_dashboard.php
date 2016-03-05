@@ -320,13 +320,14 @@
                         <div class="row">
                             <div class="col s12 l6">
                                 <ul id="projects-collection" class="collection">
-                                    <?php foreach($query as $key){ ?>
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
                                         <span class="collection-header">Assignments left to be corrected</span>
                                         <p></p>
                                         <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                                     </li>
+                                    <?php foreach($query as $key){ ?>
+                                    
                                     <li class="collection-item">
                                         <div class="row">
                                             <div class="col s6">
