@@ -2,36 +2,47 @@
                 <ul id="slide-out" class="side-nav leftside-navigation">
                     <li class="user-details cyan darken-2">
                         <div class="row">
-                            <div class="col col s4 m4 l4">
+                            <div class="col col s5 m5 l5">
                                 <?php $user = (array)$this->ion_auth->user()->row();?>
                                 <img src="<?php echo base_url();?>contents/users/<?php echo $user['image'];?>" alt="" class="circle responsive-img valign profile-image">
                             </div>
-                            <div class="col col s8 m8 l8">
+
+                            <div class="col col s10 m10 l10">
                                 <ul id="profile-dropdown" class="dropdown-content">
-                                    <li><a href="#"><i class="mdi-action-face-unlock"></i> Profile</a>
+                                    <li><a href="<?php echo base_url(); ?>display_view/edit_profile"><i class="mdi-action-face-unlock"></i> Profile</a>
                                     </li>
-                                    <li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
+                                    <!--li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
                                     </li>
                                     <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
-                                    </li>
-                                    <li><a href="<?php echo base_url(); ?>auth/logout"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
-                                    </li>
+                                    
+                                    <!--li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
+                                    </li-->
+                                    
                                 </ul>
                                 <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?php echo $user['email'];?><i class="mdi-navigation-arrow-drop-down right"></i></a>
                                 <!--?php $gr = $this->ion_auth->get_user_groups($user['id'])->row(); ?>
                                 <p class="user-roal"><?php echo $gr['description']?></p-->
                             </div>
+                           
                         </div>
                     </li>
-                    <li class="bold active"><a href="index.html" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                    <li class="bold"><a href="<?php echo base_url(); ?>dashboard" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
                     </li>
-                    <li class="bold"><a href="app-email.html" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> My courses <span class="new badge">4</span></a>
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/courselist" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Courselist</a>
                     </li>
-                    <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Assignments</a>
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/grades" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Grade Card</a>
                     </li>
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/inbox" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Inbox</a>
+                    </li>
+
+                    <div class="divider"></div>
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/edit_profile" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Edit Profile</a>
+                    </li>
+                    
+                    <li class="bold"><a href="<?php echo base_url(); ?>auth/logout" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Logout</a>
+                    </li>
+                    
+                    <!--  -->
                     <!--li class="no-padding">
                         <ul class="collapsible collapsible-accordion">
                             <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> CSS</a>

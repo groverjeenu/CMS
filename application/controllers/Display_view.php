@@ -26,6 +26,7 @@ class Display_view extends CI_Controller {
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->model('courses_model','courses');
 		$this->load->model('lessons_model','lessons');
+		$this->load->model('mail_model','mail');
 		$this->load->model('admindash_model');
 		$this->load->model('assignments_model','assignments');
 		$this->load->model('lessons_model');
@@ -226,7 +227,13 @@ class Display_view extends CI_Controller {
 	{
 
 		$lec = $this->lessons_model->get($id);
-		echo $id;
+		if($this->courses->check_if_enrolled($lec['course_id']) == 0 )
+		{
+			$this->session->set_flashdata('item', 'You are not enrolled for the course');
+			redirect('display_view/dashboard',"refresh");
+		}
+
+		//echo $id;
 		$data['lec'] = $lec;
 		$this->load->view('courselectures', $data);
 	}
@@ -259,13 +266,13 @@ class Display_view extends CI_Controller {
 	public function submit_grades($id)
 	{
 		$data['assignment_id'] = $id;
-		$data['grade'] = $this->input->post('grade');
-		$data['penalty'] = $this->input->post('penalty');
+		$data['grade'] = $_POST['grade'];
+		$data['penalty'] = $_POST['penalty'];
 		$data['graded_by'] = $this->ion_auth->get_user_id();
 		$this->courses->update_submissions($data);
 		echo "Successfully Submitted";
 		$id1 = $this->ion_auth->get_user_id();
-		//redirect('display_view/cadmindash/'.$id1, 'refresh');
+		redirect('display_view/cadmindash/'.$id1, 'refresh');
 	       			
 	}
 	public function get_query_courses()
@@ -346,5 +353,97 @@ class Display_view extends CI_Controller {
 		redirect('display_view/facultydash', 'refresh');
 	}
 
+	public function forgot_password()
+	{
+		echo "Password link sent to your email address";
+	}
+	public function grades()
+	{
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("login","refresh");
+		}
+
+		$query = $this->courses->get_user_courses();
+		$usr= $this->ion_auth->user()->row();
+			$data['user']= (array)$usr;
+		//$data['query'] = $query;
+			
+		foreach($query as $cidd)
+		{
+			$cid = $cidd['cid'];
+			
+
+			// $val = $this->courses->check_if_enrolled($cid);
+			// $val_ca = $this->courses->is_ca($cid);
+			
+			// $lectures = $this->courses->get_course_lectures($cid);
+			// $data['val'] = $val;
+			// $data['val_ca'] = $val_ca;
+			// $data['lectures'] = $lectures;
+			$data['data'][$cid]['course'] = $this->courses->get_course($cid);
+			$data['data'][$cid]['assignments'] = $this->courses->get_course_assignments($cid);
+			$data['data'][$cid]['grades_course']=$this->courses->get_course_grades($cid);
+			$data['data'][$cid]['wt'] = $this->courses->get_total_weight($cid);
+		}
+
+		
+		$this->load->view('grades',$data);
+	}
+
+
+	public function composemail($cid)
+	{
+		if($this->ion_auth->in_group('faculty'))
+		{
+			$fac = $this->mail->getstumails($cid);
+			$user = $this->mail->getuseremail();
+			$data['fac'] = $fac;
+			$data['user'] = $user;
+			$this->load->view('mail_compose_fac', $data);
+		}	
+		else
+		{	
+			$fac = $this->mail->getfacmails($cid);
+			$user = $this->mail->getuseremail();
+			$data['fac'] = $fac;
+			$data['user'] = $user;
+			$this->load->view('mail_compose', $data);
+		}
+	}
+
+	public function sendmail()
+	{
+		$data['sender_id'] = $this->ion_auth->get_user_id();
+		$data['body'] = htmlspecialchars($_POST['textarea']);
+		$data['is_read'] = 0;
+		date_default_timezone_set('Asia/Kolkata');
+		$data['date'] = date('Y-m-d H:i:s');
+		$this->mail->send_mail($data);
+
+		foreach ($_POST['select2'] as $key) {
+			$sender = $this->mail->getid($data);
+			$this->mail->update_receiver($sender['mail_id'], $key);
+		}
+	}
+
+	public function inbox()
+	{
+		$mail = $this->mail->mail_data();
+		$data['mail'] = $mail;
+		$this->load->view('inbox', $data);
+	}
+
+	public function sent_mail()
+	{
+		$mail = $this->mail->mail_data_sent();
+		$data['mail'] = $mail;
+		$this->load->view('sent_mail', $data);
+	}
+
+	public function reply_mail()
+	{
+
+	}
 
 } 

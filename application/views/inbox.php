@@ -316,168 +316,59 @@
 
             <section id = "content">
                 <div class = "container">
-                    <section id = "work-collections">
-                        <div class="row">
-                            <div class="col s12 l6">
-                                <ul id="projects-collection" class="collection">
-                                    <li class="collection-item avatar">
-                                        <i class="mdi-file-folder circle light-blue darken-2"></i>
-                                        <span class="collection-header">Assignments left to be corrected</span>
-                                        <p></p>
-                                        <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                                    </li>
-                                    <?php foreach($query as $key){ ?>
-                                    
-                                    <li class="collection-item">
+                    <div class="card-panel">
+                        <div class = "col s12">
+                            <div class="row">
+                                <h4>Inbox<h4>
+                                <ul class="collapsible popout" data-collapsible="accordion">
+                                <?php foreach ($mail as $key) {?>
+                                <li>
+                                    <div class="collapsible-header">
                                         <div class="row">
-                                            <div class="col s6">
-                                                <a href = "<?php echo base_url()."display_view/assigngrades/".$key['assignment_id']?>"
-                                                <p class="collections-title"><?php echo $key['course_name'];?></p>
-                                                </a>
-                                                <p class="collections-content">Assignment <?php echo $key['assignment_id'];?></p>
+                                            <div class="col s4">
+                                                <h4 class="header2">From: <?php echo $key['email']?></h4>
                                             </div>
-                                            <div class="col s3">
-                                                <span class="task-cat cyan">
-                                                Submitted by: id  
-                                                <?php 
-                                                echo $key['user_id'];
-                                                //$names = $this->course->get_course($ccourse['course_id'])->row();
-                                                //$namess = (array)$names;
-                                               // echo $all_courses[$ccourse['course_id']]['names']; ?>
-                                            </span>
+                                            <div class="col s4">
+                                                <h4 class="header2"></h4>
                                             </div>
-                                            <!--div class="col s3">
-                                                <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
+                                            <div class="col s4">
+                                                <h4 class="header2">Date: <?php echo $key['date']?></h4>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <?php }?>
-                                   
-                                    
-                                </ul> 
-                            </div> 
-                                 <!--div class = "card">
-                                        <div class="panel panel-default paper-shadow" data-z="0.5">
-                                            <span class="collection-header">Your Courses</span>
-                                            <li class="collection-item">
-                                                <div class="row">
-                                                    <div class = "col s6">
-                                                        <p class="collections-title">Web App</p>
-                                                        <p class="collections-content">Web App</p>
-                                                    </div>
-                                            </li-->
+                                    </div>
+                                    <div class = "collapsible-body hoverable">
+                                        <table class = "striped">
+                                            <thead>
+                                              <!--tr>
+                                                  <th data-field="sender_id"></th>
+                                                  <th data-field="name"></th>
+                                                  <th data-field="price"></th>
+                                                  <th data-field="price"></th>
+                                                  <th data-field="price"></th>
 
+                                              </tr-->
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <?php echo $key['body']?>
+                                                    </td>  
+                                                    <td>
+                                                        <a class="btn-flat waves-effect pink accent-2 white-text"><i class="mdi-communication-email right"></i>Reply</a>
+                                                    </td> 
 
-                                <!--div class="panel-heading">
-                                    <h4 class="text-headline margin-none">Courses</h4>
-                                    <p class="text-subhead text-light">Your recent courses</p>
-                                </div>
-                                <ul class="list-group">
-                                    <li class="list-group-item media v-middle">
-                                      <div class="media-body">
-                                        <a href="app-take-course.html" class="text-subhead list-group-link">Basics of HTML</a>
-                                      </div>
-                                      <div class="media-right">
-                                        <div class="progress progress-mini width-100 margin-none">
-                                          <div class="progress-bar progress-bar-green-300" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:45%;">
-                                          </div>
-                                        </div>
-                                      </div>
+                                                    
+                                                </tr>
+                                                <!--?php }?=-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <?php } ?>
                                     </li>
-                                    <li class="list-group-item media v-middle">
-                                      <div class="media-body">
-                                        <a href="app-take-course.html" class="text-subhead list-group-link">Angular in Steps</a>
-                                      </div>
-                                      <div class="media-right">
-                                        <div class="progress progress-mini width-100 margin-none">
-                                          <div class="progress-bar progress-bar-green-300" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:75%;">
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </li>
-                                    <li class="list-group-item media v-middle">
-                                      <div class="media-body">
-                                        <a href="app-take-course.html" class="text-subhead list-group-link">Bootstrap Foundations</a>
-                                      </div>
-                                      <div class="media-right">
-                                        <div class="progress progress-mini width-100 margin-none">
-                                          <div class="progress-bar progress-bar-green-300" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:25%;">
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </li>
-                                  </ul>
-                                  <div class="panel-footer text-right">
-                                    <a href="app-student-courses.html" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated href="#"> View all</a-->
-                            <!--div class="col s12 l6">
-                                <ul id="projects-collection" class="collection">
-                                    <li class="collection-item avatar">
-                                        <i class="mdi-file-folder circle light-blue darken-2"></i>
-                                        <span class="collection-header">Quiz</span>
-                                        <p>Recent Performnce</p>
-                                        <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">HTML</p>
-                                                <p class="collections-content">Web Dev</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat cyan">Development</span>
-                                            </div-->
-                                            <!--div class="col s3">
-                                                <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        <!--/div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">Mobile App for Social</p>
-                                                <p class="collections-content">iSocial App</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat grey darken-3">UI/UX</span>
-                                            </div-->
-                                            <!--div class="col s3">
-                                                <div id="project-line-2"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        <!--/div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">Website</p>
-                                                <p class="collections-content">MediTab</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat teal">Marketing</span>
-                                            </div-->
-                                            <!--div class="col s3">
-                                                <div id="project-line-3"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        <!--/div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <p class="collections-title">AdWord campaign</p>
-                                                <p class="collections-content">True Line</p>
-                                            </div>
-                                            <div class="col s3">
-                                                <span class="task-cat green">SEO</span>
-                                            </div-->
-                                            <!--div class="col s3">
-                                                <div id="project-line-4"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
-                                            </div-->
-                                        </div>
-                                    </li>
-                                </ul>   
+                                </ul>  
                             </div>
-                                      
                         </div>
-                    </section>
+                    </div>
                 </div>
             </section>
             <!-- END LEFT SIDEBAR NAV-->

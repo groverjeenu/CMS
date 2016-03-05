@@ -50,11 +50,11 @@
 
 <body>
     <!-- Start Page Loading -->
-    <div id="loader-wrapper">
+    <!--div id="loader-wrapper">
         <div id="loader"></div>        
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>
+    </div-->
     <!-- End Page Loading -->
 
     <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -98,9 +98,10 @@
     <div id="main">
         <!-- START WRAPPER -->
         <div class="wrapper">
-
+            <?php $this->view('addons/sidebar.php'); ?>
+    
             <!-- START LEFT SIDEBAR NAV-->
-            <aside id="left-sidebar-nav">
+            <!--aside id="left-sidebar-nav">
                 <ul id="slide-out" class="side-nav leftside-navigation">
                     <li class="user-details cyan darken-2">
                         <div class="row">
@@ -310,7 +311,7 @@
                     </li>
                 </ul>
                 
-            </aside>
+            </aside-->
 
             <section id = "content">
                 <div class = "container">
@@ -1385,14 +1386,14 @@
     // Toast Notification
     $(window).load(function() {
         setTimeout(function() {
-            Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
+           // Materialize.toast('<span><?php echo $this->session->flashdata('item') ;?></span>', 15000);
         }, 1500);
-        setTimeout(function() {
-            Materialize.toast('<span>You can swipe me too!</span>', 3000);
-        }, 5000);
-        setTimeout(function() {
-            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
-        }, 15000);
+        // setTimeout(function() {
+        //     Materialize.toast('<span>You can swipe me too!</span>', 3000);
+        // }, 5000);
+        // setTimeout(function() {
+        //     Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
+        // }, 15000);
     });
 
 

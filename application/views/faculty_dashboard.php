@@ -96,18 +96,19 @@
                                           <p class="text-subhead text-light">Your recent courses</p>
                                 </div>
                                   <ul class="list-group">
+                                  <?php $i=0 ?>
                                   <?php foreach ($courses as $key) {
                                   ?>
                                   <li class="list-group-item media v-middle">
                                     <div class="media-body">
-                                      <a href="app-instructor-course-edit-course.html" class="text-subhead list-group-link"><?php echo $key['course_name'];?></a>
+                                      <a href="<?php echo base_url();?>display_view/course/<?php echo $key['cid']?>" class="text-subhead list-group-link"><?php echo $key['course_name'];?></a>
                                     </div>
-                                    <div class="media-right">
+                                    <!--div class="media-right">
                                       <div class="progress progress-mini width-100 margin-none">
                                         <div class="progress-bar progress-bar-green-300" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
                                         </div>
                                       </div>
-                                    </div>
+                                    </div-->
                                   </li>
                                   <?php }?>
                                   <!--li class="list-group-item media v-middle">
@@ -133,10 +134,10 @@
                                     </div>
                                   </li-->
                                 </ul>
-                                <div class="panel-footer text-right">
+                                <!--div class="panel-footer text-right">
                                   <a href="app-instructor-courses.html" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated>View all</a>
                                           <a href="app-instructor-course-edit-course.html" class="btn btn-primary paper-shadow relative" data-z="0" data-hover-z="1" data-animated>CREATE COURSE <i class="fa fa-plus"></i></a>
-                                </div>
+                                </div-->
                               </div>  
                             </div>
                             <div class = "col-sm-6">
