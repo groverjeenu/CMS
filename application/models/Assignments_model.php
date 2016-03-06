@@ -11,7 +11,20 @@ class Assignments_model extends CI_Model
 
 	public function get($aid)
 	{
-		return (array)$this->db->query("select * from assignment where assignment_id = ?",$aid)->row();
+		return $this->db->query("select * from assignment where assignment_id = ?",$aid)->row_array();
+	}
+
+	public function edit($aid,$data)
+	{
+		return $this->db->update('assignment',$data,array('assignment_id' => $aid));
+	}
+
+	public function getall($cid)
+	{
+		return $this->db->select('assignment_id, title, last_update_time')
+						->from('assignment')
+						->where('cid',$cid)
+						->get()->result_array();
 	}
 	public function upload($aid,$file,$user_id)
 	{

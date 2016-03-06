@@ -11,8 +11,6 @@
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
-        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
         <style type="text/css">
         .mytextarea
         {
@@ -47,6 +45,10 @@
         - Using bundles will improve performance by greatly reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/app/app.css" rel="stylesheet">
         <link href="<?php echo base_url();?>public/css/app/bootstrap-switch.min.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>public/css/app/bootstrap-datepicker.min.css" rel="stylesheet">
+
+        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
         <!-- App CSS CORE
         This variant is to be used when loading the separate styling modules -->
         <!-- <link href="css/app/main.css" rel="stylesheet"> -->
@@ -91,39 +93,59 @@
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
                         <div class="container-fluid">
-                            <?php echo $error; ?>
                             <div class="page-section">
-                                <h1 class="text-display-1">Create New Lesson</h1>
+                                <h1 class="text-display-1">Edit Assignment</h1>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div id="course" class="card">
                                         <?php $attributes = array('class' => 'form');
-                                        echo form_open_multipart('courses/'.$courseid.'/lessons/add');?>
+                                        echo form_open_multipart('courses/'.$courseid.'/assignments/edit/'.$assignment['assignment_id']);?>
                                         <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
                                         <div class="form-group form-control-material">
-                                            <input type="text" name="title" id="title" placeholder="Lesson Title" class="form-control used" value="<?php echo set_value('title');?>" />
+                                            <input type="text" name="title" id="title" placeholder="Lesson Title" class="form-control used" value="<?php echo $assignment['title']?>" />
                                             <label for="title">Title</label>
                                             <?php echo form_error('title');?>
                                         </div>
-                                        <div class="form-group">
-                                          <label for="description">Description</label>
-                                          <textarea name="description" id="description" cols="30" rows="10" class="summernote"><?php echo set_value('description');?></textarea>
-                                          <?php echo form_error('description');?>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="video">Video</label>
-                                            <input type='file' name='video' id='video'>
+                                        <div class="form-group" >
+                                            <label for="description">Description</label>
+                                            <textarea id="description" name = "description" class="summernote" row="20" placeholder="Write assignment description here...." value="<?php echo $assignment['description']?>"><?php echo $assignment['description']?></textarea>
+                                            <?php echo form_error('description');?>
                                         </div>
                                         <div class="form-group">
-                                            <label for="text">Lesson Text</label>
+                                            <label for="text">Assignment File(s)</label>
                                             <input type='file' name='text' id='text' >
+                                            <?php if($file_error) echo $file_error;?>
                                         </div>
-                                        <h5>Visible</h5>
-                                        <input type="checkbox" name="visibility" id="visibility" checked>
+                                        <div class="form-group">
+                                            <label for="start" class="control-label">Release Date</label>
+                                            <div class='input-group date datetimepicker col-sm-6' >
+                                                <input name="start_date" id="start" type='text' class="form-control"  />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            <?php echo form_error('start_date');?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end" class="control-label">Due Date</label>
+                                            <div class='input-group date datetimepicker col-sm-6' >
+                                                <input name="deadline" id="end" type='text' class="form-control"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            <?php echo form_error('deadline');?>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="weightage">Weightage</label>
+                                                <input id="weightage" data-toggle="touch-spin" data-min="0" data-max="100" data-postfix="%" data-step="0.1" data-decimals="2" type="text" value="<?php echo $assignment['weightage']?>" name="weightage"/>
+                                        </div>
+                                        <?php echo form_error('weightage');?>
                                         <div class="text-right">
                                             <button type='submit' class="btn btn-primary">Save</button>
                                         </div>
+                                        
                                     </form>
                                 </div>
                             </div>
@@ -198,8 +220,9 @@
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-switch.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>public/js/moment.min.js"></script>
     <script src="<?php echo base_url();?>public/js/fileinput.min.js"></script>
-
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -222,22 +245,23 @@
     $(document).ready(function()
     {
         $("#visibility").bootstrapSwitch();
-        $("#video").fileinput({
-                showCaption:false,
-                showUpload:false,
-                allowedFileExtensions:["mpeg","mpg","mpe","3gp","mp4"],
-                autoReplace: true,
-                maxFileCount: 1,
-                maxFileSize: 500000
-            });
+        $("#start").datetimepicker({
+            defaultDate:"<?php echo $assignment['start_date'];?>"
+        });
+        $("#end").datetimepicker({
+            defaultDate:"<?php echo $assignment['deadline'];?>"
+        });
+
         $("#text").fileinput({
                 showCaption:false,
                 showUpload:false,
                 allowedFileExtensions:["pdf","txt","gzip","gtar","zip","rar","tar","tgz","gz"],
                 autoReplace: true,
+                initialPreview: "<object height='300' width='400' data='<?php echo base_url().'contents/assignments/'.$assignment['filename'];?>'></object>",
                 maxFileCount: 1,
                 maxFileSize: 100000
             });
+
     });
     </script>
 </body>

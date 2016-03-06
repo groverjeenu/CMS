@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['public/js/(:any)'] = "public/js/$1";
 $route['(.+)/js/(.*)'] = "welcome/test/$2";
 $route['faculty/search'] = "courses/search_faculty";
+$route['courses/(:num)/assignments'] = 'assignments/listall/$1';
 $route['courses/(:num)/lectures'] = 'courses/lectures/$1';
 $route['courses/edit/(:num)/add_faculty'] = 'courses/add_faculty/$1';
 $route['courses/edit/(:num)/add_cadmin'] = 'courses/add_cadmin/$1';

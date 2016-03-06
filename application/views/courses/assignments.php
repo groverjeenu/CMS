@@ -11,8 +11,8 @@
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
-        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
+
+
         <style type="text/css">
         .mytextarea
         {
@@ -46,7 +46,6 @@
         TIP:
         - Using bundles will improve performance by greatly reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/app/app.css" rel="stylesheet">
-        <link href="<?php echo base_url();?>public/css/app/bootstrap-switch.min.css" rel="stylesheet">
         <!-- App CSS CORE
         This variant is to be used when loading the separate styling modules -->
         <!-- <link href="css/app/main.css" rel="stylesheet"> -->
@@ -75,11 +74,18 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <!-- Wrapper required for sidebar transitions -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>        
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
         <div class="st-container">
-            <?php $this->view('common/header');?>
+            <?php $this->view('courses/courses_sidebar',array('course'=>$course));?>
             <!-- sidebar effects OUTSIDE of st-pusher: -->
             <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
             <!-- content push wrapper -->
@@ -90,53 +96,70 @@
                 <div class="st-content">
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
+                        <?php if($this->session->flashdata('message')) { ?>
+                        <div class="alert alert-<?php echo $this->session->flashdata('type');?>" role="alert"><?php echo $this->session->flashdata('message');?></div>
+                        <?php } ?>
                         <div class="container-fluid">
-                            <?php echo $error; ?>
                             <div class="page-section">
-                                <h1 class="text-display-1">Create New Lesson</h1>
+                                <h1 class="text-display-1">Course Assignments</h1>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div id="course" class="card">
-                                        <?php $attributes = array('class' => 'form');
-                                        echo form_open_multipart('courses/'.$courseid.'/lessons/add');?>
-                                        <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
-                                        <div class="form-group form-control-material">
-                                            <input type="text" name="title" id="title" placeholder="Lesson Title" class="form-control used" value="<?php echo set_value('title');?>" />
-                                            <label for="title">Title</label>
-                                            <?php echo form_error('title');?>
-                                        </div>
-                                        <div class="form-group">
-                                          <label for="description">Description</label>
-                                          <textarea name="description" id="description" cols="30" rows="10" class="summernote"><?php echo set_value('description');?></textarea>
-                                          <?php echo form_error('description');?>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="video">Video</label>
-                                            <input type='file' name='video' id='video'>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="text">Lesson Text</label>
-                                            <input type='file' name='text' id='text' >
-                                        </div>
-                                        <h5>Visible</h5>
-                                        <input type="checkbox" name="visibility" id="visibility" checked>
-                                        <div class="text-right">
-                                            <button type='submit' class="btn btn-primary">Save</button>
-                                        </div>
-                                    </form>
+                            <?php $assignments = $this->assignments->getall($course['cid']);
+                                    $no_assignments = count($assignments);
+                                    $courseid = $course['cid'];
+                            ?>
+                            <div id="assignments" class="tab-pane">
+                                <div class="media v-middle s-container">
+                                    <div class="media-body">
+                                        <h5 class="text-subhead text-light"><?php echo $no_assignments;?> Assignments</h5>
+                                    </div>
+                                    <div class="media-right">
+                                        <a class="btn btn-primary paper-shadow relative" href="<?php echo base_url()."courses/$courseid/";?>assignments/add">Add Assignment</a>
+                                    </div>
+                                </div>
+                                <div class="nestable" id="nestable-handles-primary">
+                                    <ul class="nestable-list">
+                                        <?php 
+                                            foreach($assignments as $assignment){
+                                        ?>
+                                        <li class="nestable-item nestable-item-handle" data-id="<?php echo $assignment['assignment_id']?>">
+                                            <div class="nestable-handle"><i class="md md-menu"></i></div>
+                                            <div class="nestable-content">
+                                                <div class="media v-middle">
+                                                    <div class="media-left">
+                                                        <div class="icon-block half bg-purple-400  text-white">
+                                                            <i class="fa fa-book"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h4 class="text-title media-heading margin-none">
+                                                        <a href='<?php echo base_url()."courses/".$courseid."/assignments/".$assignment['assignment_id'];?>' class="link-text-color"><?php echo $assignment['title'];?></a>
+                                                        </h4>
+                                                        <?php 
+                                                            $iso = date(DATE_RFC2822,strtotime($assignment['last_update_time'])); $dis = date('l jS \of F Y h:i:s A',strtotime($assignment['last_update_time'])); ?>
+                                                        <div class="text-caption">last updated  
+                                                            <time class="timeago" datetime="<?php echo $iso;?>"><?php echo $dis; ?></time>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <a href="<?php echo base_url()."courses/".$courseid."/assignments/edit/".$assignment['assignment_id'];?>" class="btn btn-white btn-flat"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <?php }?>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
+                    
                     </div>
+                    <!-- /st-content-inner -->
                 </div>
-                <!-- /st-content-inner -->
+                <!-- /st-content -->
             </div>
-            <!-- /st-content -->
+            <!-- /st-pusher -->
+            <?php $this->view('common/footer');?>
         </div>
-        <!-- /st-pusher -->
-        <?php $this->view('common/footer');?>
-    </div>
     <!-- /st-container -->
     <!-- Inline Script for colors and config objects; used by various external scripts; -->
     <script>
@@ -197,9 +220,10 @@
     Includes Custom Application JavaScript used for the current theme/module;
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-switch.min.js"></script>
+    <script src="<?php echo base_url();?>public/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>public/js/fileinput.min.js"></script>
-
+    <script src="<?php echo base_url();?>public/js/loader.js"></script>
+    <script src="<?php echo base_url();?>public/js/jquery.timeago.js"></script>
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -219,26 +243,10 @@
     ONLY when using the standalone modules; -->
     <!-- <script src="js/app/main.js"></script> -->
     <script>
-    $(document).ready(function()
-    {
-        $("#visibility").bootstrapSwitch();
-        $("#video").fileinput({
-                showCaption:false,
-                showUpload:false,
-                allowedFileExtensions:["mpeg","mpg","mpe","3gp","mp4"],
-                autoReplace: true,
-                maxFileCount: 1,
-                maxFileSize: 500000
-            });
-        $("#text").fileinput({
-                showCaption:false,
-                showUpload:false,
-                allowedFileExtensions:["pdf","txt","gzip","gtar","zip","rar","tar","tgz","gz"],
-                autoReplace: true,
-                maxFileCount: 1,
-                maxFileSize: 100000
-            });
-    });
+        $(document).ready(function() {
+            $("time.timeago").timeago();
+            $("#li_assignments").addClass('active');
+        });
     </script>
 </body>
 </html>
