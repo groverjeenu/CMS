@@ -18,6 +18,31 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->database();
+		$this->load->library(array('ion_auth','form_validation'));
+		$this->load->model('courses_model','courses');
+		$this->load->model('lessons_model','lessons');
+		$this->load->model('mail_model','mail');
+		$this->load->model('admindash_model');
+		$this->load->model('assignments_model','assignments');
+		$this->load->model('lessons_model');
+		$this->load->helper(array('url','language'));
+
+		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+
+		$this->lang->load('auth');
+
+		
+
+		
+
+		
+
+	}
 	public function index()
 	{
 		$this->load->view('homepage');
@@ -28,6 +53,7 @@ class Welcome extends CI_Controller {
 				echo $i."\t";
 			echo "<br>";
 		}*/
+		
 		
 
 	}
@@ -123,5 +149,66 @@ class Welcome extends CI_Controller {
 		$this->email->subject($subject);
 		$this->email->message($message);
 		echo $this->email->send();
+	}
+
+
+	public function parent_login()
+	{
+		$this->load->view('parent_login');
+	}
+
+	public function view_ward_grades()
+	{
+		$this->form_validation->set_rules('ward_email', 'ward_email', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('passkey', 'passkey', 'trim|required|xss_clean');
+		//echo $this->input->post('identity')." ".$this->input->post('password');
+		if ($this->form_validation->run() == true)
+		{
+
+				$usr = $this->db->query("select * from users where email = ?",$this->input->post('ward_email'))->row();
+				$datas = (array)$usr;
+
+				if($datas && $datas != NULL && $datas['parent_key'] == $this->input->post('passkey'))
+				{
+
+					$query = $this->courses->get_user_courses();
+					//$usr= $this->ion_auth->user()->row();
+						$data['user']= (array)$usr;
+						//echo $datas['email'];
+					//$data['query'] = $query;
+						
+					foreach($query as $cidd)
+					{
+						$cid = $cidd['cid'];
+						
+
+						// $val = $this->courses->check_if_enrolled($cid);
+						// $val_ca = $this->courses->is_ca($cid);
+						
+						// $lectures = $this->courses->get_course_lectures($cid);
+						// $data['val'] = $val;
+						// $data['val_ca'] = $val_ca;
+						// $data['lectures'] = $lectures;
+						$data['data'][$cid]['course'] = $this->courses->get_course($cid);						;
+						$data['data'][$cid]['assignments'] = $this->courses->get_course_assignments($cid);
+						$data['data'][$cid]['grades_course']=$this->courses->get_course_grades($cid,$datas);
+						$data['data'][$cid]['wt'] = $this->courses->get_total_weight($cid);
+					}
+
+				
+					$this->load->view('ward_grades',$data);
+				}
+				else
+				{
+					redirect("welcome/parent_login","refresh");
+					//echo ":hgfg";
+				}
+
+		}
+		else
+			redirect("welcome/parent_login","refresh");
+			//echo " bhh";
+
+		
 	}
 }

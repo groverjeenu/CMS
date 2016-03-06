@@ -672,6 +672,22 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           </div>
                         </div>
                       </div>
+
+                      <?php if($this->ion_auth->in_group('members')) {?>
+                      <div class="form-group">
+                        <label for="inputEmail3" class="col-md-2 control-label">Set Parental Passkey</label>
+                        <div class="col-md-6">
+                          <div class="form-control-material">
+                            <div class="input-group">
+                             
+                              <input type="parent_key" name = "parent_key" class="form-control" id="inputEmail3" placeholder="Parental Key" value = "<?php echo $user['parent_key'];?>">
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <?php } ?>
+
                     </div>
                       <!--
                       <div class="form-group">
@@ -841,17 +857,12 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
-/*    $(window).load(function() {
+   $(window).load(function() {
         setTimeout(function() {
-            Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
+            Materialize.toast('<?php echo $this->session->flashdata("message");?>', 15000);
         }, 1500);
-        setTimeout(function() {
-            Materialize.toast('<span>You can swipe me too!</span>', 3000);
-        }, 5000);
-        setTimeout(function() {
-            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
-        }, 15000);
-    });*/
+        
+    });
 
 
     $(function() {

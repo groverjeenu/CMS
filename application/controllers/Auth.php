@@ -437,6 +437,7 @@ class Auth extends CI_Controller {
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique['.$tables['users'].'.username]');
         if($identity_column!=='email')
         {
             $this->form_validation->set_rules('identity',$this->lang->line('create_user_validation_identity_label'),'required|is_unique['.$tables['users'].'.'.$identity_column.']');
@@ -460,6 +461,7 @@ class Auth extends CI_Controller {
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name'  => $this->input->post('last_name'),
+                'username' => $this->input->post('username'),
                 //'company'    => "",
                 //'phone'      => "",
                 'is_faculty' => (bool)$this->input->post('faculty'),
@@ -638,6 +640,11 @@ class Auth extends CI_Controller {
 				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
 			}
+			if ($this->input->post('parent_key'))
+			{
+				$this->form_validation->set_rules('parent_key', 'parent_key', 'min_length[4]|max_length[16]');
+				
+			}
 
 			if ($this->form_validation->run() === TRUE)
 			{
@@ -657,6 +664,13 @@ class Auth extends CI_Controller {
 				if ($this->input->post('password'))
 				{
 					$data['password'] = $this->input->post('password');
+				}
+
+				if ($this->input->post('parent_key'))
+				{
+					$data['parent_key'] = $this->input->post('parent_key');
+
+					
 				}
 
 
@@ -709,6 +723,12 @@ class Auth extends CI_Controller {
 
 			    }
 
+			    $this->session->set_flashdata('message','Update Succesful');
+
+			}
+			else
+			{
+				$this->session->set_flashdata('message','Error : Update Unsuccesful');
 			}
 		}
 
@@ -758,7 +778,13 @@ class Auth extends CI_Controller {
 			'type' => 'password'
 		);
 
-		//$this->_render_page('auth/edit_user', $this->data);
+		$this->data['parent_key'] = array(
+			'name' => 'parent_key',
+			'id'   => 'parent_key',
+			'type' => 'text'
+		);
+
+		
 		redirect('display_view/edit_profile',"refresh");
 	}
 

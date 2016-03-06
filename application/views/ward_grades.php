@@ -9,7 +9,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-    <title>Dashboard</title>
+    <title>Ward's Grades</title>
 
     <!-- Favicons-->
     <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
@@ -47,12 +47,45 @@
 </head>
 
 <body>
-    <?php $this->view('addons/header.php'); ?>
+    <div id="loader-wrapper">
+    <div id="loader"></div>        
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+
+<header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="cyan">
+                <div class="nav-wrapper">                    
+                    
+                    <ul class="left">                                            
+
+                     <!--  <li class="no-hover"><a href="#" data-activates="slide-out" class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan"><i class="mdi-navigation-menu" ></i></a></li> -->
+                      <li><h4 style="color:white">Incourse</h4></li>
+                    </ul>
+                    
+                    
+                    <!--div class="header-search-wrapper hide-on-med-and-down">
+                        <i class="mdi-action-search"></i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder=""/>
+                    </div-->
+                    <ul class="right hide-on-med-and-down">    
+
+                        <li class="pull-right">
+                            <?php echo $user['first_name']." &nbsp;".$user['last_name']." &nbsp; &nbsp; &nbsp; &nbsp;".$user['email']; ?>
+                        <li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- end header nav-->
+</header>
     <div id="main">
         <!-- START WRAPPER -->
         
         <div class="wrapper">
-            <?php $this->view('addons/sidebar.php'); ?>
+          
             <section id = "content">
             <div class = "container">
                 <section id = "work-collections">

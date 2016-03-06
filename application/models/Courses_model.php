@@ -97,9 +97,11 @@ class Courses_model extends CI_Model
 		 return $d[$c['cid']];
 	}
 
-	public function  get_user_courses()
+	public function  get_user_courses($usr = NULL)
 	{
+		if(!$usr)
 		$curr_user = (array)($this->ion_auth->user()->row());
+		else $curr_user = $usr;
 		$user_courses =  $this->db->query("select * from users,enrollments,courses where users.id = enrollments.student_id and enrollments.course_id = courses.cid and users.id = ?",$curr_user['id'])->result_array();
 		return $user_courses;
 
@@ -179,10 +181,19 @@ class Courses_model extends CI_Model
 	}
 
 
-	public function get_course_grades($cid)
+	public function get_course_grades($cid,$usr = NULL)
 	{
+		if(!$usr)
+		{
 		$curr_user = (array)($this->ion_auth->user()->row());
 		$uid = $curr_user['user_id'];
+		}
+		else
+		{
+			$curr_user = $usr;
+			$uid = $curr_user['id'];
+		}
+		
 		return $this->db->query("select * from enrollments,assignment,submissions where enrollments.course_id = assignment.cid and assignment.assignment_id = submissions.assignment_id and submissions.user_id = ? and enrollments.student_id = ? and isgraded = 1 and assignment.cid = ?",array($uid,$uid,$cid))->result_array();
 	}
 

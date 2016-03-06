@@ -79,6 +79,15 @@
           </div>
           <div class="row margin">
             <div class="input-field col s12">
+              <i class="mdi-communication-email prefix"></i>
+              <input id="username" type="text" name = "username">
+              <label for="username" class="center-align">Username</label>
+            </div>
+          </div>
+          
+
+          <div class="row margin">
+            <div class="input-field col s12">
               <i class="mdi-action-lock-outline prefix"></i>
               <input id="password" type="password" name = "password">
               <label for="password">Password</label>
@@ -97,6 +106,7 @@
               <label for="faculty">I am a faculty</label>
             </div>
           </div>
+
           <div class="row">
             <div class="input-field col s12">
               <button type="submit" class="btn waves-effect waves-light col s12">Sign Up</button>

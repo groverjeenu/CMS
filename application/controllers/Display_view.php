@@ -446,4 +446,6 @@ class Display_view extends CI_Controller {
 
 	}
 
+	
+
 } 
