@@ -357,4 +357,10 @@ class Courses_model extends CI_Model
 		$this->db->query("update course_courseadmin set is_approved=1 where courseadmin=?", $id);
 	}
 
+	public function getstulist($cid)
+	{
+		$cid = intval($cid);
+		return $this->db->query("select * from enrollments, users where enrollments.course_id=? and enrollments.student_id=users.id", $cid)->result_array();
+	}
+
 }
