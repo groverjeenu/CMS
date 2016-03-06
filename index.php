@@ -66,12 +66,17 @@
 switch (ENVIRONMENT)
 {
 	case 'development':
+		date_default_timezone_set('Asia/Kolkata');
+		
 		error_reporting(E_ALL ^ E_WARNING);
 		ini_set('display_errors', 1);
 	break;
 
-	case 'testing':
+	case 'testing':	date_default_timezone_set('Asia/Kolkata');
+		
 	case 'production':
+		date_default_timezone_set('Asia/Kolkata');
+		
 		ini_set('display_errors', 0);
 		if (version_compare(PHP_VERSION, '5.3', '>='))
 		{

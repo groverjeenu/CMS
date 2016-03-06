@@ -374,4 +374,10 @@ class Courses_model extends CI_Model
 		return $this->db->query("select * from enrollments, users where enrollments.course_id=? and enrollments.student_id=users.id", $cid)->result_array();
 	}
 
+	public function get_course_quiz($cid)
+	{
+		$cid = intval($cid);
+		return $this->db->query("select * from quiz where course_id=?", $cid)->result_array();
+	}
+
 }

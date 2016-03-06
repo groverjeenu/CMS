@@ -157,7 +157,7 @@ line-height:34px;
 			?>
 			<input type="hidden" value="<?php echo $key;?>" id="total_cate">
 			<div style="clear:both;"></div>
-			<form action="<?php echo site_url('quiz/submit_quiz/'.$quiz_id);?>" method="post" id="testform" onsubmit="showquestion('0');">
+			<form action="<?php echo site_url('quiz/quiz/submit_quiz/'.$quiz_id);?>" method="post" id="testform" onsubmit="showquestion('0');">
 				<?php
 				$category_number=0;
 				$selected_oids=explode(",",$time_info['oids']);
@@ -183,7 +183,7 @@ line-height:34px;
 					?>
 					<tr><td><table>
 						<tr><td style="width:10px; border:0px;"> <input type="radio"  id="op-<?php echo $key;?>-<?php echo $opcount;?>" name="answers<?php echo $key;?>" value="<?php if ($result->pract_test=="0"){echo $option['oid'];}else{echo $option['oid']."-".$option['score'];}?>" onClick="" <?php if($selected_oids[$key] == $option['oid']){ echo "checked"; } ?> > </td>
-						<td style="border:0px;width:750px;"> <?php echo $option['option_value'];?></td></tr></table>
+						<td style="border:0px;width:750px;"><?php echo $option['option_value'];?></td></tr></table>
 					</td></tr>
 					<?php
 					$opcount+=1;
