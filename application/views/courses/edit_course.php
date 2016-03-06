@@ -11,7 +11,7 @@
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
-        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
 
         <style type="text/css">
         .mytextarea
@@ -74,11 +74,18 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <!-- Wrapper required for sidebar transitions -->
+        <div id="loader-wrapper">
+            <div id="loader"></div>        
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>
         <div class="st-container">
-            <?php $this->view('common/header');?>
+            <?php $this->view('courses/courses_sidebar',array('course'=>$course));?>
             <!-- sidebar effects OUTSIDE of st-pusher: -->
             <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
             <!-- content push wrapper -->
@@ -89,6 +96,9 @@
                 <div class="st-content">
                     <!-- extra div for emulating position:fixed of the menu -->
                     <div class="st-content-inner padding-none">
+                        <?php if($this->session->flashdata('message')) { ?>
+                        <div class="alert alert-<?php echo $this->session->flashdata('type');?>" role="alert"><?php echo $this->session->flashdata('message');?></div>
+                        <?php } ?>
                         <div class="container-fluid">
                             <div class="page-section">
                                 <h1 class="text-display-1">General Course Details</h1>
@@ -97,7 +107,7 @@
                                 <div class="panel-body">
                                     <div id="course" class="card">
                                         <?php $attributes = array('class' => 'form');
-                                            echo form_open('courses/edit/general/'.$course['cid'],$attributes);?>
+                                            echo form_open_multipart('courses/edit/'.$course['cid'],$attributes);?>
                                             <!-- <form action="app-instructor-course-edit-course.html" class="form"> -->
                                             <div class="form-group form-control-material">
                                                 <input type="text" name="title" id="title" placeholder="Course Title" class="form-control used" value="<?php echo $course['course_name']?>" />
@@ -123,12 +133,12 @@
                                             </div>
                                             <input type='text' class='hidden' name='is_key' id='is_key' value="<?php echo $course['is_key'] ?>"/>
                                             <div class="form-group form-control-material">
-                                                <input type="text" <?php if(!$course['is_key']) echo 'disabled="disabled"'  ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo $course['course_key']; ?>" />
+                                                <input type="text" <?php if($course['is_key'] == "disabled") echo 'disabled="disabled" '  ?>name="course_key" data-toggle="key" id="course_key" placeholder="Course Key" class="form-control used" value="<?php echo $course['course_key']; ?>" />
                                                 <?php echo form_error('course_key');?>
                                             </div>
                                             <div class="form-group">
                                                     <label class="control-label">Course Icon</label>
-                                                    <input id="course_icon" name="course_icon"  type="file" class="file" data-show-caption="false" data-show-upload="false" data-allowed-file-extensions='["png", "jpg","gif","jpeg"]'>
+                                                    <input id="course_icon" name="course_icon"  type="file" >
                                                     <?php echo $file_error; ?>
                                             </div>
                                             <div class="text-right">
@@ -210,6 +220,7 @@
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
     <script src="<?php echo base_url();?>public/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>public/js/fileinput.min.js"></script>
+    <script src="<?php echo base_url();?>public/js/loader.js"></script>
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -229,29 +240,36 @@
     ONLY when using the standalone modules; -->
     <!-- <script src="js/app/main.js"></script> -->
     <script>
-    autosize($('textarea'));
     $(document).ready(function()
     {
-    autosize($('textarea'));
+    //autosize($('textarea'));
+    $('#enable_toggle').click(function(){
+    $("#is_key").val('enabled');
+    $("#course_key").prop('disabled',false);
+    });
+    $('#disable_toggle').click(function(){
+    $("#is_key").val('disabled');
+    $("#course_key").prop('disabled',true);
+    });
     });
     </script>
     <script>
-        $(document).on('ready', function() {
+        $(document).ready(function() {
             $("#course_icon").fileinput({
-                autoReplace: true,
-                maxFileCount: 1,
-                initialPreview: [
+                showCaption:false,
+                showUpload:false,
+                allowedFileExtensions:["png", "jpg","gif","jpeg"],
+                initialPreview:
                     "<img src='<?php echo base_url();?>contents/images/course_icons/<?php echo $course['imagename'];?>' class='file-preview-image' alt='course-icon' title='<?php echo $course['course_name'];?>' >",
-                    
-                ],
                 initialPreviewConfig: [
                 {
-                    url: '<?php echo base_url();?>course_icon/delete',
-                    key: "<?php echo $course['imagename'];?>"
-                },
-                overwriteInitial: true,
-                maxFileSize: 5000,
+                    url: '<?php echo base_url();?>courses/deleteIcon',
+                    key: <?php echo $course['cid'];?>
+                }],
+                maxFileSize: 5000
             });
+
+            $("#li_general").addClass('active');
         });
     </script>
 </body>

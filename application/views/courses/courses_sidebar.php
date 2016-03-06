@@ -142,21 +142,21 @@ $courseid = $course['cid'];?>
         <div class="sidebar-block">
           <div class="profile">
             <a href="<?php echo base_url()."courses/".$courseid;?>">
-              <img src="<?php echo base_url()."contents/images/courses/".$course['imagename'];?>" alt="<?php echo $course['course_name']?>" class="img-circle width-80" />
+              <img src="<?php echo base_url()."contents/images/course_icons/".$course['imagename'];?>" alt="<?php echo $course['course_name']?>" class="img-circle width-80" />
             </a>
             <h4 class="text-display-1 margin-none"><?php echo $course['course_name']?></h4>
           </div>
         </div>
 
         <ul class="sidebar-menu">
-          <li><a href="<?php echo base_url()."courses/edit/".$courseid;?>"><i class="md-home"></i><span>Course Page</span></a></li>
-          <li><a href="<?php echo base_url()."courses/edit/".$courseid."/meta";?>"><i class="md-description"></i><span>MetaData</span></a></li>
-          <li><a href="<?php echo base_url()."courses/".$courseid."/lectures";?>"><i class="md-video-collection"></i><span>Lectures</span></a></li>
-          <li><a href="<?php echo base_url()."courses/".$courseid."/assignments";?>"><i class="md-assignment"></i><span>Assignments</span></a></li>
-          <li><a href="<?php echo base_url()."courses/".$courseid."/materials";?>"><i class="md-my-library-books"></i><span>Course Materials</span></a></li>
-          <li><a href="<?php echo base_url()."courses/".$courseid."/forum";?>"><i class="md-forum"></i><span>Forum</span></a></li>
-          <li><a href="<?php echo base_url()."courses/".$courseid."/students";?>"><i class="md-account-child"></i><span>Students/Members</span></a></li>
-          <li><a href="<?php echo base_url()."courses/".$courseid."/notfications";?>"><i class="md-notifications"></i><span>Notifications</span></a></li>
+          <li id="li_general"><a href="<?php echo base_url()."courses/edit/".$courseid;?>"><i class="md-home"></i><span>General</span></a></li>
+          <li id="li_meta"><a href="<?php echo base_url()."courses/edit/".$courseid."/meta";?>"><i class="md-description"></i><span>MetaData</span></a></li>
+          <li id="li_lectures"><a href="<?php echo base_url()."courses/".$courseid."/lectures";?>"><i class="md-video-collection"></i><span>Lectures</span></a></li>
+          <li id="li_assignments"><a href="<?php echo base_url()."courses/".$courseid."/assignments";?>"><i class="md-assignment"></i><span>Assignments</span></a></li>
+          <li id="li_materials"><a href="<?php echo base_url()."courses/".$courseid."/materials";?>"><i class="md-my-library-books"></i><span>Course Materials</span></a></li>
+          <li id="li_forum"><a href="<?php echo base_url()."courses/".$courseid."/forum";?>"><i class="md-forum"></i><span>Forum</span></a></li>
+          <li id="li_students"><a href="<?php echo base_url()."courses/".$courseid."/students";?>"><i class="md-account-child"></i><span>Students/Members</span></a></li>
+          <li id="li_notifications"><a href="<?php echo base_url()."courses/".$courseid."/notfications";?>"><i class="md-notifications"></i><span>Notifications</span></a></li>
         </ul>
       </div>
     </div>

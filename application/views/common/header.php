@@ -138,7 +138,6 @@
 
       </div>
     </div>
-
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
     <div class="sidebar left sidebar-size-3 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
       <div data-scrollable>

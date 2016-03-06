@@ -32,6 +32,15 @@ class Welcome extends CI_Controller {
 
 	}
 
+	public function test($var)
+	{	
+		$uri = base_url(uri_string());
+		$pos = strpos($uri,"/js/");
+		$str = substr($uri, $pos+4);
+		redirect("public/js/".$str);
+
+	}
+
 	public function dash()
 	{
 		$this->load->view('dashboard');

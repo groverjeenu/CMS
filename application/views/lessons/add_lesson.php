@@ -11,6 +11,8 @@
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
         <style type="text/css">
         .mytextarea
         {
@@ -104,18 +106,18 @@
                                             <label for="title">Title</label>
                                             <?php echo form_error('title');?>
                                         </div>
-                                        <div class="form-group form-control-material mytextarea" >
-                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write lesson description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
-                                            <label for="description">Description</label>
-                                            <?php echo form_error('description');?>
+                                        <div class="form-group">
+                                          <label for="description">Description</label>
+                                          <textarea name="description" id="description" cols="30" rows="10" class="summernote"><?php echo set_value('description');?></textarea>
+                                          <?php echo form_error('description');?>
                                         </div>
-                                        <div class="form-group form-control-material">
-                                            <input type='file' name='video' id='video' class="form-control used"/>
+                                        <div class="form-group ">
                                             <label for="video">Video</label>
+                                            <input type='file' name='video' id='video'>
                                         </div>
-                                        <div class="form-group form-control-material">
-                                            <input type='file' name='text' id='text' class="form-control used"/>
+                                        <div class="form-group">
                                             <label for="text">Lesson Text</label>
+                                            <input type='file' name='text' id='text' >
                                         </div>
                                         <h5>Visible</h5>
                                         <input type="checkbox" name="visibility" id="visibility" checked>
@@ -195,8 +197,9 @@
     Includes Custom Application JavaScript used for the current theme/module;
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
-    <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-switch.min.js"></script>
+    <script src="<?php echo base_url();?>public/js/fileinput.min.js"></script>
+
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -218,9 +221,23 @@
     <script>
     $(document).ready(function()
     {
-        autosize($('textarea'));
         $("#visibility").bootstrapSwitch();
-
+        $("#video").fileinput({
+                showCaption:false,
+                showUpload:false,
+                allowedFileExtensions:["mpeg","mpg","mpe","3gp","mp4"],
+                autoReplace: true,
+                maxFileCount: 1,
+                maxFileSize: 500000
+            });
+        $("#text").fileinput({
+                showCaption:false,
+                showUpload:false,
+                allowedFileExtensions:["pdf","txt","gzip","gtar","zip","rar","tar","tgz","gz"],
+                autoReplace: true,
+                maxFileCount: 1,
+                maxFileSize: 100000
+            });
     });
     </script>
 </body>

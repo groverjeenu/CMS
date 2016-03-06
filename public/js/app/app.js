@@ -21,7 +21,7 @@ require('media/js/main');
 require('material/js/main');
 
 // Maps
-window.initGoogleMaps = require('maps/js/google/main');
+//window.initGoogleMaps = require('maps/js/google/main');
 
 // CORE
 require('./main');
@@ -3464,57 +3464,7 @@ function loadScript() {
 
 window.onload = loadScript;
 
-function initScripts() {
-    var $scripts = [
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.extensions.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.services.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.microdata.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.microformat.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.overlays.js",
-        "js/vendor/maps/google/jquery-ui-map/ui/jquery.ui.map.rdfa.js",
-        "js/vendor/maps/google/jquery-ui-map/addons/infobox_packed.js",
-        "js/vendor/maps/google/jquery-ui-map/addons/markerclusterer.min.js"
-    ];
 
-    $.each($scripts, function (k, v) {
-        if ($('[src="' + v + '"]').length) return true;
-        var scriptNode = document.createElement('script');
-
-        scriptNode.src = v;
-        $('head').prepend($(scriptNode));
-    });
-
-    $.extend($.ui.gmap.prototype, {
-        pagination: function (prop, mapData) {
-            var source = $("#map-pagination").html();
-            var template = Handlebars.compile(source);
-            var $el = $(template());
-
-            var self = this, i = 0;
-            prop = prop || 'title';
-            self.set('pagination', function (a, b) {
-                if (a) {
-                    i = i + b;
-                    var m = self.get('markers')[ i ];
-                    mapData.iw.open(i, m.get('content'));
-                    $el.find('.display').text(m[ prop ]);
-                    self.get('map').panTo(m.getPosition());
-                }
-            });
-            self.get('pagination')(true, 0);
-            $el.find('.back-btn').click(function (e) {
-                e.preventDefault();
-                self.get('pagination')((i > 0), - 1, this);
-            });
-            $el.find('.fwd-btn').click(function (e) {
-                e.preventDefault();
-                self.get('pagination')((i < self.get('markers').length - 1), 1, this);
-            });
-            self.addControl($el, google.maps.ControlPosition[ mapData.options.paginationPosition ]);
-        }
-    });
-}
 
 var library = require('./_library.js')();
 
