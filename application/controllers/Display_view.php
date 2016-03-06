@@ -457,6 +457,7 @@ class Display_view extends CI_Controller {
 			$sender = $this->mail->getid($data);
 			$this->mail->update_receiver($sender['mail_id'], $key);
 		}
+		redirect('dashboard', 'refresh');
 	}
 
 	public function inbox()

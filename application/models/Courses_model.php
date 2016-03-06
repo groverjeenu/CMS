@@ -221,7 +221,7 @@ class Courses_model extends CI_Model
 		 		$t = $t.$p['first_name']."\t".$p['last_name']."\t,";
 		 	}
 		 	$t = substr($t,0,-2);
-		 	$d[$c['cid']] = array("names" =>$t,"cid"=>$c['cid'],"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key'],"syllabus"=>$c['syllabus'],"attending"=>$number);
+		 	$d[$c['cid']] = array("names" =>$t,"cid"=>$c['cid'],"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key'],"syllabus"=>$c['syllabus'],"attending"=>$number,"imagename" =>$c['imagename']);
 		 }
 		 
 		 //$this->db->qu
