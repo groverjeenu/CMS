@@ -69,6 +69,7 @@ $route['dashboard'] = 'display_view/dashboard';
 $route['signup'] = 'auth/create_user';
 $route['login'] = 'auth/login';
 $route['inbox']= "display_view/inbox";
+$route['quiz/categories'] = "quiz/category_controller";
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

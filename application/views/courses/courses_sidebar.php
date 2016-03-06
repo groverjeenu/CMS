@@ -34,23 +34,18 @@ $courseid = $course['cid'];?>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url();?>courses/add">Add Course</a></li>
             <li><a href="<?php echo base_url();?>display_view/sent_mail">Courses List</a></li>
-            <li><a href="<?php echo base_url();?>quiz/qbank">Question Bank</a></li>
           </ul>
         </li>
-        <!-- <li class="dropdown">
-          <a href="app-instructor-course-edit-course.html#" class="dropdown-toggle" data-toggle="dropdown">Student <span class="caret"></span></a>
+        <li class="dropdown">
+          <a href="<?php echo base_url();?>quiz/qbank" class="dropdown-toggle" data-toggle="dropdown">Question Bank <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="app-student-dashboard.html">Dashboard</a></li>
-            <li><a href="app-student-courses.html">My Courses</a></li>
-            <li><a href="app-take-course.html">Take Course</a></li>
-            <li><a href="app-course-forums.html">Course Forums</a></li>
-            <li><a href="app-take-quiz.html">Take Quiz</a></li>
-            <li><a href="app-student-profile.html">Edit Profile</a></li>
-            <li><a href="app-student-billing.html">Edit Billing</a></li>
-            <li><a href="app-student-messages.html">Messages</a></li>
+            <li><a href="<?php echo base_url();?>quiz/qbank">All Questions</a></li>
+            <li><a href="<?php echo base_url();?>quiz/categories">Categories</a></li>
+            <li><a href="<?php echo base_url();?>quiz/difficultlevel">Difficulty Levels</a></li>
+            <li><a href="<?php echo base_url();?>quiz/qbank/add_new">Add Question</a></li>
           </ul>
         </li>
-        <li class="dropdown active">
+        <!--<li class="dropdown active">
           <a href="app-instructor-course-edit-course.html#" class="dropdown-toggle" data-toggle="dropdown">Instructor <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="app-instructor-dashboard.html">Dashboard</a></li>
