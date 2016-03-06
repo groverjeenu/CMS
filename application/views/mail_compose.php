@@ -324,6 +324,7 @@
                                     <div class = "input-select">
                                         <h6>Select email</h6>
                                         <select name="select2[]" multiple>
+                                            <option value="" disable selected>Choose your options</option>
                                             <?php foreach ($fac as $key) { ?>
                                             <option  value="<?php echo $key['id']?>"><?php echo $key['email']; ?></option>
                                             <?php } ?>
@@ -1253,7 +1254,7 @@
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
-    $(window).load(function() {
+    /*$(window).load(function() {
         setTimeout(function() {
             Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
         }, 1500);
@@ -1263,7 +1264,7 @@
         setTimeout(function() {
             Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
         }, 15000);
-    });
+    });*/
 
 
     $(function() {

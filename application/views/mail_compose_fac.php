@@ -326,6 +326,7 @@
                                     <div class = "input-select">
                                         <h6>Select email</h6>
                                         <select name="select2[]" class="selectpicker" multiple data-live-search="true">
+                                            <option value="" disable selected>Choose your options</option>
                                             <?php foreach ($fac as $key) { ?>
                                             <option  value="<?php echo $key['id']?>"><?php echo $key['email']; ?></option>
                                             <?php } ?>
