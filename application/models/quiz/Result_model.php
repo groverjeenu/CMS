@@ -1,5 +1,5 @@
-<? php
-Class result_model extends CI_Model
+<?php
+Class Result_model extends CI_Model
 {
 
     function result_list_all($limit, $user_id = '')

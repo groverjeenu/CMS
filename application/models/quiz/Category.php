@@ -6,7 +6,7 @@ class Category extends CI_Model
     function category_dropdown()
     {
         //$nor=$this->config->item('number_of_rows');
-        $query = $this -> db -> query("select * from question_category");
+        $query = $this->db-> query("select * from question_category");
 
         if ($query -> num_rows() >= 1)
         {

@@ -92,7 +92,7 @@
     <body>
         <!-- Wrapper required for sidebar transitions -->
         <div class="st-container">
-            <?php $this->view('common/header');?>
+            <?php $this->view('courses/courses_sidebar',array('course'=>$this->courses->get_general($courseid)));?>
             <!-- sidebar effects OUTSIDE of st-pusher: -->
             <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
             <!-- content push wrapper -->
@@ -174,11 +174,11 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Correct answer score</label>
-                                                            <input type='text' name='correct_answer_score' value="1"    class="form-control" value="<?php echo $result->correct_score;?>" >
+                                                            <input type='text' name='correct_answer_score'   class="form-control" value="<?php echo $result->correct_score;?>" >
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Incorrect answer score</label>
-                                                            <input type='text' name='incorrect_answer_score' value="0"    class="form-control"  value="<?php echo $result->incorrect_score;?>" >
+                                                            <input type='text' name='incorrect_answer_score'  class="form-control"  value="<?php echo $result->incorrect_score;?>" >
                                                         </div>
                                                         
                                                         <hr>

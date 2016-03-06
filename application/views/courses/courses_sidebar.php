@@ -94,7 +94,7 @@ $courseid = $course['cid'];?>
       <li id="li_meta"><a href="<?php echo base_url()."courses/edit/".$courseid."/meta";?>"><i class="md-description"></i><span>MetaData</span></a></li>
       <li id="li_lectures"><a href="<?php echo base_url()."courses/".$courseid."/lectures";?>"><i class="md-video-collection"></i><span>Lectures</span></a></li>
       <li id="li_assignments"><a href="<?php echo base_url()."courses/".$courseid."/assignments";?>"><i class="md-assignment"></i><span>Assignments</span></a></li>
-      <li id="li_materials"><a href="<?php echo base_url()."courses/".$courseid."/materials";?>"><i class="md-my-library-books"></i><span>Course Materials</span></a></li>
+      <li id="li_materials"><a href="<?php echo base_url()."courses/".$courseid."/quiz";?>"><i class="md-my-library-books"></i><span>Quiz</span></a></li>
       <li id="li_students"><a href="<?php echo base_url()."courses/".$courseid."/students";?>"><i class="md-account-child"></i><span>Students/Members</span></a></li>
     </ul>
   </div>

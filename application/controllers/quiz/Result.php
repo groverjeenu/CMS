@@ -44,9 +44,9 @@ class Result extends CI_Controller {
 				$csvdata = "Username,First name,Last name, Email, Group, Quiz Name, Score, Percentage, Result \r\n";
 				foreach($data['report'] as $key => $val) {
 					if ($val->q_result == "1") {
-						$csvdata. = $val  ->username  .",".$val  ->first_name  .",".$val  ->last_name  .",".$val  ->email  .",".$val  ->group_name  .",".$val  ->quiz_name  .",".$val  ->score  .",".$val  ->percentage  ."%,Pass\r\n";
+						$csvdata = $csvdata . $val  ->username  .",".$val  ->first_name  .",".$val  ->last_name  .",".$val  ->email  .",".$val  ->group_name  .",".$val  ->quiz_name  .",".$val  ->score  .",".$val  ->percentage  ."%,Pass\r\n";
 					} else {
-						$csvdata. = $val  ->username  .",".$val  ->first_name  .",".$val  ->last_name  .",".$val  ->email  .",".$val  ->group_name  .",".$val  ->quiz_name  .",".$val  ->score  .",".$val  ->percentage  ."%,Fail\r\n";
+						$csvdata = $csvdata. $val  ->username  .",".$val  ->first_name  .",".$val  ->last_name  .",".$val  ->email  .",".$val  ->group_name  .",".$val  ->quiz_name  .",".$val  ->score  .",".$val  ->percentage  ."%,Fail\r\n";
 
 					}
 				}

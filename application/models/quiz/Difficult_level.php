@@ -9,7 +9,7 @@ class Difficult_level extends CI_Model
     {
         //$nor=$this->config->item('number_of_rows');
         $institute_id = $this->ion_auth->get_user_id();
-        $query = $this -> db -> query("select * from difficult_level where institute_id = '$institute_id'");
+        $query = $this->db-> query("select * from difficult_level where institute_id=?",$institute_id);
 
         if ($query -> num_rows() >= 1)
         {

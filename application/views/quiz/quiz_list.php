@@ -76,7 +76,7 @@
     <body>
         <!-- Wrapper required for sidebar transitions -->
         <div class="st-container">
-            <?php $this->view('common/header');?>
+            <?php $this->view('courses/courses_sidebar',array('course'=>$this->courses->get_general($courseid)));?>
             <!-- sidebar effects OUTSIDE of st-pusher: -->
             <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
             <!-- content push wrapper -->
@@ -94,7 +94,7 @@
                             ?>
                             <div style="margin-top:10px;">
                                 <div class="row-fluid">
-                                    <a href="<?php echo site_url('quiz/quiz/add_new');?>" class="btn btn-success col-sm-3">Add new</a>                                
+                                    <a href="<?php echo site_url('quiz/quiz/add_new/'.$courseid);?>" class="btn btn-success col-sm-3">Add new</a>                                
                                     <div class="searchbox form-group col-sm-9" id="searchbox">
                                         <form method="post" class="form-inline" action="<?php echo site_url('quiz/quiz');?>">
                                             <select name="search_type" class="form-control col-sm-3" style="width:20%" data-toggle="select2"   >
@@ -105,7 +105,7 @@
                                                 <option value="quiz.duration">Duration</option>
                                             </select>
                                             <input type="text" name="search" class="form-control col-sm-6"  value="">
-                                            <input type="submit"   value="Search"  class="btn btn-default col-sm-3">
+                                            <input type="submit"   value="Search"  class="btn btn-primary col-sm-3">
                                         </form>
                                         
                                     </div>

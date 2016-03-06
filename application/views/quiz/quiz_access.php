@@ -103,7 +103,7 @@ line-height:34px;
 			?>
 			<input type="hidden" value="<?php echo $key;?>" id="total_cate">
 			<div style="clear:both;"></div>
-			<form action="<?php echo site_url('quiz/submit_quiz/'.$quiz_id);?>" method="post" id="testform" onsubmit="showquestion('0');">
+			<form action="<?php echo site_url('quiz/quiz/submit_quiz/'.$quiz_id);?>" method="post" id="testform" onsubmit="showquestion('0');">
 				<?php
 				$category_number=0;
 				$selected_oids=explode(",",$time_info['oids']);
@@ -261,8 +261,9 @@ line-height:34px;
 					<input type="hidden" name="fill_blank<?php echo $key;?>" value="<?php if ($result->pract_test=="0"){echo $option['oid'];}else{echo $option['oid']."-".$option['option_value'];}?>" >
 					<table id="ques<?php echo $key;?>" class="<?php if($key=='0'){ echo 'showquestion'; }else{ echo 'hidequestion'; } ?>">
 						<tr><td >Question <?php echo $key+1; ?></td></tr>
-						<tr><td> <?php
-							$fill_replace="<input type='text'  autocomplete='off' name='answers".$key."' value=".$question_user_ans[$question['qid']].">";
+						<tr><td> <?php $value = "";
+								if(isset($question_user_ans[$question['qid']])) $value = $question_user_ans[$question['qid']];
+							$fill_replace="<input type='text'  autocomplete='off' name='answers".$key."' value=".$value.">";
 						echo str_replace('_____',$fill_replace,$question['question']);?></td></tr>
 						<?php
 						$opcount=0;
@@ -327,7 +328,9 @@ line-height:34px;
 					<table id="ques<?php echo $key;?>" class="<?php if($key=='0'){ echo 'showquestion'; }else{ echo 'hidequestion'; } ?>">
 						<tr><td >Question <?php echo $key+1; ?></td></tr>
 						<tr><td> <?php echo $question['question'];?></td></tr>
-						<tr><td> <input type='text' autocomplete='off' name="answers<?php echo $key;?>" value="<?php echo $question_user_ans[$question['qid']];?>"></td></tr>
+						<?php $value = "";
+								if(isset($question_user_ans[$question['qid']])) $value = $question_user_ans[$question['qid']];?>
+						<tr><td> <input type='text' autocomplete='off' name="answers<?php echo $key;?>" value="<?php echo $value?>"></td></tr>
 						<?php
 						}
 						}
@@ -388,7 +391,9 @@ line-height:34px;
 						<tr><td >Question <?php echo $key+1; ?></td></tr>
 						<tr><td> <?php echo $question['question'];?></td></tr>
 						<tr><td>
-							<textarea  style="width:100%;height:300px" name="answers<?php echo $key;?>" ><?php echo $question_user_ans[$question['qid']];?></textarea>
+							<?php $value = "";
+								if(isset($question_user_ans[$question['qid']])) $value = $question_user_ans[$question['qid']];?>
+							<textarea  style="width:100%;height:300px" name="answers<?php echo $key;?>" ><?php echo $value?></textarea>
 						</td></tr>
 						<?php
 						$opcount=0;
@@ -459,7 +464,9 @@ line-height:34px;
 						<?php
 						$new_answered_op=array();
 						$new_answered_op_f=array();
-						$selected_option_by_user=explode(",",$question_user_ans[$question['qid']]);
+						$value = "";
+						if(isset($question_user_ans[$question['qid']])) $value = $question_user_ans[$question['qid']];
+						$selected_option_by_user=explode(",",$value);
 						$q_op_flip=array_flip($q_op);
 						foreach($selected_option_by_user as $vvv){
 						$vvvv=explode("=",$vvv);
@@ -635,7 +642,7 @@ mode : "textareas",
 -->
 <script>
 function close_practice(){
-window.location="<?php echo site_url();?>/quiz/close_practice/";
+window.location="<?php echo site_url();?>quiz/quiz/close_practice/";
 }
 hideqnobycate();
 $(document).ready(function(){

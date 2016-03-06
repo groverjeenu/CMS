@@ -92,7 +92,7 @@
     <body>
         <!-- Wrapper required for sidebar transitions -->
         <div class="st-container">
-            <?php $this->view('common/header');?>
+            <?php $this->view('courses/courses_sidebar',array('course'=>$this->courses->get_general($courseid)));?>
             <!-- sidebar effects OUTSIDE of st-pusher: -->
             <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
             <!-- content push wrapper -->
@@ -108,7 +108,7 @@
                             <?php
                             if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div>"; }
                             ?>
-                            <form method="post" action="<?php echo site_url('quiz/quiz/add_new');?>">
+                            <form method="post" action="<?php echo site_url('quiz/quiz/add_new')."/".$courseid;?>">
                                 <div class="row" style="margin-top:10px;">
                                     <div class="col-lg-12">
                                         <div class="panel panel-default">
@@ -410,7 +410,7 @@
 
 
 	function sortby(limi,cid){
-	   window.location="<?php echo site_url();?>/quiz/quiz/qbank/index/0/"+cid;
+	   window.location="<?php echo site_url();?>quiz/qbank/index/0/"+cid;
 	}
 
 

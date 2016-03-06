@@ -1,22 +1,22 @@
-
 <?php
-Class quiz_model extends CI_Model
+
+Class Quiz_model extends CI_Model
 {
 
-	function quiz_list($limit, $gid = '')
+	function quiz_list($cid,$limit)
 	{
-		$institute_id = $this->ion_auth->get_user_id();
+		$faculty_id = $this->ion_auth->get_user_id();
 		$nor = $this->config->item('number_of_rows');
 		if ($this->input->post('search_type')) 
 		{
 			$search_type = $this->input->post('search_type');
 			$search = $this->input->post('search');
-			$query = $this->db->query("select quiz.* from quiz where $search_type like '%$search%' and quiz.institute_id = '$institute_id' order by quid desc limit $limit, $nor");
+			$query = $this->db->query("select quiz.* from quiz where $search_type like '%$search%' and quiz.institute_id = '$faculty_id' and quiz.course_id = '$cid' order by quid desc limit $limit, $nor");
 
 		} 
 		else 
 		{
-			$query = $this->db->query("select quiz.* from quiz where quiz.institute_id = '$institute_id' order by quid desc limit $limit, $nor");
+			$query = $this->db->query("select quiz.* from quiz where quiz.institute_id = '$faculty_id' and quiz.course_id = '$cid'  order by quid desc limit $limit, $nor");
 		}
 		if ($query -> num_rows() >= 1)
 		{
@@ -29,7 +29,7 @@ Class quiz_model extends CI_Model
 	}
 
 // add new quiz
-	function add_quiz() 
+	function add_quiz($cid) 
 	{
 		$institute_id = $this->ion_auth->get_user_id();
 
@@ -46,7 +46,8 @@ Class quiz_model extends CI_Model
 		                   'correct_score' => $this->input->post('correct_answer_score'),
 		                   'incorrect_score' => $this->input->post('incorrect_answer_score'),
 		                   'pract_test' => $this->input->post('qiz_type'),
-		                   'institute_id' => $institute_id
+		                   'institute_id' => $institute_id,
+		                   'course_id' => $cid
 		               );
 
 		$qselect = $this->input->post('qselect');
@@ -79,7 +80,7 @@ Class quiz_model extends CI_Model
 	{
 		$institute_id = $this->ion_auth->get_user_id();
 		$rid = $this->input->cookie('rid', TRUE);
-		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' and institute_id = '$institute_id'");
+		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' ");
 		$row = $query->row_array();
 		$time_spent_ind = explode(",", $row['time_spent_ind']);
 		foreach($time_spent_ind as $key => $val) 
@@ -90,7 +91,7 @@ Class quiz_model extends CI_Model
 			}
 		}
 		$time_spent_ind = implode(",", $time_spent_ind);
-		$this->db->query("update quiz_result set time_spent_ind='$time_spent_ind' where institute_id = '$institute_id' and rid='$rid' ");
+		$this->db->query("update quiz_result set time_spent_ind='$time_spent_ind' where  rid='$rid' ");
 	}
 
 	// update answer
@@ -99,7 +100,7 @@ Class quiz_model extends CI_Model
 		$institute_id = $this->ion_auth->get_user_id();
 
 		$rid = $this->input->cookie('rid', TRUE);
-		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' and institute_id = '$institute_id'");
+		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' ");
 		$row = $query->row_array();
 		$oids = explode(",", $row['oids']);
 		foreach($oids as $key => $val) {
@@ -108,7 +109,7 @@ Class quiz_model extends CI_Model
 			}
 		}
 		$oids = implode(",", $oids);
-		$this->db->query("update quiz_result set oids='$oids' where rid='$rid' and institute_id = '$institute_id'");
+		$this->db->query("update quiz_result set oids='$oids' where rid='$rid'");
 	}
 
 	//update fillups
@@ -144,8 +145,14 @@ Class quiz_model extends CI_Model
 
 	}
 
+	function get_courseid($id)
+	{
+		return $this->db->select('course_id as cid')->from('quiz')->where('quid',$id)->get()->row_array()['cid'];
+	}
+
 	// add new quiz
 	function edit_quiz($id) {
+
 		$institute_id = $this->ion_auth->get_user_id();
 		$insert_data = array(
 		                   'quiz_name' => $this->input->post('quiz_name'),
@@ -163,30 +170,31 @@ Class quiz_model extends CI_Model
 		                   'institute_id' => $institute_id
 		               );
 		$quid = $id;
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('quid', $quid);
 		if ($this->db->update('quiz', $insert_data)) {
-			// delete existing no of question record and insert new one.
+				// delete existing no of question record and insert new one.
+				if($this->input->post('qselect') == 1){
+				$this->db->where('quid', $quid);
+				$this->db->delete('quiz_qids');
+				foreach($_POST['cid'] as $qkey => $value) 
+				{
+					if($value <= 0) continue;
+					if ($_POST['no_of_questions'][$qkey] >= "1") {
+						$insert_data = array(
+						                   'quid'	=>	$quid,
+						                   'cid'	=>	$_POST['cid'][$qkey],
+						                   'did'	=>	$_POST['did'][$qkey],
+						                   'no_of_questions'	=>	$_POST['no_of_questions'][$qkey],
+						                   'institute_id' => $institute_id
+						               );
 
-			$this->db->where('institute_id', $institute_id);
-			$this->db->where('quid', $quid);
-			$this->db->delete('quiz_qids');
-			foreach($_POST['cid'] as $qkey => $value) {
-				if ($_POST['no_of_questions'][$qkey] >= "1") {
-					$insert_data = array(
-					                   'quid'	=>	$quid,
-					                   'cid'	=>	$_POST['cid'][$qkey],
-					                   'did'	=>	$_POST['did'][$qkey],
-					                   'no_of_questions'	=>	$_POST['no_of_questions'][$qkey],
-					                   'institute_id' => $institute_id
-					               );
-
-					$this->db->insert('quiz_qids', $insert_data);
+						$this->db->insert('quiz_qids', $insert_data);
+					}
 				}
 			}
-			return "Quiz added successfully";
+			return "Quiz edited successfully";
 		} else {
-			return "Unable to add quiz";
+			return "Unable to edit quiz";
 		}
 	}
 
@@ -196,14 +204,13 @@ Class quiz_model extends CI_Model
 	{
 		$institute_id = $this->ion_auth->get_user_id();
 
-		$query = $this->db->query("select quiz_qids.* from quiz_qids where quid='$id' and institute_id = '$institute_id' ");
+		$query = $this->db->query("select quiz_qids.* from quiz_qids where quid='$id' ");
 		return $query -> result_array();
 	}
 
 
 	function add_question($quid, $qid) {
 		$institute_id = $this->ion_auth->get_user_id();
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('quid', $quid);
 		$query = $this->db->get('quiz');
 		$result = $query->row_array();
@@ -227,7 +234,6 @@ Class quiz_model extends CI_Model
 	function assigned_questions_manually($quid) 
 	{
 		$institute_id = $this->ion_auth->get_user_id();
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('quid', $quid);
 		$query = $this->db->get('quiz');
 		$result = $query->row_array();
@@ -246,7 +252,6 @@ Class quiz_model extends CI_Model
 
 	function remove_question_quiz($quid, $qid) {
 		$institute_id = $this->ion_auth->get_user_id();
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('quid', $quid);
 		$query = $this->db->get('quiz');
 		$result = $query->row_array();
@@ -275,7 +280,6 @@ Class quiz_model extends CI_Model
 
 	function up_question($quid, $qid) {
 		$institute_id = $this->ion_auth->get_user_id();
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('quid', $quid);
 		$query = $this->db->get('quiz');
 		$result = $query->row_array();
@@ -312,7 +316,6 @@ Class quiz_model extends CI_Model
 
 	function down_question($quid, $qid) {
 		$institute_id = $this->ion_auth->get_user_id();
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('quid', $quid);
 		$query = $this->db->get('quiz');
 		$result = $query->row_array();
@@ -352,11 +355,9 @@ Class quiz_model extends CI_Model
 	function remove_quiz($id)
 	{
 		$institute_id = $this->ion_auth->get_user_id();
-		$this->db->where('institute_id', $institute_id);
 		if ($this->db->delete('quiz', array('quid' => $id)))
 		{
 
-			$this->db->where('institute_id', $institute_id);
 			$this->db->delete('quiz_qids', array('quid' => $id));
 			return true;
 		}
@@ -368,20 +369,20 @@ Class quiz_model extends CI_Model
 
 	function get_quiz_data($id) {
 		$institute_id = $this->ion_auth->get_user_id();
-		$query = $this->db->query("select quiz.* from quiz where quid='$id' and institute_id = '$institute_id'");
+		$query = $this->db->query("select quiz.* from quiz where quid='$id' ");
 		return $query->row_array();
 	}
 
 	function get_question($rid) {
 		$institute_id = $this->ion_auth->get_user_id();
 
-		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' and institute_id='$institute_id'");
+		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' ");
 		$row = $query->row_array();
 		$qids = $row['qids'];
 
-		$query = $this->db->query("SELECT * FROM  `qbank` JOIN question_category ON qbank.cid = question_category.cid WHERE qbank.qid IN ( $qids ) and qbank.institute_id ='$institute_id'  ORDER BY FIELD(qid, $qids )");
+		$query = $this->db->query("SELECT * FROM  `qbank` JOIN question_category ON qbank.cid = question_category.cid WHERE qbank.qid IN ( $qids )  ORDER BY FIELD(qid, $qids )");
 		$questions = $query->result_array();
-		$query = $this->db->query("SELECT * FROM  q_options WHERE qid IN ( $qids )  and institute_id = '$institute_id'");
+		$query = $this->db->query("SELECT * FROM  q_options WHERE qid IN ( $qids ) ");
 		$options = $query->result_array();
 		$dataarr = array($questions, $options);
 		return $dataarr;
@@ -397,9 +398,9 @@ Class quiz_model extends CI_Model
 		$institute_id = $this->ion_auth->get_user_id();
 
 		$current_time = time();
-		$this->db->query("update quiz_result set time_spent=($current_time-start_time) where rid='$rid' and institute_id = '$institute_id' ");
+		$this->db->query("update quiz_result set time_spent=($current_time-start_time) where rid='$rid' ");
 
-		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' and institute_id ='$institute_id'");
+		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' ");
 		return $query->row_array();
 	}
 
@@ -407,7 +408,7 @@ Class quiz_model extends CI_Model
 	function quiz_detail($id)
 	{
 		$institute_id = $this->ion_auth->get_user_id();
-		$query = $this->db->query("select quiz.* from quiz where quid='$id' and institute_id = '$institute_id' ");
+		$query = $this->db->query("select quiz.* from quiz where quid='$id' ");
 
 		if ($query -> num_rows() >= 1)
 		{
@@ -425,20 +426,20 @@ Class quiz_model extends CI_Model
 		if ($this->input->cookie('rid', TRUE)) {
 			//check if there is any test already started
 			$rid = $this->input->cookie('rid', TRUE);
-			$query = $this->db-> query("select quiz_result.* from quiz_result where rid='$rid' and institute_id ='$institute_id'");
+			$query = $this->db-> query("select quiz_result.* from quiz_result where rid='$rid'");
 			$row = $query->row_array();
 			$time_spent = $row['time_spent'];
 			$quid = $row['quid'];
-			$query = $this->db->query("select quiz.* from quiz where quid='$quid' and institute_id ='$institute_id'");
+			$query = $this->db->query("select quiz.* from quiz where quid='$quid' ");
 			$row = $query->row_array();
 			$start_time = $row['start_time'];
 			$end_time = $row['end_time'];
 			$duration = $row['duration'];
 			// check quiz end time
-			if ($end_time <= time()) {
+			if ($end_time <= time() and false) {
 				return "Quiz not available. Available time has been passed";
 			}
-			if ($time_spent >= ($duration * 60 )) {
+			if ($time_spent >= ($duration * 60 ) and false) {
 				return "Time over";
 			}
 			return "1";
@@ -446,7 +447,7 @@ Class quiz_model extends CI_Model
 		else 
 		{
 			// check for new test attempt
-			$query = $this->db->query("select quiz.* from quiz where quid='$id' and institute_id = '$institute_id'");
+			$query = $this->db->query("select quiz.* from quiz where quid='$id' ");
 			$row = $query->row_array();
 			$quid = $row['quid'];
 			$uid = $this->ion_auth->get_user_id();
@@ -465,15 +466,15 @@ Class quiz_model extends CI_Model
 				}
 			}*/
 			// check quiz start time
-			if ($row['start_time'] >= time()) {
+			if ($row['start_time'] >= time() and false) {
 				return "Quiz is not available yet!";
 			}
 			// check quiz end time
-			if ($row['end_time'] <= time()) {
+			if ($row['end_time'] <= time() and false) {
 				return "Quiz not available. Available time has been passed  ";
 			}
 			// check maximum attempts
-			$query = $this->db->query("select quiz_result.* from quiz_result where uid='$uid' and quid='$quid' and institute_id = '$institute_id'");
+			$query = $this->db->query("select quiz_result.* from quiz_result where uid='$uid' and quid='$quid'");
 			$attempted = $query -> num_rows();
 			log_message('DEBUG',"ttempe:$attempted");
 			if ($attempted >= $row['max_attempts']) {
@@ -486,7 +487,7 @@ Class quiz_model extends CI_Model
 				$category_names = array();
 				$qids_range = array();
 				$rng = array();
-				$query = $this->db->query("SELECT qbank.*,question_category.* FROM qbank JOIN question_category ON qbank.cid = question_category.cid where  qbank.institute_id = '$institute_id' and qid in ($assignqids) ORDER BY FIELD(qbank.qid, $assignqids ) ");
+				$query = $this->db->query("SELECT qbank.*,question_category.* FROM qbank JOIN question_category ON qbank.cid = question_category.cid where qid in ($assignqids) ORDER BY FIELD(qbank.qid, $assignqids ) ");
 				$qidarr = $query->result_array();
 
 				foreach($qidarr as $key => $qid) {
@@ -517,19 +518,20 @@ Class quiz_model extends CI_Model
 				$qids = array();
 				$category_names = array();
 				$qids_range = array();
-				$query = $this->db->query("select quiz_qids.* from quiz_qids where quid='$quid' and institute_id = '$institute_id' ");
+				$query = $this->db->query("select quiz_qids.* from quiz_qids where quid='$quid' ");
 				$result = $query -> result_array();
 				$rng = 0;
 				foreach($result as $key => $val ) {
 					$cid = $val['cid'];
 					$did = $val['did'];
 					$noq = $val['no_of_questions'];
-					$query = $this->db->query("SELECT qbank.*,question_category.* FROM qbank JOIN question_category ON qbank.cid = question_category.cid where qbank.cid='$cid' and qbank.did='$did' and qbank.institute_id = '$institute_id' ORDER BY RAND() limit $noq ");
+					$query = $this->db->query("SELECT qbank.*,question_category.* FROM qbank JOIN question_category ON qbank.cid = question_category.cid where qbank.cid='$cid' and qbank.did='$did' ORDER BY RAND() limit $noq ");
 					$qidarr = $query->result_array();
 
 					foreach($qidarr as $key => $qid) {
 						$qids[] = $qid['qid'];
 					}
+					//SEE HOW QID ARNGE IS USED
 					$category_names[] = $qid['category_name'];
 					$qids_range[] = $rng."-".($key + $rng);
 					$rng = $rng + $key + 1;
@@ -709,7 +711,7 @@ Class quiz_model extends CI_Model
 		$oid = implode(",", $oids);
 
 // fetch quiz detail
-		$query = $this->db->query("select quiz.* from quiz where quid='$id' and institute_id = '$institute_id'");
+		$query = $this->db->query("select quiz.* from quiz where quid='$id'");
 		$quiz = $query->row_array();
 		$correct_score = explode(",", $quiz['correct_score']);
 		$incorrect_score = explode(",", $quiz['incorrect_score']);
@@ -867,7 +869,7 @@ Class quiz_model extends CI_Model
 		$score_ind[$fliped_oidr[$value['qid']]] = $score_ind_i;
 
 		// calculate percentage
-		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' and institute_id = '$institute_id'");
+		$query = $this->db->query("select quiz_result.* from quiz_result where rid='$rid' ");
 		$qr = $query->row_array();
 		//( obtained score /(number of question * correct score) )*100
 		if (count($correct_score) >= "2") {
@@ -898,7 +900,6 @@ Class quiz_model extends CI_Model
 		                   'status' => '1'
 		               );
 
-		$this->db->where('institute_id', $institute_id);
 		$this->db->where('rid', $rid);
 		if ($this->db->update('quiz_result', $insert_data)) {
 			//TODO : If you want the mail tobe sent to the user for results

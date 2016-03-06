@@ -103,7 +103,7 @@
                                                     <form method="post" action="<?php echo site_url('quiz/qbank/add_new');?>">
                                                         <div class="form-group">
                                                             <label>Question Type</label>
-                                                            <select class="form-control selectpicker" style="width:50%" OnChange="get_ques_type(this.value)">
+                                                            <select name = "qus_type" class="form-control selectpicker" style="width:50%" OnChange="get_ques_type(this.value)">
                                                                 <option value="0"> Multiple Choice -single answers</option>
                                                                 <option value="1" > Multiple Choice -multiple answers</option>
                                                                 <option value="2"  >Fill in the Blank</option>
