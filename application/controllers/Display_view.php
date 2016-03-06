@@ -473,9 +473,19 @@ class Display_view extends CI_Controller {
 		$this->load->view('sent_mail', $data);
 	}
 
-	public function reply_mail()
+	public function view_profile()
 	{
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("login","refresh");
+		}
 
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+
+		 //foreach($data['user'] as $k)echo $k."<br>";
+		$this->load->view('view_profile',$data);
 	}
 
 	
