@@ -64,6 +64,7 @@ $route['courses/(:num)/assignments/add'] = 'assignments/add/$1';
 $route['courses/(:num)/lessons/edit/(:num)'] = 'lessons/edit/$1/$2';
 $route['courses/(:num)/lessons/(:num)'] = 'lessons/index/$1/$2';
 $route['courses/(:num)/lessons/add'] = 'lessons/add/$1';
+$route['courses/(:num)'] = "display_view/course/$1";
 $route['dashboard'] = 'display_view/dashboard';
 $route['signup'] = 'auth/create_user';
 $route['login'] = 'auth/login';

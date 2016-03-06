@@ -13,9 +13,9 @@ class Courses extends CI_Controller
 		}
 	}
 	
-	public function index()
+	public function index($id)
 	{
-
+		redirect('courses/'.$id);
 	}
 
 

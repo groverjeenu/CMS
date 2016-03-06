@@ -1,6 +1,6 @@
 <!-- Fixed navbar -->
 <?php $firstname = "Prabhat"; $lastname="Agarwal"; $username = "prabhat"; $imagehash = "lop";
-$user = (array)$this->ion_auth->user()->row();
+$user = $this->ion_auth->user()->row_array();
 $courseid = $course['cid'];?>
     <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
