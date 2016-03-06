@@ -491,7 +491,7 @@ class Auth extends CI_Controller {
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-            /*$this->data['first_name'] = array(
+            $this->data['first_name'] = array(
                 'name'  => 'first_name',
                 'id'    => 'first_name',
                 'type'  => 'text',
@@ -503,11 +503,11 @@ class Auth extends CI_Controller {
                 'type'  => 'text',
                 'value' => $this->form_validation->set_value('last_name'),
             );
-            $this->data['identity'] = array(
-                'name'  => 'identity',
-                'id'    => 'identity',
+            $this->data['username'] = array(
+                'name'  => 'username',
+                'id'    => 'username',
                 'type'  => 'text',
-                'value' => $this->form_validation->set_value('identity'),
+                'value' => $this->form_validation->set_value('username'),
             );
             $this->data['email'] = array(
                 'name'  => 'email',
@@ -515,18 +515,18 @@ class Auth extends CI_Controller {
                 'type'  => 'text',
                 'value' => $this->form_validation->set_value('email'),
             );
-            $this->data['company'] = array(
-                'name'  => 'company',
-                'id'    => 'company',
-                'type'  => 'text',
-                'value' => $this->form_validation->set_value('company'),
-            );
-            $this->data['phone'] = array(
-                'name'  => 'phone',
-                'id'    => 'phone',
-                'type'  => 'text',
-                'value' => $this->form_validation->set_value('phone'),
-            );
+            // $this->data['company'] = array(
+            //     'name'  => 'company',
+            //     'id'    => 'company',
+            //     'type'  => 'text',
+            //     'value' => $this->form_validation->set_value('company'),
+            // );
+            // $this->data['phone'] = array(
+            //     'name'  => 'phone',
+            //     'id'    => 'phone',
+            //     'type'  => 'text',
+            //     'value' => $this->form_validation->set_value('phone'),
+            // );
             $this->data['password'] = array(
                 'name'  => 'password',
                 'id'    => 'password',
@@ -538,7 +538,7 @@ class Auth extends CI_Controller {
                 'id'    => 'password_confirm',
                 'type'  => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
-            );*/
+            );
 
             //$this->_render_page('auth/create_user', $this->data);
             //echo "reg failed";
