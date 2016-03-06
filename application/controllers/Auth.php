@@ -46,6 +46,7 @@ class Auth extends CI_Controller {
 		}
 	}
 
+
 	// log the user in
 	function login()
 	{

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ECourse</title>
+        <title><?php echo $page_title." | ".$this->config->item('sitename');?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -46,6 +46,9 @@
         <link href="<?php echo base_url();?>public/css/app/app.css" rel="stylesheet">
         <link href="<?php echo base_url();?>public/css/app/bootstrap-switch.min.css" rel="stylesheet">
         <link href="<?php echo base_url();?>public/css/app/bootstrap-datepicker.min.css" rel="stylesheet">
+
+        <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
         <!-- App CSS CORE
         This variant is to be used when loading the separate styling modules -->
         <!-- <link href="css/app/main.css" rel="stylesheet"> -->
@@ -105,32 +108,35 @@
                                             <label for="title">Title</label>
                                             <?php echo form_error('title');?>
                                         </div>
-                                        <div class="form-group form-control-material mytextarea" >
-                                            <textarea id="description" name = "description" class="form-control used" row="20" placeholder="Write assignment description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
+                                        <div class="form-group" >
                                             <label for="description">Description</label>
+                                            <textarea id="description" name = "description" class="summernote" row="20" placeholder="Write assignment description here...." value="<?php echo set_value('description');?>"><?php echo set_value('description');?></textarea>
+                                            
                                             <?php echo form_error('description');?>
                                         </div>
-                                        <div class="form-group form-control-material">
-                                            <input type='file' name='text' id='text' class="form-control used"/>
+                                        <div class="form-group">
                                             <label for="text">Assignment File(s)</label>
+                                            <input type='file' name='text' id='text' >
                                         </div>
                                         <div class="form-group">
                                             <label for="start" class="control-label">Release Date</label>
                                             <div class='input-group date datetimepicker col-sm-6' >
-                                                <input name="start" id="start" type='text' class="form-control" />
+                                                <input name="start_date" id="start" type='text' class="form-control" />
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
+                                            <?php echo form_error('start_date');?>
                                         </div>
                                         <div class="form-group">
                                             <label for="end" class="control-label">Due Date</label>
                                             <div class='input-group date datetimepicker col-sm-6' >
-                                                <input name="end" id="end" type='text' class="form-control" />
+                                                <input name="deadline" id="end" type='text' class="form-control" />
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
+                                            <?php echo form_error('deadline');?>
                                         </div>
                                         <div class="form-group">
                                                 <label for="weightage">Weightage</label>
@@ -213,10 +219,10 @@
     Includes Custom Application JavaScript used for the current theme/module;
     Do not use it simultaneously with the standalone modules below. -->
     <script src="<?php echo base_url();?>public/js/app/app.js"></script>
-    <script src="<?php echo base_url();?>public/js/autosize.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-switch.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>public/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>public/js/moment.min.js"></script>
+    <script src="<?php echo base_url();?>public/js/fileinput.min.js"></script>
     <!-- App Scripts Standalone Modules
     As a convenience, we provide the entire UI framework broke down in separate modules
     Some of the standalone modules may have not been used with the current theme/module
@@ -238,9 +244,16 @@
     <script>
     $(document).ready(function()
     {
-        autosize($('textarea'));
         $("#visibility").bootstrapSwitch();
         $(".datetimepicker").datetimepicker();
+        $("#text").fileinput({
+                showCaption:false,
+                showUpload:false,
+                allowedFileExtensions:["pdf","txt","gzip","gtar","zip","rar","tar","tgz","gz"],
+                autoReplace: true,
+                maxFileCount: 1,
+                maxFileSize: 100000
+            });
 
     });
     </script>

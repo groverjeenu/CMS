@@ -20,9 +20,18 @@ class Lessons_model extends CI_Model
 		return $result;
 	}
 
-	public function edit($id,$data)
+	public function edit($id,$lesson)
 	{
-
+		$data['title'] = $lesson['title'];
+		$data['description'] = $lesson['description'];
+		$data['video'] = $lesson['video'];
+		$data['text'] = $lesson['text'];
+		$data['is_public'] = $lesson['is_public'];
+		if(!$this->db->update('lectures',$data,array('id'=>$id)))
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	

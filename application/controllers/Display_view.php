@@ -181,30 +181,62 @@ class Display_view extends CI_Controller {
 
 	public function course($cid)
 	{
-		if(!$this->ion_auth->logged_in())
+		if($this->ion_auth->in_group('faculty'))
 		{
-			redirect("login","refresh");
-		}
+			if(!$this->ion_auth->logged_in())
+			{
+				redirect("login","refresh");
+			}
 
-		$query = $this->courses->get_course($cid);
-		$data['query'] = $query;
+			$query = $this->courses->get_course($cid);
+			$data['query'] = $query;
+				
+
+			$usr= $this->ion_auth->user()->row();
+			$data['user']= (array)$usr;
+
+			$val = $this->courses->check_if_enrolled($cid);
+			$val_ca = $this->courses->is_ca($cid);
+			
+			$lectures = $this->courses->get_course_lectures($cid);
+			$data['val'] = $val;
+			$data['val_ca'] = $val_ca;
+			$data['lectures'] = $lectures;
+			$data['assignments'] = $this->courses->get_course_assignments($cid);
+			$data['wt'] = $this->courses->get_total_weight($cid);
+			$data['cid'] = $cid;
 			
 
-		$usr= $this->ion_auth->user()->row();
-		$data['user']= (array)$usr;
+			$this->load->view('faculty_course',$data);	
+		}
 
-		$val = $this->courses->check_if_enrolled($cid);
-		$val_ca = $this->courses->is_ca($cid);
-		
-		$lectures = $this->courses->get_course_lectures($cid);
-		$data['val'] = $val;
-		$data['val_ca'] = $val_ca;
-		$data['lectures'] = $lectures;
-		$data['assignments'] = $this->courses->get_course_assignments($cid);
-		$data['grades_course']=$this->courses->get_course_grades($cid);
-		$data['wt'] = $this->courses->get_total_weight($cid);
+		else
+		{
+			if(!$this->ion_auth->logged_in())
+			{
+				redirect("login","refresh");
+			}
 
-		$this->load->view('coursepage',$data);
+			$query = $this->courses->get_course($cid);
+			$data['query'] = $query;
+				
+
+			$usr= $this->ion_auth->user()->row();
+			$data['user']= (array)$usr;
+
+			$val = $this->courses->check_if_enrolled($cid);
+			$val_ca = $this->courses->is_ca($cid);
+			
+			$lectures = $this->courses->get_course_lectures($cid);
+			$data['val'] = $val;
+			$data['val_ca'] = $val_ca;
+			$data['lectures'] = $lectures;
+			$data['assignments'] = $this->courses->get_course_assignments($cid);
+			$data['grades_course']=$this->courses->get_course_grades($cid);
+			$data['wt'] = $this->courses->get_total_weight($cid);
+
+			$this->load->view('coursepage',$data);
+		}
 
 	}
 
@@ -441,9 +473,19 @@ class Display_view extends CI_Controller {
 		$this->load->view('sent_mail', $data);
 	}
 
-	public function reply_mail()
+	public function view_profile()
 	{
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect("login","refresh");
+		}
 
+		$usr= $this->ion_auth->user()->row();
+		$data['user']= (array)$usr;
+
+
+		 //foreach($data['user'] as $k)echo $k."<br>";
+		$this->load->view('view_profile',$data);
 	}
 
 	

@@ -49,6 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route['public/js/(:any)'] = "public/js/$1";
+$route['(.+)/js/(.*)'] = "welcome/test/$2";
+$route['faculty/search'] = "courses/search_faculty";
+$route['courses/(:num)/assignments'] = 'assignments/listall/$1';
+$route['courses/(:num)/lectures'] = 'courses/lectures/$1';
+$route['courses/edit/(:num)/add_faculty'] = 'courses/add_faculty/$1';
+$route['courses/edit/(:num)/add_cadmin'] = 'courses/add_cadmin/$1';
 $route['courses/edit/(:num)/meta'] = 'courses/edit_meta/$1';
 $route['courses/edit/(:num)'] = 'courses/edit_general/$1';
 $route['courses/(:num)/assignments/edit/(:num)'] = 'assignments/edit/$1/$2';
@@ -57,9 +64,12 @@ $route['courses/(:num)/assignments/add'] = 'assignments/add/$1';
 $route['courses/(:num)/lessons/edit/(:num)'] = 'lessons/edit/$1/$2';
 $route['courses/(:num)/lessons/(:num)'] = 'lessons/index/$1/$2';
 $route['courses/(:num)/lessons/add'] = 'lessons/add/$1';
+$route['courses/(:num)'] = "display_view/course/$1";
 $route['dashboard'] = 'display_view/dashboard';
 $route['signup'] = 'auth/create_user';
 $route['login'] = 'auth/login';
+$route['inbox']= "display_view/inbox";
+$route['quiz/categories'] = "quiz/category_controller";
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

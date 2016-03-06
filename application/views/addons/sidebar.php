@@ -13,7 +13,7 @@
                                     </li>
                                     <!--li><a href="#"><i class="mdi-action-settings"></i> Settings</a>
                                     </li>
-                                    <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a>
+                                    <li><a href="#"><i class="mdi-communication-live-help"></i> Help</a-->
                                     
                                     <!--li><a href="#"><i class="mdi-action-lock-outline"></i> Lock</a>
                                     </li-->
@@ -34,7 +34,8 @@
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/inbox" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Inbox</a>
                     </li>
-
+                    <li class="bold"><a href="<?php echo base_url(); ?>display_view/sent_mail" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Outbox</a>
+                    </li>
                     <div class="divider"></div>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/edit_profile" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Edit Profile</a>
                     </li>

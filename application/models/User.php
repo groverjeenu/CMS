@@ -4,7 +4,7 @@ class User extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		this->load->library('ion_auth');
+		$this->load->library('ion_auth');
 
 	}
 	
@@ -13,5 +13,10 @@ class User extends CI_Model
 	{
 		$id = $this->ion_auth->get_user_id();
 
+	}
+
+	public function search_faculty()
+	{
+		return $this->ion_auth->users()->result_array();
 	}
 }

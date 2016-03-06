@@ -407,7 +407,7 @@
                                   </ul>
                                   <div class="panel-footer text-right">
                                     <a href="app-student-courses.html" class="btn btn-white paper-shadow relative" data-z="0" data-hover-z="1" data-animated href="#"> View all</a-->
-                            <div class="col s12 l6">
+                            <!--div class="col s12 l6">
                                 <ul id="projects-collection" class="collection">
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
@@ -423,11 +423,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat cyan">Development</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-1"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -437,11 +437,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat grey darken-3">UI/UX</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-2"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -451,11 +451,11 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat teal">Marketing</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-3"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                     <li class="collection-item">
                                         <div class="row">
@@ -465,14 +465,14 @@
                                             </div>
                                             <div class="col s3">
                                                 <span class="task-cat green">SEO</span>
-                                            </div>
+                                            </div-->
                                             <!--div class="col s3">
                                                 <div id="project-line-4"><canvas width="144" height="30" style="display: inline-block; width: 144px; height: 30px; vertical-align: top;"></canvas></div>
                                             </div-->
-                                        </div>
+                                        <!--/div>
                                     </li>
                                 </ul>   
-                            </div>
+                            </div-->
                                       
                         </div>
                     </section>

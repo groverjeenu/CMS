@@ -13,6 +13,7 @@
         <?php $this->load->view('common/icon');?>
         <link href="<?php echo base_url();?>public/css/vendor/all.css" rel="stylesheet">
         <link href="<?php echo base_url();?>public/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url();?>public/css/loader.css" media="all" rel="stylesheet" type="text/css" />
         <style type="text/css">
         .mytextarea
         {
@@ -132,7 +133,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Course Icon</label>
-                                            <input id="course_icon" name="course_icon"  type="file" class="file" data-show-caption="false" data-show-upload="false" data-allowed-file-extensions='["png", "jpg","gif","jpeg"]'>
+                                            <input id="course_icon" name="course_icon"  type="file" >
                                             <?php echo $file_error; ?>
                                         </div>
                                         <div class="text-right">
@@ -244,6 +245,18 @@
     $("#course_key").prop('disabled',true);
     });
     });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#course_icon").fileinput({
+                showCaption:false,
+                showUpload:false,
+                allowedFileExtensions:["png", "jpg","gif","jpeg"],
+                autoReplace: true,
+                maxFileCount: 1,
+                maxFileSize: 5000
+            });
+        });
     </script>
 </body>
 </html>

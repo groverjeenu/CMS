@@ -43,7 +43,7 @@
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- <link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection"> -->
 
 
 </head>
@@ -351,11 +351,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <?php echo $key['body']?>
+                                                        <h4 class="header2"><?php echo $key['body']?></h4>
                                                     </td>  
-                                                    <td>
+                                                    <!--td>
                                                         <a class="btn-flat waves-effect pink accent-2 white-text"><i class="mdi-communication-email right"></i>Reply</a>
-                                                    </td> 
+                                                    </td--> 
 
                                                     
                                                 </tr>
@@ -1277,7 +1277,7 @@
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
-    $(window).load(function() {
+    /*$(window).load(function() {
         setTimeout(function() {
             Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
         }, 1500);
@@ -1287,7 +1287,7 @@
         setTimeout(function() {
             Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
         }, 15000);
-    });
+    });*/
 
 
     $(function() {

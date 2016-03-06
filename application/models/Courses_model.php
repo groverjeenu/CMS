@@ -14,28 +14,51 @@ class Courses_model extends CI_Model
 		$data = array(
 				'course_name' => $details['title'],
 				'description' => $details['description'],
-				'syllabus' => $details['syllabus'],
+				'syllabus' => $details['syllabus']
 			);
 		if($details['is_key'])
 		{
 			$data['course_key'] = $details['course_key'];
 		}
+		if($details['imagename'])
+		{
+			$data['imagename'] = $details['imagename'];
+		}
 		$this->db->insert('courses',$data);
 		$id = $this->db->insert_id();
 		$data['id'] = $id;
-		$this->add_faculty_to_course($id,$this->ion_auth->get_user_id());
+		$this->add_faculty_to_course($id,array($this->ion_auth->get_user_id()));
 		return $data;
 	}
 
-	public function add_faculty_to_course($cid,$faculty_id,$is_guest)
+	public function add_faculty_to_course($cid,$faculty_ids,$is_guest=false)
 	{
 		$type = 'main';
 		if($is_guest)
 		{
 			$type = 'guest';
 		}
-		$data = array('course_id' => $cid, 'faculty_id' => $faculty_id, 'faculty_role' => $type);
-		$this->db->insert('course_faculty',$data);
+		$this->db->trans_start();
+		foreach($faculty_ids as $faculty_id)
+		{
+			$data = array('course_id' => $cid, 'faculty_id' => $faculty_id, 'faculty_role' => $type);
+			$this->db->insert('course_faculty',$data);
+		}
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+
+	}
+
+	public function add_cadmin_to_course($cid,$faculty_ids)
+	{
+		$this->db->trans_start();
+		foreach($faculty_ids as $faculty_id)
+		{
+			$data = array('cid' => $cid, 'courseadmin' => $faculty_id, 'is_approved' => TRUE);
+			$this->db->insert('course_courseadmin',$data);
+		}
+		$this->db->trans_complete();
+		return $this->db->trans_status();
 
 	}
 
@@ -48,6 +71,114 @@ class Courses_model extends CI_Model
 			return false;
 		}
 		return $result->row_array();
+	}
+
+	public function get_meta($cid)
+	{
+		$this->db->select('cid, course_name,imagename, start, end, duration');
+		$result = $this->db->get_where('courses',array("cid" => $cid));
+		if($result->num_rows() != 1)
+		{
+			return false;
+		}
+		return $result->row_array();
+	}
+
+	public function get_lessons($cid)
+	{
+		return $this->db->select('id, upload_time,is_public, title')
+				->from('lectures')
+				->where('course_id',$cid)
+				->get()->result_array();
+	}
+
+	public function get_imagename($cid)
+	{
+		$this->db->select('imagename');
+		$result = $this->db->get_where('courses',array("cid" => $cid));
+		if($result->num_rows() != 1)
+		{
+			return false;
+		}
+		return $result->row_array()['imagename'];
+	}
+
+	public function set_default_image($cid)
+	{
+		return $this->db->update('courses',array('imagename'=>"course.png"),array('cid' => $cid));
+	}
+
+	public function update($cid,$data)
+	{
+		$this->db->update('courses',$data,array("cid" => $cid));
+		if($this->db->affected_rows() < 1)
+			return false;
+		return true;
+	}
+
+	public function update_meta($cid,$data)
+	{
+		$streams = $data['stream'];
+		if(!$this->updateCourseTopic($cid,$streams))
+		{
+			print_r($this->db->error());
+			exit(0);
+			return false;
+		}
+		unset($data['stream']);
+		$status = $this->db->update('courses',$data,array("cid" => $cid));
+		if(!$status)
+		{
+			print_r($this->db->error());
+			exit(0);
+			return false;
+		}
+		return true;
+	}
+
+	public function updateCourseTopic($cid,$topics)
+	{
+		$this->db->trans_start();
+		$this->db->where('course_id',$cid)->delete('course_topics');
+		$data['course_id'] = $cid;
+		foreach($topics as $topic)
+		{
+			$data['topic_id'] = $topic;
+			$this->db->insert('course_topics',$data);
+		}
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+
+	}
+
+	public function all_streams()
+	{
+		return $this->db->where('id!=',1)->get('topics')->result_array();
+
+	}
+
+	public function getAllFaculty($courseid)
+	{
+		return $this->db->select('faculty_role as role,course_faculty.last_updated,users.id,users.username,users.first_name, users.last_name, users.image')
+				->from('course_faculty')
+				->join('users','users.id=faculty_id')
+				->where('course_id',$courseid)->get()
+				->result_array();
+	}
+
+	public function getAllCAdmins($courseid)
+	{
+		return $this->db->select('course_courseadmin.last_updated,users.id,users.username,users.first_name, users.last_name, users.image')
+				->from('course_courseadmin')
+				->join('users','users.id=courseadmin')
+				->where('cid',$courseid)->get()
+				->result_array();
+	}
+
+	public function getTopicIds($cid)
+	{
+		$result = $this->db->select('topic_id')->where('course_id',$cid)->get('course_topics');
+		return array_column($result->result_array(),"topic_id");
 	}
 
 	public function get_all_courses()
@@ -235,6 +366,12 @@ class Courses_model extends CI_Model
 	{
 		$id = intval($id);
 		$this->db->query("update course_courseadmin set is_approved=1 where courseadmin=?", $id);
+	}
+
+	public function getstulist($cid)
+	{
+		$cid = intval($cid);
+		return $this->db->query("select * from enrollments, users where enrollments.course_id=? and enrollments.student_id=users.id", $cid)->result_array();
 	}
 
 }
