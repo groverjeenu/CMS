@@ -76,7 +76,7 @@
     <body>
         <!-- Wrapper required for sidebar transitions -->
         <div class="st-container">
-            <?php $this->view('common/header');?>
+            <?php $this->view('courses/courses_sidebar', array('course'=>$this->courses->get_general($cid)));?>
             <!-- sidebar effects OUTSIDE of st-pusher: -->
             <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
             <!-- content push wrapper -->

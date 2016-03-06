@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ECourse</title>
+        <title><?php echo "New Quiz | ".$this->config->item('sitename');?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -117,7 +117,7 @@
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-12">
                                                         
                                                         <div class="form-group">
                                                             <label>Quiz Name</label>
@@ -125,7 +125,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quiz Description</label>
-                                                            <textarea name="description"  placeholder=""></textarea>
+                                                            <textarea name="description" class="summernote" row="5" placeholder=""></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quiz Duration in Minutes</label>
@@ -417,7 +417,7 @@
     </script>
     <script type="text/javascript">
         
-    tinyMCE.init({
+    /*tinyMCE.init({
         
     mode : "textareas",
             theme : "advanced",
@@ -436,7 +436,7 @@
             theme_advanced_buttons4 : "jbimages,insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft,visualblocks",
             
             
-        });
+        });*/
 
     </script>
    

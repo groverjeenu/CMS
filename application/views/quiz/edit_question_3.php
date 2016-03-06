@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ECourse</title>
+        <title><?php echo "Edit Question | ".$this->config->item('sitename');?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -94,36 +94,36 @@
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-lg-12">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                        <div class="panel-heading h3">
                                             <?php if($title){ echo $title; } ?>
                                         </div>
                                         <div class="panel-body">
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     
                                                     <form method="post" action="<?php echo site_url('quiz/qbank/edit_question/'.$result['0']['qid']).'/3';?>">
                                                         <div class="form-group">
                                                             <label>Select Category</label>
-                                                            <select class="form-control"  name="cid">
+                                                            <select class="form-control selectpicker" style="width:50%"  name="cid">
                                                                 <?php foreach($category as $value){ ?>
                                                                 <option value="<?php echo $value->cid; ?>"   <?php if($result['0']['cid'] == $value->cid){ echo "selected"; }?> ><?php echo $value->category_name; ?></option>
                                                             <?php } ?></select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Select Difficulty Level</label>
-                                                            <select class="form-control" name="did">
+                                                            <select class="form-control selectpicker" style="width:50%" name="did">
                                                                 <?php foreach($difficult_level as $value){ ?>
                                                                 <option value="<?php echo $value->did; ?>"  <?php if($result['0']['did'] == $value->did){ echo "selected"; }?>  ><?php echo $value->level_name; ?></option>
                                                             <?php } ?></select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Question</label>
-                                                            <textarea name="question"><?php echo $result['0']['question'];?></textarea>
+                                                            <textarea name="question" class="summernote" row="5"><?php echo $result['0']['question'];?></textarea>
                                                             
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Description (Optional)</label>
-                                                            <textarea name="description"><?php echo $result['0']['description'];?></textarea>
+                                                            <textarea name="description" class="summernote" row="5" ><?php echo $result['0']['description'];?></textarea>
                                                             <p class="help-block">
                                                                 Describe how question can be solved. <br>
                                                                 User can see description after submitting quiz in view answer section.
@@ -145,7 +145,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="submit" value="Submit"  class="btn btn-default">
+                                                            <input type="submit" value="Submit"  class="btn btn-primary">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -280,7 +280,7 @@
     </script>
     <script type="text/javascript">
         
-tinyMCE.init({
+/*tinyMCE.init({
     
 mode : "textareas",
         theme : "advanced",
@@ -300,7 +300,7 @@ mode : "textareas",
         
         
     });
-
+*/
 </script>
 </body>
 </html>
