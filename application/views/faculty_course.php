@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title><?php echo $query['course_name']." | ".$this->config->item('sitename');?></title>
+        <?php $this->view('common/icon');?>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -339,6 +340,9 @@
         ONLY when using the standalone modules; -->
         <!-- <script src="js/app/main.js"></script> -->
         <script>
+            $(document).ready(function(){
+                $("#li_overview").addClass('active');
+            });
         </script>
     </body>
 </html>

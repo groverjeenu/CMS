@@ -68,6 +68,7 @@ $route['courses/(:num)'] = "display_view/course/$1";
 $route['dashboard'] = 'display_view/dashboard';
 $route['signup'] = 'auth/create_user';
 $route['login'] = 'auth/login';
+$route['inbox']= "display_view/inbox";
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
