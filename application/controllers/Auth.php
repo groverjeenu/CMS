@@ -438,6 +438,7 @@ class Auth extends CI_Controller {
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique['.$tables['users'].'.username]');
         if($identity_column!=='email')
         {
             $this->form_validation->set_rules('identity',$this->lang->line('create_user_validation_identity_label'),'required|is_unique['.$tables['users'].'.'.$identity_column.']');
@@ -461,6 +462,7 @@ class Auth extends CI_Controller {
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name'  => $this->input->post('last_name'),
+                'username' => $this->input->post('username'),
                 //'company'    => "",
                 //'phone'      => "",
                 'is_faculty' => (bool)$this->input->post('faculty'),
@@ -489,7 +491,7 @@ class Auth extends CI_Controller {
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-            /*$this->data['first_name'] = array(
+            $this->data['first_name'] = array(
                 'name'  => 'first_name',
                 'id'    => 'first_name',
                 'type'  => 'text',
@@ -501,11 +503,11 @@ class Auth extends CI_Controller {
                 'type'  => 'text',
                 'value' => $this->form_validation->set_value('last_name'),
             );
-            $this->data['identity'] = array(
-                'name'  => 'identity',
-                'id'    => 'identity',
+            $this->data['username'] = array(
+                'name'  => 'username',
+                'id'    => 'username',
                 'type'  => 'text',
-                'value' => $this->form_validation->set_value('identity'),
+                'value' => $this->form_validation->set_value('username'),
             );
             $this->data['email'] = array(
                 'name'  => 'email',
@@ -513,18 +515,18 @@ class Auth extends CI_Controller {
                 'type'  => 'text',
                 'value' => $this->form_validation->set_value('email'),
             );
-            $this->data['company'] = array(
-                'name'  => 'company',
-                'id'    => 'company',
-                'type'  => 'text',
-                'value' => $this->form_validation->set_value('company'),
-            );
-            $this->data['phone'] = array(
-                'name'  => 'phone',
-                'id'    => 'phone',
-                'type'  => 'text',
-                'value' => $this->form_validation->set_value('phone'),
-            );
+            // $this->data['company'] = array(
+            //     'name'  => 'company',
+            //     'id'    => 'company',
+            //     'type'  => 'text',
+            //     'value' => $this->form_validation->set_value('company'),
+            // );
+            // $this->data['phone'] = array(
+            //     'name'  => 'phone',
+            //     'id'    => 'phone',
+            //     'type'  => 'text',
+            //     'value' => $this->form_validation->set_value('phone'),
+            // );
             $this->data['password'] = array(
                 'name'  => 'password',
                 'id'    => 'password',
@@ -536,7 +538,7 @@ class Auth extends CI_Controller {
                 'id'    => 'password_confirm',
                 'type'  => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
-            );*/
+            );
 
             //$this->_render_page('auth/create_user', $this->data);
             //echo "reg failed";
@@ -639,6 +641,11 @@ class Auth extends CI_Controller {
 				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
 			}
+			if ($this->input->post('parent_key'))
+			{
+				$this->form_validation->set_rules('parent_key', 'parent_key', 'min_length[4]|max_length[16]');
+				
+			}
 
 			if ($this->form_validation->run() === TRUE)
 			{
@@ -658,6 +665,13 @@ class Auth extends CI_Controller {
 				if ($this->input->post('password'))
 				{
 					$data['password'] = $this->input->post('password');
+				}
+
+				if ($this->input->post('parent_key'))
+				{
+					$data['parent_key'] = $this->input->post('parent_key');
+
+					
 				}
 
 
@@ -710,6 +724,12 @@ class Auth extends CI_Controller {
 
 			    }
 
+			    $this->session->set_flashdata('message','Update Succesful');
+
+			}
+			else
+			{
+				$this->session->set_flashdata('message','Error : Update Unsuccesful');
 			}
 		}
 
@@ -759,7 +779,13 @@ class Auth extends CI_Controller {
 			'type' => 'password'
 		);
 
-		//$this->_render_page('auth/edit_user', $this->data);
+		$this->data['parent_key'] = array(
+			'name' => 'parent_key',
+			'id'   => 'parent_key',
+			'type' => 'text'
+		);
+
+		
 		redirect('display_view/edit_profile',"refresh");
 	}
 

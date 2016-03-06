@@ -17,6 +17,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="<?php echo base_url(); ?>login">Log In</a></li>
         <li><a href="<?php echo base_url(); ?>signup">Sign Up</a></li>
+        <li><a href="<?php echo base_url(); ?>welcome/parent_login">Parents Section</a></li>
       </ul>
 
      

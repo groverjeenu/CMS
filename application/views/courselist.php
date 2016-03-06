@@ -134,7 +134,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               flag = 1;
             $('#courses_section').append(
 
-                  '<div class="panel panel-default paper-shadow" data-z="0.5"><div class="panel-body"><div class="media media-clearfix-xs"><div class="media-left text-center"><div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10"><span class="img icon-block height-130 bg-default"></span><span class="overlay overlay-full padding-none icon-block bg-default"><span class="v-center"><i class="fa fa-github"></i></span></span><a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white"><span class="v-center"><span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span></span></a></div></div><div class="media-body">'+'<h4 class="text-headline margin-v-5-0"><a href="'+response['base_url']+'/display_view/course/'+key+'">'+ val['course_name']+'</a></h4>'+'<p class="small"><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span><span class="fa fa-fw fa-star-o text-yellow-800"></span></p><p>'+val['description']+'</p>'+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body">'+val['names']+'<br/>Instructor</div></div></div></div></div></div>'
+                  '<div class="panel panel-default paper-shadow" data-z="0.5"><div class="panel-body"><div class="media media-clearfix-xs"><div class="media-left text-center"><div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10"><img src="'+response['base_url'] +'contents/images/course_icons/'+val['imagename']+'"></div></div><div class="media-body">'+'<h4 class="text-headline margin-v-5-0"><a href="'+response['base_url']+'/display_view/course/'+key+'">'+ val['course_name']+'</a></h4>'+'<p class="small"></p><p>'+val['description']+'</p>'+'</p><hr class="margin-v-8" /><div class="media v-middle"><div class="media-left"><img src="'+response['base_url']+'public/images/people/50/guy-8.jpg" alt="People" class="img-circle width-40" /></div><div class="media-body">'+val['names']+'<br/>Instructor</div></div></div></div></div></div>'
               );
             });
           if(flag == 0)
@@ -520,28 +520,29 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <div class="media media-clearfix-xs">
                   <div class="media-left text-center">
                     <div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10">
-                      <span class="img icon-block height-130 bg-default"></span>
+                      <img src="<?php echo base_url();?>contents/images/course_icons/<?php echo $i['imagename']?>">
+                      <!--span class="img icon-block height-130 bg-default"></span>
                       <span class="overlay overlay-full padding-none icon-block bg-default">
                         <span class="v-center">
                             <i class="fa fa-github"></i>
                         </span>
-                      </span>
-                      <a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white">
+                      </span-->
+                      <!--a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white">
                         <span class="v-center">
                             <span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span>
                         </span>
-                      </a>
+                      </a-->
                     </div>
                   </div>
                   <div class="media-body">
                     <h4 class="text-headline margin-v-5-0"><a href="<?php echo base_url(); ?>display_view/course/<?php echo $key; ?>"> <?php echo $i['course_name']; ?></a></h4>
-                    <p class="small">
+                    <!--p class="small">
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                    </p>
+                    </p-->
                     <p><?php echo $i['description']; ?></p>
 
                     <hr class="margin-v-8" />

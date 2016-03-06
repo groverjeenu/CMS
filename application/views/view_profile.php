@@ -630,15 +630,15 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                                <img src ="<?php echo base_url(); ?>contents/users/<?php echo $user['image'];?>" id = "imgtab" class = "icon-block width-100 bg-grey-100">
                               </div>
                             </div>
-                            <div class="media-body">
+                            <!--div class="media-body">
                               <input type="file" id="file" onchange="readURL(this);" name="image">
                                 <label for="file" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade"
                                 data-z="0.5" data-hover-z="1" data-animated="">
                                 <i class="fa fa-upl">Add Image</i>
                                 </label>
-                              <style>#file { display: none }</style>
+                              <style>#file { display: none }</style-->
                               <!--a href="#" class="btn btn-white btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated=""><span class="ink animate" style="height: 86px; width: 86px; top: -23px; left: -25.3281px;"></span> Add Image<i class="fa fa-upl"></i></a-->
-                            </div>
+                            <!--/div-->
                           </div>
                         </div>
                       </div>
@@ -647,17 +647,10 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <div class="col-md-8">
                           <div class="row">
                             <div class="col-md-6">
-                              <div class="form-control-material">
-                                <input  class="form-control" id="exampleInputFirstName" placeholder="Your first name" name="first_name" value = "<?php echo $user['first_name'];?>">
+                                <h4  class="header2" id="exampleInputFirstName" placeholder="Your first name" name="first_name"> <?php echo $user['first_name'];?> <?php echo $user['last_name'];?></h4>
                               
-                              </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-control-material">
-                                <input class="form-control" id="exampleInputLastName" placeholder="Your last name" name="last_name" value = "<?php echo $user['last_name'];?>">
-                              </div>
                             </div>
-                          </div>
                         </div>
                       </div>
                       <div class="form-group">
@@ -672,22 +665,6 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                           </div>
                         </div>
                       </div>
-
-                      <?php if($this->ion_auth->in_group('members')) {?>
-                      <div class="form-group">
-                        <label for="inputEmail3" class="col-md-2 control-label">Set Parental Passkey</label>
-                        <div class="col-md-6">
-                          <div class="form-control-material">
-                            <div class="input-group">
-                             
-                              <input type="parent_key" name = "parent_key" class="form-control" id="inputEmail3" placeholder="Parental Key" value = "<?php echo $user['parent_key'];?>">
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <?php } ?>
-
                     </div>
                       <!--
                       <div class="form-group">
@@ -703,7 +680,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         </div>
                       </div> -->
                     
-                      <div class="form-group">
+                      <!--div class="form-group">
                         <label for="inputPassword3" class="col-md-2 control-label">Change Password</label>
                         <div class="col-md-6">
                           <div class="form-control-material">
@@ -726,7 +703,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                         <div class="col-md-offset-2 col-md-10">
                           <button type="submit" class="btn btn-primary paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated>Save Changes</button>
                         </div>
-                      </div>
+                      </div-->
                     </form>
                   </div>
 
@@ -857,12 +834,17 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
-   $(window).load(function() {
+/*    $(window).load(function() {
         setTimeout(function() {
-            Materialize.toast('<?php echo $this->session->flashdata("message");?>', 15000);
+            Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
         }, 1500);
-        
-    });
+        setTimeout(function() {
+            Materialize.toast('<span>You can swipe me too!</span>', 3000);
+        }, 5000);
+        setTimeout(function() {
+            Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
+        }, 15000);
+    });*/
 
 
     $(function() {

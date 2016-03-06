@@ -61,6 +61,7 @@
               <i class="mdi-social-person-outline prefix"></i>
               <input id="first name" type="text" name = "first_name">
               <label for="username" class="center-align">First Name</label>
+              <div class="red-text"><?php echo form_error('first_name');?></div>
             </div>
           </div>
           <div class="row margin">
@@ -68,6 +69,7 @@
               <i class="mdi-social-person-outline prefix"></i>
               <input id="last name" type="text" name = "last_name">
               <label for="username" class="center-align">LastName</label>
+              <div class="red-text"><?php echo form_error('last_one');?></div>
             </div>
           </div>
           <div class="row margin">
@@ -75,13 +77,25 @@
               <i class="mdi-communication-email prefix"></i>
               <input id="email" type="text" name = "email">
               <label for="username" class="center-align">Email</label>
+              <div class="red-text"><?php echo form_error('email');?></div>
             </div>
           </div>
+          <div class="row margin">
+            <div class="input-field col s12">
+              <i class="mdi-communication-email prefix"></i>
+              <input id="username" type="text" name = "username">
+              <label for="username" class="center-align">Username</label>
+              <div class="red-text"><?php echo form_error('username');?></div>
+            </div>
+          </div>
+          
+
           <div class="row margin">
             <div class="input-field col s12">
               <i class="mdi-action-lock-outline prefix"></i>
               <input id="password" type="password" name = "password">
               <label for="password">Password</label>
+              <div class="red-text"><?php echo form_error('password');?></div>
             </div>
           </div>
           <div class="row margin">
@@ -89,6 +103,7 @@
               <i class="mdi-action-lock-outline prefix"></i>
               <input id="reenter_pass" type="password" name = "password_confirm">
               <label for="password">Retype Password</label>
+              <div class="red-text"><?php echo form_error('password_confirm');?></div>
             </div>
           </div>
           <div class="row">
@@ -97,6 +112,7 @@
               <label for="faculty">I am a faculty</label>
             </div>
           </div>
+
           <div class="row">
             <div class="input-field col s12">
               <button type="submit" class="btn waves-effect waves-light col s12">Sign Up</button>

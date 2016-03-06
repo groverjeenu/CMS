@@ -421,7 +421,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                   <span class="icon-block half bg-blue-300 text-white">2</span>
                 </div>
                 <div class="media-body">
-                  <h1 class="text-display-1 margin-none"><?php echo $lec['name']?></h1>
+                  <h1 class="text-display-1 margin-none"><?php echo $lec['title']?></h1>
                 </div>
               </div>
               <br/>
