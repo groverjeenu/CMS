@@ -181,9 +181,10 @@ class Welcome extends CI_Controller {
 				if($datas && $datas != NULL && $datas['parent_key'] == $this->input->post('passkey'))
 				{
 
-					$query = $this->courses->get_user_courses();
+					$query = $this->courses->get_user_courses($datas);
 					//$usr= $this->ion_auth->user()->row();
 						$data['user']= (array)$usr;
+						$data['data'] = array();
 						//echo $datas['email'];
 					//$data['query'] = $query;
 						

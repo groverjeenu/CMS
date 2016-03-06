@@ -231,6 +231,7 @@ class Display_view extends CI_Controller {
 			$data['val'] = $val;
 			$data['val_ca'] = $val_ca;
 			$data['lectures'] = $lectures;
+			$data['quiz'] = $this->courses->get_course_quiz($cid);
 			$data['assignments'] = $this->courses->get_course_assignments($cid);
 			$data['grades_course']=$this->courses->get_course_grades($cid);
 			$data['wt'] = $this->courses->get_total_weight($cid);

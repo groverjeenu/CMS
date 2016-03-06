@@ -396,7 +396,7 @@ Class Quiz_model extends CI_Model
 	}
 	function get_time_info($rid) {
 		$institute_id = $this->ion_auth->get_user_id();
-
+		date_default_timezone_set("Asia/Kolkata"); 
 		$current_time = time();
 		$this->db->query("update quiz_result set time_spent=($current_time-start_time) where rid='$rid' ");
 
@@ -440,6 +440,7 @@ Class Quiz_model extends CI_Model
 				return "Quiz not available. Available time has been passed";
 			}
 			if ($time_spent >= ($duration * 60 ) and false) {
+
 				return "Time over";
 			}
 			return "1";
@@ -466,11 +467,13 @@ Class Quiz_model extends CI_Model
 				}
 			}*/
 			// check quiz start time
+
 			if ($row['start_time'] >= time() and false) {
 				return "Quiz is not available yet!";
 			}
 			// check quiz end time
 			if ($row['end_time'] <= time() and false) {
+
 				return "Quiz not available. Available time has been passed  ";
 			}
 			// check maximum attempts
@@ -550,7 +553,7 @@ Class Quiz_model extends CI_Model
 			$roids = implode(",", $roids);
 			$category_names = implode(",", $category_names);
 			$qids_range = implode(",", $qids_range);
-			
+			date_default_timezone_set("Asia/Kolkata"); 
 			$insert_data = array(
 			                   'uid' => $uid,
 			                   'quid' => $quid,
@@ -883,6 +886,7 @@ Class Quiz_model extends CI_Model
 		} else {
 			$q_result = "0";
 		}
+		date_default_timezone_set("Asia/Kolkata"); 
 		$time_spent = time() - $qr['start_time'];
 		$score_ind = implode(",", $score_ind);
 		if ($essay_question >= "1") {
