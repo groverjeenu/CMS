@@ -26,6 +26,7 @@
                            
                         </div>
                     </li>
+                    <?php if(!$this->ion_auth->in_group('faculty')){?>
                     <li class="bold"><a href="<?php echo base_url(); ?>dashboard" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/courselist" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Courselist</a>
@@ -36,6 +37,11 @@
                     </li>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/sent_mail" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Outbox</a>
                     </li>
+                    <?php }?>
+                    <?php if($this->ion_auth->in_group('faculty')) {?>
+                    <li class="bold"><a href="<?php echo base_url(); ?>dashboard" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a>
+                    </li>
+                    <?php }?>
                     <div class="divider"></div>
                     <li class="bold"><a href="<?php echo base_url(); ?>display_view/edit_profile" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i>Edit Profile</a>
                     </li>

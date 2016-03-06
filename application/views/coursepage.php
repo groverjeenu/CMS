@@ -115,17 +115,18 @@
                                 <div class="page-section">
                                     <div class="media">
                                         <div class="media-left">
-                                            <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>
+                                            <!--span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span-->
+                                            <img class="width-50" src="<?php echo base_url(); ?>contents/images/course_icons/<?php echo $query['imagename']; ?>">
                                         </div>
                                         <div class="media-body">
                                             <h1 class="text-display-1 margin-none"><?php echo $query['course_name']; ?></h1>
-                                            <p class="small margin-none">
+                                            <!--p class="small margin-none">
                                                 <span class="fa fa-fw fa-star text-yellow-800"></span>
                                                 <span class="fa fa-fw fa-star text-yellow-800"></span>
                                                 <span class="fa fa-fw fa-star text-yellow-800"></span>
                                                 <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                                                 <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                                            </p>
+                                            </p-->
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +147,7 @@
                                 <br/><br/>
                                 <div class="page-section">
                                     <h2 class="text-headline margin-none">What you'll learn</h2>
-                                    <p class="text-subhead text-light">A brief description.</p>
+                                    <p class="text-subhead text-light">Syllabus.</p>
                                     <ul class="list-group relative paper-shadow margin-none" data-hover-z="0.5" data-animated>
                                         <li class="list-group-item">
                                             <div class="media v-middle">
@@ -305,7 +306,7 @@
                                     </div>
                                     <?php }?>
                                     
-                                    <?php if($val_ca == 0){?>
+                                    <?php if($val==0 && $val_ca == 0){?>
                                     <script type = "text/javascript" language = "javascript">
                                     $('document').ready(function()
                                     {
@@ -337,6 +338,7 @@
                                         </div>
                                         <?php }?>
                                         
+                                        <?php if($val != 0 && $val_ca==0){?>
                                         <div  class="panel panel-default paper-shadow" data-z="0.5" data-hover-z="1" data-animated>
                                             <div class="panel-body">
                                                 <div class="media v-middle">
@@ -358,6 +360,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php }?>
                                         <!-- // END .page-section -->
                                     </div>
                                 </div>
