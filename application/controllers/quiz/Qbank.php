@@ -50,7 +50,7 @@ class Qbank extends CI_Controller {
 		$data['limit'] = $limit;
 		$data['quid'] = $quid;
 		$data['quiz_name'] = $quiz_name;
-		$this->load->model('quiz_model', '', TRUE);
+		$this->load->model('quiz/quiz_model', '', TRUE);
 		$data['assigned_questions'] = $this->quiz_model->assigned_questions_manually($quid);
 		//TODO:Check this our
 		if(!isset($data['resultstatus'])) $data['resultstatus'] = false;

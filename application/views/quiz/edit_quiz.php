@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ECourse</title>
+        <title><?php echo "Edit Quiz | ".$this->config->item('sitename');?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -109,23 +109,23 @@
                             if($resultstatus){ echo "<div class='alert alert-success'>".$resultstatus."</div>"; }
                             ?>
 
-                            <form method="post" action="<?php echo site_url('quiz/quiz/edit_quiz/'.$result->quid);?>">
+                            <form method="post" action="<?php echo site_url('/quiz/quiz/edit_quiz/'.$result->quid);?>">
                                 <div class="row" style="margin-top:10px;">
                                     <div class="col-lg-12">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+                                            <div class="panel-heading h3">
                                                 <?php if($title){ echo $title; } ?>
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-lg-8">
+                                                    <div class="col-lg-10">
                                                         <div class="form-group">
                                                             <label>Quiz Name</label>
                                                             <input type='text'  class="form-control"  name='quiz_name'  value="<?php echo $result->quiz_name;?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quiz Description</label>
-                                                            <textarea name="description"  ><?php echo $result->description;?></textarea>
+                                                            <textarea name="description"  class="summernote" row="5" ><?php echo $result->description;?></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quiz Duration in Minutes</label>
@@ -142,7 +142,7 @@
                                                         
                                                         <div class="form-group">
                                                             <label>Percentage required to pass</label>
-                                                            <select name="pass_percentage"  class="form-control">
+                                                            <select name="pass_percentage"  class="form-control selectpicker" style="width:50%">
                                                                 <?php for($i = 0;$i <= 100;$i++){ ?>
                                                                 <option value="<?php echo $i;  ?>"  <?php if($result->pass_percentage == $i){ echo "selected";}?> ><?php echo $i;  ?>%</option>
                                                                 <?php } ?>
@@ -157,7 +157,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Maximum Attempts </label>
-                                                            <select name="max_attemp"  class="form-control">
+                                                            <select name="max_attemp"  class="form-control selectpicker" style="width:50%">
                                                                 <?php for($i = 1;$i <= 1000;$i++){ ?>
                                                                 <option value="<?php echo $i;  ?>" <?php if($result->max_attempts == $i){ echo "selected";}?> ><?php echo $i;  ?></option>
                                                                 <?php } ?>
@@ -166,7 +166,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Quiz Type </label>
-                                                            <select name="qiz_type" class="form-control">
+                                                            <select name="qiz_type" cclass="form-control selectpicker" style="width:50%">
                                                                 <option value="0" <?php if($result->pract_test == "0"){ echo "selected";}?> >Exam</option>
                                                                 <option value="1" <?php if($result->pract_test == "1"){ echo "selected";}?> >Practice</option>
                                                                 
@@ -231,7 +231,7 @@
                                                     
                                                         <div class="form-group">
                                                             <input type="hidden" value="<?php echo $result->qselect;?>" name="qselect" id="qselect">
-                                                            <input type="submit" value="Submit Quiz" name="submit_quiz" class="btn btn-default">
+                                                            <input type="submit" value="Submit Quiz" name="submit_quiz" class="btn btn-primary">
                                                         </div>
                                                         
                                                     </div>
@@ -255,7 +255,7 @@
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-lg-12">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                        <div class="panel-heading h3">
                                             Questions Added
                                         </div>
                                         <!-- /.panel-heading -->
@@ -347,7 +347,7 @@
                             <?php
                             }
                             ?>
-
+                            <div style="margin-top:10px;"></div>
                             </div>
                                 <div id="qbank"></div>
                                 <div  id="warning_div" style="padding:10px; position:fixed;z-index:100;display:none;width:100%;border-radius:5px;height:200px; border:1px solid #dddddd;left:4px;top:70px;background:#ffffff;">
@@ -441,6 +441,7 @@
     function sortby(limi,cid){
 window.location="<?php echo site_url();?>/qbank/index/0/"+cid;
 }
+</script>
     <script src="<?php echo base_url();?>public/js/basic.js"></script>
 
     
@@ -466,7 +467,7 @@ window.location="<?php echo site_url();?>/qbank/index/0/"+cid;
     
     <script type="text/javascript">
         
-    tinyMCE.init({
+    /*tinyMCE.init({
         
     mode : "textareas",
             theme : "advanced",
@@ -486,7 +487,7 @@ window.location="<?php echo site_url();?>/qbank/index/0/"+cid;
             
             
         });
-
+*/
     </script>
     <script language="javascript">
         var position_type="Up";

@@ -5,39 +5,28 @@ class Result extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('result_model', '', TRUE);
-		if (!$this->session->userdata('logged_in'))
-		{
-			redirect('login');
-		}
+		$this->load->model('quiz/result_model', '', TRUE);
+		
 
 	}
 
 	function index($limit = '0')
 	{
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
+		
 
 		$data['result'] = $this->result_model->result_list_all($limit);
 		$data['group_list'] = $this->result_model->group_list();
 		$data['quiz_list'] = $this->result_model->quiz_list();
 		$data['title'] = "Result";
 		$data['limit'] = $limit;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/result_list_all', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/header', $data);
+		$this->load->view("quiz".'/result_list_all', $data);
+		$this->load->view("quiz".'/footer', $data);
 
 	}
 
 	function get_report() {
-		$logged_in = $this->session->userdata('logged_in');
-		if ($logged_in['su'] != "1") {
-			exit('Permission denied');
-			return;
-		}
+		
 		if ($this->input->post('generate')) {
 			$file_format = $this->input->post('file_format');
 			$gid = $this->input->post('gid');
@@ -45,7 +34,7 @@ class Result extends CI_Controller {
 			$data['report'] = $this->result_model->report($gid, $quid);
 			if ($file_format == "pdf") {
 				$this->load->library('pdf');
-				$this->pdf->load_view($this->session->userdata('web_view').'/get_report', $data);
+				$this->pdf->load_view("quiz".'/get_report', $data);
 				$this->pdf->render();
 				$filename = date('Y-M-d_H:i:s', time()).".pdf";
 				$this->pdf->stream($filename);
@@ -67,7 +56,7 @@ class Result extends CI_Controller {
 			}
 
 		} else {
-			redirect('result');
+			redirect('quiz/result');
 		}
 
 	}
@@ -76,22 +65,20 @@ class Result extends CI_Controller {
 
 	function user($limit = '0')
 	{
-		$logged_in = $this->session->userdata('logged_in');
-		$user_id = $logged_in['id'];
+		$user_id = $this->ion_auth->get_user_id();
 
 		$data['result'] = $this->result_model->result_list_all($limit, $user_id);
 		$data['title'] = "Result";
 		$data['limit'] = $limit;
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/result_list_all', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/header', $data);
+		$this->load->view("quiz".'/result_list_all', $data);
+		$this->load->view("quiz".'/footer', $data);
 	}
 
 
 
 	function view($id, $quid = '')
 	{
-		$logged_in = $this->session->userdata('logged_in');
 		// getting the last ten result of all users of particular quiz
 		$last_ten_result = $this->result_model->last_ten_result($quid);
 		$value = array();
@@ -187,9 +174,9 @@ class Result extends CI_Controller {
 
 		$data['title'] = "Result #".$id;
 
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/result_view', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/header', $data);
+		$this->load->view("quiz".'/result_view', $data);
+		$this->load->view("quiz".'/footer', $data);
 	}
 
 
@@ -213,9 +200,9 @@ class Result extends CI_Controller {
 		$data['id'] = $id;
 		$data['correct_incorrect'] = explode(",", $data['result']->score_ind);
 
-		$this->load->view($this->session->userdata('web_view').'/header', $data);
-		$this->load->view($this->session->userdata('web_view').'/view_answer', $data);
-		$this->load->view($this->session->userdata('web_view').'/footer', $data);
+		$this->load->view("quiz".'/header', $data);
+		$this->load->view("quiz".'/view_answer', $data);
+		$this->load->view("quiz".'/footer', $data);
 	}
 
 	function add_score() {

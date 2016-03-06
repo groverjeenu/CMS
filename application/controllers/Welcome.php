@@ -132,7 +132,7 @@ class Welcome extends CI_Controller {
 	}
 	public function trymail()
 	{
-		$from_email = 'mutiny@kgts.in';
+		$from_email = 'admin@incourse.com';
 		$to_email = "prabhat.agr2010@gmail.com";
 		$subject = 'Verify Your Account';
 		//$verify_link = base_url().'user/verifyAccount/'.md5($to_email.$this->secret.$rand_num);
@@ -141,10 +141,10 @@ class Welcome extends CI_Controller {
 		//email configuration
 		$config = array(
 			'protocol' => 'smtp',
-			'smtp_host' =>'ssl://cp-11.webhostbox.net ',
-			'smtp_port' => 465,
-			'smtp_user' => $from_email,
-			'smtp_pass' => 'WEQg,]9&t.00mAh',
+			'smtp_host' =>'10.3.100.244',
+			'smtp_port' => 25,
+			'smtp_user' => "",
+			'smtp_pass' => '',
 			'mailtype' => 'html',
 			'charset' => 'iso-8859-1',
 			'wordwrap' => TRUE,
@@ -157,7 +157,8 @@ class Welcome extends CI_Controller {
 		$this->email->to($to_email);
 		$this->email->subject($subject);
 		$this->email->message($message);
-		echo $this->email->send();
+		if($this->email->send())
+		echo "Sucess";
 	}
 
 

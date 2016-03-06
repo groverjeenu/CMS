@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ECourse</title>
+        <title><?php echo "Add Category | ".$this->config->item('sitename');?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -97,7 +97,7 @@
 								<div class="row" style="margin-top:10px;">
 									<div class="col-lg-12">
 										<div class="panel panel-default">
-											<div class="panel-heading">
+											<div class="panel-heading h4">
 												<?php if($title){ echo $title; } ?>
 											</div>
 											<div class="panel-body">
@@ -111,7 +111,7 @@
 														
 														<div class="form-group">
 															
-															<input type="submit" value="Submit" class="btn btn-default">
+															<input type="submit" value="Submit" class="btn btn-primary">
 														</div>
 													</div>
 												</div>

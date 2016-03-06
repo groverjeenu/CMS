@@ -108,7 +108,7 @@ class Quiz extends CI_Controller {
 	function remove_question_quiz($quid, $qid) {
 		
 		$this->quiz_model->remove_question_quiz($quid, $qid);
-		redirect('quiz/edit_quiz/'.$quid, 'refresh');
+		redirect('quiz/quiz/edit_quiz/'.$quid, 'refresh');
 	}
 
 
@@ -117,14 +117,14 @@ class Quiz extends CI_Controller {
 		for ($i = 1; $i <= $not; $i++) {
 			$this->quiz_model->up_question($quid, $qid);
 		}
-		redirect('quiz/edit_quiz/'.$quid, 'refresh');
+		redirect('quiz/quiz/edit_quiz/'.$quid, 'refresh');
 	}
 
 	function down_question($quid, $qid, $not = '1') {
 		for ($i = 1; $i <= $not; $i++) {
 			$this->quiz_model->down_question($quid, $qid);
 		}
-		redirect('quiz/edit_quiz/'.$quid, 'refresh');
+		redirect('quiz/quiz/edit_quiz/'.$quid, 'refresh');
 	}
 
 
@@ -184,7 +184,7 @@ class Quiz extends CI_Controller {
 		if ($this->db->delete('quiz_result')) {
 			$this->load->helper('cookie');
 			delete_cookie("rid");
-			redirect('/quiz/', 'refresh');
+			redirect('quiz/quiz/', 'refresh');
 		}
 
 

@@ -417,6 +417,7 @@ class Courses extends CI_Controller
 	{
 		$student = $this->courses->getstulist($cid);
 		$data['student'] = $student;
+		$data['cid'] = $cid;
 		$this->load->view('studentlist', $data);
 	}
 

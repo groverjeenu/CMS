@@ -33,7 +33,7 @@ $courseid = $course['cid'];?>
           <a href="app-instructor-course-edit-course.html#" class="dropdown-toggle" data-toggle="dropdown">Courses <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url();?>courses/add">Add Course</a></li>
-            <li><a href="<?php echo base_url();?>display_view/sent_mail">Courses List</a></li>
+            <li><a href="<?php echo base_url();?>dashboard">Courses List</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -95,9 +95,7 @@ $courseid = $course['cid'];?>
       <li id="li_lectures"><a href="<?php echo base_url()."courses/".$courseid."/lectures";?>"><i class="md-video-collection"></i><span>Lectures</span></a></li>
       <li id="li_assignments"><a href="<?php echo base_url()."courses/".$courseid."/assignments";?>"><i class="md-assignment"></i><span>Assignments</span></a></li>
       <li id="li_materials"><a href="<?php echo base_url()."courses/".$courseid."/materials";?>"><i class="md-my-library-books"></i><span>Course Materials</span></a></li>
-      <li id="li_forum"><a href="<?php echo base_url()."courses/".$courseid."/forum";?>"><i class="md-forum"></i><span>Forum</span></a></li>
       <li id="li_students"><a href="<?php echo base_url()."courses/".$courseid."/students";?>"><i class="md-account-child"></i><span>Students/Members</span></a></li>
-      <li id="li_notifications"><a href="<?php echo base_url()."courses/".$courseid."/notfications";?>"><i class="md-notifications"></i><span>Notifications</span></a></li>
     </ul>
   </div>
 </div>

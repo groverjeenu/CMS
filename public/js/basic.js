@@ -265,7 +265,7 @@ document.getElementById('page_res').innerHTML="Sending data...";
 	$.ajax({
 		type: "POST",
 	    data : formData,
-		url: base_url + "quiz/liveclass/insert_content/"+id,
+		url: base_url + "quiz/quiz/liveclass/insert_content/"+id,
 		success: function(data){
 				var d = new Date();
 		var dt=d.toString();
@@ -284,7 +284,7 @@ document.getElementById('page_res').innerHTML="Sending data...";
 function get_liveclass_content(id){
 
 	$.ajax({
-		url: base_url + "quiz/liveclass/get_class_content/"+id,
+		url: base_url + "quiz/quiz/liveclass/get_class_content/"+id,
 		success: function(data){
 		var d = new Date();
 var dt=d.toString();
@@ -337,7 +337,7 @@ var class_id;
 function get_ques_content(id){
 class_id=id;
 	$.ajax({
-		url: base_url + "quiz/liveclass/get_ques_content/"+id,
+		url: base_url + "quiz/quiz/liveclass/get_ques_content/"+id,
 		success: function(data){
 		//alert(data);
 		document.getElementById('comment_box').innerHTML=data;

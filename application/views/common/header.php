@@ -34,7 +34,7 @@ $user = $this->ion_auth->user()->row_array();
           <a href="app-instructor-course-edit-course.html#" class="dropdown-toggle" data-toggle="dropdown">Courses <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url();?>courses/add">Add Course</a></li>
-            <li><a href="<?php echo base_url();?>display_view/sent_mail">Courses List</a></li>
+            <li><a href="<?php echo base_url();?>dashboard">Courses List</a></li>
           </ul>
         </li>
         <li class="dropdown">

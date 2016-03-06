@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>ECourse</title>
+        <title><?php echo "Add Question | ".$this->config->item('sitename');?></title>
         <!-- Vendor CSS BUNDLE
         Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
         TIP: Using bundles will improve performance by reducing the number of network requests the client needs to make when loading the page. -->
@@ -94,16 +94,16 @@
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-lg-12">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                        <div class="panel-heading h4">
                                             <?php if($title){ echo $title; } ?>
                                         </div>
                                         <div class="panel-body">
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     <form method="post" action="<?php echo site_url('quiz/qbank/add_new');?>">
                                                         <div class="form-group">
                                                             <label>Question Type</label>
-                                                            <select class="form-control"  name="qus_type" OnChange="get_ques_type(this.value)">
+                                                            <select class="form-control selectpicker" style="width:50%"  name="qus_type" OnChange="get_ques_type(this.value)">
                                                                 <option value="0"> Multiple Choice -single answers</option>
                                                                 <option value="1" > Multiple Choice -multiple answers</option>
                                                                 <option value="2"  >Fill in the Blank</option>
@@ -114,26 +114,26 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Select Category</label>
-                                                            <select class="form-control"  name="cid">
+                                                            <select class="form-control selectpicker" style="width:50%" name="cid">
                                                                 <?php foreach($category as $value){ ?>
                                                                 <option value="<?php echo $value->cid; ?>"><?php echo $value->category_name; ?></option>
                                                             <?php } ?></select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Select Difficulty Level</label>
-                                                            <select class="form-control" name="did">
+                                                            <select class="form-control selectpicker" style="width:50%" name="did">
                                                                 <?php foreach($difficult_level as $value){ ?>
                                                                 <option value="<?php echo $value->did; ?>"><?php echo $value->level_name; ?></option>
                                                             <?php } ?></select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Question</label>
-                                                            <textarea name="question"></textarea>
+                                                            <textarea name="question" row="5" class="summernote"></textarea>
                                                             
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Description (Optional)</label>
-                                                            <textarea name="description"></textarea>
+                                                            <textarea name="description" row="5" class="summernote"></textarea>
                                                             <p class="help-block">
                                                                 Describe how question can be solved. <br>
                                                                 User can see description after submitting quiz in view answer section.
@@ -148,32 +148,32 @@
                                                                 <tr>
                                                                     <td valign="top" style="height:30px;">1) &nbsp;&nbsp; </td>
                                                                     <td valign="top">
-                                                                        <input name="option[]" type="text"> Ex: option1=Answer1
+                                                                        <input class="form-control" name="option[]" type="text"> Ex: option1=Answer1
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td valign="top" style="height:30px;">2) &nbsp;&nbsp;</td>
                                                                     <td valign="top">
-                                                                        <input name="option[]" type="text"> Ex: option2=Answer2
+                                                                        <input class="form-control" name="option[]" type="text"> Ex: option2=Answer2
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td valign="top" style="height:30px;" >3) &nbsp;&nbsp;</td>
                                                                     <td valign="top">
-                                                                        <input name="option[]" type="text"> Ex: option3=Answer3
+                                                                        <input class="form-control" name="option[]" type="text"> Ex: option3=Answer3
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td valign="top" style="height:30px;">4)  &nbsp;&nbsp; </td>
                                                                     <td valign="top">
-                                                                        <input name="option[]" type="text"> Ex: option4=Answer4 <?php $op="5"; ?>
+                                                                        <input  class="form-control" name="option[]" type="text"> Ex: option4=Answer4 <?php $op="5"; ?>
                                                                     </td>
                                                                 </tr>
                                                                 <?php
                                                                 if($this->input->post('add')){
                                                                 for($j=1; $j<=$this->input->post('add'); $j++){
                                                                 ?>
-                                                                <tr><td valign="top" style="height:30px;"><?php echo $op.")"; ?> &nbsp;&nbsp;</td><td valign="top"><input name="option[]" type="text">  </td></tr>
+                                                                <tr><td valign="top" style="height:30px;"><?php echo $op.")"; ?> &nbsp;&nbsp;</td><td valign="top"><input class="form-control" name="option[]" type="text">  </td></tr>
                                                                 <?php
                                                                 $op++;
                                                                 }
@@ -182,7 +182,7 @@
                                                             </table>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="submit" value="Submit"  class="btn btn-default">
+                                                            <input type="submit" value="Submit"  class="btn btn-primary">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -197,7 +197,7 @@
                                                         <option value="<?php echo $x; ?>"><?php echo $x; ?></option>
                                                         <?php } ?>
                                                     </select>&nbsp;&nbsp;
-                                                    <input type="submit" value="Add"   class="form-control col-sm-3" />
+                                                    <input type="submit" value="Add"   class="form-control  btn btn-warning col-sm-3" />
                                                 </div>
                                             </form>
                                         </div>
@@ -333,7 +333,7 @@
     </script>
     <script type="text/javascript">
         
-tinyMCE.init({
+/*tinyMCE.init({
     
 mode : "textareas",
         theme : "advanced",
@@ -352,7 +352,7 @@ mode : "textareas",
         theme_advanced_buttons4 : "jbimages,insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft,visualblocks",
         
         
-    });
+    });*/
 
 </script>
 </body>
