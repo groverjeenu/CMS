@@ -412,6 +412,13 @@ class Courses extends CI_Controller
     {
     	return ($_FILES && $_FILES[$name]['name'] !== "");
     }
+	
+	public function facultystudents($cid)
+	{
+		$student = $this->courses->getstulist($cid);
+		$data['student'] = $student;
+		$this->load->view('studentlist', $data);
+	}
 
 }
 /* End of file '/Courses.php' */
