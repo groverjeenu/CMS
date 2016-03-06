@@ -91,7 +91,7 @@
                           <div style="margin-top: 20px">
                               <div class="panel panel-default paper-shadow" data-z="0.5">
                                 <div class="panel-heading">
-                                          <h4 class="text-headline margin-none">My Student List Courses</h4>
+                                          <h4 class="text-headline margin-none">My Student List</h4>
                                           <p class="text-subhead text-light">Your current students</p>
                                 </div>
                                 <ul class="list-group">
@@ -112,7 +112,7 @@
                                   <ul class="list-group">
                                   <li class="list-group-item media v-middle">
                                     <div class="media-body">
-                                      <a class="text-subhead list-group-link" ><img src="<?php echo base_url()."contents/images/people/".$key['image'];?>" alt="<?php echo $key['username']?>" class="img-circle width-40" /><?php echo $key['first_name']?> <?php echo $key['last_name']?></a>
+                                      <a class="text-subhead list-group-link" ><img src="<?php echo base_url()."contents/images/people/".$key['image'];?>" alt="<?php echo $key['username']?>" class="img-circle width-40" />  <?php echo $key['first_name']?> <?php echo $key['last_name']?></a>
                                     </div>
                                     <div class="media-body">
                                       <a class="text-subhead list-group-link"><?php echo $key['email']?></a>
