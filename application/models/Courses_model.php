@@ -195,7 +195,7 @@ class Courses_model extends CI_Model
 		 		$t = $t.$p['first_name']."\t".$p['last_name']."\t,";
 		 	}
 		 	$t = substr($t,0,-2);
-		 	$d[$c['cid']] = array("names" =>$t,"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key']);
+		 	$d[$c['cid']] = array("names" =>$t,"course_name"=>$c['course_name'],"description"=>$c['description'],"course_key" =>$c['course_key'], "imagename" =>$c['imagename']);
 		 }
 		 
 		 //$this->db->query("select * from courses ,course_faculty ,users where courses.cid = course_faculty.course_id and course_faculty.faculty_id = users.id");

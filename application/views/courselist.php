@@ -520,28 +520,29 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <div class="media media-clearfix-xs">
                   <div class="media-left text-center">
                     <div class="cover width-150 width-100pc-xs overlay cover-image-full hover margin-v-0-10">
-                      <span class="img icon-block height-130 bg-default"></span>
+                      <img src="<?php echo base_url();?>/contents/images/course_icons/<?php echo $i['imagename']?>">
+                      <!--span class="img icon-block height-130 bg-default"></span>
                       <span class="overlay overlay-full padding-none icon-block bg-default">
                         <span class="v-center">
                             <i class="fa fa-github"></i>
                         </span>
-                      </span>
-                      <a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white">
+                      </span-->
+                      <!--a href="app-student-course.html" class="overlay overlay-full overlay-hover overlay-bg-white">
                         <span class="v-center">
                             <span class="btn btn-circle btn-white btn-lg"><i class="fa fa-graduation-cap"></i></span>
                         </span>
-                      </a>
+                      </a-->
                     </div>
                   </div>
                   <div class="media-body">
                     <h4 class="text-headline margin-v-5-0"><a href="<?php echo base_url(); ?>display_view/course/<?php echo $key; ?>"> <?php echo $i['course_name']; ?></a></h4>
-                    <p class="small">
+                    <!--p class="small">
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star text-yellow-800"></span>
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                       <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                    </p>
+                    </p-->
                     <p><?php echo $i['description']; ?></p>
 
                     <hr class="margin-v-8" />
