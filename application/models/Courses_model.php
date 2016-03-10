@@ -44,7 +44,7 @@ class Courses_model extends CI_Model
 		{
 			$data['course_key'] = $details['course_key'];
 		}
-		if($details['imagename'])
+		if(isset($details['imagename']))
 		{
 			$data['imagename'] = $details['imagename'];
 		}

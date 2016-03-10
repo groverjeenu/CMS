@@ -89,7 +89,7 @@ class Courses extends CI_Controller
 	            }
 	        }
 			$data_insert = $this->input->post();
-			if($data['imagename'])
+			if(isset($data['imagename']))
 				$data_insert['imagename'] = $data['imagename'];
 			log_message("DEBUG","loplop ".$data['imagename']."    ".$data_insert['imagename']);
 			$data = $this->courses->add($data_insert);
@@ -114,7 +114,7 @@ class Courses extends CI_Controller
 
 	public function lectures($cid)
 	{
-		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($id)))
+		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($cid)))
 		{
 			show_error('Access Forbidden',403);
 		}
@@ -126,7 +126,7 @@ class Courses extends CI_Controller
 
 	public function add_faculty($courseid)
 	{
-		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($id)))
+		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($courseid)))
 		{
 			show_error('Access Forbidden',403);
 		}
@@ -160,7 +160,7 @@ class Courses extends CI_Controller
 
 	public function add_cadmin($courseid)
 	{
-		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($id)))
+		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($courseid)))
 		{
 			show_error('Access Forbidden',403);
 		}
@@ -193,11 +193,12 @@ class Courses extends CI_Controller
 
 	public function deleteIcon()
 	{
+		
+		$id = $this->input->post('key');
 		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($id)))
 		{
 			show_error('Access Forbidden',403);
 		}
-		$id = $this->input->post('key');
 		log_message("ERROR","loploplop $id");
 		if($id && is_numeric($id) && $id > 0)
 		{
@@ -225,7 +226,7 @@ class Courses extends CI_Controller
 			show_error("Access Forbidden",403);
 			exit(0);
 		}*/
-		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($id)))
+		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($courseid)))
 		{
 			show_error('Access Forbidden',403);
 		}
@@ -337,7 +338,7 @@ class Courses extends CI_Controller
 
     public function edit_meta($courseid)
     {
-    	if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($id)))
+    	if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_main_facultyid($courseid)))
 		{
 			show_error('Access Forbidden',403);
 		}
@@ -437,10 +438,10 @@ class Courses extends CI_Controller
 
     public function view_quiz()
     {
-    	if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($id)))
+    	/*if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($id)))
 		{
 			show_error('Access Forbidden',403);
-		}
+		}*/
     	$this->load->view('quiz_1/quiz_access');
     }
 
@@ -451,7 +452,7 @@ class Courses extends CI_Controller
 	
 	public function facultystudents($cid)
 	{
-		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($id)))
+		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($cid)))
 		{
 			show_error('Access Forbidden',403);
 		}
