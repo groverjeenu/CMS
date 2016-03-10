@@ -433,7 +433,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <div class="media">
                   <div class="media-right">
                      <label for="download" class="btn btn-primary btn-sm paper-shadow relative ripple ripple-dark-fade" data-z="0.5" data-hover-z="1" data-animated="">
-                      <i class="fa fa-upl">Download Lectures</i>
+                      <i class="fa fa-upl"><a href="<?php echo base_url().'contents/texts/'.$lec['text'];?>">Download Lectures</a></i>
                     </label>
                   </div>
                 </div>
@@ -441,7 +441,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <div>
                 <div id = "video">
                   <video height=100% width = 100% controls>
-                      <source src="<?php echo base_url().'contents/videos/'.$lec['videoname'];?>" type="video/mp4"/>
+                      <source src="<?php echo base_url().'contents/videos/'.$lec['video'];?>" type="video/mp4"/>
                   </video>
                 </div>
                
