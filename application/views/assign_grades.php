@@ -56,9 +56,9 @@
   <!-- //////////////////////////////////////////////////////////////////////////// -->
 
   <!-- START HEADER -->
-  <header id="header" class="page-topbar">
+  <!--header id="header" class="page-topbar"-->
         <!-- start header nav-->
-        <div class="navbar-fixed">
+        <!--div class="navbar-fixed">
             <nav class="cyan">
                 <div class="nav-wrapper">                    
                     
@@ -82,9 +82,9 @@
                     </ul>
                 </div>
             </nav>
-        </div>
+        </div-->
         <!-- end header nav-->
-  </header>
+  <!--/header-->
   <!-- END HEADER -->
 
   <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -93,6 +93,8 @@
   <div id="main">
     <!-- START WRAPPER -->
     <div class="wrapper">
+        <?php $this->view('addons/header.php'); ?>
+    
     <?php $this->view('addons/sidebar.php'); ?>
     
       <!-- START LEFT SIDEBAR NAV-->
@@ -672,7 +674,7 @@
 
   <!-- //////////////////////////////////////////////////////////////////////////// -->
   <!-- START RIGHT SIDEBAR NAV-->
-  <aside id="right-sidebar-nav">
+  <!--aside id="right-sidebar-nav">
         <ul id="chat-out" class="side-nav rightside-navigation">
             <li class="li-hover">
             <a href="#" data-activates="chat-out" class="chat-close-collapse right"><i class="mdi-navigation-close"></i></a>
@@ -806,7 +808,7 @@
                 </ul>
             </li>
         </ul>
-      </aside>
+      </aside-->
   <!-- LEFT RIGHT SIDEBAR NAV-->
 
   </div>
@@ -820,14 +822,16 @@
   <!-- //////////////////////////////////////////////////////////////////////////// -->
 
   <!-- START FOOTER -->
-  <footer class="page-footer">
+  <!--footer class="page-footer">
     <div class="footer-copyright">
       <div class="container">
         <span>Copyright © 2015 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.</span>
         <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a></span>
         </div>
     </div>
-  </footer>
+  </footer-->
+  <?php $this->view('addons/footer.php'); ?>
+    
   <!-- END FOOTER -->
 
 
