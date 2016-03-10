@@ -17,6 +17,11 @@ class User extends CI_Model
 
 	public function search_faculty()
 	{
-		return $this->ion_auth->users()->result_array();
+		return $this->ion_auth->users(3)->result_array();
+	}
+
+	public function search_users()
+	{
+		return $this->ion_auth->users(array(4,1))->result_array();
 	}
 }

@@ -70,6 +70,7 @@ $route['courses/(:num)'] = "display_view/course/$1";
 $route['dashboard'] = 'display_view/dashboard';
 $route['signup'] = 'auth/create_user';
 $route['login'] = 'auth/login';
+$route['logout'] = 'auth/logout';
 $route['inbox']= "display_view/inbox";
 $route['quiz/categories'] = "quiz/category_controller";
 $route['default_controller'] = 'welcome';

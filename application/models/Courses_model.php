@@ -78,6 +78,8 @@ class Courses_model extends CI_Model
 		$this->db->trans_start();
 		foreach($faculty_ids as $faculty_id)
 		{
+			$this->ion_auth->remove_from_group(NULL,$faculty_id);
+			$this->ion_auth->add_to_group(4,$faculty_id);
 			$data = array('cid' => $cid, 'courseadmin' => $faculty_id, 'is_approved' => TRUE);
 			$this->db->insert('course_courseadmin',$data);
 		}
