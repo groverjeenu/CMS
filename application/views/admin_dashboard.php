@@ -92,6 +92,8 @@
     <!-- END HEADER -->
 
     <?php $this->view('addons/header.php'); ?>
+    <?php $this->view('addons/sidebar.php'); ?>
+
     <!-- //////////////////////////////////////////////////////////////////////////// -->
 
     <!-- START MAIN -->
@@ -100,7 +102,7 @@
         <div class="wrapper">
 
             <!-- START LEFT SIDEBAR NAV-->
-            <aside id="left-sidebar-nav">
+            <!--aside id="left-sidebar-nav">
                 <ul id="slide-out" class="side-nav leftside-navigation">
                     <li class="user-details cyan darken-2">
                         <div class="row">
@@ -310,7 +312,7 @@
                     </li>
                 </ul>
                 
-            </aside>
+            </aside-->
 
 
             <section id = "content">
@@ -438,7 +440,7 @@
     <!-- Toast Notification -->
     <script type="text/javascript">
     // Toast Notification
-    $(window).load(function() {
+    /*$(window).load(function() {
         setTimeout(function() {
             Materialize.toast('<span>Hiya! I am a toast.</span>', 1500);
         }, 1500);
@@ -448,7 +450,7 @@
         setTimeout(function() {
             Materialize.toast('<span>You have new order.</span><a class="btn-flat yellow-text" href="#">Read<a>', 3000);
         }, 15000);
-    });
+    });*/
 
 
     $(function() {
