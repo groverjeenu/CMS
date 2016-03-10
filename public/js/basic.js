@@ -1,5 +1,5 @@
 // update base url ( http://localhost/savsoftquiz/ ). include slash at end
-var base_url = "http://localhost/incourse/";
+var base_url = "http://10.5.27.131/incourse/";
 
 var comnt_id="0";
 $(document).ready(function(){
@@ -9,7 +9,7 @@ $(document).ready(function(){
 	$.ajax({
 		url: base_url + "quiz/qbank/get_level_question/" + did + "/" + cid,
 		success: function(data){
-		
+			//alert(data);
 			var output = "<select name = 'no_of_questions[]' id='cnoq' >";
 			if(data=="0"){
 			output += "<option value = '0'>0</option>";
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			$("#no_of_question").html(output);
 			},
 		error: function(xhr,status,strErr){
-			//alert(status);
+		//alert(status);
 			}	
 		});
 	});

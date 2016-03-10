@@ -74,5 +74,6 @@ $route['logout'] = 'auth/logout';
 $route['inbox']= "display_view/inbox";
 $route['quiz/categories'] = "quiz/category_controller";
 $route['default_controller'] = 'welcome';
+$route['user/(:any)'] = 'display_view/view_profile';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

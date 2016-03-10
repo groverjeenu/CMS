@@ -10,7 +10,8 @@ class Lessons extends CI_Controller
 	
 	public function index($courseid,$lessonid)
 	{
-		echo "You are viewing $lessonid lesson for $courseid";
+		redirect('courses/'.$courseid."/lectures");
+		//echo "You are viewing $lessonid lesson for $courseid";
 	}
 
 	public function add($courseid)

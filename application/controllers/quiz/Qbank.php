@@ -11,7 +11,7 @@ class Qbank extends CI_Controller {
 		/*if (!$this->ion_auth->logged_in())
 		{
 			redirect('login');
-		}
+		}/*
 		if(!$this->ion_auth->in_group('faculty'))
 		{
 			redirect('dashboard');
@@ -255,7 +255,8 @@ class Qbank extends CI_Controller {
 		$this->db->where("did", $difficulty_level);
 		$query =	$this->db->get("qbank");
 		$num = $query->num_rows();
-		echo $num;
+		log_message('DEBUG',"keykye,".$num);
+		echo json_encode($num);
 	}
 
 }
