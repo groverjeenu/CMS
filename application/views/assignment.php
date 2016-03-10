@@ -53,6 +53,23 @@ NOTE:
 TIP:
     - Using bundles will improve performance by greatly reducing the number of network requests the client needs to make when loading the page. -->
   <link href="<?php echo base_url(); ?>public/css/app/app.css" rel="stylesheet">
+  <!-- CORE CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS for full screen (Layout-2)-->    
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->    
+    <link href="<?php echo base_url(); ?>public/css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS for full screen (Layout-2)-->    
+    <link href="<?php echo base_url(); ?>public/css/style-fullscreen.css" type="text/css" rel="stylesheet" media="screen,projection">    
+    <link href="<?php echo base_url(); ?>public/css/app/app.css" type="text/css" rel="stylesheet" media="screen,projection">    
+
+
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+
 
   <!-- App CSS CORE
 This variant is to be used when loading the separate styling modules -->
@@ -99,12 +116,14 @@ $(document).ready(function(
 </head>
 
 <body>
-
+<?php $this->view('addons/header.php'); ?>
+    <?php $this->view('addons/sidebar.php'); ?>
+    
   <!-- Wrapper required for sidebar transitions -->
-  <div class="st-container">
+  <!--div class="st-container"-->
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
+    <!--div class="navbar navbar-size-large navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="#sidebar-menu" data-toggle="sidebar-menu" class="toggle pull-left visible-xs"><i class="fa fa-ellipsis-v"></i></a>
@@ -161,10 +180,10 @@ $(document).ready(function(
               </svg>
             </a>
           </div>
-        </div>
+        </div-->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="main-nav">
+        <!--div class="collapse navbar-collapse" id="main-nav">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Forum <span class="caret"></span></a>
@@ -208,9 +227,9 @@ $(document).ready(function(
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-nav-bordered navbar-right">
+          <ul class="nav navbar-nav navbar-nav-bordered navbar-right"-->
             <!-- notifications -->
-            <li class="dropdown notifications updates">
+            <!--li class="dropdown notifications updates">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <span class="badge badge-primary">4</span>
@@ -261,10 +280,10 @@ $(document).ready(function(
                   </div>
                 </li>
               </ul>
-            </li>
+            </li-->
             <!-- // END notifications -->
             <!-- User -->
-            <li class="dropdown">
+            <!--li class="dropdown">
               <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
                 <img src="images/people/110/guy-5.jpg" alt="Bill" class="img-circle" width="40" /> Bill <span class="caret"></span>
               </a>
@@ -275,14 +294,14 @@ $(document).ready(function(
               </ul>
             </li>
           </ul>
-        </div>
+        </div-->
         <!-- /.navbar-collapse -->
 
-      </div>
-    </div>
+      <!--/div>
+    </div-->
 
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    <div class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
+    <!--div class="sidebar left sidebar-size-1 sidebar-mini-reveal sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
       <div data-scrollable>
 
         <ul class="sidebar-menu sm-icons-right">
@@ -319,47 +338,26 @@ $(document).ready(function(
           <li><a href="login.html"><i class="fa fa-sign-out"></i><span>Logout</span></a></li>
         </ul>
       </div>
-    </div>
+    </div-->
 
     <!-- sidebar effects OUTSIDE of st-pusher: -->
     <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
 
     <!-- content push wrapper -->
-    <div class="st-pusher" id="content">
-
-      <!-- sidebar effects INSIDE of st-pusher: -->
-      <!-- st-effect-3, st-effect-6, st-effect-7, st-effect-8, st-effect-14 -->
-
-      <!-- this is the wrapper for the content -->
-      <div class="st-content">
-
-        <!-- extra div for emulating position:fixed of the menu -->
-        <div class="st-content-inner padding-none">
-
-          <div class="container-fluid">
-
-            <div class="media media-grid media-clearfix-xs">
-              <div class="media-body">
-                
-
-                <div class="page-section">
-                  <div class="media">
-                    <div class="media-left">
+    <section id = "content">
+      <div class = "container">
+                    <div class="card-panel">
                       <span class="icon-block s60 bg-lightred"><i class="fa fa-github"></i></span>
-                    </div>
                     <div class="media-body">
                       <h1 class="text-display-1 margin-none"><?php echo $ass['title']; ?></h1>
-                      <p class="small margin-none">
+                      <!--p class="small margin-none">
                         <span class="fa fa-fw fa-star text-yellow-800"></span>
                         <span class="fa fa-fw fa-star text-yellow-800"></span>
                         <span class="fa fa-fw fa-star text-yellow-800"></span>
                         <span class="fa fa-fw fa-star-o text-yellow-800"></span>
                         <span class="fa fa-fw fa-star-o text-yellow-800"></span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
+                      </p-->
+                   
                 <div class="page-section">
                   
 
@@ -754,17 +752,10 @@ $(document).ready(function(
                 <!-- // END .page-section -->
 
               </div>
-            </div>
-
-          </div>
-
-        </div>
-        <!-- /st-content-inner -->
-
-      </div>
+           <!-- /st-content-inner -->
       <!-- /st-content -->
 
-    </div>
+    </section>
     <!-- /st-pusher -->
 
     <!-- Footer -->
@@ -807,6 +798,45 @@ $(document).ready(function(
     To learn more about the development process, please refer to the documentation.
     Do not use it simultaneously with the separate bundles above. -->
   <script src="<?php echo base_url(); ?>public/js/vendor/all.js"></script>
+  <?php $this->view('addons/footer.php'); ?>
+
+    <!-- ================================================
+    Scripts
+    ================================================ -->
+    
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery-1.11.2.min.js"></script>    
+    <!--materialize js-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/materialize.js"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    
+
+    <!-- chartist -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartist-js/chartist.min.js"></script>   
+
+    <!-- chartjs -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/chartjs/chart-script.js"></script>
+
+    <!-- sparkline -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/sparkline/sparkline-script.js"></script>
+    
+    <!-- google map api -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
+
+    <!--jvectormap-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins/jvectormap/vectormap-script.js"></script>    
+
+    
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins.js"></script>
+    <!-- Toast Notification -->
+    <script type="text/javascript">
+    
 
   <!-- Vendor Scripts Standalone Libraries -->
   <!-- <script src="js/vendor/core/all.js"></script> -->
