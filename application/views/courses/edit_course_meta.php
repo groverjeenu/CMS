@@ -247,7 +247,7 @@
                                                     <div class="form-group col-sm-9">
                                                         <select id="cadmin" name='cadmin[]' style="width: 100%;" multiple="multiple" data-toggle="select2">
                                                         <?php
-                                                        $fs = $this->user->search_faculty();
+                                                        $fs = $this->user->search_users();
                                                         foreach ($fs as $fu) { ?>
 
                                                         <option id="<?php echo $fu['username']?>" value="<?php echo $fu['id'] ?>"><span>

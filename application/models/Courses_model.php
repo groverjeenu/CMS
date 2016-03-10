@@ -7,6 +7,30 @@ class Courses_model extends CI_Model
 		$this->load->model('ion_auth_model');
 
 	}
+
+	public function get_main_facultyid($id)
+	{
+		$ids = $this->db->select('faculty_id')
+				->from('course_faculty')
+				->where('course_id',$id)
+				->where('faculty_role','main')
+				->get()->result_array();
+
+		return array_column($ids,'faculty_id');
+
+	}
+
+	public function get_all_facultyid($id)
+	{
+		$ids = $this->db->select('faculty_id')
+				->from('course_faculty')
+				->where('course_id',$id)
+				->where('faculty_role','main')
+				->get()->result_array();
+
+		return array_column($ids,'faculty_id');
+
+	}
 	
 
 	public function add($details)
@@ -20,7 +44,7 @@ class Courses_model extends CI_Model
 		{
 			$data['course_key'] = $details['course_key'];
 		}
-		if($details['imagename'])
+		if(isset($details['imagename']))
 		{
 			$data['imagename'] = $details['imagename'];
 		}
@@ -54,6 +78,8 @@ class Courses_model extends CI_Model
 		$this->db->trans_start();
 		foreach($faculty_ids as $faculty_id)
 		{
+			$this->ion_auth->remove_from_group(NULL,$faculty_id);
+			$this->ion_auth->add_to_group(4,$faculty_id);
 			$data = array('cid' => $cid, 'courseadmin' => $faculty_id, 'is_approved' => TRUE);
 			$this->db->insert('course_courseadmin',$data);
 		}
@@ -372,6 +398,12 @@ class Courses_model extends CI_Model
 	{
 		$cid = intval($cid);
 		return $this->db->query("select * from enrollments, users where enrollments.course_id=? and enrollments.student_id=users.id", $cid)->result_array();
+	}
+
+	public function get_course_quiz($cid)
+	{
+		$cid = intval($cid);
+		return $this->db->query("select * from quiz where course_id=?", $cid)->result_array();
 	}
 
 }

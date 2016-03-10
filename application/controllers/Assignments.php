@@ -9,6 +9,10 @@ class Assignments extends CI_Controller
 		$this->load->model('assignments_model','assignments');
 		$this->load->model('courses_model','courses');
 		$this->load->helper(array('form', 'url'));
+		if(!$this->ion_auth->logged_in())
+		{
+			redirect('login','refresh');
+		}
 	}
 	
 	public function index($courseid,$assgnid)
@@ -26,6 +30,10 @@ class Assignments extends CI_Controller
 
 	public function add($courseid)
 	{
+		if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($courseid)))
+		{
+			show_error('Access Forbidden',403);
+		}
 		$data['courseid'] = $courseid;
 		$data['page_title'] = 'Add Assignment';
 		$this->load->library('upload');
@@ -88,6 +96,10 @@ class Assignments extends CI_Controller
 
 	public function edit($courseid,$assignmentid)
     {
+    	if(!in_array($this->ion_auth->get_user_id(),$this->courses->get_all_facultyid($courseid)))
+		{
+			show_error('Access Forbidden',403);
+		}
     	$data['page_title'] = "Edit Assignment";
     	$data['courseid'] = $courseid;
     	$data['file_error'] = "";

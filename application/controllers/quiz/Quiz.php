@@ -6,6 +6,7 @@ class Quiz extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('quiz/quiz_model', '', TRUE);
+		$this->load->model('courses_model','courses');
 		//$this->load->model('group_model', '', TRUE);
 		//$this->load->model('quiz/group_model', '', TRUE);
 		/*if (!$this->session->userdata('logged_in'))
@@ -14,27 +15,31 @@ class Quiz extends CI_Controller {
 		}*/
 	}
 
-	function index($limit = '0')
+	function index($cid,$limit = '0')
 	{
 		$data['title'] = "Quiz/Test";
 		$data['limit'] = $limit;
 		$data['resultstatus'] = false;
-		$data['result'] = $this->quiz_model->quiz_list($limit);
-		if(!isset($data['result']))  $data['result'] = false;
+		$data['courseid'] = $cid;
+		$data['result'] = $this->quiz_model->quiz_list($cid,$limit);
 		$this->load->view("quiz".'/quiz_list', $data);
 	}
 
 
-	function add_new()
+	function add_new($cid=false)
 	{
+		if(!$cid)
+		{
+			redirect('dashboard');
+		}
+		$data['courseid']=$cid;
 		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
 		$this->load->model('quiz/difficult_level', '', TRUE);
-		//$data['groups'] = $this->group_model->get_allgroups();
-
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
+
 		if ($this->input->post('submit_quiz')) {
-			$data['resultstatus'] = $this->quiz_model->add_quiz();
+			$data['resultstatus'] = $this->quiz_model->add_quiz($cid);
 			$qselect = $this->input->post('qselect');
 			redirect('quiz/quiz/edit_quiz/'.$data['resultstatus'].'/'.$qselect);
 		}
@@ -46,10 +51,10 @@ class Quiz extends CI_Controller {
 
 	function edit_quiz($id, $qselect = '1')
 	{
+		$data['courseid'] = $this->quiz_model->get_courseid($id);
 		$this->load->model('quiz/category', '', TRUE);
 		$data['category'] = $this->category->category_dropdown();
 		$this->load->model('quiz/difficult_level', '', TRUE);
-
 		$data['difficult_level'] = $this->difficult_level->level_dropdown();
 		if ($this->input->post('submit_quiz')) {
 			$data['resultstatus'] = $this->quiz_model->edit_quiz($id);

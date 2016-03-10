@@ -247,7 +247,6 @@ document.getElementById('warning_checkbox').style.display="block";
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
     <script type="text/javascript" src="<?php echo base_url(); ?>public/js/plugins.js"></script>
     <!-- Toast Notification -->
-    <script type="text/javascript">
 
 </body>
 </html>

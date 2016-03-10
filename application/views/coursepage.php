@@ -210,6 +210,29 @@
                                         <?php }?>
                                     </ul>
                                 </div>
+
+                                <div class="page-section">
+                                    <h2 class="text-headline margin-none">Quiz</h2>
+                                    <p class="text-subhead text-light">Course quizzes</p>
+                                    <ul class="list-group relative paper-shadow margith-sn-none" data-hover-z="0.5" data-animated>
+                                        <?php foreach($quiz as $ll) {?>
+                                        <li class="list-group-item">
+                                            <div class="media v-middle">
+                                                <div class="media-left">
+                                                    <div class="icon-block s30 bg-blue-300 text-white img-circle">
+                                                        <i class="fa fa-file-text"></i>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="media-body text-body-2 disable-select">
+                                                    <?php echo "<a href = ".base_url()."quiz/quiz/attempt/".$ll['quid'].">".$ll['quiz_name']."</a>"; ?>
+                                                </div>
+                                                
+                                            </div>
+                                        </li>
+                                        <?php }?>
+                                    </ul>
+                                </div>
                                 <?php }?>
                             </div>
                             <div class="pull-right">

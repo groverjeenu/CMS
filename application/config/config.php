@@ -23,7 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/CMS/';
+
+//$config['base_url'] = 'http://localhost/CMS/';
+
+$config['base_url'] = 'http://10.5.27.131/incourse/';
+
 //$config['base_url'] = 'http://10.147.18.244/CMS';
 
 /*
@@ -518,7 +522,7 @@ $config['proxy_ips'] = '';
 /*
 | number of records per page
 */
-$config['number_of_rows']	= '30';
+$config['number_of_rows']	= '10';
 
 
 $config['sitename'] = "Incourse";

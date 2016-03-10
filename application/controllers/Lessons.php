@@ -65,7 +65,7 @@ class Lessons extends CI_Controller
 	       			else
 	       				$data['is_public'] = FALSE;
 	       			$id = $this->lesson->add($data);
-	       			/*if(!$id)
+	       			if(!$id)
 					{
 						$this->session->set_flashdata('type','danger');
 						$this->session->set_flashdata('message','Some unexpected error ocuured');
@@ -76,12 +76,12 @@ class Lessons extends CI_Controller
 						$this->session->set_flashdata('type','success');
 						$this->session->set_flashdata('message','Lesson successfully added');
 						redirect('courses/'.$courseid."/lectures",'refresh');
-					}*/
-	            	echo "File uploaded successfully";
+					}
+	            	/*echo "File uploaded successfully";
 	            	echo "<br>VideoName = ".$data['video'];
 	            	echo "<br>textName = ".$this->upload->data('file_name');
 	            	echo "<br>Visi = ".$this->input->post('visibility');
-	            	echo "<br>Id if lecture = ".$id;
+	            	echo "<br>Id if lecture = ".$id;*/
 
 
 	            }

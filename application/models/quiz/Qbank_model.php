@@ -93,7 +93,7 @@ class qbank_model extends CI_Model
 
 		if ($this->db->insert('qbank', $insert_data)) {
 			$qid = $this->db->insert_id();
-
+			if(!$this->input->post('qus_type') == "4"){
 			foreach($_POST['option'] as $key => $value) {
 				if ($this->input->post('qus_type') == "0") {
 					if ($key == ($this->input->post('score'))) {
@@ -116,7 +116,7 @@ class qbank_model extends CI_Model
 				               );
 
 				$this->db->insert('q_options', $insert_data);
-			}
+			}}
 			return "Question added successfully";
 		} else {
 			return "Unable to add question";
