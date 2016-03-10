@@ -7,6 +7,30 @@ class Courses_model extends CI_Model
 		$this->load->model('ion_auth_model');
 
 	}
+
+	public function get_main_facultyid($id)
+	{
+		$ids = $this->db->select('faculty_id')
+				->from('course_faculty')
+				->where('course_id',$id)
+				->where('faculty_role','main')
+				->get()->result_array();
+
+		return array_column($ids,'faculty_id');
+
+	}
+
+	public function get_all_facultyid($id)
+	{
+		$ids = $this->db->select('faculty_id')
+				->from('course_faculty')
+				->where('course_id',$id)
+				->where('faculty_role','main')
+				->get()->result_array();
+
+		return array_column($ids,'faculty_id');
+
+	}
 	
 
 	public function add($details)

@@ -14,7 +14,7 @@ $user = $this->ion_auth->user()->row_array();
       <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand navbar-brand-primary navbar-brand-logo navbar-nav-padding-left">
-        <a class="svg" href="dashboard.html">
+        <a class="svg" href="<?php echo base_url();?>dashboard">
           <!--               <img src="<?php echo base_url()."public/img/site_icon.jpg";?>" alt="<?php echo $this->config->item('sitename'); ?>" class="img-circle" width="5"/>
           -->              <?php echo $this->config->item('sitename'); ?>
         </a>
