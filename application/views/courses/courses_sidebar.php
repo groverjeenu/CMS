@@ -26,6 +26,8 @@ $courseid = $course['cid'];?>
           <a href="<?php echo base_url();?>display_view/inbox" class="dropdown-toggle" data-toggle="dropdown">Inbox <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url();?>inbox">Inbox Home</a></li>
+            
+            <li><a href="<?php echo base_url();?>display_view/composemail">Compose</a></li>
             <li><a href="<?php echo base_url();?>display_view/sent_mail">Sent Mail</a></li>
           </ul>
         </li>
@@ -64,10 +66,12 @@ $courseid = $course['cid'];?>
         <!-- User -->
         <li class="dropdown">
           <a href="app-instructor-course-edit-course.html#" class="dropdown-toggle user" data-toggle="dropdown">
-            <img src="<?php echo base_url()."contents/images/people/".$user['image'];?>" alt="<?php echo $user['username']?>" class="img-circle" width="40" /> <?php echo $user['username']?> <span class="caret"></span>
+            <img src="<?php echo base_url()."contents/users/".$user['image'];?>" alt="<?php echo $user['username']?>" class="img-circle" width="40" /> <?php echo $user['username']?> <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="<?php echo base_url()."user/".$user['username'];?>">Profile</a></li>
+
+            <li><a href="<?php echo base_url()."display_view/edit_profile"?>">Edit Profile</a></li>
             <li><a href="<?php echo base_url();?>dashboard">Dashboard</a></li>
             <li><a href="<?php echo base_url();?>logout">Logout</a></li>
           </ul>

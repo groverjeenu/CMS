@@ -28,6 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['base_url'] = 'http://10.5.27.131/incourse/';
 
+
 //$config['base_url'] = 'http://10.147.18.244/CMS';
 
 /*

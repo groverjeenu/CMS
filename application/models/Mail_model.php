@@ -13,11 +13,12 @@ class Mail_model extends CI_Model
 		return $query;
 	}
 
-	public function getstumails($cid)
+	public function getstumails($cid=1)
 	{
 		$cid = intval($cid);
 		$id = $this->ion_auth->get_user_id();
-		$query = $this->db->query("select * from course_faculty, users, enrollments where users.id=student_id and course_faculty.course_id = enrollments.course_id and course_faculty.faculty_id=? and enrollments.course_id=?", array($id,$cid))->result_array();
+		$query = $this->db->select('email, id')->from('users')->get()->result_array();
+		//$query = $this->db->query("select * from course_faculty, users, enrollments where users.id=student_id and course_faculty.course_id = enrollments.course_id and course_faculty.faculty_id=? and enrollments.course_id=?", array($id,$cid))->result_array();
 		return $query;
 	}
 

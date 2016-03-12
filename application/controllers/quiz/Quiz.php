@@ -15,7 +15,7 @@ class Quiz extends CI_Controller {
 		}*/
 	}
 
-	function index($cid,$limit = '0')
+	function index($cid=1,$limit = '0')
 	{
 		$data['title'] = "Quiz/Test";
 		$data['limit'] = $limit;
@@ -170,8 +170,13 @@ class Quiz extends CI_Controller {
 			// get quiz data like quiz duration, title
 			$data['quiz_data'] = $this->quiz_model->get_quiz_data($id);
 
+
 			// load quiz access page
-			$this->load->view("quiz".'/quiz_access', $data);
+			$this->load->view("quiz".'/header',$data);
+			$this->load->view("quiz".'/quiz_access',$data);
+		  	$this->load->view("quiz".'/footer',$data);
+			// load quiz access page
+			//$this->load->view("quiz".'/quiz_access', $data);
 
 
 		} else {
