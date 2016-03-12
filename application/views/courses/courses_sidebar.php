@@ -26,6 +26,8 @@ $courseid = $course['cid'];?>
           <a href="<?php echo base_url();?>display_view/inbox" class="dropdown-toggle" data-toggle="dropdown">Inbox <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url();?>inbox">Inbox Home</a></li>
+            
+            <li><a href="<?php echo base_url();?>display_view/composemail">Compose</a></li>
             <li><a href="<?php echo base_url();?>display_view/sent_mail">Sent Mail</a></li>
           </ul>
         </li>

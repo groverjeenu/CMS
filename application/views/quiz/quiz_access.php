@@ -138,7 +138,7 @@ foreach($category_name as $key=> $cvalue){
 
 <div style="clear:both;"></div>
 
-<form action="<?php echo site_url('quiz/submit_quiz/'.$quiz_id);?>" method="post" id="testform" onsubmit="showquestion('0');">
+<form action="<?php echo site_url('quiz/quiz/submit_quiz/'.$quiz_id);?>" method="post" id="testform" onsubmit="showquestion('0');">
 <?php 
 $category_number=0;
 
@@ -209,7 +209,7 @@ if($key!=(count($assigned_question['0'])-1)){
 if(in_array($key,$startnextcate)){
 $category_number+=1;
 ?>
-<a href="#"   class="btn btn-success"  onClick="showquestion('<?php echo $key+1;?>','<?php echo $question['q_type'];?>');changecategory('<?php echo $category_number;?>');update_curr_ans('<?php echo $key;?>','<?php echo $question['q_type'];?>');" > Save & Next</a>
+<a href="#"  class="btn btn-success"  onClick="showquestion('<?php echo $key+1;?>','<?php echo $question['q_type'];?>');changecategory('<?php echo $category_number;?>');update_curr_ans('<?php echo $key;?>','<?php echo $question['q_type'];?>');" > Save & Next</a>
 <?php
 }else{
 ?>
@@ -704,16 +704,16 @@ if($photo!=""){ ?><img src="<?php echo base_url('photo/'.$photo);?>" style="widt
 
 </form>
 <script language="javascript">
-document.onmousedown=disableclick;
-status="Right Click Disabled";
-Function disableclick(event)
-{
-  if(event.button==2)
-   {
-     alert(status);
-     return false;    
-   }
-}
+// document.onmousedown=disableclick;
+// status="Right Click Disabled";
+// Function disableclick(event)
+// {
+//   if(event.button==2)
+//    {
+//      alert(status);
+//      return false;    
+//    }
+// }
 </script>
 <script language="javascript">
 
@@ -759,7 +759,7 @@ document.getElementById('testform').submit();
 -->
 <script>
 function close_practice(){
-window.location="<?php echo site_url();?>/quiz/close_practice/";
+window.location="<?php echo site_url();?>quiz/quiz/close_practice";
 }
 
 

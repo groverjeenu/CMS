@@ -298,7 +298,7 @@ class Courses_model extends CI_Model
 	public function getsubmissions($id)
 	{
 		$id = intval($id);
-		$ass = $this->db->query("select * from assignment, submissions, users, courses where assignment.cid=courses.cid and submissions.assignment_id=assignment.assignment_id and submissions.user_id=users.id and assignment.assignment_id=? ", $id)->row_array();
+		$ass = $this->db->query("select * from assignment, submissions, users, courses where isgraded=0 and assignment.cid=courses.cid and submissions.assignment_id=assignment.assignment_id and submissions.user_id=users.id and assignment.assignment_id=? ", $id)->row_array();
 		return $ass;
 	}
 

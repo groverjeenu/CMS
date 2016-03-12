@@ -40,7 +40,7 @@
 
  
 
-<script type="text/javascript" src="<?php echo base_url();?>/js/basic.js?rd=<?php echo time();?>"></script>
+<script type="text/javascript" src="<?php echo base_url();?>public/js/basic.js?rd=<?php echo time();?>"></script>
  
 
 

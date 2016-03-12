@@ -256,6 +256,17 @@ class Display_view extends CI_Controller {
 		$this->load->view('edit_profile',$data);
 	}
 
+	public function result($rid,$qid)
+	{
+		$result = $this->db->select('score, percentage')->from('quiz_result')
+			->where(array("rid"=>$rid,"quid"=>$qid))
+			->get()->row_array();
+		$data['score'] = $result['score'];
+		$data['percentage'] = $result['percentage'];
+		$data['resultstatus'] = false;
+		$this->load->view('quiz/resultview',$data);
+	}
+
 	public function lectures($id)
 	{
 
@@ -425,7 +436,7 @@ class Display_view extends CI_Controller {
 	}
 
 
-	public function composemail($cid)
+	public function composemail($cid=1)
 	{
 		if($this->ion_auth->in_group('faculty'))
 		{

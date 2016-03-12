@@ -317,7 +317,7 @@
                 <div class = "container">
                     <section id = "work-collections">
                         <div class="row">
-                            <div class="col s12 l6">
+                            <div class="col s12 l12">
                                 <ul id="projects-collection" class="collection">
                                     <li class="collection-item avatar">
                                         <i class="mdi-file-folder circle light-blue darken-2"></i>
@@ -328,13 +328,13 @@
                                     <?php  foreach ($user_courses as $kk => $ccourse) { ?>
                                     <li class="collection-item">
                                         <div class="row">
-                                            <div class="col s6">
+                                            <div class="col s9">
                                                 <a href = "<?php echo base_url()."display_view/course/".$ccourse['course_id']?>">
                                                 <p class="collections-title"> <?php echo $ccourse['course_name'] ?></p>
                                                 </a>
                                                 <p class="collections-content"><?php echo $ccourse['description'] ?></p>
                                             </div>
-                                            <div class="col s3">
+                                            <div class="col s3 pull-right">
                                                 <span class="task-cat cyan"> 
                                                 <?php 
 
