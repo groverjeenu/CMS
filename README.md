@@ -4,7 +4,7 @@ A web-based application aimed at self-paced learning featuring online course des
 
 ## Design Document
 
-Please find the design document here
+Please find the design document [here](https://github.com/groverjeenu/CMS/blob/master/DBMS_Assignment3-2.pdf)
 
 ## How to run
 
